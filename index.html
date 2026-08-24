@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeKopier — Trade Copier for NinjaTrader 8</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="Replicate your trades instantly across all your NinjaTrader 8 accounts, with no limit on accounts or connections. Built by traders, for traders.">
+<link rel="canonical" href="https://tradekopier.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TradeKopier">
+<meta property="og:title" content="TradeKopier — Trade Copier for NinjaTrader 8">
+<meta property="og:description" content="Replicate your trades instantly across all your NinjaTrader 8 accounts, with no limit on accounts or connections. Built by traders, for traders.">
+<meta property="og:url" content="https://tradekopier.com/">
+<meta property="og:image" content="https://tradekopier.com/assets/cockpit-dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TradeKopier — Trade Copier for NinjaTrader 8">
+<meta name="twitter:description" content="Replicate your trades instantly across all your NinjaTrader 8 accounts, with no limit on accounts or connections.">
+<meta name="twitter:image" content="https://tradekopier.com/assets/cockpit-dark.png">
+<style>
+  :root{
+    --bg:#0a0e14; --bg2:#0f1520; --panel:#131a24; --border:#212b38;
+    --text:#eaf0f7; --muted:#8fa1b3; --accent:#3ea6ff; --accent2:#7c5cff;
+    --green:#2ecc71; --yellow:#f5c542;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.6;
+  }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
+
+  header{
+    position:sticky; top:0; z-index:50; background:rgba(10,14,20,.85); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1100px; margin:0 auto; gap:16px;}
+  .logo{font-size:20px; font-weight:800; letter-spacing:-.01em; display:flex; align-items:center; gap:11px; flex-shrink:0;}
+  .wordmark{white-space:nowrap;}
+  .kletter{background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; margin:0 -1px; display:inline-block;}
+  .klogo{
+    display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:11px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); position:relative; overflow:hidden;
+    flex-shrink:0; box-shadow:0 8px 20px -7px rgba(62,166,255,.65), inset 0 1px 0 rgba(255,255,255,.28);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .klogo::before{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(135deg, rgba(255,255,255,.4), rgba(255,255,255,0) 55%);
+  }
+  .logo:hover .klogo{ transform:translateY(-1px) scale(1.05); box-shadow:0 10px 26px -6px rgba(62,166,255,.8), inset 0 1px 0 rgba(255,255,255,.32); }
+  .klogo .kmark{position:relative; z-index:1; display:block;}
+  footer .klogo{margin:0;}
+  .navlinks{display:flex; gap:26px; font-size:14px; color:var(--muted);}
+  .navlinks a:hover{color:var(--text);}
+  .navright{display:flex; align-items:center; gap:14px;}
+  .navcta{
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; padding:9px 18px;
+    border-radius:8px; font-size:14px; font-weight:600; white-space:nowrap;
+  }
+  select#langSwitch{
+    background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:7px;
+    padding:7px 8px; font-size:13px; cursor:pointer;
+  }
+
+  .hero{padding:80px 24px 60px; text-align:center; position:relative; overflow:hidden;}
+  .hero::before{
+    content:''; position:absolute; top:-200px; left:50%; transform:translateX(-50%);
+    width:800px; height:500px; background:radial-gradient(ellipse,rgba(62,166,255,.15),transparent 70%);
+    pointer-events:none;
+  }
+  .badge{
+    display:inline-block; background:var(--panel); border:1px solid var(--border); color:var(--muted);
+    font-size:12.5px; padding:6px 14px; border-radius:20px; margin-bottom:22px;
+  }
+  .badge b{color:var(--accent);}
+  h1{
+    font-size:clamp(30px,5vw,52px); font-weight:800; letter-spacing:-.03em; line-height:1.12;
+    margin-bottom:20px; max-width:820px; margin-left:auto; margin-right:auto;
+  }
+  h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p{color:var(--muted); font-size:17px; max-width:600px; margin:0 auto 34px;}
+  .hero-ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;}
+  .btn{
+    padding:13px 26px; border-radius:9px; font-weight:600; font-size:15px; cursor:pointer; border:none;
+    display:inline-block;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;}
+  .btn-primary:hover{opacity:.92;}
+  .btn-ghost{background:var(--panel); color:var(--text); border:1px solid var(--border);}
+  .btn-ghost:hover{border-color:var(--muted);}
+
+  .stats{display:flex; justify-content:center; gap:56px; flex-wrap:wrap; padding:20px 24px 70px; text-align:center;}
+  .stats div .n{font-size:24px; font-weight:800; color:var(--accent);}
+  .stats div .l{font-size:12.5px; color:var(--muted); margin-top:2px; max-width:150px;}
+
+  section{padding:76px 24px;}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 48px;}
+  .eyebrow{color:var(--accent); font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;}
+  h2{font-size:clamp(26px,3.5vw,36px); font-weight:800; letter-spacing:-.02em; margin-bottom:12px;}
+  .section-head p{color:var(--muted); font-size:15.5px;}
+
+  .features{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto;}
+  .feature{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:26px;}
+  .feature .icon{
+    width:42px; height:42px; border-radius:10px; background:linear-gradient(135deg,rgba(62,166,255,.15),rgba(124,92,255,.15));
+    display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;
+  }
+  .feature h3{font-size:16.5px; font-weight:700; margin-bottom:8px;}
+  .feature p{color:var(--muted); font-size:14px;}
+
+  /* Broker strip (marquee) */
+  .brokers{background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:36px 0;}
+  .brokers .label{color:var(--muted); font-size:13px; margin-bottom:20px; text-align:center; padding:0 24px;}
+  .marquee{overflow:hidden; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .marquee-track{display:flex; width:max-content; gap:14px; animation:marquee-scroll 36s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  .marquee-track .logochip{
+    display:flex; align-items:center; gap:10px; background:var(--panel); border:1px solid var(--border);
+    padding:8px 16px 8px 8px; border-radius:10px; white-space:nowrap; flex-shrink:0;
+  }
+  .marquee-track .logochip .av{
+    width:28px; height:28px; border-radius:7px; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:11.5px; color:#fff; flex-shrink:0; letter-spacing:-.02em;
+  }
+  .marquee-track .logochip .name{font-size:13.5px; font-weight:700; color:var(--text);}
+  .marquee-track .logochip.plain{
+    background:none; border:none; padding:8px 6px; color:var(--muted); font-size:13.5px; font-weight:600;
+  }
+  @keyframes marquee-scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* Trust grid */
+  .trust{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto;}
+  .trustcard{padding:22px 4px;}
+  .trustcard h3{font-size:15.5px; font-weight:700; margin-bottom:8px;}
+  .trustcard p{color:var(--muted); font-size:13.5px;}
+  .trustcard .n{font-size:22px; margin-bottom:10px;}
+
+  /* Execution pipeline */
+  .pipeline{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1050px; margin:0 auto; counter-reset:pipe;}
+  .pipestep{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:26px;}
+  .pipestep::before{
+    counter-increment:pipe; content:counter(pipe); display:inline-flex; align-items:center; justify-content:center;
+    width:30px; height:30px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff; font-weight:800; font-size:14px; margin-bottom:14px;
+  }
+  .pipestep h4{font-size:15.5px; font-weight:700; margin-bottom:8px;}
+  .pipestep p{color:var(--muted); font-size:13.5px;}
+
+  /* Included-in-all-plans strip */
+  .included{
+    max-width:900px; margin:0 auto 40px; background:var(--panel); border:1px solid var(--border); border-radius:16px;
+    padding:26px 32px;
+  }
+  .included h4{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:16px; text-align:center;}
+  .included ul{list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:10px 24px;}
+  .included li{font-size:14px; display:flex; gap:9px;}
+  .included li::before{content:'✓'; color:var(--green); font-weight:800; flex-shrink:0;}
+
+  /* Final CTA band */
+  .final-cta{
+    max-width:1000px; margin:0 auto; background:linear-gradient(135deg,rgba(62,166,255,.12),rgba(124,92,255,.12));
+    border:1px solid var(--border); border-radius:24px; padding:56px 40px; text-align:center;
+  }
+  .final-cta h2{margin-bottom:12px;}
+  .final-cta p{color:var(--muted); font-size:15.5px; margin-bottom:28px; max-width:520px; margin-left:auto; margin-right:auto;}
+
+  /* Risk section */
+  .risk{background:var(--panel); border:1px solid var(--border); border-radius:20px; padding:48px; max-width:1000px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;}
+  .risk h2{margin-bottom:14px;}
+  .risk p.desc{color:var(--muted); font-size:15px; margin-bottom:0;}
+  .risklist{list-style:none;}
+  .risklist li{font-size:14.5px; padding:10px 0; border-bottom:1px solid var(--border); display:flex; gap:10px;}
+  .risklist li:last-child{border-bottom:none;}
+  .risklist .ricon{flex-shrink:0;}
+
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:900px; margin:0 auto;}
+  .step{text-align:center;}
+  .step .num{
+    width:38px; height:38px; border-radius:50%; background:var(--panel); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--accent);
+    margin:0 auto 14px;
+  }
+  .step h4{font-size:15.5px; font-weight:700; margin-bottom:6px;}
+  .step p{color:var(--muted); font-size:13.5px;}
+
+  /* Captura de instalación */
+  .install-shot{
+    max-width:720px; margin:44px auto 0; background:var(--panel); border:1px solid var(--border); border-radius:16px;
+    overflow:hidden; box-shadow:0 30px 70px -35px rgba(0,0,0,.6);
+  }
+  .install-shot img, .install-shot video{display:block; width:100%; height:auto;}
+  .install-shot-cap{text-align:center; color:var(--muted); font-size:13.5px; margin-top:14px;}
+
+  /* Screenshot section */
+  .shots-main{
+    max-width:1180px; margin:0 auto 18px; background:var(--panel); border:1px solid var(--border); border-radius:16px;
+    overflow:hidden; box-shadow:0 30px 70px -35px rgba(0,0,0,.6);
+  }
+  .shots-main .bar{display:flex; gap:6px; padding:12px 16px; background:var(--bg2); border-bottom:1px solid var(--border);}
+  .shots-main .bar span{width:10px; height:10px; border-radius:50%; background:var(--border);}
+  .shots-main .frame{position:relative; background:#000;}
+  .shots-main img, .shots-main video{display:block; width:100%; height:auto;}
+  .shots-caption{text-align:center; color:var(--muted); font-size:14.5px; margin-bottom:22px;}
+  .shots-thumbs{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; max-width:1180px; margin:0 auto;}
+  .shots-thumb{
+    width:140px; height:82px; border-radius:9px; overflow:hidden; border:2px solid var(--border); background:var(--panel);
+    cursor:pointer; position:relative; padding:0; flex-shrink:0;
+  }
+  .shots-thumb.active{border-color:var(--accent);}
+  .shots-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .shots-thumb .play{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.35);
+    color:#fff; font-size:20px;
+  }
+
+  /* Pricing */
+  .pricing{background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; max-width:1050px; margin:0 auto;}
+  .plan{
+    position:relative; background:var(--panel); border:1px solid var(--border); border-radius:18px;
+    padding:34px 28px; text-align:center;
+  }
+  .plan.featured{border:1px solid var(--accent); box-shadow:0 20px 60px -25px rgba(62,166,255,.45); transform:translateY(-6px);}
+  .plan .ribbon{
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; font-size:11.5px; font-weight:700;
+    padding:5px 14px; border-radius:20px; white-space:nowrap;
+  }
+  .planicon{font-size:27px; margin-bottom:8px;}
+  .plandesc{color:var(--muted); font-size:12.5px; margin-bottom:2px; min-height:32px;}
+  .plan h3{font-size:15.5px; font-weight:700; color:var(--muted); margin-bottom:14px;}
+  .plan .price{font-size:38px; font-weight:800; line-height:1;}
+  .plan .price .per{font-size:14px; font-weight:600; color:var(--muted);}
+  .plan .save{
+    display:inline-block; background:rgba(46,204,113,.12); color:var(--green); font-size:12px; font-weight:700;
+    padding:4px 12px; border-radius:20px; margin-top:12px; min-height:22px;
+  }
+  .sharedfeatures{list-style:none; text-align:left; margin:26px 0 26px;}
+  .sharedfeatures li{font-size:13.5px; padding:7px 0; display:flex; gap:9px;}
+  .sharedfeatures li::before{content:'✓'; color:var(--green); font-weight:800; flex-shrink:0;}
+  .plan .btn{width:100%;}
+  .pricenote{color:var(--muted); font-size:12.5px; margin-top:32px; text-align:center;}
+
+  footer{padding:50px 24px; text-align:center; border-top:1px solid var(--border);}
+  footer .logo{justify-content:center; margin-bottom:14px;}
+  footer p{color:var(--muted); font-size:13px;}
+  footer .links{display:flex; gap:18px 22px; justify-content:center; flex-wrap:wrap; margin-top:16px; font-size:13px; color:var(--muted);}
+  footer .links a:hover{color:var(--text);}
+  footer .disclaimer{
+    max-width:820px; margin:32px auto 0; text-align:left; font-size:10.5px; line-height:1.6; color:#5c6b7d;
+    border-top:1px solid var(--border); padding-top:20px;
+  }
+  footer .disclaimer strong{display:block; margin-bottom:6px; color:#7a8ba0;}
+
+  @media(max-width:820px){
+    .navlinks{display:none;}
+    .features, .steps, .plans, .trust, .pipeline{grid-template-columns:1fr;}
+    .plan.featured{transform:none;}
+    .risk{grid-template-columns:1fr; padding:32px;}
+    .stats{gap:34px;}
+    .included ul{grid-template-columns:1fr;}
+    .final-cta{padding:40px 24px; border-radius:16px;}
+  }
+
+  /* Chat de soporte */
+  .chat-bubble{
+    position:fixed; bottom:96px; right:22px; z-index:80; width:56px; height:56px; border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; cursor:pointer;
+    box-shadow:0 10px 30px -8px rgba(62,166,255,.6); font-size:24px; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .chat-bubble:hover{opacity:.92;}
+  .chat-panel{
+    position:fixed; bottom:164px; right:22px; z-index:80; width:340px; max-width:calc(100vw - 32px);
+    height:460px; max-height:calc(100vh - 130px); background:var(--panel); border:1px solid var(--border);
+    border-radius:16px; box-shadow:0 30px 70px -25px rgba(0,0,0,.7); display:none; flex-direction:column; overflow:hidden;
+  }
+  .chat-panel.open{display:flex;}
+  .chat-head{display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-bottom:1px solid var(--border); background:var(--bg2);}
+  .chat-head .t{font-weight:700; font-size:14px; display:flex; align-items:center; gap:8px;}
+  .chat-head .t .dot3{width:7px; height:7px; border-radius:50%; background:var(--green);}
+  .chat-head button{background:none; border:none; color:var(--muted); cursor:pointer; font-size:16px;}
+  .chat-body{flex:1; overflow-y:auto; padding:14px 16px; display:flex; flex-direction:column; gap:10px;}
+  .chat-msg{font-size:13.5px; line-height:1.5; padding:9px 12px; border-radius:12px; max-width:85%;}
+  .chat-msg.bot{background:var(--bg2); border:1px solid var(--border); align-self:flex-start; border-bottom-left-radius:3px;}
+  .chat-msg.user{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; align-self:flex-end; border-bottom-right-radius:3px;}
+  .chat-msg.typing{color:var(--muted); font-style:italic;}
+  .chat-foot{border-top:1px solid var(--border); padding:10px; display:flex; gap:8px; flex-shrink:0;}
+  .chat-foot input{
+    flex:1; background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:9px 10px;
+    color:var(--text); font-size:13px;
+  }
+  .chat-foot button{
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; color:#fff; border-radius:8px;
+    padding:0 14px; font-weight:600; font-size:13px; cursor:pointer;
+  }
+  .chat-ticket-link{align-self:center; font-size:12px; color:var(--accent); cursor:pointer; text-decoration:underline; margin-top:4px;}
+  .chat-ticket-form{padding:14px 16px; display:flex; flex-direction:column; gap:8px; overflow-y:auto;}
+  .chat-ticket-form input, .chat-ticket-form textarea{
+    background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:9px 10px; color:var(--text);
+    font-size:13px; font-family:inherit; resize:vertical;
+  }
+  .chat-ticket-form button{
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; color:#fff; border-radius:8px;
+    padding:10px; font-weight:600; font-size:13px; cursor:pointer; margin-top:4px;
+  }
+  .chat-ticket-back{background:none; border:none; color:var(--muted); font-size:12px; cursor:pointer; text-align:left; padding:0;}
+  @media(max-width:420px){
+    .chat-panel{right:16px; bottom:158px; width:calc(100vw - 32px);}
+    .chat-bubble{right:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo"><span class="klogo" aria-hidden="true"><svg class="kmark" viewBox="0 0 40 40" width="22" height="22" focusable="false"><g stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M8 9 V31"/><path d="M8 20 L18 9"/><path d="M8 20 L18 31"/><path d="M32 9 V31"/><path d="M32 20 L22 9"/><path d="M32 20 L22 31"/></g></svg></span><span class="wordmark">Trade<span class="kletter">K</span>opier</span></div>
+    <div class="navlinks">
+      <a href="#features" data-i18n="nav.features">Funciones</a>
+      <a href="#capturas" data-i18n="nav.shots">Interfaz</a>
+      <a href="#riesgo" data-i18n="nav.risk">Gestión de riesgo</a>
+      <a href="#precios" data-i18n="nav.pricing">Precios</a>
+      <a href="#como-funciona" data-i18n="nav.install">Instalación</a>
+      <a href="faq.html" data-i18n="nav.faq">FAQ</a>
+    </div>
+    <div class="navright">
+      <select id="langSwitch">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="pt">Português</option>
+        <option value="it">Italiano</option>
+      </select>
+      <a href="mi-cuenta.html" style="color:var(--muted); font-size:14px;" data-i18n="nav.account">Mi cuenta</a>
+      <a href="#precios" class="navcta" data-i18n="nav.cta">Empezar</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="badge" data-i18n="hero.badge">🚀 Hecho por traders, para traders</div>
+    <h1><span data-i18n="hero.title.accent">Copia tus operaciones al instante</span> <span data-i18n="hero.title.rest" style="background:none;-webkit-text-fill-color:var(--text);">en todas tus cuentas a la vez</span></h1>
+    <p data-i18n="hero.sub">TradeKopier replica automáticamente cada entrada, salida y protección de tu cuenta maestra hacia todas tus cuentas esclavas — sin límite de cuentas, sin límite de conexiones.</p>
+    <div class="hero-ctas">
+      <a href="#precios" class="btn btn-primary" data-i18n="hero.cta1">Ver planes</a>
+      <a href="#features" class="btn btn-ghost" data-i18n="hero.cta2">Ver funciones</a>
+    </div>
+  </div>
+  <div class="stats">
+    <div><div class="n" data-i18n="stats.n1">Ilimitadas</div><div class="l" data-i18n="stats.l1">cuentas esclavas por maestra</div></div>
+    <div><div class="n" data-i18n="stats.n2">Ilimitadas</div><div class="l" data-i18n="stats.l2">conexiones/brokers a la vez</div></div>
+    <div><div class="n">&lt;1s</div><div class="l" data-i18n="stats.l3">de latencia de réplica</div></div>
+  </div>
+</section>
+
+<div class="brokers">
+  <div class="label" data-i18n="brokers.label">Compatible con TradingView, Tradovate, y con todas las conexiones y empresas de fondeo que permite NinjaTrader 8, incluyendo:</div>
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</div>
+
+<section id="capturas">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="shots.eyebrow">Interfaz</div>
+      <h2 data-i18n="shots.title">Así se ve TradeKopier por dentro</h2>
+      <p data-i18n="shots.sub">Disponible en modo oscuro y modo claro — elige el que prefieras.</p>
+    </div>
+    <div class="shots-main">
+      <div class="bar"><span></span><span></span><span></span></div>
+      <div class="frame" id="shotsFrame">
+        <img id="shotsImg" src="assets/cockpit-dark.png" alt="TradeKopier Cockpit">
+      </div>
+    </div>
+    <p class="shots-caption" id="shotsCaption" data-i18n="shots.cap.dark">Modo oscuro, con varios grupos corriendo al mismo tiempo.</p>
+    <div class="shots-thumbs">
+      <button class="shots-thumb active" data-type="image" data-src="assets/cockpit-dark.png" data-cap="shots.cap.dark">
+        <img src="assets/cockpit-dark.png" alt="Cockpit modo oscuro">
+      </button>
+      <button class="shots-thumb" data-type="image" data-src="assets/cockpit-light.png" data-cap="shots.cap.cockpit">
+        <img src="assets/cockpit-light.png" alt="Cockpit">
+      </button>
+      <button class="shots-thumb" data-type="image" data-src="assets/risk-management.png" data-cap="shots.cap.risk">
+        <img src="assets/risk-management.png" alt="Risk Management">
+      </button>
+      <button class="shots-thumb" data-type="image" data-src="assets/groups.png" data-cap="shots.cap.groups">
+        <img src="assets/groups.png" alt="Groups">
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="features.eyebrow">Funciones</div>
+      <h2 data-i18n="features.title">Todo lo que necesitas para gestionar varias cuentas</h2>
+      <p data-i18n="features.sub">Pensado para traders con múltiples cuentas de prop firm o fondeo que quieren operar una vez y replicar en todas — sin los límites de otros copiadores.</p>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <div class="icon">♾️</div>
+        <h3 data-i18n="feat1.h">Sin límite de cuentas ni conexiones</h3>
+        <p data-i18n="feat1.p">Conecta y opera tantas cuentas y brokers distintos como necesites al mismo tiempo — compatible con TradingView, Tradovate y todas las conexiones que permite NinjaTrader 8, además de cualquier sitio donde ejecutes tus operaciones. A diferencia de otros copiadores que cobran más por cada conexión adicional.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🏆</div>
+        <h3 data-i18n="feat7.h">Optimizado para empresas de fondeo</h3>
+        <p data-i18n="feat7.p">Funciona sin problemas con cualquier empresa de fondeo (prop firm) que uses — sin restricciones ni conflictos de compatibilidad.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">⚡</div>
+        <h3 data-i18n="feat2.h">Réplica en tiempo real</h3>
+        <p data-i18n="feat2.p">Cada entrada y salida de tu cuenta maestra se replica al instante, sin importar si operas desde el Chart Trader, un ATM o TradingView.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🎚️</div>
+        <h3 data-i18n="feat3.h">Multiplicador por cuenta</h3>
+        <p data-i18n="feat3.p">Ajusta el tamaño de la posición de forma independiente en cada esclava — perfecto para cuentas con distinto tamaño de capital.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🛡️</div>
+        <h3 data-i18n="feat4.h">Protección SL/TP real</h3>
+        <p data-i18n="feat4.p">Replica el Stop Loss y Take Profit reales que pones en la maestra, a la misma distancia y escalados por cuenta — no una red de seguridad genérica.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📊</div>
+        <h3 data-i18n="feat5.h">Cockpit en vivo</h3>
+        <p data-i18n="feat5.p">Panel de control con el estado de cada cuenta, PnL del día, posiciones abiertas y flatten de emergencia con un clic.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔒</div>
+        <h3 data-i18n="feat6.h">Candado de seguridad</h3>
+        <p data-i18n="feat6.p">Deshabilita cualquier cuenta desde Conexiones y queda excluida de toda réplica al instante, esté donde esté configurada.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🕐</div>
+        <h3 data-i18n="feat8.h">Soporte 24/7</h3>
+        <p data-i18n="feat8.p">Nuestro equipo está disponible las 24 horas del día, los 7 días de la semana, para ayudarte con cualquier duda o incidencia.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💻</div>
+        <h3 data-i18n="feat9.h">Sin necesidad de VPS</h3>
+        <p data-i18n="feat9.p">Funciona directamente en tu propio ordenador — no necesitas alquilar un VPS ni pagar de más solo para mantener el copiador corriendo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="riesgo">
+  <div class="risk">
+    <div>
+      <div class="eyebrow" data-i18n="risk.eyebrow">Gestión de riesgo</div>
+      <h2 data-i18n="risk.title">Protege tus cuentas de fondeo automáticamente</h2>
+      <p class="desc" data-i18n="risk.desc">Configura el límite de pérdida diaria (PDLL) y el objetivo de beneficio (PDPT) por cada cuenta. TradeKopier vigila en tiempo real y actúa antes de que sea tarde.</p>
+    </div>
+    <ul class="risklist">
+      <li><span class="ricon">🛑</span><span data-i18n="risk.li1">Liquidación automática al tocar el límite de pérdida o el objetivo de beneficio que tú elijas</span></li>
+      <li><span class="ricon">🔒</span><span data-i18n="risk.li2">Modo "liquidar y bloquear" — la cuenta queda bloqueada hasta el día siguiente, sin posibilidad de revertirlo por error</span></li>
+      <li><span class="ricon">👑</span><span data-i18n="risk.li3">Si la maestra toca su propio límite, se cierra solo ella — las esclavas siguen operando con normalidad</span></li>
+      <li><span class="ricon">🔔</span><span data-i18n="risk.li4">Panel de verificación que te avisa si una cuenta activa no tiene límites configurados</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="confianza">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="trust.eyebrow">Confianza</div>
+      <h2 data-i18n="trust.title">Seguro por defecto, pensado para traders serios</h2>
+    </div>
+    <div class="trust">
+      <div class="trustcard"><div class="n">♾️</div><h3 data-i18n="trust1.h">Cuentas ilimitadas, precio fijo</h3><p data-i18n="trust1.p">Copia en tantas cuentas fondeadas y reales como operes, sin cargos por cuenta adicional.</p></div>
+      <div class="trustcard"><div class="n">🏛️</div><h3 data-i18n="trust2.h">Pensado para las reglas de las prop firms</h3><p data-i18n="trust2.p">Los controles de riesgo mantienen tus evaluaciones y cuentas fondeadas dentro de la normativa en cada señal.</p></div>
+      <div class="trustcard"><div class="n">🔌</div><h3 data-i18n="trust3.h">Conexiones directas y nativas</h3><p data-i18n="trust3.p">Integrado directamente en NinjaTrader 8 — sin plugins externos ni capas intermedias.</p></div>
+      <div class="trustcard"><div class="n">🔐</div><h3 data-i18n="trust4.h">Cifrado y privado</h3><p data-i18n="trust4.p">Tu conexión al bróker permanece en tu propio equipo — nunca guardamos tus contraseñas.</p></div>
+      <div class="trustcard"><div class="n">🧑‍💻</div><h3 data-i18n="trust5.h">Soporte humano real, 24/7</h3><p data-i18n="trust5.p">La ayuda viene directamente del equipo que construye y mantiene TradeKopier.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="precios" class="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="pricing.eyebrow">Precios</div>
+      <h2 data-i18n="pricing.title">El mismo TradeKopier, elige tu duración</h2>
+      <p data-i18n="pricing.sub">Todas las funciones incluidas en los 3 planes. Cuanto más tiempo elijas, más ahorras.</p>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <div class="planicon">🎯</div>
+        <h3 data-i18n="plan.mensual">Mensual</h3>
+        <p class="plandesc" data-i18n="plan.mensual.desc">Pruébalo sin compromiso, cancela cuando quieras.</p>
+        <div class="price">$25<span class="per" data-i18n="plan.permes">/mes</span></div>
+        <div class="save" data-i18n="plan.trial">🎁 7 días gratis, después $25/mes</div>
+        <a href="https://buy.stripe.com/14A14ndVS1aU2I5eTV1ck00" class="btn btn-ghost" data-i18n="plan.cta">Comprar ahora</a>
+      </div>
+      <div class="plan featured">
+        <div class="ribbon" data-i18n="plan.popular">Más popular</div>
+        <div class="planicon">🔥</div>
+        <h3 data-i18n="plan.trimestral">Trimestral</h3>
+        <p class="plandesc" data-i18n="plan.trimestral.desc">El equilibrio perfecto entre ahorro y flexibilidad.</p>
+        <div class="price">$60<span class="per" data-i18n="plan.pertri">/3 meses</span></div>
+        <div class="save" data-i18n="plan.save.tri">Ahorras $15</div>
+        <a href="https://buy.stripe.com/bJe9ATbNK6ve6YldPR1ck01" class="btn btn-primary" data-i18n="plan.cta">Comprar ahora</a>
+      </div>
+      <div class="plan">
+        <div class="planicon">💎</div>
+        <h3 data-i18n="plan.semestral">Semestral</h3>
+        <p class="plandesc" data-i18n="plan.semestral.desc">Máximo ahorro para quien ya sabe que se queda.</p>
+        <div class="price">$100<span class="per" data-i18n="plan.persem">/6 meses</span></div>
+        <div class="save" data-i18n="plan.save.sem">Ahorras $50</div>
+        <a href="https://buy.stripe.com/28EdR92da1aU3M99zB1ck02" class="btn btn-ghost" data-i18n="plan.cta">Comprar ahora</a>
+      </div>
+    </div>
+    <div class="included">
+      <h4 data-i18n="included.title">Incluido en los 3 planes</h4>
+      <ul>
+        <li data-i18n="pf1">Cuentas y conexiones ilimitadas</li>
+        <li data-i18n="pf2">Réplica en tiempo real</li>
+        <li data-i18n="pf3">Gestión de riesgo PDLL/PDPT automática</li>
+        <li data-i18n="pf4">Protección SL/TP real</li>
+        <li data-i18n="pf5">Actualizaciones y nuevas funciones sin coste extra</li>
+        <li data-i18n="pf6">Soporte 24/7</li>
+        <li data-i18n="pf7">Compatible con TradingView</li>
+        <li data-i18n="pf8">Cancela cuando quieras, sin permanencia</li>
+      </ul>
+    </div>
+    <div class="pricenote" data-i18n="plan.note">Pago seguro procesado por Stripe.</div>
+  </div>
+</section>
+
+<section id="motor">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="pipe.eyebrow">Motor de réplica</div>
+      <h2 data-i18n="pipe.title">De la señal a la esclava, en tres pasos</h2>
+    </div>
+    <div class="pipeline">
+      <div class="pipestep">
+        <h4 data-i18n="pipe1.h">La maestra coloca la orden</h4>
+        <p data-i18n="pipe1.p">Market, limit, stop, bracket, OCO — capturamos la orden directamente desde NinjaTrader, no simulando clics en la interfaz.</p>
+      </div>
+      <div class="pipestep">
+        <h4 data-i18n="pipe2.h">Multiplicador por cuenta</h4>
+        <p data-i18n="pipe2.p">Tamaño de la maestra × multiplicador de cada esclava, redondeado al contrato entero más cercano. Puedes forzar micros o minis por cuenta.</p>
+      </div>
+      <div class="pipestep">
+        <h4 data-i18n="pipe3.h">Ejecución en paralelo</h4>
+        <p data-i18n="pipe3.p">Cada esclava se envía a su propia conexión de forma independiente — sin cuello de botella ni bloqueos compartidos. Todas las cuentas operan a la vez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="how.eyebrow">Instalación</div>
+      <h2 data-i18n="how.title">Listo en menos de 5 minutos</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h4 data-i18n="how.s1h">Compra tu licencia</h4>
+        <p data-i18n="how.s1p">Elige tu plan y recibe tu clave de licencia al instante por email.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h4 data-i18n="how.s2h">Instala en NinjaTrader 8</h4>
+        <p data-i18n="how.s2p">Tools → Import → NinjaScript Add-On, selecciona el archivo, reinicia NinjaTrader.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h4 data-i18n="how.s3h">Activa y configura</h4>
+        <p data-i18n="how.s3p">Introduce tu email y clave, elige tu maestra y esclavas, y empieza a replicar.</p>
+      </div>
+    </div>
+    <div class="install-shot">
+      <video controls playsinline poster="assets/install-menu.png">
+        <source src="assets/install-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="install-shot-cap" data-i18n="how.shot.cap">Vídeo explicativo de instalación.</p>
+  </div>
+</section>
+
+<section id="cta-final">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2 data-i18n="cta.title">Copia tus operaciones con total confianza</h2>
+      <p data-i18n="cta.sub">Un único TradeKopier, todas las funciones, sin límite de cuentas ni conexiones. Empieza cuando quieras.</p>
+      <a href="#precios" class="btn btn-primary" data-i18n="cta.btn">Ver planes</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo"><span class="klogo" aria-hidden="true"><svg class="kmark" viewBox="0 0 40 40" width="22" height="22" focusable="false"><g stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M8 9 V31"/><path d="M8 20 L18 9"/><path d="M8 20 L18 31"/><path d="M32 9 V31"/><path d="M32 20 L22 9"/><path d="M32 20 L22 31"/></g></svg></span><span class="wordmark">Trade<span class="kletter">K</span>opier</span></div>
+  <p data-i18n="footer.tagline">Copiador de operaciones multi-cuenta para NinjaTrader 8 — hecho por traders, para traders.</p>
+  <div class="links">
+    <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a>
+    <a href="faq.html" data-i18n="footer.faq">FAQ</a>
+    <a href="contact.html" data-i18n="footer.contact">Contacto</a>
+    <a href="terms.html" data-i18n="footer.terms">Términos de Servicio</a>
+    <a href="privacy.html" data-i18n="footer.privacy">Política de Privacidad</a>
+    <a href="cookies.html" data-i18n="footer.cookies">Política de Cookies</a>
+  </div>
+  <div class="disclaimer">
+    <strong>Declaración de Riesgo:</strong>
+    La operación de futuros y forex sobrelleva riesgos substanciales y no es para todos los inversionistas. Un inversionista, podría, potencialmente perder todo o más de la inversión inicial. Capital de Riesgo, es dinero que puede ser perdido, sin poner en juego la seguridad financiera o estilo de vida de la persona. Solo capital de riesgo debe ser utilizado para trading, y solo aquellas personas con suficiente capital de riesgo deben considerar trading. Resultados pasados, no son necesariamente indicativos de resultados futuros.
+    <br><br>
+    Resultados hipotéticos de rendimiento deben tener muchas limitaciones inherentes, algunas de las cuales se describen a continuación. No se debe hacer representación de que alguna de las cuentas va o es probable que tenga resultados similares a los mostrados; de hecho, hay diferencias frecuentes entre los resultados hipotéticos y los resultados actuales obtenidos por cualquier programa de trading. Una de las limitaciones de resultados hipotéticos de rendimiento es el hecho de que son preparados con los beneficios en retrospectiva. Además, trading hipotético no involucra riesgo financiero, y ningún record de trading hipotético puede considerar el riesgo financiero de operaciones reales. Por ejemplo, la capacidad de resistir pérdidas o de adherirse a un programa de trading particular sin importar pérdidas son puntos materiales los cuales pueden afectar de manera substancial resultados de trading real. Hay muchos factores relacionados a los mercados en general, o a la implementación de cualquier programa de trading especifico, los cuales no pueden ser todos considerados en la preparación de resultados hipotéticos, todos estos, pueden afectar los resultados de trading de forma adversa.
+  </div>
+</footer>
+
+<button class="chat-bubble" id="chatBubble" aria-label="Chat">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div class="t"><span class="dot3"></span><span data-i18n="chat.title">Soporte TradeKopier</span></div>
+    <button id="chatClose">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-foot" id="chatFootMsg">
+    <input type="text" id="chatInput" data-i18n-ph="chat.placeholder" placeholder="Escribe tu pregunta...">
+    <button id="chatSend" data-i18n="chat.send">Enviar</button>
+  </div>
+  <div class="chat-ticket-form" id="chatTicketForm" style="display:none;">
+    <button class="chat-ticket-back" id="chatTicketBack" data-i18n="chat.back">← Volver al chat</button>
+    <div style="font-weight:700; font-size:13.5px;" data-i18n="chat.ticket.title">Abrir ticket de soporte</div>
+    <input type="text" id="ticketName" data-i18n-ph="chat.ticket.name" placeholder="Nombre (opcional)">
+    <input type="email" id="ticketEmail" data-i18n-ph="chat.ticket.email" placeholder="Tu email">
+    <textarea id="ticketMessage" rows="4" data-i18n-ph="chat.ticket.message" placeholder="Cuéntanos qué pasa"></textarea>
+    <button id="ticketSubmit" data-i18n="chat.ticket.submit">Enviar ticket</button>
+  </div>
+</div>
+
+<script>
+  let currentLang = 'en';
+
+  // ---- Traducciones ----
+  const i18n = {
+    es:{
+      "nav.features":"Funciones","nav.shots":"Interfaz","nav.install":"Instalación","nav.risk":"Gestión de riesgo","nav.pricing":"Precios","nav.faq":"FAQ","nav.account":"Mi cuenta","nav.cta":"Empezar",
+      "hero.badge":"🚀 Hecho por traders, para traders",
+      "hero.title.accent":"Copia tus operaciones al instante","hero.title.rest":"en todas tus cuentas a la vez",
+      "hero.sub":"TradeKopier replica automáticamente cada entrada, salida y protección de tu cuenta maestra hacia todas tus cuentas esclavas — sin límite de cuentas, sin límite de conexiones.",
+      "hero.cta1":"Ver planes","hero.cta2":"Ver funciones",
+      "stats.n1":"Ilimitadas","stats.l1":"cuentas esclavas por maestra",
+      "stats.n2":"Ilimitadas","stats.l2":"conexiones/brokers a la vez",
+      "stats.l3":"de latencia de réplica",
+      "brokers.label":"Compatible con TradingView, Tradovate, y con todas las conexiones y empresas de fondeo que permite NinjaTrader 8, incluyendo:","brokers.more":"y muchas más",
+      "features.eyebrow":"Funciones","features.title":"Todo lo que necesitas para gestionar varias cuentas",
+      "features.sub":"Pensado para traders con múltiples cuentas de prop firm o fondeo que quieren operar una vez y replicar en todas — sin los límites de otros copiadores.",
+      "feat1.h":"Sin límite de cuentas ni conexiones","feat1.p":"Conecta y opera tantas cuentas y brokers distintos como necesites al mismo tiempo — compatible con TradingView, Tradovate y todas las conexiones que permite NinjaTrader 8, además de cualquier sitio donde ejecutes tus operaciones. A diferencia de otros copiadores que cobran más por cada conexión adicional.",
+      "feat7.h":"Optimizado para empresas de fondeo","feat7.p":"Funciona sin problemas con cualquier empresa de fondeo (prop firm) que uses — sin restricciones ni conflictos de compatibilidad.",
+      "feat8.h":"Soporte 24/7","feat8.p":"Nuestro equipo está disponible las 24 horas del día, los 7 días de la semana, para ayudarte con cualquier duda o incidencia.",
+      "feat9.h":"Sin necesidad de VPS","feat9.p":"Funciona directamente en tu propio ordenador — no necesitas alquilar un VPS ni pagar de más solo para mantener el copiador corriendo.",
+      "feat2.h":"Réplica en tiempo real","feat2.p":"Cada entrada y salida de tu cuenta maestra se replica al instante, sin importar si operas desde el Chart Trader, un ATM o TradingView.",
+      "feat3.h":"Multiplicador por cuenta","feat3.p":"Ajusta el tamaño de la posición de forma independiente en cada esclava — perfecto para cuentas con distinto tamaño de capital.",
+      "feat4.h":"Protección SL/TP real","feat4.p":"Replica el Stop Loss y Take Profit reales que pones en la maestra, a la misma distancia y escalados por cuenta — no una red de seguridad genérica.",
+      "feat5.h":"Cockpit en vivo","feat5.p":"Panel de control con el estado de cada cuenta, PnL del día, posiciones abiertas y flatten de emergencia con un clic.",
+      "feat6.h":"Candado de seguridad","feat6.p":"Deshabilita cualquier cuenta desde Conexiones y queda excluida de toda réplica al instante, esté donde esté configurada.",
+      "risk.eyebrow":"Gestión de riesgo","risk.title":"Protege tus cuentas de fondeo automáticamente",
+      "risk.desc":"Configura el límite de pérdida diaria (PDLL) y el objetivo de beneficio (PDPT) por cada cuenta. TradeKopier vigila en tiempo real y actúa antes de que sea tarde.",
+      "risk.li1":"Liquidación automática al tocar el límite de pérdida o el objetivo de beneficio que tú elijas",
+      "risk.li2":"Modo \"liquidar y bloquear\" — la cuenta queda bloqueada hasta el día siguiente, sin posibilidad de revertirlo por error",
+      "risk.li3":"Si la maestra toca su propio límite, se cierra solo ella — las esclavas siguen operando con normalidad",
+      "risk.li4":"Panel de verificación que te avisa si una cuenta activa no tiene límites configurados",
+      "trust.eyebrow":"Confianza","trust.title":"Seguro por defecto, pensado para traders serios",
+      "trust1.h":"Cuentas ilimitadas, precio fijo","trust1.p":"Copia en tantas cuentas fondeadas y reales como operes, sin cargos por cuenta adicional.",
+      "trust2.h":"Pensado para las reglas de las prop firms","trust2.p":"Los controles de riesgo mantienen tus evaluaciones y cuentas fondeadas dentro de la normativa en cada señal.",
+      "trust3.h":"Conexiones directas y nativas","trust3.p":"Integrado directamente en NinjaTrader 8 — sin plugins externos ni capas intermedias.",
+      "trust4.h":"Cifrado y privado","trust4.p":"Tu conexión al bróker permanece en tu propio equipo — nunca guardamos tus contraseñas.",
+      "trust5.h":"Soporte humano real, 24/7","trust5.p":"La ayuda viene directamente del equipo que construye y mantiene TradeKopier.",
+      "how.eyebrow":"Instalación","how.title":"Listo en menos de 5 minutos",
+      "how.s1h":"Compra tu licencia","how.s1p":"Elige tu plan y recibe tu clave de licencia al instante por email.",
+      "how.s2h":"Instala en NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, selecciona el archivo, reinicia NinjaTrader.",
+      "how.s3h":"Activa y configura","how.s3p":"Introduce tu email y clave, elige tu maestra y esclavas, y empieza a replicar.",
+      "how.shot.cap":"Vídeo explicativo de instalación.",
+      "pipe.eyebrow":"Motor de réplica","pipe.title":"De la señal a la esclava, en tres pasos",
+      "pipe1.h":"La maestra coloca la orden","pipe1.p":"Market, limit, stop, bracket, OCO — capturamos la orden directamente desde NinjaTrader, no simulando clics en la interfaz.",
+      "pipe2.h":"Multiplicador por cuenta","pipe2.p":"Tamaño de la maestra × multiplicador de cada esclava, redondeado al contrato entero más cercano. Puedes forzar micros o minis por cuenta.",
+      "pipe3.h":"Ejecución en paralelo","pipe3.p":"Cada esclava se envía a su propia conexión de forma independiente — sin cuello de botella ni bloqueos compartidos. Todas las cuentas operan a la vez.",
+      "shots.eyebrow":"Interfaz","shots.title":"Así se ve TradeKopier por dentro",
+      "shots.sub":"Disponible en modo oscuro y modo claro — elige el que prefieras.",
+      "shots.cap.cockpit":"Cockpit en vivo — PnL, posiciones y control de todas las cuentas a la vez.",
+      "shots.cap.dark":"Modo oscuro, con varios grupos corriendo al mismo tiempo.",
+      "shots.cap.risk":"Risk Management — PDLL y PDPT por cuenta, con bloqueo automático.",
+      "shots.cap.groups":"Grupos — una maestra, tantas esclavas como necesites, cada una con su multiplicador.",
+      "shots.cap.video":"Vídeo de demostración en directo.",
+      "pricing.eyebrow":"Precios","pricing.title":"El mismo TradeKopier, elige tu duración",
+      "pricing.sub":"Todas las funciones incluidas en los 3 planes. Cuanto más tiempo elijas, más ahorras.",
+      "plan.mensual":"Mensual","plan.trimestral":"Trimestral","plan.semestral":"Semestral",
+      "plan.mensual.desc":"Pruébalo sin compromiso, cancela cuando quieras.","plan.trimestral.desc":"El equilibrio perfecto entre ahorro y flexibilidad.","plan.semestral.desc":"Máximo ahorro para quien ya sabe que se queda.",
+      "plan.permes":"/mes","plan.pertri":"/3 meses","plan.persem":"/6 meses","plan.popular":"Más popular",
+      "plan.save.tri":"Ahorras $15","plan.save.sem":"Ahorras $50","plan.trial":"🎁 7 días gratis, después $25/mes",
+      "pf1":"Cuentas y conexiones ilimitadas","pf2":"Réplica en tiempo real","pf3":"Gestión de riesgo PDLL/PDPT automática",
+      "pf4":"Protección SL/TP real","pf5":"Actualizaciones y nuevas funciones sin coste extra","pf6":"Soporte 24/7",
+      "pf7":"Compatible con TradingView","pf8":"Cancela cuando quieras, sin permanencia",
+      "included.title":"Incluido en los 3 planes",
+      "plan.cta":"Comprar ahora","plan.note":"Pago seguro procesado por Stripe.",
+      "cta.title":"Copia tus operaciones con total confianza","cta.sub":"Un único TradeKopier, todas las funciones, sin límite de cuentas ni conexiones. Empieza cuando quieras.","cta.btn":"Ver planes",
+      "footer.tagline":"Copiador de operaciones multi-cuenta para NinjaTrader 8 — hecho por traders, para traders.",
+      "footer.faq":"FAQ","footer.contact":"Contacto","footer.terms":"Términos de Servicio","footer.privacy":"Política de Privacidad","footer.cookies":"Política de Cookies",
+      "chat.title":"Soporte TradeKopier","chat.placeholder":"Escribe tu pregunta...","chat.send":"Enviar",
+      "chat.welcome":"¡Hola! Soy el asistente de TradeKopier. Pregúntame sobre precios, instalación, compatibilidad o lo que necesites.",
+      "chat.openticket":"¿No es suficiente? Abrir ticket de soporte",
+      "chat.back":"← Volver al chat",
+      "chat.ticket.title":"Abrir ticket de soporte","chat.ticket.name":"Nombre (opcional)","chat.ticket.email":"Tu email","chat.ticket.message":"Cuéntanos qué pasa",
+      "chat.ticket.submit":"Enviar ticket","chat.ticket.success":"¡Recibido! Te responderemos por email en breve (soporte 24/7).",
+      "chat.ticket.missing":"Necesitamos tu email y un mensaje para poder ayudarte.",
+      "chat.error":"Algo ha fallado. Inténtalo de nuevo o abre un ticket.",
+    },
+    en:{
+      "nav.features":"Features","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Risk management","nav.pricing":"Pricing","nav.faq":"FAQ","nav.account":"My account","nav.cta":"Get started",
+      "hero.badge":"🚀 Built by traders, for traders",
+      "hero.title.accent":"Copy your trades instantly","hero.title.rest":"across all your accounts at once",
+      "hero.sub":"TradeKopier automatically replicates every entry, exit and protective order from your master account to all your slave accounts — no account limit, no connection limit.",
+      "hero.cta1":"View plans","hero.cta2":"See features",
+      "stats.n1":"Unlimited","stats.l1":"slave accounts per master",
+      "stats.n2":"Unlimited","stats.l2":"connections/brokers at once",
+      "stats.l3":"replication latency",
+      "brokers.label":"Compatible with TradingView, Tradovate, and every connection and prop firm NinjaTrader 8 supports, including:","brokers.more":"and many more",
+      "features.eyebrow":"Features","features.title":"Everything you need to manage multiple accounts",
+      "features.sub":"Built for traders with several prop firm or funded accounts who want to trade once and replicate everywhere — without other copiers' limits.",
+      "feat1.h":"No account or connection limits","feat1.p":"Connect and trade as many different accounts and brokers as you need at the same time — compatible with TradingView, Tradovate, and every connection NinjaTrader 8 supports, plus any venue where you execute your trades. Unlike other copiers that charge more per extra connection.",
+      "feat7.h":"Optimized for prop firms","feat7.p":"Works seamlessly with any prop firm you use — no restrictions, no compatibility conflicts.",
+      "feat8.h":"24/7 support","feat8.p":"Our team is available around the clock, every day of the week, to help with any question or issue.",
+      "feat9.h":"No VPS needed","feat9.p":"Runs directly on your own computer — no need to rent a VPS or pay extra just to keep the copier running.",
+      "feat2.h":"Real-time replication","feat2.p":"Every entry and exit on your master account is replicated instantly, whether you trade from the Chart Trader, an ATM, or TradingView.",
+      "feat3.h":"Per-account multiplier","feat3.p":"Independently scale position size on each slave account — perfect for accounts with different capital sizes.",
+      "feat4.h":"Real SL/TP protection","feat4.p":"Replicates the actual Stop Loss and Take Profit you set on the master, at the same distance and scaled per account — not a generic safety net.",
+      "feat5.h":"Live Cockpit","feat5.p":"Control panel showing the status of every account, daily PnL, open positions, and one-click emergency flatten.",
+      "feat6.h":"Safety lock","feat6.p":"Disable any account from Connections and it's instantly excluded from all replication, wherever it's configured.",
+      "risk.eyebrow":"Risk management","risk.title":"Protect your funded accounts automatically",
+      "risk.desc":"Set the daily loss limit (PDLL) and profit target (PDPT) per account. TradeKopier watches in real time and acts before it's too late.",
+      "risk.li1":"Automatic liquidation when the loss limit or the profit target you choose is hit",
+      "risk.li2":"\"Liquidate and lock\" mode — the account stays locked until the next day, with no way to revert it by mistake",
+      "risk.li3":"If the master hits its own limit, only the master closes — slave accounts keep trading normally",
+      "risk.li4":"Verification panel that warns you if an active account has no limits configured",
+      "trust.eyebrow":"Trust","trust.title":"Safe by default, built for serious traders",
+      "trust1.h":"Unlimited accounts, flat price","trust1.p":"Copy to as many funded and live accounts as you run, with no per-account fees.",
+      "trust2.h":"Built for prop firm rules","trust2.p":"Risk controls keep your evaluations and funded accounts compliant on every signal.",
+      "trust3.h":"Direct, native connections","trust3.p":"Wired directly into NinjaTrader 8 — no third-party plugins, no middle layers.",
+      "trust4.h":"Encrypted and private","trust4.p":"Your broker connection stays on your own machine — we never store your passwords.",
+      "trust5.h":"Real human support, 24/7","trust5.p":"Help comes straight from the team that builds and runs TradeKopier.",
+      "how.eyebrow":"Installation","how.title":"Ready in under 5 minutes",
+      "how.s1h":"Buy your license","how.s1p":"Choose your plan and get your license key instantly by email.",
+      "how.s2h":"Install on NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, select the file, restart NinjaTrader.",
+      "how.s3h":"Activate and configure","how.s3p":"Enter your email and key, choose your master and slave accounts, and start replicating.",
+      "how.shot.cap":"Step-by-step install video.",
+      "pipe.eyebrow":"Replication engine","pipe.title":"From signal to slave, in three stages",
+      "pipe1.h":"Master places the order","pipe1.p":"Market, limit, stop, bracket, OCO — we capture the order directly from NinjaTrader, not by simulating UI clicks.",
+      "pipe2.h":"Per-account multiplier","pipe2.p":"Master size × each slave's multiplier, rounded to the nearest whole contract. You can force micros or minis per account.",
+      "pipe3.h":"Parallel execution","pipe3.p":"Each slave is dispatched to its own connection independently — no bottleneck, no shared locks. Every account trades at once.",
+      "shots.eyebrow":"Interface","shots.title":"Here's what TradeKopier looks like",
+      "shots.sub":"Available in dark mode and light mode — pick whichever you prefer.",
+      "shots.cap.cockpit":"Live Cockpit — PnL, positions, and control over every account at once.",
+      "shots.cap.dark":"Dark mode, with several groups running at the same time.",
+      "shots.cap.risk":"Risk Management — PDLL and PDPT per account, with automatic lockout.",
+      "shots.cap.groups":"Groups — one leader, as many followers as you need, each with its own multiplier.",
+      "shots.cap.video":"Live demo video.",
+      "pricing.eyebrow":"Pricing","pricing.title":"The same TradeKopier, choose your duration",
+      "pricing.sub":"Every feature included in all 3 plans. The longer you choose, the more you save.",
+      "plan.mensual":"Monthly","plan.trimestral":"Quarterly","plan.semestral":"Semi-annual",
+      "plan.mensual.desc":"Try it with no commitment, cancel anytime.","plan.trimestral.desc":"The perfect balance of savings and flexibility.","plan.semestral.desc":"Maximum savings for traders who are already sold.",
+      "plan.permes":"/mo","plan.pertri":"/3 months","plan.persem":"/6 months","plan.popular":"Most popular",
+      "plan.save.tri":"Save $15","plan.save.sem":"Save $50","plan.trial":"🎁 7 days free, then $25/mo",
+      "pf1":"Unlimited accounts and connections","pf2":"Real-time replication","pf3":"Automatic PDLL/PDPT risk management",
+      "pf4":"Real SL/TP protection","pf5":"Free updates and new features included","pf6":"24/7 support",
+      "pf7":"Compatible with TradingView","pf8":"Cancel anytime, no lock-in",
+      "included.title":"Included in all 3 plans",
+      "plan.cta":"Buy now","plan.note":"Secure payment processed by Stripe.",
+      "cta.title":"Copy your trades with total confidence","cta.sub":"One TradeKopier, every feature, no limit on accounts or connections. Start whenever you're ready.","cta.btn":"View plans",
+      "footer.tagline":"Multi-account trade copier for NinjaTrader 8 — built by traders, for traders.",
+      "footer.faq":"FAQ","footer.contact":"Contact","footer.terms":"Terms of Service","footer.privacy":"Privacy Policy","footer.cookies":"Cookie Policy",
+      "chat.title":"TradeKopier Support","chat.placeholder":"Type your question...","chat.send":"Send",
+      "chat.welcome":"Hi! I'm the TradeKopier assistant. Ask me about pricing, installation, compatibility, or anything else.",
+      "chat.openticket":"Not enough? Open a support ticket",
+      "chat.back":"← Back to chat",
+      "chat.ticket.title":"Open a support ticket","chat.ticket.name":"Name (optional)","chat.ticket.email":"Your email","chat.ticket.message":"Tell us what's going on",
+      "chat.ticket.submit":"Send ticket","chat.ticket.success":"Got it! We'll reply by email shortly (24/7 support).",
+      "chat.ticket.missing":"We need your email and a message to help you.",
+      "chat.error":"Something went wrong. Try again or open a ticket.",
+    },
+    de:{
+      "nav.features":"Funktionen","nav.shots":"Oberfläche","nav.install":"Installation","nav.risk":"Risikomanagement","nav.pricing":"Preise","nav.faq":"FAQ","nav.account":"Mein Konto","nav.cta":"Loslegen",
+      "hero.badge":"🚀 Von Tradern für Trader entwickelt",
+      "hero.title.accent":"Kopiere deine Trades sofort","hero.title.rest":"auf all deine Konten gleichzeitig",
+      "hero.sub":"TradeKopier repliziert automatisch jeden Einstieg, Ausstieg und jede Absicherung deines Master-Kontos auf alle Slave-Konten — ohne Konto- oder Verbindungslimit.",
+      "hero.cta1":"Preise ansehen","hero.cta2":"Funktionen ansehen",
+      "stats.n1":"Unbegrenzt","stats.l1":"Slave-Konten pro Master",
+      "stats.n2":"Unbegrenzt","stats.l2":"Verbindungen/Broker gleichzeitig",
+      "stats.l3":"Replikationslatenz",
+      "brokers.label":"Kompatibel mit TradingView, Tradovate und jeder Verbindung sowie Prop-Firm, die NinjaTrader 8 unterstützt, u. a.:","brokers.more":"und viele mehr",
+      "features.eyebrow":"Funktionen","features.title":"Alles, was du für mehrere Konten brauchst",
+      "features.sub":"Für Trader mit mehreren Prop-Firm- oder Funded-Konten, die einmal traden und überall replizieren wollen — ohne die Grenzen anderer Copier.",
+      "feat1.h":"Keine Konto- oder Verbindungslimits","feat1.p":"Verbinde und handle so viele verschiedene Konten und Broker gleichzeitig, wie du brauchst — kompatibel mit TradingView, Tradovate und jeder Verbindung, die NinjaTrader 8 unterstützt, sowie jedem Ort, an dem du deine Trades ausführst. Anders als bei Copiern, die pro zusätzlicher Verbindung mehr verlangen.",
+      "feat7.h":"Optimiert für Prop-Firms","feat7.p":"Funktioniert problemlos mit jeder Prop-Firm, die du nutzt — ohne Einschränkungen oder Kompatibilitätskonflikte.",
+      "feat8.h":"24/7-Support","feat8.p":"Unser Team ist rund um die Uhr, jeden Tag der Woche, für Fragen und Probleme erreichbar.",
+      "feat9.h":"Kein VPS nötig","feat9.p":"Läuft direkt auf deinem eigenen Computer — kein VPS-Mietvertrag oder Extrakosten nur, um den Copier am Laufen zu halten.",
+      "feat2.h":"Echtzeit-Replikation","feat2.p":"Jeder Einstieg und Ausstieg auf deinem Master-Konto wird sofort repliziert, egal ob du über Chart Trader, ATM oder TradingView handelst.",
+      "feat3.h":"Multiplikator pro Konto","feat3.p":"Skaliere die Positionsgröße für jedes Slave-Konto unabhängig — perfekt für Konten mit unterschiedlichem Kapital.",
+      "feat4.h":"Echter SL/TP-Schutz","feat4.p":"Repliziert den tatsächlichen Stop Loss und Take Profit vom Master, im gleichen Abstand und pro Konto skaliert — kein generisches Sicherheitsnetz.",
+      "feat5.h":"Live-Cockpit","feat5.p":"Kontrollzentrum mit Status jedes Kontos, Tages-PnL, offenen Positionen und Notfall-Flatten per Klick.",
+      "feat6.h":"Sicherheitssperre","feat6.p":"Deaktiviere jedes Konto unter Verbindungen und es wird sofort von jeder Replikation ausgeschlossen, egal wo es konfiguriert ist.",
+      "risk.eyebrow":"Risikomanagement","risk.title":"Schütze deine Funded-Konten automatisch",
+      "risk.desc":"Lege das tägliche Verlustlimit (PDLL) und das Gewinnziel (PDPT) pro Konto fest. TradeKopier überwacht in Echtzeit und handelt, bevor es zu spät ist.",
+      "risk.li1":"Automatische Liquidation bei Erreichen des Verlustlimits oder des Gewinnziels, das du selbst festlegst",
+      "risk.li2":"\"Liquidieren und sperren\"-Modus — das Konto bleibt bis zum nächsten Tag gesperrt, ohne versehentliche Rückgängigmachung",
+      "risk.li3":"Erreicht der Master sein eigenes Limit, schließt nur er — Slave-Konten handeln normal weiter",
+      "risk.li4":"Prüfpanel, das warnt, wenn ein aktives Konto keine Limits konfiguriert hat",
+      "trust.eyebrow":"Vertrauen","trust.title":"Standardmäßig sicher, für ernsthafte Trader gebaut",
+      "trust1.h":"Unbegrenzte Konten, Festpreis","trust1.p":"Kopiere auf so viele Funded- und Live-Konten, wie du betreibst, ohne Gebühren pro zusätzlichem Konto.",
+      "trust2.h":"Für die Regeln der Prop-Firms gebaut","trust2.p":"Risikokontrollen halten deine Evaluierungen und Funded-Konten bei jedem Signal regelkonform.",
+      "trust3.h":"Direkte, native Verbindungen","trust3.p":"Direkt in NinjaTrader 8 integriert — ohne Drittanbieter-Plugins oder Zwischenschichten.",
+      "trust4.h":"Verschlüsselt und privat","trust4.p":"Deine Broker-Verbindung bleibt auf deinem eigenen Rechner — wir speichern niemals deine Passwörter.",
+      "trust5.h":"Echter menschlicher Support, 24/7","trust5.p":"Die Hilfe kommt direkt vom Team, das TradeKopier entwickelt und betreibt.",
+      "how.eyebrow":"Installation","how.title":"In unter 5 Minuten startklar",
+      "how.s1h":"Lizenz kaufen","how.s1p":"Wähle deinen Plan und erhalte deinen Lizenzschlüssel sofort per E-Mail.",
+      "how.s2h":"In NinjaTrader 8 installieren","how.s2p":"Tools → Import → NinjaScript Add-On, Datei auswählen, NinjaTrader neu starten.",
+      "how.s3h":"Aktivieren und konfigurieren","how.s3p":"E-Mail und Schlüssel eingeben, Master- und Slave-Konten wählen und mit dem Replizieren beginnen.",
+      "how.shot.cap":"Installations-Erklärvideo.",
+      "pipe.eyebrow":"Replikations-Engine","pipe.title":"Vom Signal zum Slave, in drei Schritten",
+      "pipe1.h":"Master platziert die Order","pipe1.p":"Market, Limit, Stop, Bracket, OCO — wir erfassen die Order direkt von NinjaTrader, nicht durch simulierte UI-Klicks.",
+      "pipe2.h":"Multiplikator pro Konto","pipe2.p":"Master-Größe × Multiplikator jedes Slaves, gerundet auf den nächsten ganzen Kontrakt. Du kannst pro Konto Micros oder Minis erzwingen.",
+      "pipe3.h":"Parallele Ausführung","pipe3.p":"Jeder Slave wird unabhängig an seine eigene Verbindung gesendet — kein Engpass, keine gemeinsamen Sperren. Alle Konten handeln gleichzeitig.",
+      "shots.eyebrow":"Oberfläche","shots.title":"So sieht TradeKopier von innen aus",
+      "shots.sub":"Verfügbar im Dunkel- und Hellmodus — wähle, was dir lieber ist.",
+      "shots.cap.cockpit":"Live-Cockpit — PnL, Positionen und Kontrolle über alle Konten gleichzeitig.",
+      "shots.cap.dark":"Dunkler Modus, mit mehreren gleichzeitig laufenden Gruppen.",
+      "shots.cap.risk":"Risk Management — PDLL und PDPT pro Konto, mit automatischer Sperre.",
+      "shots.cap.groups":"Gruppen — ein Master, so viele Slaves wie du brauchst, jeder mit eigenem Multiplikator.",
+      "shots.cap.video":"Live-Demo-Video.",
+      "pricing.eyebrow":"Preise","pricing.title":"Derselbe TradeKopier, wähle deine Laufzeit",
+      "pricing.sub":"Alle Funktionen in allen 3 Plänen enthalten. Je länger die Laufzeit, desto mehr sparst du.",
+      "plan.mensual":"Monatlich","plan.trimestral":"Vierteljährlich","plan.semestral":"Halbjährlich",
+      "plan.mensual.desc":"Unverbindlich testen, jederzeit kündbar.","plan.trimestral.desc":"Die perfekte Balance aus Ersparnis und Flexibilität.","plan.semestral.desc":"Maximale Ersparnis für alle, die schon überzeugt sind.",
+      "plan.permes":"/Monat","plan.pertri":"/3 Monate","plan.persem":"/6 Monate","plan.popular":"Am beliebtesten",
+      "plan.save.tri":"Spare $15","plan.save.sem":"Spare $50","plan.trial":"🎁 7 Tage gratis, danach $25/Monat",
+      "pf1":"Unbegrenzte Konten und Verbindungen","pf2":"Echtzeit-Replikation","pf3":"Automatisches PDLL/PDPT-Risikomanagement",
+      "pf4":"Echter SL/TP-Schutz","pf5":"Kostenlose Updates und neue Funktionen inklusive","pf6":"24/7-Support",
+      "pf7":"Kompatibel mit TradingView","pf8":"Jederzeit kündbar, keine Vertragsbindung",
+      "included.title":"In allen 3 Plänen enthalten",
+      "plan.cta":"Jetzt kaufen","plan.note":"Sichere Zahlung, abgewickelt von Stripe.",
+      "cta.title":"Kopiere deine Trades mit vollem Vertrauen","cta.sub":"Ein TradeKopier, alle Funktionen, kein Limit bei Konten oder Verbindungen. Starte, wann immer du bereit bist.","cta.btn":"Preise ansehen",
+      "footer.tagline":"Multi-Konto-Trade-Copier für NinjaTrader 8 — von Tradern für Trader entwickelt.",
+      "footer.faq":"FAQ","footer.contact":"Kontakt","footer.terms":"Nutzungsbedingungen","footer.privacy":"Datenschutz","footer.cookies":"Cookie-Richtlinie",
+      "chat.title":"TradeKopier-Support","chat.placeholder":"Schreib deine Frage...","chat.send":"Senden",
+      "chat.welcome":"Hallo! Ich bin der TradeKopier-Assistent. Frag mich zu Preisen, Installation, Kompatibilität oder was du sonst brauchst.",
+      "chat.openticket":"Nicht genug? Support-Ticket öffnen",
+      "chat.back":"← Zurück zum Chat",
+      "chat.ticket.title":"Support-Ticket öffnen","chat.ticket.name":"Name (optional)","chat.ticket.email":"Deine E-Mail","chat.ticket.message":"Erzähl uns, was los ist",
+      "chat.ticket.submit":"Ticket senden","chat.ticket.success":"Erhalten! Wir antworten in Kürze per E-Mail (24/7-Support).",
+      "chat.ticket.missing":"Wir brauchen deine E-Mail und eine Nachricht, um dir zu helfen.",
+      "chat.error":"Etwas ist schiefgelaufen. Versuch es erneut oder öffne ein Ticket.",
+    },
+    pt:{
+      "nav.features":"Funcionalidades","nav.shots":"Interface","nav.install":"Instalação","nav.risk":"Gestão de risco","nav.pricing":"Preços","nav.faq":"FAQ","nav.account":"Minha conta","nav.cta":"Começar",
+      "hero.badge":"🚀 Feito por traders, para traders",
+      "hero.title.accent":"Copia as tuas operações ao instante","hero.title.rest":"em todas as tuas contas ao mesmo tempo",
+      "hero.sub":"O TradeKopier replica automaticamente cada entrada, saída e proteção da tua conta mestre para todas as contas escravas — sem limite de contas, sem limite de conexões.",
+      "hero.cta1":"Ver planos","hero.cta2":"Ver funcionalidades",
+      "stats.n1":"Ilimitadas","stats.l1":"contas escravas por mestre",
+      "stats.n2":"Ilimitadas","stats.l2":"conexões/brokers ao mesmo tempo",
+      "stats.l3":"de latência de réplica",
+      "brokers.label":"Compatível com TradingView, Tradovate, e com todas as conexões e empresas de fondeo que o NinjaTrader 8 permite, incluindo:","brokers.more":"e muitas mais",
+      "features.eyebrow":"Funcionalidades","features.title":"Tudo o que precisas para gerir várias contas",
+      "features.sub":"Pensado para traders com várias contas de prop firm ou fundeadas que querem operar uma vez e replicar em todas — sem os limites de outros copiadores.",
+      "feat1.h":"Sem limite de contas nem conexões","feat1.p":"Liga e opera quantas contas e brokers diferentes precisares ao mesmo tempo — compatível com TradingView, Tradovate e todas as conexões que o NinjaTrader 8 permite, além de qualquer sítio onde executes as tuas operações. Ao contrário de outros copiadores que cobram mais por cada conexão extra.",
+      "feat7.h":"Otimizado para empresas de fondeo","feat7.p":"Funciona sem problemas com qualquer empresa de fondeo (prop firm) que uses — sem restrições nem conflitos de compatibilidade.",
+      "feat8.h":"Suporte 24/7","feat8.p":"A nossa equipa está disponível 24 horas por dia, 7 dias por semana, para te ajudar com qualquer dúvida ou incidência.",
+      "feat9.h":"Sem necessidade de VPS","feat9.p":"Funciona diretamente no teu próprio computador — não precisas de alugar um VPS nem pagar a mais só para manter o copiador a correr.",
+      "feat2.h":"Réplica em tempo real","feat2.p":"Cada entrada e saída na tua conta mestre é replicada instantaneamente, quer operes pelo Chart Trader, um ATM ou TradingView.",
+      "feat3.h":"Multiplicador por conta","feat3.p":"Ajusta o tamanho da posição de forma independente em cada escrava — perfeito para contas com capital diferente.",
+      "feat4.h":"Proteção SL/TP real","feat4.p":"Replica o Stop Loss e Take Profit reais que colocas na mestre, à mesma distância e escalados por conta — não uma rede de segurança genérica.",
+      "feat5.h":"Cockpit ao vivo","feat5.p":"Painel de controlo com o estado de cada conta, PnL do dia, posições abertas e flatten de emergência com um clique.",
+      "feat6.h":"Bloqueio de segurança","feat6.p":"Desativa qualquer conta em Conexões e fica excluída de toda a réplica instantaneamente, onde quer que esteja configurada.",
+      "risk.eyebrow":"Gestão de risco","risk.title":"Protege as tuas contas fundeadas automaticamente",
+      "risk.desc":"Configura o limite de perda diária (PDLL) e o objetivo de lucro (PDPT) por conta. O TradeKopier vigia em tempo real e age antes que seja tarde.",
+      "risk.li1":"Liquidação automática ao atingir o limite de perda ou o objetivo de lucro que tu escolheres",
+      "risk.li2":"Modo \"liquidar e bloquear\" — a conta fica bloqueada até ao dia seguinte, sem possibilidade de reverter por engano",
+      "risk.li3":"Se a mestre atingir o seu próprio limite, só ela fecha — as escravas continuam a operar normalmente",
+      "risk.li4":"Painel de verificação que avisa se uma conta ativa não tem limites configurados",
+      "trust.eyebrow":"Confiança","trust.title":"Seguro por padrão, pensado para traders sérios",
+      "trust1.h":"Contas ilimitadas, preço fixo","trust1.p":"Copia para tantas contas fundeadas e reais quantas operares, sem custos por conta adicional.",
+      "trust2.h":"Pensado para as regras das prop firms","trust2.p":"Os controlos de risco mantêm as tuas avaliações e contas fundeadas dentro da norma em cada sinal.",
+      "trust3.h":"Conexões diretas e nativas","trust3.p":"Integrado diretamente no NinjaTrader 8 — sem plugins externos nem camadas intermédias.",
+      "trust4.h":"Cifrado e privado","trust4.p":"A tua conexão ao broker permanece no teu próprio equipamento — nunca guardamos as tuas palavras-passe.",
+      "trust5.h":"Suporte humano real, 24/7","trust5.p":"A ajuda vem diretamente da equipa que constrói e mantém o TradeKopier.",
+      "how.eyebrow":"Instalação","how.title":"Pronto em menos de 5 minutos",
+      "how.s1h":"Compra a tua licença","how.s1p":"Escolhe o teu plano e recebe a tua chave de licença instantaneamente por email.",
+      "how.s2h":"Instala no NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, seleciona o ficheiro, reinicia o NinjaTrader.",
+      "how.s3h":"Ativa e configura","how.s3p":"Introduz o teu email e chave, escolhe a mestre e as escravas, e começa a replicar.",
+      "how.shot.cap":"Vídeo explicativo de instalação.",
+      "pipe.eyebrow":"Motor de réplica","pipe.title":"Do sinal à escrava, em três etapas",
+      "pipe1.h":"A mestre coloca a ordem","pipe1.p":"Market, limit, stop, bracket, OCO — capturamos a ordem diretamente do NinjaTrader, não simulando cliques na interface.",
+      "pipe2.h":"Multiplicador por conta","pipe2.p":"Tamanho da mestre × multiplicador de cada escrava, arredondado ao contrato inteiro mais próximo. Podes forçar micros ou minis por conta.",
+      "pipe3.h":"Execução em paralelo","pipe3.p":"Cada escrava é enviada para a sua própria conexão de forma independente — sem gargalo nem bloqueios partilhados. Todas as contas operam ao mesmo tempo.",
+      "shots.eyebrow":"Interface","shots.title":"É assim que o TradeKopier é por dentro",
+      "shots.sub":"Disponível em modo escuro e modo claro — escolhe o que preferires.",
+      "shots.cap.cockpit":"Cockpit ao vivo — PnL, posições e controlo de todas as contas ao mesmo tempo.",
+      "shots.cap.dark":"Modo escuro, com vários grupos a correr ao mesmo tempo.",
+      "shots.cap.risk":"Risk Management — PDLL e PDPT por conta, com bloqueio automático.",
+      "shots.cap.groups":"Grupos — uma mestre, tantas escravas quantas precisares, cada uma com o seu multiplicador.",
+      "shots.cap.video":"Vídeo de demonstração ao vivo.",
+      "pricing.eyebrow":"Preços","pricing.title":"O mesmo TradeKopier, escolhe a duração",
+      "pricing.sub":"Todas as funcionalidades incluídas nos 3 planos. Quanto mais tempo escolheres, mais poupas.",
+      "plan.mensual":"Mensal","plan.trimestral":"Trimestral","plan.semestral":"Semestral",
+      "plan.mensual.desc":"Experimenta sem compromisso, cancela quando quiseres.","plan.trimestral.desc":"O equilíbrio perfeito entre poupança e flexibilidade.","plan.semestral.desc":"Poupança máxima para quem já sabe que fica.",
+      "plan.permes":"/mês","plan.pertri":"/3 meses","plan.persem":"/6 meses","plan.popular":"Mais popular",
+      "plan.save.tri":"Poupa $15","plan.save.sem":"Poupa $50","plan.trial":"🎁 7 dias grátis, depois $25/mês",
+      "pf1":"Contas e conexões ilimitadas","pf2":"Réplica em tempo real","pf3":"Gestão de risco PDLL/PDPT automática",
+      "pf4":"Proteção SL/TP real","pf5":"Atualizações e novas funcionalidades sem custo extra","pf6":"Suporte 24/7",
+      "pf7":"Compatível com TradingView","pf8":"Cancela quando quiseres, sem fidelização",
+      "included.title":"Incluído nos 3 planos",
+      "plan.cta":"Comprar agora","plan.note":"Pagamento seguro processado pela Stripe.",
+      "cta.title":"Copia as tuas operações com total confiança","cta.sub":"Um único TradeKopier, todas as funcionalidades, sem limite de contas nem conexões. Começa quando quiseres.","cta.btn":"Ver planos",
+      "footer.tagline":"Copiador de operações multi-conta para NinjaTrader 8 — feito por traders, para traders.",
+      "footer.faq":"FAQ","footer.contact":"Contacto","footer.terms":"Termos de Serviço","footer.privacy":"Política de Privacidade","footer.cookies":"Política de Cookies",
+      "chat.title":"Suporte TradeKopier","chat.placeholder":"Escreve a tua pergunta...","chat.send":"Enviar",
+      "chat.welcome":"Olá! Sou o assistente do TradeKopier. Pergunta-me sobre preços, instalação, compatibilidade ou o que precisares.",
+      "chat.openticket":"Não é suficiente? Abrir ticket de suporte",
+      "chat.back":"← Voltar ao chat",
+      "chat.ticket.title":"Abrir ticket de suporte","chat.ticket.name":"Nome (opcional)","chat.ticket.email":"O teu email","chat.ticket.message":"Conta-nos o que se passa",
+      "chat.ticket.submit":"Enviar ticket","chat.ticket.success":"Recebido! Responderemos por email em breve (suporte 24/7).",
+      "chat.ticket.missing":"Precisamos do teu email e de uma mensagem para te podermos ajudar.",
+      "chat.error":"Algo correu mal. Tenta novamente ou abre um ticket.",
+    },
+    it:{
+      "nav.features":"Funzionalità","nav.shots":"Interfaccia","nav.install":"Installazione","nav.risk":"Gestione del rischio","nav.pricing":"Prezzi","nav.faq":"FAQ","nav.account":"Il mio account","nav.cta":"Inizia",
+      "hero.badge":"🚀 Creato da trader, per trader",
+      "hero.title.accent":"Copia le tue operazioni all'istante","hero.title.rest":"su tutti i tuoi conti contemporaneamente",
+      "hero.sub":"TradeKopier replica automaticamente ogni entrata, uscita e protezione del tuo conto master su tutti i conti slave — senza limiti di conti, senza limiti di connessioni.",
+      "hero.cta1":"Vedi i piani","hero.cta2":"Vedi le funzionalità",
+      "stats.n1":"Illimitati","stats.l1":"conti slave per master",
+      "stats.n2":"Illimitate","stats.l2":"connessioni/broker contemporaneamente",
+      "stats.l3":"di latenza di replica",
+      "brokers.label":"Compatibile con TradingView, Tradovate, e con tutte le connessioni e le prop firm supportate da NinjaTrader 8, tra cui:","brokers.more":"e molti altri",
+      "features.eyebrow":"Funzionalità","features.title":"Tutto ciò che serve per gestire più conti",
+      "features.sub":"Pensato per trader con più conti prop firm o funded che vogliono operare una volta e replicare ovunque — senza i limiti degli altri copiatori.",
+      "feat1.h":"Nessun limite di conti o connessioni","feat1.p":"Collega e opera con tutti i conti e broker diversi di cui hai bisogno contemporaneamente — compatibile con TradingView, Tradovate e tutte le connessioni supportate da NinjaTrader 8, oltre a qualsiasi luogo in cui esegui le tue operazioni. A differenza di altri copiatori che fanno pagare di più per ogni connessione extra.",
+      "feat7.h":"Ottimizzato per le prop firm","feat7.p":"Funziona senza problemi con qualsiasi prop firm tu usi — senza restrizioni né conflitti di compatibilità.",
+      "feat8.h":"Supporto 24/7","feat8.p":"Il nostro team è disponibile 24 ore su 24, 7 giorni su 7, per qualsiasi domanda o problema.",
+      "feat9.h":"Nessun VPS necessario","feat9.p":"Funziona direttamente sul tuo computer — non serve affittare un VPS né pagare extra solo per tenere il copier attivo.",
+      "feat2.h":"Replica in tempo reale","feat2.p":"Ogni entrata e uscita sul tuo conto master viene replicata istantaneamente, che tu operi da Chart Trader, un ATM o TradingView.",
+      "feat3.h":"Moltiplicatore per conto","feat3.p":"Scala la dimensione della posizione in modo indipendente su ogni conto slave — perfetto per conti con capitale diverso.",
+      "feat4.h":"Protezione SL/TP reale","feat4.p":"Replica lo Stop Loss e il Take Profit reali impostati sul master, alla stessa distanza e scalati per conto — non una rete di sicurezza generica.",
+      "feat5.h":"Cockpit dal vivo","feat5.p":"Pannello di controllo con lo stato di ogni conto, PnL giornaliero, posizioni aperte e flatten di emergenza con un clic.",
+      "feat6.h":"Blocco di sicurezza","feat6.p":"Disattiva qualsiasi conto da Connessioni e viene escluso istantaneamente da ogni replica, ovunque sia configurato.",
+      "risk.eyebrow":"Gestione del rischio","risk.title":"Proteggi automaticamente i tuoi conti funded",
+      "risk.desc":"Imposta il limite di perdita giornaliera (PDLL) e l'obiettivo di profitto (PDPT) per ogni conto. TradeKopier monitora in tempo reale e agisce prima che sia troppo tardi.",
+      "risk.li1":"Liquidazione automatica al raggiungimento del limite di perdita o dell'obiettivo di profitto che scegli tu",
+      "risk.li2":"Modalità \"liquida e blocca\" — il conto resta bloccato fino al giorno successivo, senza possibilità di annullarlo per errore",
+      "risk.li3":"Se il master raggiunge il proprio limite, si chiude solo lui — i conti slave continuano a operare normalmente",
+      "risk.li4":"Pannello di verifica che avvisa se un conto attivo non ha limiti configurati",
+      "trust.eyebrow":"Fiducia","trust.title":"Sicuro per impostazione predefinita, pensato per trader seri",
+      "trust1.h":"Conti illimitati, prezzo fisso","trust1.p":"Copia su tutti i conti funded e live che gestisci, senza costi per conto aggiuntivo.",
+      "trust2.h":"Pensato per le regole delle prop firm","trust2.p":"I controlli di rischio mantengono le tue valutazioni e i conti funded conformi a ogni segnale.",
+      "trust3.h":"Connessioni dirette e native","trust3.p":"Integrato direttamente in NinjaTrader 8 — senza plugin esterni né livelli intermedi.",
+      "trust4.h":"Crittografato e privato","trust4.p":"La tua connessione al broker resta sul tuo computer — non salviamo mai le tue password.",
+      "trust5.h":"Supporto umano reale, 24/7","trust5.p":"L'assistenza arriva direttamente dal team che sviluppa e gestisce TradeKopier.",
+      "how.eyebrow":"Installazione","how.title":"Pronto in meno di 5 minuti",
+      "how.s1h":"Acquista la licenza","how.s1p":"Scegli il tuo piano e ricevi la chiave di licenza istantaneamente via email.",
+      "how.s2h":"Installa su NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, seleziona il file, riavvia NinjaTrader.",
+      "how.s3h":"Attiva e configura","how.s3p":"Inserisci email e chiave, scegli master e slave, e inizia a replicare.",
+      "how.shot.cap":"Video esplicativo di installazione.",
+      "pipe.eyebrow":"Motore di replica","pipe.title":"Dal segnale allo slave, in tre fasi",
+      "pipe1.h":"Il master piazza l'ordine","pipe1.p":"Market, limit, stop, bracket, OCO — catturiamo l'ordine direttamente da NinjaTrader, non simulando clic sull'interfaccia.",
+      "pipe2.h":"Moltiplicatore per conto","pipe2.p":"Dimensione del master × moltiplicatore di ogni slave, arrotondato al contratto intero più vicino. Puoi forzare micro o mini per conto.",
+      "pipe3.h":"Esecuzione in parallelo","pipe3.p":"Ogni slave viene inviato alla propria connessione in modo indipendente — nessun collo di bottiglia, nessun blocco condiviso. Tutti i conti operano contemporaneamente.",
+      "shots.eyebrow":"Interfaccia","shots.title":"Ecco come appare TradeKopier",
+      "shots.sub":"Disponibile in modalità scura e modalità chiara — scegli quella che preferisci.",
+      "shots.cap.cockpit":"Cockpit dal vivo — PnL, posizioni e controllo di tutti i conti contemporaneamente.",
+      "shots.cap.dark":"Modalità scura, con più gruppi in esecuzione contemporaneamente.",
+      "shots.cap.risk":"Risk Management — PDLL e PDPT per conto, con blocco automatico.",
+      "shots.cap.groups":"Gruppi — un master, tutti gli slave che ti servono, ciascuno con il proprio moltiplicatore.",
+      "shots.cap.video":"Video dimostrativo dal vivo.",
+      "pricing.eyebrow":"Prezzi","pricing.title":"Lo stesso TradeKopier, scegli la durata",
+      "pricing.sub":"Tutte le funzionalità incluse nei 3 piani. Più a lungo scegli, più risparmi.",
+      "plan.mensual":"Mensile","plan.trimestral":"Trimestrale","plan.semestral":"Semestrale",
+      "plan.mensual.desc":"Provalo senza impegno, cancella quando vuoi.","plan.trimestral.desc":"Il perfetto equilibrio tra risparmio e flessibilità.","plan.semestral.desc":"Il massimo risparmio per chi ha già deciso di restare.",
+      "plan.permes":"/mese","plan.pertri":"/3 mesi","plan.persem":"/6 mesi","plan.popular":"Più popolare",
+      "plan.save.tri":"Risparmi $15","plan.save.sem":"Risparmi $50","plan.trial":"🎁 7 giorni gratis, poi $25/mese",
+      "pf1":"Conti e connessioni illimitati","pf2":"Replica in tempo reale","pf3":"Gestione del rischio PDLL/PDPT automatica",
+      "pf4":"Protezione SL/TP reale","pf5":"Aggiornamenti e nuove funzionalità senza costi extra","pf6":"Supporto 24/7",
+      "pf7":"Compatibile con TradingView","pf8":"Annulla quando vuoi, nessun vincolo",
+      "included.title":"Incluso in tutti e 3 i piani",
+      "plan.cta":"Acquista ora","plan.note":"Pagamento sicuro elaborato da Stripe.",
+      "cta.title":"Copia le tue operazioni con totale fiducia","cta.sub":"Un solo TradeKopier, tutte le funzionalità, nessun limite di conti o connessioni. Inizia quando vuoi.","cta.btn":"Vedi i piani",
+      "footer.tagline":"Copiatore di operazioni multi-conto per NinjaTrader 8 — creato da trader, per trader.",
+      "footer.faq":"FAQ","footer.contact":"Contatto","footer.terms":"Termini di Servizio","footer.privacy":"Informativa sulla Privacy","footer.cookies":"Informativa sui Cookie",
+      "chat.title":"Supporto TradeKopier","chat.placeholder":"Scrivi la tua domanda...","chat.send":"Invia",
+      "chat.welcome":"Ciao! Sono l'assistente di TradeKopier. Chiedimi di prezzi, installazione, compatibilità o qualsiasi altra cosa.",
+      "chat.openticket":"Non basta? Apri un ticket di supporto",
+      "chat.back":"← Torna alla chat",
+      "chat.ticket.title":"Apri un ticket di supporto","chat.ticket.name":"Nome (opzionale)","chat.ticket.email":"La tua email","chat.ticket.message":"Raccontaci cosa succede",
+      "chat.ticket.submit":"Invia ticket","chat.ticket.success":"Ricevuto! Ti risponderemo via email a breve (supporto 24/7).",
+      "chat.ticket.missing":"Ci servono la tua email e un messaggio per poterti aiutare.",
+      "chat.error":"Qualcosa è andato storto. Riprova o apri un ticket.",
+    },
+    fr:{
+      "nav.features":"Fonctionnalités","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Gestion du risque","nav.pricing":"Tarifs","nav.faq":"FAQ","nav.account":"Mon compte","nav.cta":"Commencer",
+      "hero.badge":"🚀 Créé par des traders, pour des traders",
+      "hero.title.accent":"Copiez vos trades instantanément","hero.title.rest":"sur tous vos comptes à la fois",
+      "hero.sub":"TradeKopier réplique automatiquement chaque entrée, sortie et protection de votre compte maître vers tous vos comptes esclaves — sans limite de comptes, sans limite de connexions.",
+      "hero.cta1":"Voir les tarifs","hero.cta2":"Voir les fonctionnalités",
+      "stats.n1":"Illimités","stats.l1":"comptes esclaves par maître",
+      "stats.n2":"Illimitées","stats.l2":"connexions/brokers à la fois",
+      "stats.l3":"de latence de réplication",
+      "brokers.label":"Compatible avec TradingView, Tradovate, et toutes les connexions et sociétés de prop trading prises en charge par NinjaTrader 8, notamment :","brokers.more":"et bien d'autres",
+      "features.eyebrow":"Fonctionnalités","features.title":"Tout ce dont vous avez besoin pour gérer plusieurs comptes",
+      "features.sub":"Conçu pour les traders ayant plusieurs comptes prop firm ou financés qui veulent trader une fois et répliquer partout — sans les limites des autres copieurs.",
+      "feat1.h":"Aucune limite de comptes ni de connexions","feat1.p":"Connectez et tradez autant de comptes et de brokers différents que nécessaire en même temps — compatible avec TradingView, Tradovate et toutes les connexions prises en charge par NinjaTrader 8, ainsi que n'importe quel site d'exécution. Contrairement aux autres copieurs qui facturent plus par connexion supplémentaire.",
+      "feat2.h":"Réplication en temps réel","feat2.p":"Chaque entrée et sortie sur votre compte maître est répliquée instantanément, que vous tradiez depuis Chart Trader, un ATM ou TradingView.",
+      "feat3.h":"Multiplicateur par compte","feat3.p":"Ajustez la taille de position indépendamment sur chaque compte esclave — parfait pour des comptes ayant des capitaux différents.",
+      "feat4.h":"Protection SL/TP réelle","feat4.p":"Réplique le Stop Loss et le Take Profit réels définis sur le maître, à la même distance et adaptés par compte — pas un filet de sécurité générique.",
+      "feat5.h":"Cockpit en direct","feat5.p":"Panneau de contrôle avec le statut de chaque compte, le PnL du jour, les positions ouvertes et un flatten d'urgence en un clic.",
+      "feat6.h":"Verrou de sécurité","feat6.p":"Désactivez n'importe quel compte depuis Connexions et il est instantanément exclu de toute réplication, où qu'il soit configuré.",
+      "feat7.h":"Optimisé pour les sociétés de prop trading","feat7.p":"Fonctionne sans problème avec n'importe quelle société de prop trading que vous utilisez — sans restrictions ni conflits de compatibilité.",
+      "feat8.h":"Support 24/7","feat8.p":"Notre équipe est disponible 24 heures sur 24, 7 jours sur 7, pour toute question ou incident.",
+      "feat9.h":"Pas besoin de VPS","feat9.p":"Fonctionne directement sur votre propre ordinateur — pas besoin de louer un VPS ni de payer plus juste pour garder le copieur actif.",
+      "risk.eyebrow":"Gestion du risque","risk.title":"Protégez automatiquement vos comptes financés",
+      "risk.desc":"Configurez la limite de perte quotidienne (PDLL) et l'objectif de profit (PDPT) par compte. TradeKopier surveille en temps réel et agit avant qu'il ne soit trop tard.",
+      "risk.li1":"Liquidation automatique dès que la limite de perte ou l'objectif de profit que vous choisissez est atteint",
+      "risk.li2":"Mode « liquider et verrouiller » — le compte reste verrouillé jusqu'au lendemain, sans possibilité de l'annuler par erreur",
+      "risk.li3":"Si le maître atteint sa propre limite, seul lui se ferme — les comptes esclaves continuent de trader normalement",
+      "risk.li4":"Panneau de vérification qui vous avertit si un compte actif n'a aucune limite configurée",
+      "trust.eyebrow":"Confiance","trust.title":"Sécurisé par défaut, conçu pour les traders sérieux",
+      "trust1.h":"Comptes illimités, prix fixe","trust1.p":"Copiez sur autant de comptes financés et réels que vous gérez, sans frais par compte supplémentaire.",
+      "trust2.h":"Conçu pour les règles des prop firms","trust2.p":"Les contrôles de risque maintiennent vos évaluations et comptes financés conformes à chaque signal.",
+      "trust3.h":"Connexions directes et natives","trust3.p":"Intégré directement dans NinjaTrader 8 — sans plugins tiers ni couches intermédiaires.",
+      "trust4.h":"Chiffré et privé","trust4.p":"Votre connexion au broker reste sur votre propre machine — nous ne stockons jamais vos mots de passe.",
+      "trust5.h":"Support humain réel, 24/7","trust5.p":"L'aide vient directement de l'équipe qui développe et fait fonctionner TradeKopier.",
+      "how.eyebrow":"Installation","how.title":"Prêt en moins de 5 minutes",
+      "how.s1h":"Achetez votre licence","how.s1p":"Choisissez votre plan et recevez votre clé de licence instantanément par email.",
+      "how.s2h":"Installez sur NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, sélectionnez le fichier, redémarrez NinjaTrader.",
+      "how.s3h":"Activez et configurez","how.s3p":"Entrez votre email et votre clé, choisissez votre maître et vos esclaves, et commencez à répliquer.",
+      "how.shot.cap":"Vidéo explicative d'installation.",
+      "pipe.eyebrow":"Moteur de réplication","pipe.title":"Du signal à l'esclave, en trois étapes",
+      "pipe1.h":"Le maître place l'ordre","pipe1.p":"Market, limit, stop, bracket, OCO — nous capturons l'ordre directement depuis NinjaTrader, sans simuler de clics sur l'interface.",
+      "pipe2.h":"Multiplicateur par compte","pipe2.p":"Taille du maître × multiplicateur de chaque esclave, arrondie au contrat entier le plus proche. Vous pouvez forcer les micros ou minis par compte.",
+      "pipe3.h":"Exécution en parallèle","pipe3.p":"Chaque esclave est envoyé à sa propre connexion de manière indépendante — sans goulot d'étranglement ni verrous partagés. Tous les comptes tradent en même temps.",
+      "shots.eyebrow":"Interface","shots.title":"Voici à quoi ressemble TradeKopier",
+      "shots.sub":"Disponible en mode sombre et en mode clair — choisissez celui que vous préférez.",
+      "shots.cap.cockpit":"Cockpit en direct — PnL, positions et contrôle de tous les comptes à la fois.",
+      "shots.cap.dark":"Mode sombre, avec plusieurs groupes actifs en même temps.",
+      "shots.cap.risk":"Risk Management — PDLL et PDPT par compte, avec verrouillage automatique.",
+      "shots.cap.groups":"Groupes — un maître, autant d'esclaves que nécessaire, chacun avec son propre multiplicateur.",
+      "shots.cap.video":"Vidéo de démonstration en direct.",
+      "pricing.eyebrow":"Tarifs","pricing.title":"Le même TradeKopier, choisissez votre durée",
+      "pricing.sub":"Toutes les fonctionnalités incluses dans les 3 plans. Plus vous choisissez une durée longue, plus vous économisez.",
+      "plan.mensual":"Mensuel","plan.trimestral":"Trimestriel","plan.semestral":"Semestriel",
+      "plan.mensual.desc":"Essayez sans engagement, annulez à tout moment.","plan.trimestral.desc":"L'équilibre parfait entre économies et flexibilité.","plan.semestral.desc":"Économies maximales pour ceux qui sont déjà convaincus.",
+      "plan.permes":"/mois","plan.pertri":"/3 mois","plan.persem":"/6 mois","plan.popular":"Le plus populaire",
+      "plan.save.tri":"Économisez 15 $","plan.save.sem":"Économisez 50 $","plan.trial":"🎁 7 jours gratuits, puis 25 $/mois",
+      "pf1":"Comptes et connexions illimités","pf2":"Réplication en temps réel","pf3":"Gestion du risque PDLL/PDPT automatique",
+      "pf4":"Protection SL/TP réelle","pf5":"Mises à jour et nouvelles fonctionnalités incluses sans frais","pf6":"Support 24/7",
+      "pf7":"Compatible avec TradingView","pf8":"Annulez à tout moment, sans engagement",
+      "included.title":"Inclus dans les 3 plans",
+      "plan.cta":"Acheter maintenant","plan.note":"Paiement sécurisé traité par Stripe.",
+      "cta.title":"Copiez vos trades en toute confiance","cta.sub":"Un seul TradeKopier, toutes les fonctionnalités, sans limite de comptes ni de connexions. Commencez quand vous voulez.","cta.btn":"Voir les tarifs",
+      "footer.tagline":"Copieur de trades multi-comptes pour NinjaTrader 8 — créé par des traders, pour des traders.",
+      "footer.faq":"FAQ","footer.contact":"Contact","footer.terms":"Conditions d'utilisation","footer.privacy":"Politique de confidentialité","footer.cookies":"Politique de cookies",
+      "chat.title":"Support TradeKopier","chat.placeholder":"Écrivez votre question...","chat.send":"Envoyer",
+      "chat.welcome":"Bonjour ! Je suis l'assistant TradeKopier. Posez-moi vos questions sur les prix, l'installation, la compatibilité, ou autre chose.",
+      "chat.openticket":"Pas suffisant ? Ouvrir un ticket de support",
+      "chat.back":"← Retour au chat",
+      "chat.ticket.title":"Ouvrir un ticket de support","chat.ticket.name":"Nom (facultatif)","chat.ticket.email":"Votre email","chat.ticket.message":"Dites-nous ce qui se passe",
+      "chat.ticket.submit":"Envoyer le ticket","chat.ticket.success":"Bien reçu ! Nous répondrons par email sous peu (support 24/7).",
+      "chat.ticket.missing":"Nous avons besoin de votre email et d'un message pour vous aider.",
+      "chat.error":"Une erreur s'est produite. Réessayez ou ouvrez un ticket.",
+    },
+  };
+
+  function setLang(lang){
+    if(!i18n[lang]) return;
+    currentLang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(i18n[lang][key]) el.textContent = i18n[lang][key];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+      const key = el.getAttribute('data-i18n-ph');
+      if(i18n[lang][key]) el.setAttribute('placeholder', i18n[lang][key]);
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('tk_lang', lang);
+    const activeThumb = document.querySelector('.shots-thumb.active');
+    if(activeThumb) updateShotsCaption(activeThumb.getAttribute('data-cap'));
+  }
+
+  function updateShotsCaption(key){
+    const el = document.getElementById('shotsCaption');
+    if(el && i18n[currentLang][key]) el.textContent = i18n[currentLang][key];
+  }
+
+  // ---- Galería de capturas / vídeo ----
+  document.querySelectorAll('.shots-thumb').forEach(thumb=>{
+    thumb.addEventListener('click', ()=>{
+      document.querySelectorAll('.shots-thumb').forEach(t=>t.classList.remove('active'));
+      thumb.classList.add('active');
+      const type = thumb.getAttribute('data-type');
+      const src = thumb.getAttribute('data-src');
+      const frame = document.getElementById('shotsFrame');
+      if(type === 'video'){
+        frame.innerHTML = '<video id="shotsImg" src="' + src + '" controls autoplay></video>';
+      } else {
+        frame.innerHTML = '<img id="shotsImg" src="' + src + '" alt="TradeKopier">';
+      }
+      updateShotsCaption(thumb.getAttribute('data-cap'));
+    });
+  });
+
+  document.getElementById('langSwitch').addEventListener('change', (e)=> setLang(e.target.value));
+
+  // ---- Tira de marcas (logo chips: iniciales + color, sin usar los logotipos
+  // oficiales de cada empresa — nombres y colores solo a modo identificativo) ----
+  const brands = [
+    { name:'TradingView', ini:'TV', color:'#1e88e5' },
+    { name:'Tradovate', ini:'TD', color:'#00b386' },
+    { name:'Rithmic', ini:'RM', color:'#37474f' },
+    { name:'Lucid Trading', ini:'LT', color:'#7c5cff' },
+    { name:'Apex Trader Funding', ini:'AT', color:'#e35b4b' },
+    { name:'Tradeify', ini:'TF', color:'#3ea6ff' },
+    { name:'Bulenox', ini:'BX', color:'#2ecc71' },
+    { name:'Alpha Futures', ini:'AF', color:'#c99a2e' },
+    { name:'MyFundedFutures', ini:'MF', color:'#00acc1' },
+    { name:'Take Profit Trader', ini:'TP', color:'#43a047' },
+    { name:'FundedNext', ini:'FN', color:'#5c6bc0' },
+  ];
+  function buildMarqueeHtml(){
+    const chips = brands.map(b =>
+      `<div class="logochip"><div class="av" style="background:${b.color};">${b.ini}</div><div class="name">${b.name}</div></div>`
+    ).join('');
+    const more = `<div class="logochip plain" data-i18n="brokers.more">y muchas más</div>`;
+    return chips + more;
+  }
+  document.getElementById('marqueeTrack').innerHTML = buildMarqueeHtml() + buildMarqueeHtml();
+
+  const saved = localStorage.getItem('tk_lang');
+  const initialLang = (saved && i18n[saved]) ? saved : 'en';
+  document.getElementById('langSwitch').value = initialLang;
+  setLang(initialLang);
+
+  // ---- Chat de soporte ----
+  const SUPPORT_CHAT_URL = "https://ansdganfothquofypear.supabase.co/functions/v1/smooth-processor";
+  const CREATE_TICKET_URL = "https://ansdganfothquofypear.supabase.co/functions/v1/bright-responder";
+
+  const chatBubble = document.getElementById('chatBubble');
+  const chatPanel = document.getElementById('chatPanel');
+  const chatBody = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+  const chatSend = document.getElementById('chatSend');
+  const chatFootMsg = document.getElementById('chatFootMsg');
+  const chatTicketForm = document.getElementById('chatTicketForm');
+  let chatHistory = [];
+  let chatWelcomed = false;
+
+  function chatOpen(){
+    chatPanel.classList.add('open');
+    if(!chatWelcomed){
+      addBotMsg(i18n[currentLang]['chat.welcome']);
+      chatWelcomed = true;
+    }
+    chatInput.focus();
+  }
+  chatBubble.addEventListener('click', chatOpen);
+  document.getElementById('chatClose').addEventListener('click', ()=> chatPanel.classList.remove('open'));
+
+  function addMsg(text, who){
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + who;
+    div.textContent = text;
+    chatBody.appendChild(div);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return div;
+  }
+  function addBotMsg(text){ return addMsg(text, 'bot'); }
+
+  function addTicketLink(){
+    const link = document.createElement('div');
+    link.className = 'chat-ticket-link';
+    link.textContent = i18n[currentLang]['chat.openticket'];
+    link.addEventListener('click', showTicketForm);
+    chatBody.appendChild(link);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  async function sendChat(){
+    const text = chatInput.value.trim();
+    if(!text) return;
+    addMsg(text, 'user');
+    chatHistory.push({ role:'user', content:text });
+    chatInput.value = '';
+    const typing = addMsg('…', 'bot typing');
+
+    try{
+      const resp = await fetch(SUPPORT_CHAT_URL, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ messages: chatHistory }),
+      });
+      const data = await resp.json();
+      typing.remove();
+      if(!resp.ok || !data.reply){
+        addBotMsg(i18n[currentLang]['chat.error']);
+        addTicketLink();
+        return;
+      }
+      addBotMsg(data.reply);
+      chatHistory.push({ role:'assistant', content:data.reply });
+      addTicketLink();
+    } catch(err){
+      typing.remove();
+      addBotMsg(i18n[currentLang]['chat.error']);
+      addTicketLink();
+    }
+  }
+  chatSend.addEventListener('click', sendChat);
+  chatInput.addEventListener('keydown', e=>{ if(e.key==='Enter') sendChat(); });
+
+  function showTicketForm(){
+    chatFootMsg.style.display = 'none';
+    chatBody.style.display = 'none';
+    chatTicketForm.style.display = 'flex';
+    const lastUser = [...chatHistory].reverse().find(m=>m.role==='user');
+    if(lastUser) document.getElementById('ticketMessage').value = lastUser.content;
+  }
+  document.getElementById('chatTicketBack').addEventListener('click', ()=>{
+    chatTicketForm.style.display = 'none';
+    chatFootMsg.style.display = 'flex';
+    chatBody.style.display = 'flex';
+  });
+
+  document.getElementById('ticketSubmit').addEventListener('click', async ()=>{
+    const name = document.getElementById('ticketName').value.trim();
+    const email = document.getElementById('ticketEmail').value.trim();
+    const message = document.getElementById('ticketMessage').value.trim();
+    if(!email || !message){
+      alert(i18n[currentLang]['chat.ticket.missing']);
+      return;
+    }
+    const btn = document.getElementById('ticketSubmit');
+    btn.disabled = true;
+    try{
+      const resp = await fetch(CREATE_TICKET_URL, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify({ name, email, message, conversation: chatHistory }),
+      });
+      const data = await resp.json();
+      if(!resp.ok || !data.ok){
+        alert(i18n[currentLang]['chat.error']);
+        btn.disabled = false;
+        return;
+      }
+      chatTicketForm.style.display = 'none';
+      chatFootMsg.style.display = 'flex';
+      chatBody.style.display = 'flex';
+      addBotMsg(i18n[currentLang]['chat.ticket.success']);
+    } catch(err){
+      alert(i18n[currentLang]['chat.error']);
+      btn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>

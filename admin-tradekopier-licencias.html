@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeKopier — Panel de Licencias</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+  :root{
+    --bg:#0b0f14; --panel:#131922; --panel2:#1a2230; --border:#242e3d;
+    --text:#e7edf5; --muted:#8fa1b3; --accent:#3ea6ff; --green:#2ecc71;
+    --red:#ff5c5c; --yellow:#f5c542; --blue:#4a90e2;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--text); min-height:100vh;
+  }
+  .wrap{max-width:1200px; margin:0 auto; padding:32px 20px;}
+  h1{font-size:22px; margin:0 0 4px 0; display:flex; align-items:center; gap:10px;}
+  .sub{color:var(--muted); font-size:13px; margin-bottom:28px;}
+
+  /* Login */
+  #loginBox{
+    max-width:380px; margin:80px auto; background:var(--panel); border:1px solid var(--border);
+    border-radius:12px; padding:32px;
+  }
+  #loginBox h2{margin-top:0; font-size:18px;}
+  #loginBox input{
+    width:100%; padding:10px 12px; margin:8px 0; border-radius:8px; border:1px solid var(--border);
+    background:var(--panel2); color:var(--text); font-size:14px;
+  }
+  #loginBox button{
+    width:100%; margin-top:12px; padding:10px; border:none; border-radius:8px;
+    background:var(--accent); color:#031018; font-weight:600; cursor:pointer; font-size:14px;
+  }
+  #loginBox button:hover{opacity:.9;}
+  #loginErr{color:var(--red); font-size:13px; margin-top:8px; min-height:16px;}
+
+  /* App */
+  #app{display:none;}
+  .topbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;}
+  .logout{
+    background:none; border:1px solid var(--border); color:var(--muted); padding:6px 14px;
+    border-radius:8px; cursor:pointer; font-size:13px;
+  }
+  .logout:hover{color:var(--text); border-color:var(--muted);}
+
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px;}
+  .stat{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;}
+  .stat .n{font-size:26px; font-weight:700;}
+  .stat .l{font-size:12px; color:var(--muted); margin-top:2px;}
+
+  .toolbar{display:flex; gap:10px; margin-bottom:14px; align-items:center;}
+  .toolbar input{
+    flex:1; padding:9px 12px; border-radius:8px; border:1px solid var(--border);
+    background:var(--panel2); color:var(--text); font-size:13px;
+  }
+  .btn{
+    padding:9px 16px; border-radius:8px; border:none; cursor:pointer; font-size:13px; font-weight:600;
+  }
+  .btn-primary{background:var(--accent); color:#031018;}
+  .btn-primary:hover{opacity:.9;}
+  .btn-ghost{background:var(--panel2); color:var(--text); border:1px solid var(--border);}
+  .btn-ghost:hover{border-color:var(--muted);}
+
+  table{width:100%; border-collapse:collapse; background:var(--panel); border-radius:10px; overflow:hidden;}
+  thead th{
+    text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted);
+    padding:10px 12px; border-bottom:1px solid var(--border); background:var(--panel2);
+  }
+  tbody td{padding:10px 12px; border-bottom:1px solid var(--border); font-size:13px; vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:rgba(255,255,255,.02);}
+  .mono{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12.5px;}
+  .badge{padding:3px 9px; border-radius:20px; font-size:11px; font-weight:700; display:inline-block;}
+  .badge-ok{background:rgba(46,204,113,.15); color:var(--green);}
+  .badge-warn{background:rgba(245,197,66,.15); color:var(--yellow);}
+  .badge-off{background:rgba(255,92,92,.15); color:var(--red);}
+  .badge-idle{background:rgba(143,161,179,.15); color:var(--muted);}
+  .actions{display:flex; gap:6px; flex-wrap:wrap;}
+  .mini{padding:5px 10px; font-size:11.5px; border-radius:6px;}
+  .mini-revoke{background:rgba(255,92,92,.12); color:var(--red); border:1px solid rgba(255,92,92,.3);}
+  .mini-restore{background:rgba(46,204,113,.12); color:var(--green); border:1px solid rgba(46,204,113,.3);}
+  .mini-extend{background:rgba(74,144,226,.12); color:var(--blue); border:1px solid rgba(74,144,226,.3);}
+  .mini-edit{background:var(--panel2); color:var(--muted); border:1px solid var(--border);}
+  .email-edit{background:var(--panel2); border:1px solid var(--border); color:var(--text); border-radius:6px; padding:4px 6px; font-size:12.5px; width:170px;}
+  #tableStatus, #ticketStatus{color:var(--muted); font-size:13px; padding:16px; text-align:center;}
+  .tabs{display:flex; gap:8px; margin-bottom:20px;}
+  .tab-btn{
+    padding:8px 16px; border-radius:8px; border:1px solid var(--border); background:var(--panel);
+    color:var(--muted); cursor:pointer; font-size:13px; font-weight:600;
+  }
+  .tab-btn.active{background:var(--accent); color:#031018; border-color:var(--accent);}
+  .ticket-msg{max-width:340px; white-space:pre-wrap; color:var(--text);}
+  .badge-open{background:rgba(74,144,226,.15); color:var(--blue);}
+  .badge-closed{background:rgba(143,161,179,.15); color:var(--muted);}
+  .toast{
+    position:fixed; bottom:20px; right:20px; background:var(--panel2); border:1px solid var(--border);
+    color:var(--text); padding:12px 18px; border-radius:8px; font-size:13px; opacity:0; transition:opacity .25s;
+    pointer-events:none;
+  }
+  .toast.show{opacity:1;}
+</style>
+</head>
+<body>
+
+<div id="loginBox">
+  <h2>TradeKopier — Panel de Licencias</h2>
+  <p class="sub" style="margin-bottom:14px;">Acceso solo para administrador.</p>
+  <input type="email" id="loginEmail" placeholder="Email" autocomplete="username">
+  <input type="password" id="loginPass" placeholder="Contraseña" autocomplete="current-password">
+  <button onclick="doLogin()">Entrar</button>
+  <div id="loginErr"></div>
+</div>
+
+<div id="app">
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <h1>🔑 TradeKopier — Licencias</h1>
+        <div class="sub" id="whoami"></div>
+      </div>
+      <button class="logout" onclick="doLogout()">Cerrar sesión</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tabLicencias" onclick="mostrarVista('licencias')">🔑 Licencias</button>
+      <button class="tab-btn" id="tabTickets" onclick="mostrarVista('tickets')">🎫 Tickets <span id="ticketOpenCount"></span></button>
+    </div>
+
+    <div id="viewLicencias">
+      <div class="stats">
+        <div class="stat"><div class="n" id="statTotal">—</div><div class="l">Total licencias</div></div>
+        <div class="stat"><div class="n" style="color:var(--green)" id="statActive">—</div><div class="l">Activas</div></div>
+        <div class="stat"><div class="n" style="color:var(--yellow)" id="statIdle">—</div><div class="l">Sin activar</div></div>
+        <div class="stat"><div class="n" style="color:var(--red)" id="statRevoked">—</div><div class="l">Revocadas / expiradas</div></div>
+      </div>
+
+      <div class="toolbar">
+        <input type="text" id="searchBox" placeholder="Buscar por email o clave..." oninput="renderTable()">
+        <button class="btn btn-ghost" onclick="loadLicenses()">↻ Refrescar</button>
+        <button class="btn btn-primary" onclick="crearLicencia()">+ Nueva licencia (30 días)</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Clave</th>
+            <th>Estado</th>
+            <th>Vence</th>
+            <th>Máquina</th>
+            <th>Última validación</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div id="tableStatus"></div>
+    </div>
+
+    <div id="viewTickets" style="display:none;">
+      <div class="stats">
+        <div class="stat"><div class="n" id="statTicketsTotal">—</div><div class="l">Total tickets</div></div>
+        <div class="stat"><div class="n" style="color:var(--blue)" id="statTicketsOpen">—</div><div class="l">Abiertos</div></div>
+        <div class="stat"><div class="n" style="color:var(--muted)" id="statTicketsClosed">—</div><div class="l">Cerrados</div></div>
+      </div>
+
+      <div class="toolbar">
+        <input type="text" id="ticketSearchBox" placeholder="Buscar por email o mensaje..." oninput="renderTickets()">
+        <button class="btn btn-ghost" onclick="loadTickets()">↻ Refrescar</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Mensaje</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="ticketsTbody"></tbody>
+      </table>
+      <div id="ticketStatus"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = "https://ansdganfothquofypear.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_RpWSRaDArZYU3HWKWY-vMw_mc-AfH2U";
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let licenses = [];
+
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 2500);
+  }
+
+  async function doLogin(){
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPass').value;
+    const errBox = document.getElementById('loginErr');
+    errBox.textContent = "";
+    const { data, error } = await sb.auth.signInWithPassword({ email, password });
+    if (error){ errBox.textContent = "Email o contraseña incorrectos."; return; }
+    showApp(data.user);
+  }
+
+  async function doLogout(){
+    await sb.auth.signOut();
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('loginBox').style.display = 'block';
+  }
+
+  function showApp(user){
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('whoami').textContent = "Sesión: " + (user?.email || '');
+    loadLicenses();
+    loadTickets();
+  }
+
+  function mostrarVista(vista){
+    document.getElementById('viewLicencias').style.display = vista === 'licencias' ? 'block' : 'none';
+    document.getElementById('viewTickets').style.display = vista === 'tickets' ? 'block' : 'none';
+    document.getElementById('tabLicencias').classList.toggle('active', vista === 'licencias');
+    document.getElementById('tabTickets').classList.toggle('active', vista === 'tickets');
+  }
+
+  async function loadLicenses(){
+    document.getElementById('tableStatus').textContent = "Cargando...";
+    const { data, error } = await sb.from('licenses').select('*').order('issued_at', { ascending:false });
+    if (error){
+      document.getElementById('tableStatus').textContent = "Error cargando licencias: " + error.message;
+      return;
+    }
+    licenses = data;
+    document.getElementById('tableStatus').textContent = "";
+    renderStats();
+    renderTable();
+  }
+
+  function estadoDe(l){
+    if (l.revoked) return { label:'Revocada', cls:'badge-off' };
+    if (!l.expires_at) return { label:'Sin activar', cls:'badge-idle' };
+    if (new Date(l.expires_at) < new Date()) return { label:'Expirada', cls:'badge-off' };
+    return { label:'Activa', cls:'badge-ok' };
+  }
+
+  function renderStats(){
+    let active=0, idle=0, revokedOrExp=0;
+    licenses.forEach(l=>{
+      const e = estadoDe(l);
+      if (e.label==='Activa') active++;
+      else if (e.label==='Sin activar') idle++;
+      else revokedOrExp++;
+    });
+    document.getElementById('statTotal').textContent = licenses.length;
+    document.getElementById('statActive').textContent = active;
+    document.getElementById('statIdle').textContent = idle;
+    document.getElementById('statRevoked').textContent = revokedOrExp;
+  }
+
+  function fmtFecha(iso){
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleDateString('es-ES', {day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' +
+           d.toLocaleTimeString('es-ES', {hour:'2-digit',minute:'2-digit'});
+  }
+
+  function renderTable(){
+    const q = document.getElementById('searchBox').value.trim().toLowerCase();
+    const tbody = document.getElementById('tbody');
+    tbody.innerHTML = '';
+    const filtered = licenses.filter(l =>
+      !q || l.email.toLowerCase().includes(q) || l.license_key.toLowerCase().includes(q)
+    );
+    if (filtered.length === 0){
+      document.getElementById('tableStatus').textContent = "No hay licencias que coincidan.";
+    } else {
+      document.getElementById('tableStatus').textContent = "";
+    }
+    filtered.forEach(l=>{
+      const e = estadoDe(l);
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <input class="email-edit" value="${l.email.replace(/"/g,'&quot;')}" id="email-${l.id}">
+        </td>
+        <td class="mono">${l.license_key}</td>
+        <td><span class="badge ${e.cls}">${e.label}</span></td>
+        <td>${fmtFecha(l.expires_at)}</td>
+        <td class="mono" style="color:var(--muted)">${l.machine_id ? l.machine_id.slice(0,10)+'…' : '—'}</td>
+        <td style="color:var(--muted)">${fmtFecha(l.last_validated_at)}</td>
+        <td class="actions">
+          ${l.revoked
+            ? `<button class="mini mini-restore" onclick="reactivar('${l.id}')">Reactivar</button>`
+            : `<button class="mini mini-revoke" onclick="revocar('${l.id}')">Revocar</button>`}
+          <button class="mini mini-extend" onclick="extender('${l.id}')">+30 días</button>
+          <button class="mini mini-edit" onclick="guardarEmail('${l.id}')">Guardar email</button>
+          <button class="mini mini-revoke" onclick="eliminar('${l.id}', '${l.license_key}')">Eliminar</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function eliminar(id, key){
+    if (!confirm('¿Borrar definitivamente la licencia ' + key + '? Esto no se puede deshacer.')) return;
+    const { error } = await sb.from('licenses').delete().eq('id', id);
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Licencia eliminada');
+    loadLicenses();
+  }
+
+  async function revocar(id){
+    const { error } = await sb.from('licenses').update({ revoked:true }).eq('id', id);
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Licencia revocada');
+    loadLicenses();
+  }
+
+  async function reactivar(id){
+    const { error } = await sb.from('licenses').update({ revoked:false }).eq('id', id);
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Licencia reactivada');
+    loadLicenses();
+  }
+
+  async function extender(id){
+    const l = licenses.find(x=>x.id===id);
+    const base = (l.expires_at && new Date(l.expires_at) > new Date()) ? new Date(l.expires_at) : new Date();
+    base.setDate(base.getDate() + 30);
+    const { error } = await sb.from('licenses').update({ expires_at: base.toISOString() }).eq('id', id);
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Extendida 30 días');
+    loadLicenses();
+  }
+
+  async function guardarEmail(id){
+    const val = document.getElementById('email-'+id).value.trim();
+    if (!val){ toast('Email vacío'); return; }
+    const { error } = await sb.from('licenses').update({ email: val }).eq('id', id);
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Email actualizado');
+    loadLicenses();
+  }
+
+  function randomBlock(){
+    return Math.random().toString(36).slice(2,6).toUpperCase().padEnd(4,'0');
+  }
+
+  async function crearLicencia(){
+    const email = prompt("Email para la nueva licencia (puedes cambiarlo después):", "pendiente@tradekopier.local");
+    if (email === null) return;
+    const key = `TK-${randomBlock()}-${randomBlock()}-${randomBlock()}`;
+    const { error } = await sb.from('licenses').insert({ license_key:key, email, validity_days:30 });
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Licencia creada: ' + key);
+    loadLicenses();
+  }
+
+  // ---- Tickets de soporte (creados por el chat de la web) ----
+  let tickets = [];
+
+  async function loadTickets(){
+    const st = document.getElementById('ticketStatus');
+    if (st) st.textContent = "Cargando...";
+    const { data, error } = await sb.from('tickets').select('*').order('created_at', { ascending:false });
+    if (error){
+      if (st) st.textContent = "Error cargando tickets: " + error.message;
+      return;
+    }
+    tickets = data;
+    if (st) st.textContent = "";
+    renderTicketStats();
+    renderTickets();
+  }
+
+  function renderTicketStats(){
+    const open = tickets.filter(t => t.status !== 'closed').length;
+    const closed = tickets.length - open;
+    document.getElementById('statTicketsTotal').textContent = tickets.length;
+    document.getElementById('statTicketsOpen').textContent = open;
+    document.getElementById('statTicketsClosed').textContent = closed;
+    const badge = document.getElementById('ticketOpenCount');
+    badge.textContent = open > 0 ? `(${open})` : '';
+  }
+
+  function renderTickets(){
+    const q = (document.getElementById('ticketSearchBox')?.value || '').trim().toLowerCase();
+    const tbody = document.getElementById('ticketsTbody');
+    tbody.innerHTML = '';
+    const filtered = tickets.filter(t =>
+      !q || t.email.toLowerCase().includes(q) || (t.message||'').toLowerCase().includes(q)
+    );
+    document.getElementById('ticketStatus').textContent = filtered.length === 0 ? "No hay tickets que coincidan." : "";
+    filtered.forEach(t=>{
+      const isOpen = t.status !== 'closed';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="color:var(--muted); white-space:nowrap;">${fmtFecha(t.created_at)}</td>
+        <td>${(t.name || '—').replace(/</g,'&lt;')}</td>
+        <td class="mono">${t.email.replace(/</g,'&lt;')}</td>
+        <td class="ticket-msg">${(t.message||'').replace(/</g,'&lt;')}</td>
+        <td><span class="badge ${isOpen ? 'badge-open' : 'badge-closed'}">${isOpen ? 'Abierto' : 'Cerrado'}</span></td>
+        <td class="actions">
+          ${isOpen
+            ? `<button class="mini mini-edit" onclick="cerrarTicket('${t.id}')">Marcar cerrado</button>`
+            : `<button class="mini mini-restore" onclick="reabrirTicket('${t.id}')">Reabrir</button>`}
+          <a class="mini mini-edit" style="text-decoration:none; display:inline-block;" href="mailto:${t.email}">Responder</a>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function cerrarTicket(id){
+    const { error } = await sb.from('tickets').update({ status:'closed' }).eq('id', id);
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Ticket cerrado');
+    loadTickets();
+  }
+
+  async function reabrirTicket(id){
+    const { error } = await sb.from('tickets').update({ status:'open' }).eq('id', id);
+    if (error){ toast('Error: ' + error.message); return; }
+    toast('Ticket reabierto');
+    loadTickets();
+  }
+
+  // Restaurar sesión si ya había una activa
+  (async () => {
+    const { data:{ session } } = await sb.auth.getSession();
+    if (session) showApp(session.user);
+  })();
+</script>
+</body>
+</html>

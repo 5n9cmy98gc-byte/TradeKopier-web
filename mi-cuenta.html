@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi cuenta — TradeKopier</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+  :root{
+    --bg:#0a0e14; --bg2:#0f1520; --panel:#131a24; --border:#212b38;
+    --text:#eaf0f7; --muted:#8fa1b3; --accent:#3ea6ff; --accent2:#7c5cff;
+    --green:#2ecc71; --yellow:#f5c542; --red:#ff5c5c;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh;
+  }
+  a{color:inherit;}
+  .wrap{max-width:720px; margin:0 auto; padding:40px 24px 80px;}
+  header{display:flex; align-items:center; justify-content:space-between; margin-bottom:40px;}
+  .logo{font-size:19px; font-weight:800; display:flex; align-items:center; gap:10px;}
+  .klogo{
+    width:34px; height:34px; border-radius:9px; background:linear-gradient(135deg,var(--accent),var(--accent2));
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .klogo svg{display:block;}
+  a.back{color:var(--muted); font-size:13.5px;}
+  a.back:hover{color:var(--text);}
+
+  h1{font-size:24px; font-weight:800; margin-bottom:6px;}
+  .sub{color:var(--muted); font-size:14.5px; margin-bottom:28px;}
+
+  /* Login */
+  #loginBox{
+    background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:32px;
+    max-width:420px; margin:40px auto 0;
+  }
+  #loginBox h2{font-size:18px; margin-bottom:8px;}
+  #loginBox p{color:var(--muted); font-size:13.5px; margin-bottom:18px;}
+  #loginBox input{
+    width:100%; padding:11px 13px; border-radius:9px; border:1px solid var(--border);
+    background:var(--bg2); color:var(--text); font-size:14px; margin-bottom:12px;
+  }
+  .btn{
+    padding:11px 20px; border-radius:9px; font-weight:600; font-size:14px; cursor:pointer; border:none;
+    display:inline-block; width:100%; text-align:center;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;}
+  .btn-primary:hover{opacity:.92;}
+  .btn-ghost{background:var(--bg2); color:var(--text); border:1px solid var(--border); width:auto;}
+  .btn-ghost:hover{border-color:var(--muted);}
+  .btn-danger{background:rgba(255,92,92,.12); color:var(--red); border:1px solid rgba(255,92,92,.35); width:auto;}
+  .btn-danger:hover{background:rgba(255,92,92,.2);}
+  .btn:disabled{opacity:.55; cursor:default;}
+  #loginMsg{font-size:13px; margin-top:12px; min-height:16px;}
+  #loginMsg.ok{color:var(--green);}
+  #loginMsg.err{color:var(--red);}
+
+  /* App */
+  #app{display:none;}
+  .topbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:26px;}
+  .whoami{color:var(--muted); font-size:13.5px;}
+
+  .card{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:22px; margin-bottom:16px;}
+  .card .row1{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px;}
+  .plan-badge{font-size:12px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.04em;}
+  .badge{padding:3px 10px; border-radius:20px; font-size:11.5px; font-weight:700;}
+  .badge-ok{background:rgba(46,204,113,.15); color:var(--green);}
+  .badge-warn{background:rgba(245,197,66,.15); color:var(--yellow);}
+  .badge-off{background:rgba(255,92,92,.15); color:var(--red);}
+  .badge-idle{background:rgba(143,161,179,.15); color:var(--muted);}
+  .card .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; margin-bottom:16px;}
+  .field .l{color:var(--muted); font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px;}
+  .field .v{font-size:14.5px; font-weight:600;}
+  .field .v.mono{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px;}
+  .card .actions{display:flex; gap:10px; flex-wrap:wrap;}
+  .cancel-note{color:var(--muted); font-size:12.5px; margin-top:10px;}
+
+  .consent-card{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-top:24px;}
+  .consent-row{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
+  .consent-row input{width:18px; height:18px; flex-shrink:0;}
+  .consent-row label{font-size:14px; cursor:pointer;}
+  #consentMsg{font-size:12.5px; color:var(--green); min-height:16px;}
+
+  #emptyState, #loadingState{color:var(--muted); font-size:14px; text-align:center; padding:40px 0;}
+  .toast{
+    position:fixed; bottom:20px; right:20px; background:var(--panel); border:1px solid var(--border);
+    color:var(--text); padding:12px 18px; border-radius:8px; font-size:13px; opacity:0; transition:opacity .25s;
+    pointer-events:none; max-width:320px;
+  }
+  .toast.show{opacity:1;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <span class="klogo"><svg viewBox="0 0 40 40" width="18" height="18"><g stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M8 9 V31"/><path d="M8 20 L18 9"/><path d="M8 20 L18 31"/><path d="M32 9 V31"/><path d="M32 20 L22 9"/><path d="M32 20 L22 31"/></g></svg></span>
+      TradeKopier
+    </div>
+    <a class="back" href="index.html">← Volver a la web</a>
+  </header>
+
+  <div id="loginBox">
+    <h2>Mi cuenta</h2>
+    <p>Escribe el email con el que compraste TradeKopier y te enviamos un enlace para entrar — sin contraseña.</p>
+    <input type="email" id="loginEmail" placeholder="tu@email.com" autocomplete="email">
+    <button class="btn btn-primary" id="btnEnviar" onclick="enviarEnlace()">Enviarme el enlace</button>
+    <div id="loginMsg"></div>
+  </div>
+
+  <div id="app">
+    <div class="topbar">
+      <div>
+        <h1>Mi cuenta</h1>
+        <div class="whoami" id="whoami"></div>
+      </div>
+      <button class="btn btn-ghost" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+
+    <div id="loadingState">Cargando tu licencia...</div>
+    <div id="emptyState" style="display:none;">No encontramos ninguna licencia asociada a este email.</div>
+    <div id="licencias"></div>
+
+    <div class="consent-card">
+      <div class="consent-row">
+        <input type="checkbox" id="chkConsent">
+        <label for="chkConsent">Quiero recibir ofertas y novedades de TradeKopier por email</label>
+      </div>
+      <button class="btn btn-ghost" onclick="guardarConsentimiento()">Guardar preferencia</button>
+      <div id="consentMsg"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = "https://ansdganfothquofypear.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_RpWSRaDArZYU3HWKWY-vMw_mc-AfH2U";
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  let licencias = [];
+
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 3000);
+  }
+
+  async function enviarEnlace(){
+    const email = document.getElementById('loginEmail').value.trim();
+    const msg = document.getElementById('loginMsg');
+    const btn = document.getElementById('btnEnviar');
+    msg.className = ''; msg.textContent = '';
+    if (!email){ msg.className='err'; msg.textContent='Escribe tu email.'; return; }
+    btn.disabled = true; btn.textContent = 'Enviando...';
+    const { error } = await sb.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: window.location.origin + '/mi-cuenta.html' }
+    });
+    btn.disabled = false; btn.textContent = 'Enviarme el enlace';
+    if (error){ msg.className='err'; msg.textContent = 'Error: ' + error.message; return; }
+    msg.className = 'ok';
+    msg.textContent = 'Te hemos enviado un enlace a ' + email + ' — revisa tu bandeja (y spam).';
+  }
+
+  async function cerrarSesion(){
+    await sb.auth.signOut();
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('loginBox').style.display = 'block';
+  }
+
+  function fmtFecha(iso){
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleDateString('es-ES', {day:'2-digit',month:'2-digit',year:'numeric'});
+  }
+
+  function estadoDe(l){
+    if (l.revoked) return { label:'Cancelada', cls:'badge-off' };
+    if (!l.expires_at) return { label:'Pendiente de activar', cls:'badge-idle' };
+    if (new Date(l.expires_at) < new Date()) return { label:'Expirada', cls:'badge-off' };
+    return { label:'Activa', cls:'badge-ok' };
+  }
+
+  function planLabel(p){
+    if (p === 'trial') return 'Mensual (prueba)';
+    if (p === 'paid') return 'Activo';
+    return p || '—';
+  }
+
+  function renderLicencias(){
+    const cont = document.getElementById('licencias');
+    cont.innerHTML = '';
+    if (licencias.length === 0){
+      document.getElementById('emptyState').style.display = 'block';
+      return;
+    }
+    document.getElementById('emptyState').style.display = 'none';
+    licencias.forEach(l=>{
+      const e = estadoDe(l);
+      const puedeCancel = l.stripe_subscription_id && !l.revoked;
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+        <div class="row1">
+          <div class="plan-badge">${planLabel(l.plan)}</div>
+          <span class="badge ${e.cls}">${e.label}</span>
+        </div>
+        <div class="grid">
+          <div class="field"><div class="l">Clave de licencia</div><div class="v mono">${l.license_key}</div></div>
+          <div class="field"><div class="l">Próxima renovación / vence</div><div class="v">${fmtFecha(l.expires_at)}</div></div>
+        </div>
+        <div class="actions">
+          <a class="btn btn-ghost" href="downloads/TradeKopier.zip">⬇ Descargar TradeKopier</a>
+          ${puedeCancel ? `<button class="btn btn-danger" onclick="cancelar('${l.id}', this)">Cancelar suscripción</button>` : ''}
+        </div>
+        ${puedeCancel ? '<div class="cancel-note">Al cancelar, conservas el acceso hasta el final del periodo que ya pagaste — no se te cobra de nuevo.</div>' : ''}
+      `;
+      cont.appendChild(div);
+    });
+  }
+
+  async function cancelar(licenseId, btn){
+    if (!confirm('¿Seguro que quieres cancelar? Conservarás el acceso hasta el final del periodo ya pagado.')) return;
+    btn.disabled = true;
+    btn.textContent = 'Cancelando...';
+    // Nota: el slug real de esta función en Supabase es "quick-action" (nombre
+    // interno asignado por Supabase, distinto del nombre visible "cancel-subscription").
+    const { data, error } = await sb.functions.invoke('quick-action', { body: { license_id: licenseId } });
+    if (error || data?.error){
+      toast('Error: ' + (data?.error || error.message));
+      btn.disabled = false;
+      btn.textContent = 'Cancelar suscripción';
+      return;
+    }
+    toast('Suscripción cancelada. Conservas el acceso hasta el final del periodo ya pagado.');
+    await cargarLicencias();
+  }
+
+  async function guardarConsentimiento(){
+    const consent = document.getElementById('chkConsent').checked;
+    const { data, error } = await sb.functions.invoke('update-marketing-consent', { body: { consent } });
+    const msg = document.getElementById('consentMsg');
+    if (error || data?.error){
+      msg.style.color = 'var(--red)';
+      msg.textContent = 'Error al guardar.';
+      return;
+    }
+    msg.style.color = 'var(--green)';
+    msg.textContent = 'Preferencia guardada.';
+    setTimeout(()=>{ msg.textContent=''; }, 3000);
+  }
+
+  async function cargarLicencias(){
+    document.getElementById('loadingState').style.display = 'block';
+    const { data, error } = await sb.from('licenses').select('*').order('issued_at', { ascending:false });
+    document.getElementById('loadingState').style.display = 'none';
+    if (error){
+      toast('Error cargando tu cuenta: ' + error.message);
+      return;
+    }
+    licencias = data || [];
+    renderLicencias();
+    if (licencias.length > 0){
+      document.getElementById('chkConsent').checked = !!licencias[0].marketing_consent;
+    }
+  }
+
+  async function mostrarApp(user){
+    document.getElementById('loginBox').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('whoami').textContent = 'Sesión: ' + (user?.email || '');
+    await cargarLicencias();
+  }
+
+  (async () => {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) await mostrarApp(session.user);
+
+    sb.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) mostrarApp(session.user);
+      if (event === 'SIGNED_OUT') {
+        document.getElementById('app').style.display = 'none';
+        document.getElementById('loginBox').style.display = 'block';
+      }
+    });
+  })();
+</script>
+</body>
+</html>

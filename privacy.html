@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeKopier — Privacy Policy</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{
+    --bg:#0a0e14; --bg2:#0f1520; --panel:#131a24; --border:#212b38;
+    --text:#eaf0f7; --muted:#8fa1b3; --accent:#3ea6ff; --accent2:#7c5cff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.7;}
+  a{color:var(--accent); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  header{position:sticky; top:0; z-index:50; background:rgba(10,14,20,.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--border);}
+  nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:820px; margin:0 auto;}
+  .logo{font-size:18px; font-weight:800; display:flex; align-items:center; gap:8px;}
+  .logo .dot{width:8px; height:8px; border-radius:50%; background:var(--accent);}
+  select#langSwitch{background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:7px; padding:6px 8px; font-size:13px; cursor:pointer;}
+  .wrap{max-width:760px; margin:0 auto; padding:56px 24px 90px;}
+  h1{font-size:32px; font-weight:800; margin-bottom:8px; letter-spacing:-.02em;}
+  .updated{color:var(--muted); font-size:13px; margin-bottom:40px;}
+  h2{font-size:19px; font-weight:700; margin:34px 0 12px;}
+  p, li{color:#c3ccd6; font-size:14.5px;}
+  p{margin-bottom:14px;}
+  ul{margin:0 0 14px 20px;}
+  li{margin-bottom:6px;}
+  table{width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:13.5px;}
+  th, td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); color:#c3ccd6;}
+  th{color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.04em;}
+  footer{border-top:1px solid var(--border); padding:36px 24px; text-align:center; color:var(--muted); font-size:13px;}
+  footer a{margin:0 10px;}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="logo"><span class="dot"></span>TradeKopier</a>
+    <select id="langSwitch">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+    </select>
+  </nav>
+</header>
+
+<div class="wrap">
+  <h1 data-i18n="title">Privacy Policy</h1>
+  <div class="updated" data-i18n="updated">Last updated: August 21, 2026</div>
+
+  <p data-i18n="intro">This policy explains what data TradeKopier collects, why, and how you can control it. TradeKopier is a small, independently-run product — we collect the minimum needed to issue and support your license, nothing more.</p>
+
+  <h2 data-i18n="s1.h">1. What we collect</h2>
+  <table>
+    <tr><th data-i18n="t.data">Data</th><th data-i18n="t.why">Why</th></tr>
+    <tr><td data-i18n="t.d1">Email address</td><td data-i18n="t.w1">To send your license key and provide support</td></tr>
+    <tr><td data-i18n="t.d2">License key &amp; status</td><td data-i18n="t.w2">To validate your license inside TradeKopier</td></tr>
+    <tr><td data-i18n="t.d3">Machine ID</td><td data-i18n="t.w3">To tie your license to your device once activated</td></tr>
+    <tr><td data-i18n="t.d4">Payment record (via Stripe)</td><td data-i18n="t.w4">To confirm payment and issue the correct plan</td></tr>
+  </table>
+  <p data-i18n="s1.p">We never see or store your card number — that is handled entirely by Stripe.</p>
+
+  <h2 data-i18n="s2.h">2. Who we share data with</h2>
+  <p data-i18n="s2.p">We use a small number of third-party processors to run TradeKopier's commercial side:</p>
+  <ul>
+    <li data-i18n="s2.li1"><strong>Stripe</strong> — payment processing.</li>
+    <li data-i18n="s2.li2"><strong>Supabase</strong> — database that stores your license record.</li>
+    <li data-i18n="s2.li3"><strong>Resend</strong> — sends the transactional email containing your license key.</li>
+  </ul>
+  <p data-i18n="s2.p2">We do not sell your data to anyone, and we do not use it for advertising.</p>
+
+  <h2 data-i18n="s3.h">3. How long we keep it</h2>
+  <p data-i18n="s3.p">We keep your license record for as long as your license is active, plus a reasonable period afterward for accounting and support purposes. You can request earlier deletion at any time (see Section 5).</p>
+
+  <h2 data-i18n="s4.h">4. Security</h2>
+  <p data-i18n="s4.p">Data is encrypted in transit (HTTPS) and access to the database is restricted by row-level security policies — only authenticated TradeKopier staff can view license records.</p>
+
+  <h2 data-i18n="s5.h">5. Your rights</h2>
+  <p data-i18n="s5.p">Depending on where you live (for example, under GDPR in the EU or CCPA in California), you may have the right to access, correct, delete, or export your data, or to ask us not to process it further. To exercise any of these rights, email <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a> — we'll respond and act within a reasonable time.</p>
+
+  <h2 data-i18n="s6.h">6. Children</h2>
+  <p data-i18n="s6.p">TradeKopier is not directed at, and should not be used by, anyone under 18.</p>
+
+  <h2 data-i18n="s7.h">7. Changes to this policy</h2>
+  <p data-i18n="s7.p">If we materially change how we handle your data, we'll update this page and, where appropriate, notify active license holders by email.</p>
+
+  <h2 data-i18n="s8.h">8. Contact</h2>
+  <p data-i18n="s8.p">Questions about this policy: <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a>.</p>
+</div>
+
+<footer>
+  <a href="index.html" data-i18n="f.home">Home</a>
+  <a href="terms.html" data-i18n="f.terms">Terms of Service</a>
+  <a href="cookies.html" data-i18n="f.cookies">Cookie Policy</a>
+  <a href="faq.html" data-i18n="f.faq">FAQ</a>
+  <a href="contact.html" data-i18n="f.contact">Contact</a>
+</footer>
+
+<script>
+  const i18n = {
+    en:{
+      "title":"Privacy Policy","updated":"Last updated: August 21, 2026",
+      "intro":"This policy explains what data TradeKopier collects, why, and how you can control it. TradeKopier is a small, independently-run product — we collect the minimum needed to issue and support your license, nothing more.",
+      "s1.h":"1. What we collect",
+      "t.data":"Data","t.why":"Why",
+      "t.d1":"Email address","t.w1":"To send your license key and provide support",
+      "t.d2":"License key &amp; status","t.w2":"To validate your license inside TradeKopier",
+      "t.d3":"Machine ID","t.w3":"To tie your license to your device once activated",
+      "t.d4":"Payment record (via Stripe)","t.w4":"To confirm payment and issue the correct plan",
+      "s1.p":"We never see or store your card number — that is handled entirely by Stripe.",
+      "s2.h":"2. Who we share data with","s2.p":"We use a small number of third-party processors to run TradeKopier's commercial side:",
+      "s2.li1":"<strong>Stripe</strong> — payment processing.",
+      "s2.li2":"<strong>Supabase</strong> — database that stores your license record.",
+      "s2.li3":"<strong>Resend</strong> — sends the transactional email containing your license key.",
+      "s2.p2":"We do not sell your data to anyone, and we do not use it for advertising.",
+      "s3.h":"3. How long we keep it","s3.p":"We keep your license record for as long as your license is active, plus a reasonable period afterward for accounting and support purposes. You can request earlier deletion at any time (see Section 5).",
+      "s4.h":"4. Security","s4.p":"Data is encrypted in transit (HTTPS) and access to the database is restricted by row-level security policies — only authenticated TradeKopier staff can view license records.",
+      "s5.h":"5. Your rights","s5.p":"Depending on where you live (for example, under GDPR in the EU or CCPA in California), you may have the right to access, correct, delete, or export your data, or to ask us not to process it further. To exercise any of these rights, email <a href=\"mailto:licencias@tradekopier.com\">licencias@tradekopier.com</a> — we'll respond and act within a reasonable time.",
+      "s6.h":"6. Children","s6.p":"TradeKopier is not directed at, and should not be used by, anyone under 18.",
+      "s7.h":"7. Changes to this policy","s7.p":"If we materially change how we handle your data, we'll update this page and, where appropriate, notify active license holders by email.",
+      "s8.h":"8. Contact","s8.p":"Questions about this policy: <a href=\"mailto:licencias@tradekopier.com\">licencias@tradekopier.com</a>.",
+      "f.home":"Home","f.terms":"Terms of Service","f.cookies":"Cookie Policy","f.faq":"FAQ","f.contact":"Contact",
+    },
+    es:{
+      "title":"Política de Privacidad","updated":"Última actualización: 21 de agosto de 2026",
+      "intro":"Esta política explica qué datos recopila TradeKopier, por qué, y cómo puedes controlarlos. TradeKopier es un producto pequeño, gestionado de forma independiente — recopilamos lo mínimo necesario para emitir y dar soporte a tu licencia, nada más.",
+      "s1.h":"1. Qué recopilamos",
+      "t.data":"Dato","t.why":"Para qué",
+      "t.d1":"Dirección de email","t.w1":"Para enviarte la clave de licencia y darte soporte",
+      "t.d2":"Clave de licencia y su estado","t.w2":"Para validar tu licencia dentro de TradeKopier",
+      "t.d3":"ID de máquina","t.w3":"Para vincular tu licencia a tu equipo una vez activada",
+      "t.d4":"Registro de pago (vía Stripe)","t.w4":"Para confirmar el pago y emitir el plan correcto",
+      "s1.p":"Nunca vemos ni guardamos el número de tu tarjeta — de eso se encarga Stripe por completo.",
+      "s2.h":"2. Con quién compartimos datos","s2.p":"Usamos un número reducido de proveedores externos para gestionar la parte comercial de TradeKopier:",
+      "s2.li1":"<strong>Stripe</strong> — procesamiento de pagos.",
+      "s2.li2":"<strong>Supabase</strong> — base de datos donde se guarda tu registro de licencia.",
+      "s2.li3":"<strong>Resend</strong> — envía el email transaccional con tu clave de licencia.",
+      "s2.p2":"No vendemos tus datos a nadie, ni los usamos para publicidad.",
+      "s3.h":"3. Cuánto tiempo los conservamos","s3.p":"Guardamos tu registro de licencia mientras esté activa, más un periodo razonable después por motivos contables y de soporte. Puedes solicitar su eliminación antes en cualquier momento (ver Sección 5).",
+      "s4.h":"4. Seguridad","s4.p":"Los datos viajan cifrados (HTTPS) y el acceso a la base de datos está restringido por políticas de seguridad a nivel de fila — solo el personal autenticado de TradeKopier puede ver los registros de licencia.",
+      "s5.h":"5. Tus derechos","s5.p":"Dependiendo de dónde vivas (por ejemplo, bajo el RGPD en la UE o la CCPA en California), puedes tener derecho a acceder, corregir, eliminar o exportar tus datos, o a pedir que dejemos de tratarlos. Para ejercer cualquiera de estos derechos, escribe a <a href=\"mailto:licencias@tradekopier.com\">licencias@tradekopier.com</a> — responderemos y actuaremos en un plazo razonable.",
+      "s6.h":"6. Menores","s6.p":"TradeKopier no está dirigido a, ni debe ser usado por, menores de 18 años.",
+      "s7.h":"7. Cambios en esta política","s7.p":"Si cambiamos de forma significativa cómo tratamos tus datos, actualizaremos esta página y, cuando corresponda, avisaremos por email a quienes tengan una licencia activa.",
+      "s8.h":"8. Contacto","s8.p":"Dudas sobre esta política: <a href=\"mailto:licencias@tradekopier.com\">licencias@tradekopier.com</a>.",
+      "f.home":"Inicio","f.terms":"Términos de Servicio","f.cookies":"Política de Cookies","f.faq":"FAQ","f.contact":"Contacto",
+    },
+  };
+
+  function setLang(lang){
+    if(!i18n[lang]) return;
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const key = el.getAttribute('data-i18n');
+      if(i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
+    });
+    document.documentElement.lang = lang;
+    localStorage.setItem('tk_lang', lang);
+  }
+  document.getElementById('langSwitch').addEventListener('change', e => setLang(e.target.value));
+  const saved = localStorage.getItem('tk_lang');
+  const initial = (saved === 'es') ? 'es' : 'en';
+  document.getElementById('langSwitch').value = initial;
+  setLang(initial);
+</script>
+
+</body>
+</html>
