@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mi cuenta — TradeKopier</title>
+<title>My Account — TradeKopier</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
@@ -19,15 +19,17 @@
   }
   a{color:inherit;}
   .wrap{max-width:720px; margin:0 auto; padding:40px 24px 80px;}
-  header{display:flex; align-items:center; justify-content:space-between; margin-bottom:40px;}
+  header{display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; gap:12px; flex-wrap:wrap;}
   .logo{font-size:19px; font-weight:800; display:flex; align-items:center; gap:10px;}
   .klogo{
     width:34px; height:34px; border-radius:9px; background:linear-gradient(135deg,var(--accent),var(--accent2));
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
   .klogo svg{display:block;}
+  .headerRight{display:flex; align-items:center; gap:14px;}
   a.back{color:var(--muted); font-size:13.5px;}
   a.back:hover{color:var(--text);}
+  select#langSwitch{background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:7px; padding:6px 8px; font-size:13px; cursor:pointer;}
 
   h1{font-size:24px; font-weight:800; margin-bottom:6px;}
   .sub{color:var(--muted); font-size:14.5px; margin-bottom:28px;}
@@ -101,36 +103,46 @@
       <span class="klogo"><svg viewBox="0 0 40 40" width="18" height="18"><g stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M8 9 V31"/><path d="M8 20 L18 9"/><path d="M8 20 L18 31"/><path d="M32 9 V31"/><path d="M32 20 L22 9"/><path d="M32 20 L22 31"/></g></svg></span>
       TradeKopier
     </div>
-    <a class="back" href="index.html">← Volver a la web</a>
+    <div class="headerRight">
+      <select id="langSwitch">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+        <option value="fr">Français</option>
+        <option value="pt">Português</option>
+        <option value="it">Italiano</option>
+      </select>
+      <a class="back" id="backLink" href="index.html">← Back to site</a>
+    </div>
   </header>
 
   <div id="loginBox">
-    <h2>Mi cuenta</h2>
-    <p>Escribe el email con el que compraste TradeKopier y te enviamos un enlace para entrar — sin contraseña.</p>
-    <input type="email" id="loginEmail" placeholder="tu@email.com" autocomplete="email">
-    <button class="btn btn-primary" id="btnEnviar" onclick="enviarEnlace()">Enviarme el enlace</button>
+    <h2 id="loginH2">My account</h2>
+    <p id="loginP">Enter the email you used to buy TradeKopier and we'll send you a login link — no password needed.</p>
+    <input type="email" id="loginEmail" placeholder="you@email.com" autocomplete="email">
+    <button class="btn btn-primary" id="btnEnviar" onclick="enviarEnlace()">Send me the link</button>
     <div id="loginMsg"></div>
   </div>
 
   <div id="app">
     <div class="topbar">
       <div>
-        <h1>Mi cuenta</h1>
+        <h1 id="appH1">My account</h1>
         <div class="whoami" id="whoami"></div>
       </div>
-      <button class="btn btn-ghost" onclick="cerrarSesion()">Cerrar sesión</button>
+      <button class="btn btn-ghost" id="btnLogout" onclick="cerrarSesion()">Log out</button>
     </div>
 
-    <div id="loadingState">Cargando tu licencia...</div>
-    <div id="emptyState" style="display:none;">No encontramos ninguna licencia asociada a este email.</div>
+    <div id="loadingState">Loading your license...</div>
+    <div id="emptyState" style="display:none;">We couldn't find any license associated with this email.</div>
     <div id="licencias"></div>
 
     <div class="consent-card">
       <div class="consent-row">
         <input type="checkbox" id="chkConsent">
-        <label for="chkConsent">Quiero recibir ofertas y novedades de TradeKopier por email</label>
+        <label for="chkConsent" id="consentLabel">I want to receive offers and news from TradeKopier by email</label>
       </div>
-      <button class="btn btn-ghost" onclick="guardarConsentimiento()">Guardar preferencia</button>
+      <button class="btn btn-ghost" id="btnConsent" onclick="guardarConsentimiento()">Save preference</button>
       <div id="consentMsg"></div>
     </div>
   </div>
@@ -145,28 +157,195 @@
 
   let licencias = [];
 
+  const I18N = {
+    en:{
+      pageTitle:"My Account — TradeKopier", back:"← Back to site",
+      login_h2:"My account",
+      login_p:"Enter the email you used to buy TradeKopier and we'll send you a login link — no password needed.",
+      login_placeholder:"you@email.com", login_btn:"Send me the link", login_btn_sending:"Sending...",
+      err_email:"Enter your email.", err_prefix:"Error: ",
+      sent_msg:(email)=>`We've sent a link to ${email} — check your inbox (and spam).`,
+      app_h1:"My account", logout:"Log out", whoami_prefix:"Signed in as: ",
+      loading:"Loading your license...", empty:"We couldn't find any license associated with this email.",
+      field_key:"License key", field_renew:"Next renewal / expires", download:"⬇ Download TradeKopier",
+      cancel_btn:"Cancel subscription",
+      cancel_note:"When you cancel, you keep access until the end of the period you already paid for — you won't be charged again.",
+      cancel_confirm:"Are you sure you want to cancel? You'll keep access until the end of the period you already paid for.",
+      cancelling:"Cancelling...",
+      cancel_toast:"Subscription cancelled. You keep access until the end of the period you already paid for.",
+      load_error:"Error loading your account: ",
+      consent_label:"I want to receive offers and news from TradeKopier by email",
+      consent_btn:"Save preference", consent_saved:"Preference saved.", consent_error:"Error saving.",
+      status_cancelled:"Cancelled", status_pending:"Pending activation", status_expired:"Expired", status_active:"Active",
+      plan_trial:"Monthly (trial)", plan_paid:"Active", locale:"en-US",
+    },
+    es:{
+      pageTitle:"Mi cuenta — TradeKopier", back:"← Volver a la web",
+      login_h2:"Mi cuenta",
+      login_p:"Escribe el email con el que compraste TradeKopier y te enviamos un enlace para entrar — sin contraseña.",
+      login_placeholder:"tu@email.com", login_btn:"Enviarme el enlace", login_btn_sending:"Enviando...",
+      err_email:"Escribe tu email.", err_prefix:"Error: ",
+      sent_msg:(email)=>`Te hemos enviado un enlace a ${email} — revisa tu bandeja (y spam).`,
+      app_h1:"Mi cuenta", logout:"Cerrar sesión", whoami_prefix:"Sesión: ",
+      loading:"Cargando tu licencia...", empty:"No encontramos ninguna licencia asociada a este email.",
+      field_key:"Clave de licencia", field_renew:"Próxima renovación / vence", download:"⬇ Descargar TradeKopier",
+      cancel_btn:"Cancelar suscripción",
+      cancel_note:"Al cancelar, conservas el acceso hasta el final del periodo que ya pagaste — no se te cobra de nuevo.",
+      cancel_confirm:"¿Seguro que quieres cancelar? Conservarás el acceso hasta el final del periodo ya pagado.",
+      cancelling:"Cancelando...",
+      cancel_toast:"Suscripción cancelada. Conservas el acceso hasta el final del periodo ya pagado.",
+      load_error:"Error cargando tu cuenta: ",
+      consent_label:"Quiero recibir ofertas y novedades de TradeKopier por email",
+      consent_btn:"Guardar preferencia", consent_saved:"Preferencia guardada.", consent_error:"Error al guardar.",
+      status_cancelled:"Cancelada", status_pending:"Pendiente de activar", status_expired:"Expirada", status_active:"Activa",
+      plan_trial:"Mensual (prueba)", plan_paid:"Activo", locale:"es-ES",
+    },
+    de:{
+      pageTitle:"Mein Konto — TradeKopier", back:"← Zurück zur Website",
+      login_h2:"Mein Konto",
+      login_p:"Gib die E-Mail-Adresse ein, mit der du TradeKopier gekauft hast — wir schicken dir einen Login-Link, kein Passwort nötig.",
+      login_placeholder:"du@email.com", login_btn:"Link zusenden", login_btn_sending:"Wird gesendet...",
+      err_email:"Gib deine E-Mail-Adresse ein.", err_prefix:"Fehler: ",
+      sent_msg:(email)=>`Wir haben einen Link an ${email} gesendet — schau in deinem Posteingang nach (und im Spam-Ordner).`,
+      app_h1:"Mein Konto", logout:"Abmelden", whoami_prefix:"Angemeldet als: ",
+      loading:"Deine Lizenz wird geladen...", empty:"Wir konnten keine Lizenz zu dieser E-Mail-Adresse finden.",
+      field_key:"Lizenzschlüssel", field_renew:"Nächste Verlängerung / läuft ab", download:"⬇ TradeKopier herunterladen",
+      cancel_btn:"Abo kündigen",
+      cancel_note:"Nach der Kündigung behältst du den Zugang bis zum Ende des bereits bezahlten Zeitraums — es wird nicht erneut abgebucht.",
+      cancel_confirm:"Bist du sicher, dass du kündigen möchtest? Du behältst den Zugang bis zum Ende des bereits bezahlten Zeitraums.",
+      cancelling:"Wird gekündigt...",
+      cancel_toast:"Abo gekündigt. Du behältst den Zugang bis zum Ende des bereits bezahlten Zeitraums.",
+      load_error:"Fehler beim Laden deines Kontos: ",
+      consent_label:"Ich möchte Angebote und Neuigkeiten von TradeKopier per E-Mail erhalten",
+      consent_btn:"Einstellung speichern", consent_saved:"Einstellung gespeichert.", consent_error:"Fehler beim Speichern.",
+      status_cancelled:"Gekündigt", status_pending:"Aktivierung ausstehend", status_expired:"Abgelaufen", status_active:"Aktiv",
+      plan_trial:"Monatlich (Test)", plan_paid:"Aktiv", locale:"de-DE",
+    },
+    fr:{
+      pageTitle:"Mon compte — TradeKopier", back:"← Retour au site",
+      login_h2:"Mon compte",
+      login_p:"Entrez l'email avec lequel vous avez acheté TradeKopier, nous vous enverrons un lien de connexion — sans mot de passe.",
+      login_placeholder:"vous@email.com", login_btn:"M'envoyer le lien", login_btn_sending:"Envoi...",
+      err_email:"Entrez votre email.", err_prefix:"Erreur : ",
+      sent_msg:(email)=>`Nous avons envoyé un lien à ${email} — vérifiez votre boîte de réception (et les spams).`,
+      app_h1:"Mon compte", logout:"Se déconnecter", whoami_prefix:"Connecté en tant que : ",
+      loading:"Chargement de votre licence...", empty:"Nous n'avons trouvé aucune licence associée à cet email.",
+      field_key:"Clé de licence", field_renew:"Prochain renouvellement / expire", download:"⬇ Télécharger TradeKopier",
+      cancel_btn:"Annuler l'abonnement",
+      cancel_note:"En annulant, vous conservez l'accès jusqu'à la fin de la période déjà payée — vous ne serez pas débité à nouveau.",
+      cancel_confirm:"Voulez-vous vraiment annuler ? Vous conserverez l'accès jusqu'à la fin de la période déjà payée.",
+      cancelling:"Annulation...",
+      cancel_toast:"Abonnement annulé. Vous conservez l'accès jusqu'à la fin de la période déjà payée.",
+      load_error:"Erreur lors du chargement de votre compte : ",
+      consent_label:"Je souhaite recevoir les offres et actualités de TradeKopier par email",
+      consent_btn:"Enregistrer la préférence", consent_saved:"Préférence enregistrée.", consent_error:"Erreur lors de l'enregistrement.",
+      status_cancelled:"Annulée", status_pending:"En attente d'activation", status_expired:"Expirée", status_active:"Active",
+      plan_trial:"Mensuel (essai)", plan_paid:"Actif", locale:"fr-FR",
+    },
+    pt:{
+      pageTitle:"Minha conta — TradeKopier", back:"← Voltar ao site",
+      login_h2:"Minha conta",
+      login_p:"Digita o email com que compraste o TradeKopier e enviamos-te um link de acesso — sem palavra-passe.",
+      login_placeholder:"teu@email.com", login_btn:"Enviar-me o link", login_btn_sending:"A enviar...",
+      err_email:"Escreve o teu email.", err_prefix:"Erro: ",
+      sent_msg:(email)=>`Enviámos um link para ${email} — verifica a tua caixa de entrada (e o spam).`,
+      app_h1:"Minha conta", logout:"Terminar sessão", whoami_prefix:"Sessão iniciada como: ",
+      loading:"A carregar a tua licença...", empty:"Não encontrámos nenhuma licença associada a este email.",
+      field_key:"Chave de licença", field_renew:"Próxima renovação / expira", download:"⬇ Descarregar TradeKopier",
+      cancel_btn:"Cancelar subscrição",
+      cancel_note:"Ao cancelar, mantens o acesso até ao fim do período já pago — não voltas a ser cobrado.",
+      cancel_confirm:"Tens a certeza que queres cancelar? Vais manter o acesso até ao fim do período já pago.",
+      cancelling:"A cancelar...",
+      cancel_toast:"Subscrição cancelada. Mantens o acesso até ao fim do período já pago.",
+      load_error:"Erro ao carregar a tua conta: ",
+      consent_label:"Quero receber ofertas e novidades do TradeKopier por email",
+      consent_btn:"Guardar preferência", consent_saved:"Preferência guardada.", consent_error:"Erro ao guardar.",
+      status_cancelled:"Cancelada", status_pending:"Pendente de ativação", status_expired:"Expirada", status_active:"Ativa",
+      plan_trial:"Mensal (teste)", plan_paid:"Ativo", locale:"pt-PT",
+    },
+    it:{
+      pageTitle:"Il mio account — TradeKopier", back:"← Torna al sito",
+      login_h2:"Il mio account",
+      login_p:"Inserisci l'email con cui hai acquistato TradeKopier e ti invieremo un link di accesso — senza password.",
+      login_placeholder:"tu@email.com", login_btn:"Inviami il link", login_btn_sending:"Invio in corso...",
+      err_email:"Inserisci la tua email.", err_prefix:"Errore: ",
+      sent_msg:(email)=>`Abbiamo inviato un link a ${email} — controlla la tua casella (e lo spam).`,
+      app_h1:"Il mio account", logout:"Esci", whoami_prefix:"Accesso come: ",
+      loading:"Caricamento della tua licenza...", empty:"Non abbiamo trovato nessuna licenza associata a questa email.",
+      field_key:"Chiave di licenza", field_renew:"Prossimo rinnovo / scade", download:"⬇ Scarica TradeKopier",
+      cancel_btn:"Annulla abbonamento",
+      cancel_note:"Annullando, mantieni l'accesso fino alla fine del periodo già pagato — non ti verrà addebitato di nuovo.",
+      cancel_confirm:"Sei sicuro di voler annullare? Manterrai l'accesso fino alla fine del periodo già pagato.",
+      cancelling:"Annullamento...",
+      cancel_toast:"Abbonamento annullato. Mantieni l'accesso fino alla fine del periodo già pagato.",
+      load_error:"Errore nel caricamento del tuo account: ",
+      consent_label:"Voglio ricevere offerte e novità da TradeKopier via email",
+      consent_btn:"Salva preferenza", consent_saved:"Preferenza salvata.", consent_error:"Errore durante il salvataggio.",
+      status_cancelled:"Annullata", status_pending:"In attesa di attivazione", status_expired:"Scaduta", status_active:"Attiva",
+      plan_trial:"Mensile (prova)", plan_paid:"Attivo", locale:"it-IT",
+    },
+  };
+
+  let currentLang = 'en';
+
+  function t(){ return I18N[currentLang]; }
+
+  function applyStaticTexts(){
+    const d = t();
+    document.title = d.pageTitle;
+    document.documentElement.lang = currentLang;
+    document.getElementById('backLink').textContent = d.back;
+    document.getElementById('loginH2').textContent = d.login_h2;
+    document.getElementById('loginP').textContent = d.login_p;
+    document.getElementById('loginEmail').placeholder = d.login_placeholder;
+    document.getElementById('btnEnviar').textContent = d.login_btn;
+    document.getElementById('appH1').textContent = d.app_h1;
+    document.getElementById('btnLogout').textContent = d.logout;
+    document.getElementById('loadingState').textContent = d.loading;
+    document.getElementById('emptyState').textContent = d.empty;
+    document.getElementById('consentLabel').textContent = d.consent_label;
+    document.getElementById('btnConsent').textContent = d.consent_btn;
+  }
+
+  function setLang(lang){
+    if (!I18N[lang]) return;
+    currentLang = lang;
+    localStorage.setItem('tk_lang', lang);
+    applyStaticTexts();
+    if (licencias.length) renderLicencias();
+  }
+
+  document.getElementById('langSwitch').addEventListener('change', e => setLang(e.target.value));
+  (function initLang(){
+    const saved = localStorage.getItem('tk_lang');
+    const initial = (saved && I18N[saved]) ? saved : 'en';
+    document.getElementById('langSwitch').value = initial;
+    setLang(initial);
+  })();
+
   function toast(msg){
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'), 3000);
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(()=>el.classList.remove('show'), 3000);
   }
 
   async function enviarEnlace(){
+    const d = t();
     const email = document.getElementById('loginEmail').value.trim();
     const msg = document.getElementById('loginMsg');
     const btn = document.getElementById('btnEnviar');
     msg.className = ''; msg.textContent = '';
-    if (!email){ msg.className='err'; msg.textContent='Escribe tu email.'; return; }
-    btn.disabled = true; btn.textContent = 'Enviando...';
+    if (!email){ msg.className='err'; msg.textContent=d.err_email; return; }
+    btn.disabled = true; btn.textContent = d.login_btn_sending;
     const { error } = await sb.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: window.location.origin + '/mi-cuenta.html' }
     });
-    btn.disabled = false; btn.textContent = 'Enviarme el enlace';
-    if (error){ msg.className='err'; msg.textContent = 'Error: ' + error.message; return; }
+    btn.disabled = false; btn.textContent = d.login_btn;
+    if (error){ msg.className='err'; msg.textContent = d.err_prefix + error.message; return; }
     msg.className = 'ok';
-    msg.textContent = 'Te hemos enviado un enlace a ' + email + ' — revisa tu bandeja (y spam).';
+    msg.textContent = d.sent_msg(email);
   }
 
   async function cerrarSesion(){
@@ -177,24 +356,27 @@
 
   function fmtFecha(iso){
     if (!iso) return '—';
-    const d = new Date(iso);
-    return d.toLocaleDateString('es-ES', {day:'2-digit',month:'2-digit',year:'numeric'});
+    const d2 = new Date(iso);
+    return d2.toLocaleDateString(t().locale, {day:'2-digit',month:'2-digit',year:'numeric'});
   }
 
   function estadoDe(l){
-    if (l.revoked) return { label:'Cancelada', cls:'badge-off' };
-    if (!l.expires_at) return { label:'Pendiente de activar', cls:'badge-idle' };
-    if (new Date(l.expires_at) < new Date()) return { label:'Expirada', cls:'badge-off' };
-    return { label:'Activa', cls:'badge-ok' };
+    const d = t();
+    if (l.revoked) return { label:d.status_cancelled, cls:'badge-off' };
+    if (!l.expires_at) return { label:d.status_pending, cls:'badge-idle' };
+    if (new Date(l.expires_at) < new Date()) return { label:d.status_expired, cls:'badge-off' };
+    return { label:d.status_active, cls:'badge-ok' };
   }
 
   function planLabel(p){
-    if (p === 'trial') return 'Mensual (prueba)';
-    if (p === 'paid') return 'Activo';
+    const d = t();
+    if (p === 'trial') return d.plan_trial;
+    if (p === 'paid') return d.plan_paid;
     return p || '—';
   }
 
   function renderLicencias(){
+    const d = t();
     const cont = document.getElementById('licencias');
     cont.innerHTML = '';
     if (licencias.length === 0){
@@ -213,56 +395,59 @@
           <span class="badge ${e.cls}">${e.label}</span>
         </div>
         <div class="grid">
-          <div class="field"><div class="l">Clave de licencia</div><div class="v mono">${l.license_key}</div></div>
-          <div class="field"><div class="l">Próxima renovación / vence</div><div class="v">${fmtFecha(l.expires_at)}</div></div>
+          <div class="field"><div class="l">${d.field_key}</div><div class="v mono">${l.license_key}</div></div>
+          <div class="field"><div class="l">${d.field_renew}</div><div class="v">${fmtFecha(l.expires_at)}</div></div>
         </div>
         <div class="actions">
-          <a class="btn btn-ghost" href="downloads/TradeKopier.zip">⬇ Descargar TradeKopier</a>
-          ${puedeCancel ? `<button class="btn btn-danger" onclick="cancelar('${l.id}', this)">Cancelar suscripción</button>` : ''}
+          <a class="btn btn-ghost" href="downloads/TradeKopier.zip">${d.download}</a>
+          ${puedeCancel ? `<button class="btn btn-danger" onclick="cancelar('${l.id}', this)">${d.cancel_btn}</button>` : ''}
         </div>
-        ${puedeCancel ? '<div class="cancel-note">Al cancelar, conservas el acceso hasta el final del periodo que ya pagaste — no se te cobra de nuevo.</div>' : ''}
+        ${puedeCancel ? `<div class="cancel-note">${d.cancel_note}</div>` : ''}
       `;
       cont.appendChild(div);
     });
   }
 
   async function cancelar(licenseId, btn){
-    if (!confirm('¿Seguro que quieres cancelar? Conservarás el acceso hasta el final del periodo ya pagado.')) return;
+    const d = t();
+    if (!confirm(d.cancel_confirm)) return;
     btn.disabled = true;
-    btn.textContent = 'Cancelando...';
+    btn.textContent = d.cancelling;
     // Nota: el slug real de esta función en Supabase es "quick-action" (nombre
     // interno asignado por Supabase, distinto del nombre visible "cancel-subscription").
     const { data, error } = await sb.functions.invoke('quick-action', { body: { license_id: licenseId } });
     if (error || data?.error){
-      toast('Error: ' + (data?.error || error.message));
+      toast(d.err_prefix + (data?.error || error.message));
       btn.disabled = false;
-      btn.textContent = 'Cancelar suscripción';
+      btn.textContent = d.cancel_btn;
       return;
     }
-    toast('Suscripción cancelada. Conservas el acceso hasta el final del periodo ya pagado.');
+    toast(d.cancel_toast);
     await cargarLicencias();
   }
 
   async function guardarConsentimiento(){
+    const d = t();
     const consent = document.getElementById('chkConsent').checked;
     const { data, error } = await sb.functions.invoke('update-marketing-consent', { body: { consent } });
     const msg = document.getElementById('consentMsg');
     if (error || data?.error){
       msg.style.color = 'var(--red)';
-      msg.textContent = 'Error al guardar.';
+      msg.textContent = d.consent_error;
       return;
     }
     msg.style.color = 'var(--green)';
-    msg.textContent = 'Preferencia guardada.';
+    msg.textContent = d.consent_saved;
     setTimeout(()=>{ msg.textContent=''; }, 3000);
   }
 
   async function cargarLicencias(){
+    const d = t();
     document.getElementById('loadingState').style.display = 'block';
     const { data, error } = await sb.from('licenses').select('*').order('issued_at', { ascending:false });
     document.getElementById('loadingState').style.display = 'none';
     if (error){
-      toast('Error cargando tu cuenta: ' + error.message);
+      toast(d.load_error + error.message);
       return;
     }
     licencias = data || [];
@@ -275,7 +460,7 @@
   async function mostrarApp(user){
     document.getElementById('loginBox').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    document.getElementById('whoami').textContent = 'Sesión: ' + (user?.email || '');
+    document.getElementById('whoami').textContent = t().whoami_prefix + (user?.email || '');
     await cargarLicencias();
   }
 
