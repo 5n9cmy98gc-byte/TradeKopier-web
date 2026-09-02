@@ -112,7 +112,7 @@
   .logo:hover .klogo{ transform:translateY(-1px) scale(1.05); box-shadow:0 10px 26px -6px rgba(62,166,255,.8), inset 0 1px 0 rgba(255,255,255,.32); }
   .klogo .kmark{position:relative; z-index:1; display:block;}
   footer .klogo{margin:0;}
-  .navlinks{display:flex; gap:26px; font-size:14px; color:var(--muted);}
+  .navlinks{display:flex; gap:26px; font-size:14px; color:var(--text); font-weight:600;}
   .navlinks a:hover{color:var(--text);}
   .navright{display:flex; align-items:center; gap:14px;}
   .navcta{
@@ -162,13 +162,30 @@
   .section-head p{color:var(--muted); font-size:15.5px;}
 
   .features{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto;}
-  .feature{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:26px;}
+  .feature{
+    position:relative; background:var(--f-bg,var(--panel)); border:1px solid var(--border); border-radius:16px; padding:26px;
+    overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .feature::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--f-accent,var(--accent));}
+  .feature:hover{transform:translateY(-5px); box-shadow:0 22px 40px -22px var(--f-shadow,rgba(62,166,255,.4)); border-color:var(--f-accent,var(--accent));}
   .feature .icon{
-    width:42px; height:42px; border-radius:10px; background:linear-gradient(135deg,rgba(62,166,255,.15),rgba(124,92,255,.15));
-    display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px;
+    width:46px; height:46px; border-radius:12px;
+    background:linear-gradient(135deg,var(--f-accent,var(--accent)),var(--f-accent2,var(--accent2)));
+    box-shadow:0 10px 18px -8px var(--f-shadow,rgba(62,166,255,.5));
+    display:flex; align-items:center; justify-content:center; font-size:21px; margin-bottom:16px;
   }
   .feature h3{font-size:16.5px; font-weight:700; margin-bottom:8px;}
   .feature p{color:var(--muted); font-size:14px;}
+  .feature .new-badge{
+    position:absolute; top:16px; right:16px; font-size:10px; font-weight:800; letter-spacing:.05em;
+    background:var(--f-accent,var(--accent)); color:#fff; padding:3px 9px; border-radius:20px; text-transform:uppercase;
+  }
+  .feature--blue{--f-accent:#2f8ce6; --f-accent2:#5aa9ef; --f-bg:#f2f8ff; --f-shadow:rgba(47,140,230,.35);}
+  .feature--purple{--f-accent:#7c5cff; --f-accent2:#9c85ff; --f-bg:#f6f4ff; --f-shadow:rgba(124,92,255,.35);}
+  .feature--green{--f-accent:#1f9d55; --f-accent2:#3dbd74; --f-bg:#f0faf4; --f-shadow:rgba(31,157,85,.35);}
+  .feature--orange{--f-accent:#e07b1f; --f-accent2:#f0994a; --f-bg:#fff6ee; --f-shadow:rgba(224,123,31,.35);}
+  .feature--pink{--f-accent:#e0518a; --f-accent2:#f078a8; --f-bg:#fff0f6; --f-shadow:rgba(224,81,138,.35);}
+  .feature--teal{--f-accent:#0fa3a3; --f-accent2:#33c2c2; --f-bg:#effcfc; --f-shadow:rgba(15,163,163,.35);}
 
   /* Broker strip (marquee) */
   .brokers{background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:36px 0;}
@@ -469,50 +486,38 @@
       <p data-i18n="features.sub">Pensado para traders con múltiples cuentas de prop firm o fondeo que quieren operar una vez y replicar en todas — sin los límites de otros copiadores.</p>
     </div>
     <div class="features">
-      <div class="feature">
-        <div class="icon">♾️</div>
-        <h3 data-i18n="feat1.h">Sin límite de cuentas ni conexiones</h3>
-        <p data-i18n="feat1.p">Conecta y opera tantas cuentas y brokers distintos como necesites al mismo tiempo — compatible con TradingView, Tradovate y todas las conexiones que permite NinjaTrader 8, además de cualquier sitio donde ejecutes tus operaciones. A diferencia de otros copiadores que cobran más por cada conexión adicional.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">🏆</div>
-        <h3 data-i18n="feat7.h">Optimizado para empresas de fondeo</h3>
-        <p data-i18n="feat7.p">Funciona sin problemas con cualquier empresa de fondeo (prop firm) que uses — sin restricciones ni conflictos de compatibilidad.</p>
-      </div>
-      <div class="feature">
+      <div class="feature feature--blue">
         <div class="icon">⚡</div>
-        <h3 data-i18n="feat2.h">Réplica en tiempo real</h3>
-        <p data-i18n="feat2.p">Cada entrada y salida de tu cuenta maestra se replica al instante, sin importar si operas desde el Chart Trader, un ATM o TradingView.</p>
+        <h3 data-i18n="feat1.h">Réplica en tiempo real</h3>
+        <p data-i18n="feat1.p">Cada entrada y salida se copia al instante en todas tus cuentas — siempre en menos de un segundo.</p>
       </div>
-      <div class="feature">
-        <div class="icon">🎚️</div>
-        <h3 data-i18n="feat3.h">Multiplicador por cuenta</h3>
-        <p data-i18n="feat3.p">Ajusta el tamaño de la posición de forma independiente en cada esclava — perfecto para cuentas con distinto tamaño de capital.</p>
+      <div class="feature feature--purple">
+        <div class="icon">♾️</div>
+        <h3 data-i18n="feat2.h">Cuentas ilimitadas, un solo precio</h3>
+        <p data-i18n="feat2.p">Conecta todos los brokers y cuentas de fondeo que tengas — sin coste por conexión adicional.</p>
       </div>
-      <div class="feature">
+      <div class="feature feature--green">
         <div class="icon">🛡️</div>
-        <h3 data-i18n="feat4.h">Protección SL/TP real</h3>
-        <p data-i18n="feat4.p">Replica el Stop Loss y Take Profit reales que pones en la maestra, a la misma distancia y escalados por cuenta — no una red de seguridad genérica.</p>
+        <h3 data-i18n="feat3.h">Protección de riesgo automática</h3>
+        <p data-i18n="feat3.p">Límite de pérdida diaria y objetivo de beneficio aplicados en tiempo real, antes de que sea tarde.</p>
       </div>
-      <div class="feature">
-        <div class="icon">📊</div>
-        <h3 data-i18n="feat5.h">Cockpit en vivo</h3>
-        <p data-i18n="feat5.p">Panel de control con el estado de cada cuenta, PnL del día, posiciones abiertas y flatten de emergencia con un clic.</p>
+      <div class="feature feature--orange">
+        <span class="new-badge" data-i18n="new.badge">NEW</span>
+        <div class="icon">📓</div>
+        <h3 data-i18n="feat4.h">Diario de trading integrado</h3>
+        <p data-i18n="feat4.p">Cada operación se registra sola — estadísticas, gráficos y calendario de PnL completo.</p>
       </div>
-      <div class="feature">
-        <div class="icon">🔒</div>
-        <h3 data-i18n="feat6.h">Candado de seguridad</h3>
-        <p data-i18n="feat6.p">Deshabilita cualquier cuenta desde Conexiones y queda excluida de toda réplica al instante, esté donde esté configurada.</p>
+      <div class="feature feature--pink">
+        <span class="new-badge" data-i18n="new.badge">NEW</span>
+        <div class="icon">📸</div>
+        <h3 data-i18n="feat5.h">Resultados listos para Instagram</h3>
+        <p data-i18n="feat5.p">Convierte tus estadísticas en una tarjeta de PnL para compartir con un clic.</p>
       </div>
-      <div class="feature">
-        <div class="icon">🕐</div>
-        <h3 data-i18n="feat8.h">Soporte 24/7</h3>
-        <p data-i18n="feat8.p">Nuestro equipo está disponible las 24 horas del día, los 7 días de la semana, para ayudarte con cualquier duda o incidencia.</p>
-      </div>
-      <div class="feature">
-        <div class="icon">💻</div>
-        <h3 data-i18n="feat9.h">Sin necesidad de VPS</h3>
-        <p data-i18n="feat9.p">Funciona directamente en tu propio ordenador — no necesitas alquilar un VPS ni pagar de más solo para mantener el copiador corriendo.</p>
+      <div class="feature feature--teal">
+        <span class="new-badge" data-i18n="new.badge">NEW</span>
+        <div class="icon">🏷️</div>
+        <h3 data-i18n="feat6.h">Descuentos exclusivos en prop firms</h3>
+        <p data-i18n="feat6.p">Desbloquea códigos de descuento reales con las mejores prop firms, dentro de la app.</p>
       </div>
     </div>
   </div>
@@ -723,16 +728,14 @@
       "stats.l3":"de latencia de réplica",
       "brokers.label":"Compatible con TradingView, Tradovate, y con todas las conexiones y empresas de fondeo que permite NinjaTrader 8, incluyendo:","brokers.more":"y muchas más",
       "features.eyebrow":"Funciones","features.title":"Todo lo que necesitas para gestionar varias cuentas",
-      "features.sub":"Pensado para traders con múltiples cuentas de prop firm o fondeo que quieren operar una vez y replicar en todas — sin los límites de otros copiadores.",
-      "feat1.h":"Sin límite de cuentas ni conexiones","feat1.p":"Conecta y opera tantas cuentas y brokers distintos como necesites al mismo tiempo — compatible con TradingView, Tradovate y todas las conexiones que permite NinjaTrader 8, además de cualquier sitio donde ejecutes tus operaciones. A diferencia de otros copiadores que cobran más por cada conexión adicional.",
-      "feat7.h":"Optimizado para empresas de fondeo","feat7.p":"Funciona sin problemas con cualquier empresa de fondeo (prop firm) que uses — sin restricciones ni conflictos de compatibilidad.",
-      "feat8.h":"Soporte 24/7","feat8.p":"Nuestro equipo está disponible las 24 horas del día, los 7 días de la semana, para ayudarte con cualquier duda o incidencia.",
-      "feat9.h":"Sin necesidad de VPS","feat9.p":"Funciona directamente en tu propio ordenador — no necesitas alquilar un VPS ni pagar de más solo para mantener el copiador corriendo.",
-      "feat2.h":"Réplica en tiempo real","feat2.p":"Cada entrada y salida de tu cuenta maestra se replica al instante, sin importar si operas desde el Chart Trader, un ATM o TradingView.",
-      "feat3.h":"Multiplicador por cuenta","feat3.p":"Ajusta el tamaño de la posición de forma independiente en cada esclava — perfecto para cuentas con distinto tamaño de capital.",
-      "feat4.h":"Protección SL/TP real","feat4.p":"Replica el Stop Loss y Take Profit reales que pones en la maestra, a la misma distancia y escalados por cuenta — no una red de seguridad genérica.",
-      "feat5.h":"Cockpit en vivo","feat5.p":"Panel de control con el estado de cada cuenta, PnL del día, posiciones abiertas y flatten de emergencia con un clic.",
-      "feat6.h":"Candado de seguridad","feat6.p":"Deshabilita cualquier cuenta desde Conexiones y queda excluida de toda réplica al instante, esté donde esté configurada.",
+      "features.sub":"Opera una vez. Replica en todas partes. Nada más que gestionar.",
+      "new.badge":"NUEVO",
+      "feat1.h":"Réplica en tiempo real","feat1.p":"Cada entrada y salida se copia al instante en todas tus cuentas — siempre en menos de un segundo.",
+      "feat2.h":"Cuentas ilimitadas, un solo precio","feat2.p":"Conecta todos los brokers y cuentas de fondeo que tengas — sin coste por conexión adicional.",
+      "feat3.h":"Protección de riesgo automática","feat3.p":"Límite de pérdida diaria y objetivo de beneficio aplicados en tiempo real, antes de que sea tarde.",
+      "feat4.h":"Diario de trading integrado","feat4.p":"Cada operación se registra sola — estadísticas, gráficos y calendario de PnL completo.",
+      "feat5.h":"Resultados listos para Instagram","feat5.p":"Convierte tus estadísticas en una tarjeta de PnL para compartir con un clic.",
+      "feat6.h":"Descuentos exclusivos en prop firms","feat6.p":"Desbloquea códigos de descuento reales con las mejores prop firms, dentro de la app.",
       "risk.eyebrow":"Gestión de riesgo","risk.title":"Protege tus cuentas de fondeo automáticamente",
       "risk.desc":"Configura el límite de pérdida diaria (PDLL) y el objetivo de beneficio (PDPT) por cada cuenta. TradeKopier vigila en tiempo real y actúa antes de que sea tarde.",
       "risk.li1":"Liquidación automática al tocar el límite de pérdida o el objetivo de beneficio que tú elijas",
@@ -796,16 +799,14 @@
       "stats.l3":"replication latency",
       "brokers.label":"Compatible with TradingView, Tradovate, and every connection and prop firm NinjaTrader 8 supports, including:","brokers.more":"and many more",
       "features.eyebrow":"Features","features.title":"Everything you need to manage multiple accounts",
-      "features.sub":"Built for traders with several prop firm or funded accounts who want to trade once and replicate everywhere — without other copiers' limits.",
-      "feat1.h":"No account or connection limits","feat1.p":"Connect and trade as many different accounts and brokers as you need at the same time — compatible with TradingView, Tradovate, and every connection NinjaTrader 8 supports, plus any venue where you execute your trades. Unlike other copiers that charge more per extra connection.",
-      "feat7.h":"Optimized for prop firms","feat7.p":"Works seamlessly with any prop firm you use — no restrictions, no compatibility conflicts.",
-      "feat8.h":"24/7 support","feat8.p":"Our team is available around the clock, every day of the week, to help with any question or issue.",
-      "feat9.h":"No VPS needed","feat9.p":"Runs directly on your own computer — no need to rent a VPS or pay extra just to keep the copier running.",
-      "feat2.h":"Real-time replication","feat2.p":"Every entry and exit on your master account is replicated instantly, whether you trade from the Chart Trader, an ATM, or TradingView.",
-      "feat3.h":"Per-account multiplier","feat3.p":"Independently scale position size on each slave account — perfect for accounts with different capital sizes.",
-      "feat4.h":"Real SL/TP protection","feat4.p":"Replicates the actual Stop Loss and Take Profit you set on the master, at the same distance and scaled per account — not a generic safety net.",
-      "feat5.h":"Live Cockpit","feat5.p":"Control panel showing the status of every account, daily PnL, open positions, and one-click emergency flatten.",
-      "feat6.h":"Safety lock","feat6.p":"Disable any account from Connections and it's instantly excluded from all replication, wherever it's configured.",
+      "features.sub":"Trade once. Replicate everywhere. Nothing else to manage.",
+      "new.badge":"NEW",
+      "feat1.h":"Real-time replication","feat1.p":"Every entry and exit copied instantly across every account — sub-second, always.",
+      "feat2.h":"Unlimited accounts, one price","feat2.p":"Connect every broker and prop firm account you run — no per-connection fees.",
+      "feat3.h":"Automatic risk protection","feat3.p":"Daily loss limits and profit targets enforced in real time, before it's too late.",
+      "feat4.h":"Built-in trade journal","feat4.p":"Every trade logged automatically — stats, charts and a full PnL calendar.",
+      "feat5.h":"Instagram-ready results","feat5.p":"Turn your stats into a shareable PnL card in one click.",
+      "feat6.h":"Exclusive prop firm discounts","feat6.p":"Unlock real partner discount codes for top prop firms, right in the app.",
       "risk.eyebrow":"Risk management","risk.title":"Protect your funded accounts automatically",
       "risk.desc":"Set the daily loss limit (PDLL) and profit target (PDPT) per account. TradeKopier watches in real time and acts before it's too late.",
       "risk.li1":"Automatic liquidation when the loss limit or the profit target you choose is hit",
@@ -869,16 +870,14 @@
       "stats.l3":"Replikationslatenz",
       "brokers.label":"Kompatibel mit TradingView, Tradovate und jeder Verbindung sowie Prop-Firm, die NinjaTrader 8 unterstützt, u. a.:","brokers.more":"und viele mehr",
       "features.eyebrow":"Funktionen","features.title":"Alles, was du für mehrere Konten brauchst",
-      "features.sub":"Für Trader mit mehreren Prop-Firm- oder Funded-Konten, die einmal traden und überall replizieren wollen — ohne die Grenzen anderer Copier.",
-      "feat1.h":"Keine Konto- oder Verbindungslimits","feat1.p":"Verbinde und handle so viele verschiedene Konten und Broker gleichzeitig, wie du brauchst — kompatibel mit TradingView, Tradovate und jeder Verbindung, die NinjaTrader 8 unterstützt, sowie jedem Ort, an dem du deine Trades ausführst. Anders als bei Copiern, die pro zusätzlicher Verbindung mehr verlangen.",
-      "feat7.h":"Optimiert für Prop-Firms","feat7.p":"Funktioniert problemlos mit jeder Prop-Firm, die du nutzt — ohne Einschränkungen oder Kompatibilitätskonflikte.",
-      "feat8.h":"24/7-Support","feat8.p":"Unser Team ist rund um die Uhr, jeden Tag der Woche, für Fragen und Probleme erreichbar.",
-      "feat9.h":"Kein VPS nötig","feat9.p":"Läuft direkt auf deinem eigenen Computer — kein VPS-Mietvertrag oder Extrakosten nur, um den Copier am Laufen zu halten.",
-      "feat2.h":"Echtzeit-Replikation","feat2.p":"Jeder Einstieg und Ausstieg auf deinem Master-Konto wird sofort repliziert, egal ob du über Chart Trader, ATM oder TradingView handelst.",
-      "feat3.h":"Multiplikator pro Konto","feat3.p":"Skaliere die Positionsgröße für jedes Slave-Konto unabhängig — perfekt für Konten mit unterschiedlichem Kapital.",
-      "feat4.h":"Echter SL/TP-Schutz","feat4.p":"Repliziert den tatsächlichen Stop Loss und Take Profit vom Master, im gleichen Abstand und pro Konto skaliert — kein generisches Sicherheitsnetz.",
-      "feat5.h":"Live-Cockpit","feat5.p":"Kontrollzentrum mit Status jedes Kontos, Tages-PnL, offenen Positionen und Notfall-Flatten per Klick.",
-      "feat6.h":"Sicherheitssperre","feat6.p":"Deaktiviere jedes Konto unter Verbindungen und es wird sofort von jeder Replikation ausgeschlossen, egal wo es konfiguriert ist.",
+      "features.sub":"Einmal handeln. Überall replizieren. Nichts weiter zu verwalten.",
+      "new.badge":"NEU",
+      "feat1.h":"Replikation in Echtzeit","feat1.p":"Jeder Einstieg und Ausstieg wird sofort auf allen Konten kopiert — immer unter einer Sekunde.",
+      "feat2.h":"Unbegrenzte Konten, ein Preis","feat2.p":"Verbinde jeden Broker und jedes Funded-Konto, das du hast — ohne Gebühr pro Verbindung.",
+      "feat3.h":"Automatischer Risikoschutz","feat3.p":"Tägliches Verlustlimit und Gewinnziel werden in Echtzeit durchgesetzt, bevor es zu spät ist.",
+      "feat4.h":"Integriertes Trading-Journal","feat4.p":"Jeder Trade wird automatisch erfasst — Statistiken, Charts und ein vollständiger PnL-Kalender.",
+      "feat5.h":"Ergebnisse, bereit für Instagram","feat5.p":"Verwandle deine Statistiken mit einem Klick in eine teilbare PnL-Karte.",
+      "feat6.h":"Exklusive Prop-Firm-Rabatte","feat6.p":"Schalte echte Partner-Rabattcodes für Top-Prop-Firmen direkt in der App frei.",
       "risk.eyebrow":"Risikomanagement","risk.title":"Schütze deine Funded-Konten automatisch",
       "risk.desc":"Lege das tägliche Verlustlimit (PDLL) und das Gewinnziel (PDPT) pro Konto fest. TradeKopier überwacht in Echtzeit und handelt, bevor es zu spät ist.",
       "risk.li1":"Automatische Liquidation bei Erreichen des Verlustlimits oder des Gewinnziels, das du selbst festlegst",
@@ -942,16 +941,14 @@
       "stats.l3":"de latência de réplica",
       "brokers.label":"Compatível com TradingView, Tradovate, e com todas as conexões e empresas de fondeo que o NinjaTrader 8 permite, incluindo:","brokers.more":"e muitas mais",
       "features.eyebrow":"Funcionalidades","features.title":"Tudo o que precisas para gerir várias contas",
-      "features.sub":"Pensado para traders com várias contas de prop firm ou fundeadas que querem operar uma vez e replicar em todas — sem os limites de outros copiadores.",
-      "feat1.h":"Sem limite de contas nem conexões","feat1.p":"Liga e opera quantas contas e brokers diferentes precisares ao mesmo tempo — compatível com TradingView, Tradovate e todas as conexões que o NinjaTrader 8 permite, além de qualquer sítio onde executes as tuas operações. Ao contrário de outros copiadores que cobram mais por cada conexão extra.",
-      "feat7.h":"Otimizado para empresas de fondeo","feat7.p":"Funciona sem problemas com qualquer empresa de fondeo (prop firm) que uses — sem restrições nem conflitos de compatibilidade.",
-      "feat8.h":"Suporte 24/7","feat8.p":"A nossa equipa está disponível 24 horas por dia, 7 dias por semana, para te ajudar com qualquer dúvida ou incidência.",
-      "feat9.h":"Sem necessidade de VPS","feat9.p":"Funciona diretamente no teu próprio computador — não precisas de alugar um VPS nem pagar a mais só para manter o copiador a correr.",
-      "feat2.h":"Réplica em tempo real","feat2.p":"Cada entrada e saída na tua conta mestre é replicada instantaneamente, quer operes pelo Chart Trader, um ATM ou TradingView.",
-      "feat3.h":"Multiplicador por conta","feat3.p":"Ajusta o tamanho da posição de forma independente em cada escrava — perfeito para contas com capital diferente.",
-      "feat4.h":"Proteção SL/TP real","feat4.p":"Replica o Stop Loss e Take Profit reais que colocas na mestre, à mesma distância e escalados por conta — não uma rede de segurança genérica.",
-      "feat5.h":"Cockpit ao vivo","feat5.p":"Painel de controlo com o estado de cada conta, PnL do dia, posições abertas e flatten de emergência com um clique.",
-      "feat6.h":"Bloqueio de segurança","feat6.p":"Desativa qualquer conta em Conexões e fica excluída de toda a réplica instantaneamente, onde quer que esteja configurada.",
+      "features.sub":"Opera uma vez. Replica em todas as contas. Nada mais para gerir.",
+      "new.badge":"NOVO",
+      "feat1.h":"Replicação em tempo real","feat1.p":"Cada entrada e saída é copiada instantaneamente em todas as contas — sempre em menos de um segundo.",
+      "feat2.h":"Contas ilimitadas, um só preço","feat2.p":"Liga todos os brokers e contas de fundeio que tiveres — sem custo por conexão extra.",
+      "feat3.h":"Proteção de risco automática","feat3.p":"Limite de perda diária e objetivo de lucro aplicados em tempo real, antes que seja tarde demais.",
+      "feat4.h":"Diário de trading integrado","feat4.p":"Cada operação é registada automaticamente — estatísticas, gráficos e calendário de PnL completo.",
+      "feat5.h":"Resultados prontos para o Instagram","feat5.p":"Transforma as tuas estatísticas num cartão de PnL para partilhar com um clique.",
+      "feat6.h":"Descontos exclusivos em prop firms","feat6.p":"Desbloqueia códigos de desconto reais das melhores prop firms, direto na app.",
       "risk.eyebrow":"Gestão de risco","risk.title":"Protege as tuas contas fundeadas automaticamente",
       "risk.desc":"Configura o limite de perda diária (PDLL) e o objetivo de lucro (PDPT) por conta. O TradeKopier vigia em tempo real e age antes que seja tarde.",
       "risk.li1":"Liquidação automática ao atingir o limite de perda ou o objetivo de lucro que tu escolheres",
@@ -1015,16 +1012,14 @@
       "stats.l3":"di latenza di replica",
       "brokers.label":"Compatibile con TradingView, Tradovate, e con tutte le connessioni e le prop firm supportate da NinjaTrader 8, tra cui:","brokers.more":"e molti altri",
       "features.eyebrow":"Funzionalità","features.title":"Tutto ciò che serve per gestire più conti",
-      "features.sub":"Pensato per trader con più conti prop firm o funded che vogliono operare una volta e replicare ovunque — senza i limiti degli altri copiatori.",
-      "feat1.h":"Nessun limite di conti o connessioni","feat1.p":"Collega e opera con tutti i conti e broker diversi di cui hai bisogno contemporaneamente — compatibile con TradingView, Tradovate e tutte le connessioni supportate da NinjaTrader 8, oltre a qualsiasi luogo in cui esegui le tue operazioni. A differenza di altri copiatori che fanno pagare di più per ogni connessione extra.",
-      "feat7.h":"Ottimizzato per le prop firm","feat7.p":"Funziona senza problemi con qualsiasi prop firm tu usi — senza restrizioni né conflitti di compatibilità.",
-      "feat8.h":"Supporto 24/7","feat8.p":"Il nostro team è disponibile 24 ore su 24, 7 giorni su 7, per qualsiasi domanda o problema.",
-      "feat9.h":"Nessun VPS necessario","feat9.p":"Funziona direttamente sul tuo computer — non serve affittare un VPS né pagare extra solo per tenere il copier attivo.",
-      "feat2.h":"Replica in tempo reale","feat2.p":"Ogni entrata e uscita sul tuo conto master viene replicata istantaneamente, che tu operi da Chart Trader, un ATM o TradingView.",
-      "feat3.h":"Moltiplicatore per conto","feat3.p":"Scala la dimensione della posizione in modo indipendente su ogni conto slave — perfetto per conti con capitale diverso.",
-      "feat4.h":"Protezione SL/TP reale","feat4.p":"Replica lo Stop Loss e il Take Profit reali impostati sul master, alla stessa distanza e scalati per conto — non una rete di sicurezza generica.",
-      "feat5.h":"Cockpit dal vivo","feat5.p":"Pannello di controllo con lo stato di ogni conto, PnL giornaliero, posizioni aperte e flatten di emergenza con un clic.",
-      "feat6.h":"Blocco di sicurezza","feat6.p":"Disattiva qualsiasi conto da Connessioni e viene escluso istantaneamente da ogni replica, ovunque sia configurato.",
+      "features.sub":"Fai trading una volta. Replica ovunque. Niente altro da gestire.",
+      "new.badge":"NUOVO",
+      "feat1.h":"Replica in tempo reale","feat1.p":"Ogni entrata e uscita viene copiata istantaneamente su tutti i conti — sempre in meno di un secondo.",
+      "feat2.h":"Conti illimitati, un solo prezzo","feat2.p":"Collega tutti i broker e conti di prop firm che hai — senza costi per connessione aggiuntiva.",
+      "feat3.h":"Protezione del rischio automatica","feat3.p":"Limite di perdita giornaliera e obiettivo di profitto applicati in tempo reale, prima che sia troppo tardi.",
+      "feat4.h":"Diario di trading integrato","feat4.p":"Ogni operazione viene registrata automaticamente — statistiche, grafici e calendario PnL completo.",
+      "feat5.h":"Risultati pronti per Instagram","feat5.p":"Trasforma le tue statistiche in una card PnL condivisibile con un clic.",
+      "feat6.h":"Sconti esclusivi sulle prop firm","feat6.p":"Sblocca codici sconto reali dei partner per le migliori prop firm, direttamente nell'app.",
       "risk.eyebrow":"Gestione del rischio","risk.title":"Proteggi automaticamente i tuoi conti funded",
       "risk.desc":"Imposta il limite di perdita giornaliera (PDLL) e l'obiettivo di profitto (PDPT) per ogni conto. TradeKopier monitora in tempo reale e agisce prima che sia troppo tardi.",
       "risk.li1":"Liquidazione automatica al raggiungimento del limite di perdita o dell'obiettivo di profitto che scegli tu",
@@ -1088,16 +1083,14 @@
       "stats.l3":"de latence de réplication",
       "brokers.label":"Compatible avec TradingView, Tradovate, et toutes les connexions et sociétés de prop trading prises en charge par NinjaTrader 8, notamment :","brokers.more":"et bien d'autres",
       "features.eyebrow":"Fonctionnalités","features.title":"Tout ce dont vous avez besoin pour gérer plusieurs comptes",
-      "features.sub":"Conçu pour les traders ayant plusieurs comptes prop firm ou financés qui veulent trader une fois et répliquer partout — sans les limites des autres copieurs.",
-      "feat1.h":"Aucune limite de comptes ni de connexions","feat1.p":"Connectez et tradez autant de comptes et de brokers différents que nécessaire en même temps — compatible avec TradingView, Tradovate et toutes les connexions prises en charge par NinjaTrader 8, ainsi que n'importe quel site d'exécution. Contrairement aux autres copieurs qui facturent plus par connexion supplémentaire.",
-      "feat2.h":"Réplication en temps réel","feat2.p":"Chaque entrée et sortie sur votre compte maître est répliquée instantanément, que vous tradiez depuis Chart Trader, un ATM ou TradingView.",
-      "feat3.h":"Multiplicateur par compte","feat3.p":"Ajustez la taille de position indépendamment sur chaque compte esclave — parfait pour des comptes ayant des capitaux différents.",
-      "feat4.h":"Protection SL/TP réelle","feat4.p":"Réplique le Stop Loss et le Take Profit réels définis sur le maître, à la même distance et adaptés par compte — pas un filet de sécurité générique.",
-      "feat5.h":"Cockpit en direct","feat5.p":"Panneau de contrôle avec le statut de chaque compte, le PnL du jour, les positions ouvertes et un flatten d'urgence en un clic.",
-      "feat6.h":"Verrou de sécurité","feat6.p":"Désactivez n'importe quel compte depuis Connexions et il est instantanément exclu de toute réplication, où qu'il soit configuré.",
-      "feat7.h":"Optimisé pour les sociétés de prop trading","feat7.p":"Fonctionne sans problème avec n'importe quelle société de prop trading que vous utilisez — sans restrictions ni conflits de compatibilité.",
-      "feat8.h":"Support 24/7","feat8.p":"Notre équipe est disponible 24 heures sur 24, 7 jours sur 7, pour toute question ou incident.",
-      "feat9.h":"Pas besoin de VPS","feat9.p":"Fonctionne directement sur votre propre ordinateur — pas besoin de louer un VPS ni de payer plus juste pour garder le copieur actif.",
+      "features.sub":"Tradez une fois. Répliquez partout. Rien d'autre à gérer.",
+      "new.badge":"NOUVEAU",
+      "feat1.h":"Réplication en temps réel","feat1.p":"Chaque entrée et sortie est copiée instantanément sur tous vos comptes — toujours en moins d'une seconde.",
+      "feat2.h":"Comptes illimités, un seul prix","feat2.p":"Connectez tous vos brokers et comptes de prop firm — sans frais par connexion supplémentaire.",
+      "feat3.h":"Protection du risque automatique","feat3.p":"Limite de perte quotidienne et objectif de profit appliqués en temps réel, avant qu'il ne soit trop tard.",
+      "feat4.h":"Journal de trading intégré","feat4.p":"Chaque trade est enregistré automatiquement — statistiques, graphiques et calendrier de PnL complet.",
+      "feat5.h":"Résultats prêts pour Instagram","feat5.p":"Transformez vos statistiques en carte de PnL partageable en un clic.",
+      "feat6.h":"Réductions exclusives chez les prop firms","feat6.p":"Débloquez de vrais codes de réduction partenaires pour les meilleures prop firms, directement dans l'app.",
       "risk.eyebrow":"Gestion du risque","risk.title":"Protégez automatiquement vos comptes financés",
       "risk.desc":"Configurez la limite de perte quotidienne (PDLL) et l'objectif de profit (PDPT) par compte. TradeKopier surveille en temps réel et agit avant qu'il ne soit trop tard.",
       "risk.li1":"Liquidation automatique dès que la limite de perte ou l'objectif de profit que vous choisissez est atteint",
