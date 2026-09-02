@@ -1185,25 +1185,28 @@
 
   document.getElementById('langSwitch').addEventListener('change', (e)=> setLang(e.target.value));
 
-  // ---- Tira de marcas (logo chips: iniciales + color, sin usar los logotipos
-  // oficiales de cada empresa — nombres y colores solo a modo identificativo) ----
+  // ---- Tira de marcas (logo chips: logo oficial cuando está disponible,
+  // si no, iniciales + color a modo identificativo) ----
   const brands = [
-    { name:'TradingView', ini:'TV', color:'#1e88e5' },
+    { name:'TradingView', ini:'TV', color:'#1e88e5', logo:'assets/logos/tradingview.png' },
     { name:'Tradovate', ini:'TD', color:'#00b386' },
     { name:'Rithmic', ini:'RM', color:'#37474f' },
     { name:'Lucid Trading', ini:'LT', color:'#7c5cff' },
-    { name:'Apex Trader Funding', ini:'AT', color:'#e35b4b' },
-    { name:'Tradeify', ini:'TF', color:'#3ea6ff' },
+    { name:'Apex Trader Funding', ini:'AT', color:'#e35b4b', logo:'assets/logos/apex.png' },
+    { name:'Tradeify', ini:'TF', color:'#3ea6ff', logo:'assets/logos/tradeify.png' },
     { name:'Bulenox', ini:'BX', color:'#2ecc71' },
     { name:'Alpha Futures', ini:'AF', color:'#c99a2e' },
-    { name:'MyFundedFutures', ini:'MF', color:'#00acc1' },
-    { name:'Take Profit Trader', ini:'TP', color:'#43a047' },
+    { name:'MyFundedFutures', ini:'MF', color:'#00acc1', logo:'assets/logos/myfundedfutures.png' },
+    { name:'Take Profit Trader', ini:'TP', color:'#43a047', logo:'assets/logos/takeprofittrader.png' },
     { name:'FundedNext', ini:'FN', color:'#5c6bc0' },
   ];
   function buildMarqueeHtml(){
-    const chips = brands.map(b =>
-      `<div class="logochip"><div class="av" style="background:${b.color};">${b.ini}</div><div class="name">${b.name}</div></div>`
-    ).join('');
+    const chips = brands.map(b => {
+      const avStyle = b.logo
+        ? `background-image:url('${b.logo}');background-size:cover;background-position:center;`
+        : `background:${b.color};`;
+      return `<div class="logochip"><div class="av" style="${avStyle}">${b.logo ? '' : b.ini}</div><div class="name">${b.name}</div></div>`;
+    }).join('');
     const more = `<div class="logochip plain" data-i18n="brokers.more">y muchas más</div>`;
     return chips + more;
   }
