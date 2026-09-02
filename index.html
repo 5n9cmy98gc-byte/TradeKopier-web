@@ -112,16 +112,16 @@
   .logo:hover .klogo{ transform:translateY(-1px) scale(1.05); box-shadow:0 10px 26px -6px rgba(62,166,255,.8), inset 0 1px 0 rgba(255,255,255,.32); }
   .klogo .kmark{position:relative; z-index:1; display:block;}
   footer .klogo{margin:0;}
-  .navlinks{display:flex; gap:26px; font-size:14px; color:var(--text); font-weight:600;}
+  .navlinks{display:flex; gap:26px; font-size:15.5px; color:var(--text); font-weight:600;}
   .navlinks a:hover{color:var(--text);}
   .navright{display:flex; align-items:center; gap:14px;}
   .navcta{
     background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; padding:9px 18px;
-    border-radius:8px; font-size:14px; font-weight:600; white-space:nowrap;
+    border-radius:8px; font-size:15.5px; font-weight:600; white-space:nowrap;
   }
   select#langSwitch{
     background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:7px;
-    padding:7px 8px; font-size:13px; cursor:pointer;
+    padding:7px 8px; font-size:14.5px; cursor:pointer;
   }
 
   .hero{padding:80px 24px 60px; text-align:center; position:relative; overflow:hidden;}
@@ -219,11 +219,17 @@
 
   /* Execution pipeline */
   .pipeline{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1050px; margin:0 auto; counter-reset:pipe;}
-  .pipestep{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:26px;}
+  .pipestep{
+    position:relative; background:#f2f8ff; border:1px solid var(--border); border-radius:16px; padding:26px;
+    overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .pipestep::after{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:#2f8ce6;}
+  .pipestep:hover{transform:translateY(-5px); box-shadow:0 22px 40px -22px rgba(47,140,230,.35); border-color:#2f8ce6;}
   .pipestep::before{
     counter-increment:pipe; content:counter(pipe); display:inline-flex; align-items:center; justify-content:center;
-    width:30px; height:30px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent2));
-    color:#fff; font-weight:800; font-size:14px; margin-bottom:14px;
+    width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#2f8ce6,#5aa9ef);
+    box-shadow:0 10px 18px -8px rgba(47,140,230,.5);
+    color:#fff; font-weight:800; font-size:15px; margin-bottom:16px;
   }
   .pipestep h4{font-size:15.5px; font-weight:700; margin-bottom:8px;}
   .pipestep p{color:var(--muted); font-size:13.5px;}
@@ -256,10 +262,16 @@
   .risklist .ricon{flex-shrink:0;}
 
   .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:900px; margin:0 auto;}
-  .step{text-align:center;}
+  .step{
+    position:relative; text-align:center; background:#f2f8ff; border:1px solid var(--border); border-radius:16px;
+    padding:30px 22px; overflow:hidden; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .step::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:#2f8ce6;}
+  .step:hover{transform:translateY(-5px); box-shadow:0 22px 40px -22px rgba(47,140,230,.35); border-color:#2f8ce6;}
   .step .num{
-    width:38px; height:38px; border-radius:50%; background:var(--panel); border:1px solid var(--border);
-    display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--accent);
+    width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#2f8ce6,#5aa9ef);
+    box-shadow:0 10px 18px -8px rgba(47,140,230,.5);
+    display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff;
     margin:0 auto 14px;
   }
   .step h4{font-size:15.5px; font-weight:700; margin-bottom:6px;}
@@ -417,7 +429,7 @@
         <option value="pt">Português</option>
         <option value="it">Italiano</option>
       </select>
-      <a href="mi-cuenta.html" style="color:var(--muted); font-size:14px;" data-i18n="nav.account">Mi cuenta</a>
+      <a href="mi-cuenta.html" style="color:var(--muted); font-size:15.5px;" data-i18n="nav.account">Mi cuenta</a>
       <a href="#precios" class="navcta" data-i18n="nav.cta">Empezar</a>
     </div>
   </nav>
@@ -491,29 +503,29 @@
         <h3 data-i18n="feat1.h">Réplica en tiempo real</h3>
         <p data-i18n="feat1.p">Cada entrada y salida se copia al instante en todas tus cuentas — siempre en menos de un segundo.</p>
       </div>
-      <div class="feature feature--purple">
+      <div class="feature feature--blue">
         <div class="icon">♾️</div>
         <h3 data-i18n="feat2.h">Cuentas ilimitadas, un solo precio</h3>
         <p data-i18n="feat2.p">Conecta todos los brokers y cuentas de fondeo que tengas — sin coste por conexión adicional.</p>
       </div>
-      <div class="feature feature--green">
+      <div class="feature feature--blue">
         <div class="icon">🛡️</div>
         <h3 data-i18n="feat3.h">Protección de riesgo automática</h3>
         <p data-i18n="feat3.p">Límite de pérdida diaria y objetivo de beneficio aplicados en tiempo real, antes de que sea tarde.</p>
       </div>
-      <div class="feature feature--orange">
+      <div class="feature feature--blue">
         <span class="new-badge" data-i18n="new.badge">NEW</span>
         <div class="icon">📓</div>
         <h3 data-i18n="feat4.h">Diario de trading integrado</h3>
         <p data-i18n="feat4.p">Cada operación se registra sola — estadísticas, gráficos y calendario de PnL completo.</p>
       </div>
-      <div class="feature feature--pink">
+      <div class="feature feature--blue">
         <span class="new-badge" data-i18n="new.badge">NEW</span>
         <div class="icon">📸</div>
         <h3 data-i18n="feat5.h">Resultados listos para Instagram</h3>
         <p data-i18n="feat5.p">Convierte tus estadísticas en una tarjeta de PnL para compartir con un clic.</p>
       </div>
-      <div class="feature feature--teal">
+      <div class="feature feature--blue">
         <span class="new-badge" data-i18n="new.badge">NEW</span>
         <div class="icon">🏷️</div>
         <h3 data-i18n="feat6.h">Descuentos exclusivos en prop firms</h3>
