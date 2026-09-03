@@ -91,16 +91,16 @@
   .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
   /* Promo badge flotante */
   .promo-badge{
-    position:fixed; left:20px; bottom:20px; z-index:60; width:104px; height:104px; border-radius:22px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
+    position:fixed; left:20px; bottom:20px; z-index:60; width:132px; height:132px; border-radius:26px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2)); color:var(--text);
     display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
-    box-shadow:0 18px 34px -14px rgba(47,140,230,.55); cursor:pointer; text-align:center; padding:8px;
+    box-shadow:0 20px 38px -14px rgba(47,140,230,.55); cursor:pointer; text-align:center; padding:10px;
     animation:promoFloat 3.2s ease-in-out infinite; transition:transform .25s ease, box-shadow .25s ease;
   }
-  .promo-badge:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 22px 40px -14px rgba(47,140,230,.68);}
-  .promo-pct{font-size:23px; font-weight:800; line-height:1;}
-  .promo-code{font-size:11px; font-weight:700; letter-spacing:.03em; opacity:.95; margin-top:2px;}
-  .promo-sub{font-size:9.5px; opacity:.85; margin-top:1px;}
+  .promo-badge:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 24px 44px -14px rgba(47,140,230,.68);}
+  .promo-pct{font-size:29px; font-weight:800; line-height:1; color:var(--text);}
+  .promo-code{font-size:13px; font-weight:800; letter-spacing:.03em; color:var(--text); margin-top:3px;}
+  .promo-sub{font-size:11px; font-weight:600; color:var(--text); opacity:.85; margin-top:2px;}
   .promo-close{
     position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%;
     background:#fff; color:var(--text); border:1px solid var(--border); font-size:13px; line-height:1;
@@ -111,10 +111,10 @@
     50%{transform:translateY(calc(var(--promoScroll,0px) - 9px));}
   }
   @media(max-width:820px){
-    .promo-badge{width:86px; height:86px; left:14px; bottom:14px; border-radius:18px;}
-    .promo-pct{font-size:19px;}
-    .promo-code{font-size:9.5px;}
-    .promo-sub{font-size:8.5px;}
+    .promo-badge{width:104px; height:104px; left:14px; bottom:14px; border-radius:22px;}
+    .promo-pct{font-size:22px;}
+    .promo-code{font-size:11px;}
+    .promo-sub{font-size:9.5px;}
   }
 
   header{
@@ -151,7 +151,7 @@
     padding:7px 8px; font-size:14.5px; cursor:pointer;
   }
 
-  .hero{padding:80px 24px 60px; text-align:center; position:relative; overflow:hidden;}
+  .hero{padding:44px 24px 16px; text-align:center; position:relative; overflow:hidden;}
   .hero::before{
     content:''; position:absolute; top:-200px; left:50%; transform:translateX(-50%);
     width:800px; height:500px; background:radial-gradient(ellipse,rgba(62,166,255,.15),transparent 70%);
@@ -178,7 +178,7 @@
   .btn-ghost{background:var(--panel); color:var(--text); border:1px solid var(--border);}
   .btn-ghost:hover{border-color:var(--muted);}
 
-  .stats{display:flex; justify-content:center; gap:56px; flex-wrap:wrap; padding:20px 24px 70px; text-align:center;}
+  .stats{display:flex; justify-content:center; gap:56px; flex-wrap:wrap; padding:20px 24px 28px; text-align:center;}
   .stats > div{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease;}
   .stats.in-view > div:nth-child(1){transition-delay:.05s;}
   .stats.in-view > div:nth-child(2){transition-delay:.18s;}
@@ -190,6 +190,8 @@
 
   section{padding:76px 24px;}
   .section-head{text-align:center; max-width:640px; margin:0 auto 48px;}
+  #motor{padding:8px 24px 32px;}
+  #motor .section-head{margin-bottom:32px;}
   .eyebrow{color:var(--accent); font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-bottom:10px;}
   h2{font-size:clamp(26px,3.5vw,36px); font-weight:800; letter-spacing:-.02em; margin-bottom:12px;}
   .section-head p{color:var(--muted); font-size:15.5px;}
@@ -483,6 +485,29 @@
   </div>
 </section>
 
+<section id="motor">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" data-i18n="pipe.eyebrow">Motor de réplica</div>
+      <h2 data-i18n="pipe.title">De la señal a la esclava, en tres pasos</h2>
+    </div>
+    <div class="pipeline">
+      <div class="pipestep">
+        <h4 data-i18n="pipe1.h">La maestra coloca la orden</h4>
+        <p data-i18n="pipe1.p">Market, limit, stop, bracket, OCO — capturamos la orden directamente desde NinjaTrader, no simulando clics en la interfaz.</p>
+      </div>
+      <div class="pipestep">
+        <h4 data-i18n="pipe2.h">Multiplicador por cuenta</h4>
+        <p data-i18n="pipe2.p">Tamaño de la maestra × multiplicador de cada esclava, redondeado al contrato entero más cercano. Puedes forzar micros o minis por cuenta.</p>
+      </div>
+      <div class="pipestep">
+        <h4 data-i18n="pipe3.h">Ejecución en paralelo</h4>
+        <p data-i18n="pipe3.p">Cada esclava se envía a su propia conexión de forma independiente — sin cuello de botella ni bloqueos compartidos. Todas las cuentas operan a la vez.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="brokers">
   <div class="label" data-i18n="brokers.label">Compatible con TradingView, Tradovate, y con todas las conexiones y empresas de fondeo que permite NinjaTrader 8, incluyendo:</div>
   <div class="marquee">
@@ -633,34 +658,11 @@
   </div>
 </section>
 
-<section id="motor">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow" data-i18n="pipe.eyebrow">Motor de réplica</div>
-      <h2 data-i18n="pipe.title">De la señal a la esclava, en tres pasos</h2>
-    </div>
-    <div class="pipeline">
-      <div class="pipestep">
-        <h4 data-i18n="pipe1.h">La maestra coloca la orden</h4>
-        <p data-i18n="pipe1.p">Market, limit, stop, bracket, OCO — capturamos la orden directamente desde NinjaTrader, no simulando clics en la interfaz.</p>
-      </div>
-      <div class="pipestep">
-        <h4 data-i18n="pipe2.h">Multiplicador por cuenta</h4>
-        <p data-i18n="pipe2.p">Tamaño de la maestra × multiplicador de cada esclava, redondeado al contrato entero más cercano. Puedes forzar micros o minis por cuenta.</p>
-      </div>
-      <div class="pipestep">
-        <h4 data-i18n="pipe3.h">Ejecución en paralelo</h4>
-        <p data-i18n="pipe3.p">Cada esclava se envía a su propia conexión de forma independiente — sin cuello de botella ni bloqueos compartidos. Todas las cuentas operan a la vez.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="como-funciona">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow" data-i18n="how.eyebrow">Instalación</div>
-      <h2 data-i18n="how.title">Listo en menos de 5 minutos</h2>
+      <h2 data-i18n="how.title">Listo en menos de 1 minuto</h2>
     </div>
     <div class="steps">
       <div class="step">
@@ -769,7 +771,7 @@
       "risk.li2":"Modo \"liquidar y bloquear\" — la cuenta queda bloqueada hasta el día siguiente, sin posibilidad de revertirlo por error",
       "risk.li3":"Si la maestra toca su propio límite, se cierra solo ella — las esclavas siguen operando con normalidad",
       "risk.li4":"Panel de verificación que te avisa si una cuenta activa no tiene límites configurados",
-      "how.eyebrow":"Instalación","how.title":"Listo en menos de 5 minutos",
+      "how.eyebrow":"Instalación","how.title":"Listo en menos de 1 minuto",
       "how.s1h":"Compra tu licencia","how.s1p":"Elige tu plan y recibe tu clave de licencia al instante por email.",
       "how.s2h":"Instala en NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, selecciona el archivo, reinicia NinjaTrader.",
       "how.s3h":"Activa y configura","how.s3p":"Introduce tu email y clave, elige tu maestra y esclavas, y empieza a replicar.",
@@ -834,7 +836,7 @@
       "risk.li2":"\"Liquidate and lock\" mode — the account stays locked until the next day, with no way to revert it by mistake",
       "risk.li3":"If the master hits its own limit, only the master closes — slave accounts keep trading normally",
       "risk.li4":"Verification panel that warns you if an active account has no limits configured",
-      "how.eyebrow":"Installation","how.title":"Ready in under 5 minutes",
+      "how.eyebrow":"Installation","how.title":"Ready in under 1 minute",
       "how.s1h":"Buy your license","how.s1p":"Choose your plan and get your license key instantly by email.",
       "how.s2h":"Install on NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, select the file, restart NinjaTrader.",
       "how.s3h":"Activate and configure","how.s3p":"Enter your email and key, choose your master and slave accounts, and start replicating.",
@@ -899,7 +901,7 @@
       "risk.li2":"\"Liquidieren und sperren\"-Modus — das Konto bleibt bis zum nächsten Tag gesperrt, ohne versehentliche Rückgängigmachung",
       "risk.li3":"Erreicht der Master sein eigenes Limit, schließt nur er — Slave-Konten handeln normal weiter",
       "risk.li4":"Prüfpanel, das warnt, wenn ein aktives Konto keine Limits konfiguriert hat",
-      "how.eyebrow":"Installation","how.title":"In unter 5 Minuten startklar",
+      "how.eyebrow":"Installation","how.title":"In unter 1 Minute startklar",
       "how.s1h":"Lizenz kaufen","how.s1p":"Wähle deinen Plan und erhalte deinen Lizenzschlüssel sofort per E-Mail.",
       "how.s2h":"In NinjaTrader 8 installieren","how.s2p":"Tools → Import → NinjaScript Add-On, Datei auswählen, NinjaTrader neu starten.",
       "how.s3h":"Aktivieren und konfigurieren","how.s3p":"E-Mail und Schlüssel eingeben, Master- und Slave-Konten wählen und mit dem Replizieren beginnen.",
@@ -964,7 +966,7 @@
       "risk.li2":"Modo \"liquidar e bloquear\" — a conta fica bloqueada até ao dia seguinte, sem possibilidade de reverter por engano",
       "risk.li3":"Se a mestre atingir o seu próprio limite, só ela fecha — as escravas continuam a operar normalmente",
       "risk.li4":"Painel de verificação que avisa se uma conta ativa não tem limites configurados",
-      "how.eyebrow":"Instalação","how.title":"Pronto em menos de 5 minutos",
+      "how.eyebrow":"Instalação","how.title":"Pronto em menos de 1 minuto",
       "how.s1h":"Compra a tua licença","how.s1p":"Escolhe o teu plano e recebe a tua chave de licença instantaneamente por email.",
       "how.s2h":"Instala no NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, seleciona o ficheiro, reinicia o NinjaTrader.",
       "how.s3h":"Ativa e configura","how.s3p":"Introduz o teu email e chave, escolhe a mestre e as escravas, e começa a replicar.",
@@ -1029,7 +1031,7 @@
       "risk.li2":"Modalità \"liquida e blocca\" — il conto resta bloccato fino al giorno successivo, senza possibilità di annullarlo per errore",
       "risk.li3":"Se il master raggiunge il proprio limite, si chiude solo lui — i conti slave continuano a operare normalmente",
       "risk.li4":"Pannello di verifica che avvisa se un conto attivo non ha limiti configurati",
-      "how.eyebrow":"Installazione","how.title":"Pronto in meno di 5 minuti",
+      "how.eyebrow":"Installazione","how.title":"Pronto in meno di 1 minuto",
       "how.s1h":"Acquista la licenza","how.s1p":"Scegli il tuo piano e ricevi la chiave di licenza istantaneamente via email.",
       "how.s2h":"Installa su NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, seleziona il file, riavvia NinjaTrader.",
       "how.s3h":"Attiva e configura","how.s3p":"Inserisci email e chiave, scegli master e slave, e inizia a replicare.",
@@ -1094,7 +1096,7 @@
       "risk.li2":"Mode « liquider et verrouiller » — le compte reste verrouillé jusqu'au lendemain, sans possibilité de l'annuler par erreur",
       "risk.li3":"Si le maître atteint sa propre limite, seul lui se ferme — les comptes esclaves continuent de trader normalement",
       "risk.li4":"Panneau de vérification qui vous avertit si un compte actif n'a aucune limite configurée",
-      "how.eyebrow":"Installation","how.title":"Prêt en moins de 5 minutes",
+      "how.eyebrow":"Installation","how.title":"Prêt en moins d'1 minute",
       "how.s1h":"Achetez votre licence","how.s1p":"Choisissez votre plan et recevez votre clé de licence instantanément par email.",
       "how.s2h":"Installez sur NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, sélectionnez le fichier, redémarrez NinjaTrader.",
       "how.s3h":"Activez et configurez","how.s3p":"Entrez votre email et votre clé, choisissez votre maître et vos esclaves, et commencez à répliquer.",
