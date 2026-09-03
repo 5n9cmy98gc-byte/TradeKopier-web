@@ -8,17 +8,23 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
   :root{
-    --bg:#0a0e14; --bg2:#0f1520; --panel:#131a24; --border:#212b38;
-    --text:#eaf0f7; --muted:#8fa1b3; --accent:#3ea6ff; --accent2:#7c5cff;
-    --green:#2ecc71; --yellow:#f5c542; --red:#ff5c5c;
+    --bg:#ffffff; --bg2:#f4f6f9; --panel:#ffffff; --border:#e2e7ee;
+    --text:#0f1720; --muted:#5b6b7c; --accent:#2f8ce6; --accent2:#7c5cff;
+    --green:#1f9d55; --yellow:#b8860a; --red:#c0392b;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     background:var(--bg); color:var(--text); line-height:1.6; min-height:100vh;
+    position:relative; overflow-x:hidden;
+  }
+  body::before{
+    content:''; position:fixed; top:-220px; left:50%; transform:translateX(-50%);
+    width:900px; height:560px; background:radial-gradient(ellipse,rgba(47,140,230,.14),transparent 70%);
+    pointer-events:none; z-index:0;
   }
   a{color:inherit;}
-  .wrap{max-width:720px; margin:0 auto; padding:40px 24px 80px;}
+  .wrap{max-width:720px; margin:0 auto; padding:40px 24px 80px; position:relative; z-index:1;}
   header{display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; gap:12px; flex-wrap:wrap;}
   .logo{font-size:19px; font-weight:800; display:flex; align-items:center; gap:10px;}
   .klogo{
@@ -35,27 +41,41 @@
   .sub{color:var(--muted); font-size:14.5px; margin-bottom:28px;}
 
   /* Login */
+  .secureBadge{
+    display:inline-flex; align-items:center; gap:6px; background:var(--bg2); border:1px solid var(--border);
+    color:var(--muted); font-size:12px; font-weight:600; padding:6px 14px; border-radius:20px; margin-bottom:18px;
+  }
   #loginBox{
-    background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:32px;
-    max-width:420px; margin:40px auto 0;
+    position:relative; background:var(--panel); border:1px solid var(--border); border-radius:18px; padding:36px 32px;
+    max-width:420px; margin:24px auto 0; overflow:hidden;
+    box-shadow:0 30px 60px -32px rgba(47,140,230,.35);
+  }
+  #loginBox::before{content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  .lockBadge{
+    width:46px; height:46px; border-radius:13px; margin-bottom:16px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    display:flex; align-items:center; justify-content:center; font-size:21px;
+    box-shadow:0 10px 20px -8px rgba(47,140,230,.5);
   }
   #loginBox h2{font-size:18px; margin-bottom:8px;}
   #loginBox p{color:var(--muted); font-size:13.5px; margin-bottom:18px;}
   #loginBox input{
     width:100%; padding:11px 13px; border-radius:9px; border:1px solid var(--border);
     background:var(--bg2); color:var(--text); font-size:14px; margin-bottom:12px;
+    transition:border-color .2s ease, box-shadow .2s ease;
   }
+  #loginBox input:focus{outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(47,140,230,.15);}
   .btn{
     padding:11px 20px; border-radius:9px; font-weight:600; font-size:14px; cursor:pointer; border:none;
-    display:inline-block; width:100%; text-align:center;
+    display:inline-block; width:100%; text-align:center; transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
   }
-  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;}
-  .btn-primary:hover{opacity:.92;}
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff; box-shadow:0 12px 22px -10px rgba(47,140,230,.55);}
+  .btn-primary:hover{opacity:.96; transform:translateY(-2px); box-shadow:0 16px 28px -10px rgba(47,140,230,.65);}
   .btn-ghost{background:var(--bg2); color:var(--text); border:1px solid var(--border); width:auto;}
   .btn-ghost:hover{border-color:var(--muted);}
-  .btn-danger{background:rgba(255,92,92,.12); color:var(--red); border:1px solid rgba(255,92,92,.35); width:auto;}
-  .btn-danger:hover{background:rgba(255,92,92,.2);}
-  .btn:disabled{opacity:.55; cursor:default;}
+  .btn-danger{background:rgba(192,57,43,.1); color:var(--red); border:1px solid rgba(192,57,43,.3); width:auto;}
+  .btn-danger:hover{background:rgba(192,57,43,.16);}
+  .btn:disabled{opacity:.55; cursor:default; transform:none;}
   #loginMsg{font-size:13px; margin-top:12px; min-height:16px;}
   #loginMsg.ok{color:var(--green);}
   #loginMsg.err{color:var(--red);}
@@ -65,14 +85,20 @@
   .topbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:26px;}
   .whoami{color:var(--muted); font-size:13.5px;}
 
-  .card{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:22px; margin-bottom:16px;}
+  .card{
+    position:relative; background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:22px;
+    margin-bottom:16px; overflow:hidden; box-shadow:0 20px 40px -30px rgba(15,23,32,.25);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .card::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--accent2));}
+  .card:hover{transform:translateY(-3px); box-shadow:0 26px 48px -28px rgba(15,23,32,.32);}
   .card .row1{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:14px;}
   .plan-badge{font-size:12px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.04em;}
   .badge{padding:3px 10px; border-radius:20px; font-size:11.5px; font-weight:700;}
-  .badge-ok{background:rgba(46,204,113,.15); color:var(--green);}
-  .badge-warn{background:rgba(245,197,66,.15); color:var(--yellow);}
-  .badge-off{background:rgba(255,92,92,.15); color:var(--red);}
-  .badge-idle{background:rgba(143,161,179,.15); color:var(--muted);}
+  .badge-ok{background:rgba(31,157,85,.14); color:var(--green);}
+  .badge-warn{background:rgba(184,134,10,.14); color:var(--yellow);}
+  .badge-off{background:rgba(192,57,43,.14); color:var(--red);}
+  .badge-idle{background:rgba(91,107,124,.14); color:var(--muted);}
   .card .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; margin-bottom:16px;}
   .field .l{color:var(--muted); font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; margin-bottom:3px;}
   .field .v{font-size:14.5px; font-weight:600;}
@@ -80,7 +106,11 @@
   .card .actions{display:flex; gap:10px; flex-wrap:wrap;}
   .cancel-note{color:var(--muted); font-size:12.5px; margin-top:10px;}
 
-  .consent-card{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:20px 22px; margin-top:24px;}
+  .consent-card{
+    position:relative; background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:20px 22px;
+    margin-top:24px; overflow:hidden; box-shadow:0 20px 40px -30px rgba(15,23,32,.2);
+  }
+  .consent-card::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent2),var(--accent));}
   .consent-row{display:flex; align-items:center; gap:12px; margin-bottom:12px;}
   .consent-row input{width:18px; height:18px; flex-shrink:0;}
   .consent-row label{font-size:14px; cursor:pointer;}
@@ -90,7 +120,7 @@
   .toast{
     position:fixed; bottom:20px; right:20px; background:var(--panel); border:1px solid var(--border);
     color:var(--text); padding:12px 18px; border-radius:8px; font-size:13px; opacity:0; transition:opacity .25s;
-    pointer-events:none; max-width:320px;
+    pointer-events:none; max-width:320px; box-shadow:0 20px 40px -18px rgba(15,23,32,.3);
   }
   .toast.show{opacity:1;}
 </style>
@@ -116,7 +146,9 @@
     </div>
   </header>
 
+  <div class="secureBadge" id="secureBadge">🔒 Secure, passwordless access</div>
   <div id="loginBox">
+    <div class="lockBadge">🔐</div>
     <h2 id="loginH2">My account</h2>
     <p id="loginP">Enter the email you used to buy TradeKopier and we'll send you a login link — no password needed.</p>
     <input type="email" id="loginEmail" placeholder="you@email.com" autocomplete="email">
@@ -160,6 +192,7 @@
   const I18N = {
     en:{
       pageTitle:"My Account — TradeKopier", back:"← Back to site",
+      secure_badge:"🔒 Secure, passwordless access",
       login_h2:"My account",
       login_p:"Enter the email you used to buy TradeKopier and we'll send you a login link — no password needed.",
       login_placeholder:"you@email.com", login_btn:"Send me the link", login_btn_sending:"Sending...",
@@ -181,6 +214,7 @@
     },
     es:{
       pageTitle:"Mi cuenta — TradeKopier", back:"← Volver a la web",
+      secure_badge:"🔒 Acceso seguro, sin contraseñas",
       login_h2:"Mi cuenta",
       login_p:"Escribe el email con el que compraste TradeKopier y te enviamos un enlace para entrar — sin contraseña.",
       login_placeholder:"tu@email.com", login_btn:"Enviarme el enlace", login_btn_sending:"Enviando...",
@@ -202,6 +236,7 @@
     },
     de:{
       pageTitle:"Mein Konto — TradeKopier", back:"← Zurück zur Website",
+      secure_badge:"🔒 Sicherer Zugang, ohne Passwort",
       login_h2:"Mein Konto",
       login_p:"Gib die E-Mail-Adresse ein, mit der du TradeKopier gekauft hast — wir schicken dir einen Login-Link, kein Passwort nötig.",
       login_placeholder:"du@email.com", login_btn:"Link zusenden", login_btn_sending:"Wird gesendet...",
@@ -223,6 +258,7 @@
     },
     fr:{
       pageTitle:"Mon compte — TradeKopier", back:"← Retour au site",
+      secure_badge:"🔒 Accès sécurisé, sans mot de passe",
       login_h2:"Mon compte",
       login_p:"Entrez l'email avec lequel vous avez acheté TradeKopier, nous vous enverrons un lien de connexion — sans mot de passe.",
       login_placeholder:"vous@email.com", login_btn:"M'envoyer le lien", login_btn_sending:"Envoi...",
@@ -244,6 +280,7 @@
     },
     pt:{
       pageTitle:"Minha conta — TradeKopier", back:"← Voltar ao site",
+      secure_badge:"🔒 Acesso seguro, sem palavra-passe",
       login_h2:"Minha conta",
       login_p:"Digita o email com que compraste o TradeKopier e enviamos-te um link de acesso — sem palavra-passe.",
       login_placeholder:"teu@email.com", login_btn:"Enviar-me o link", login_btn_sending:"A enviar...",
@@ -265,6 +302,7 @@
     },
     it:{
       pageTitle:"Il mio account — TradeKopier", back:"← Torna al sito",
+      secure_badge:"🔒 Accesso sicuro, senza password",
       login_h2:"Il mio account",
       login_p:"Inserisci l'email con cui hai acquistato TradeKopier e ti invieremo un link di accesso — senza password.",
       login_placeholder:"tu@email.com", login_btn:"Inviami il link", login_btn_sending:"Invio in corso...",
@@ -295,6 +333,7 @@
     document.title = d.pageTitle;
     document.documentElement.lang = currentLang;
     document.getElementById('backLink').textContent = d.back;
+    document.getElementById('secureBadge').textContent = d.secure_badge;
     document.getElementById('loginH2').textContent = d.login_h2;
     document.getElementById('loginP').textContent = d.login_p;
     document.getElementById('loginEmail').placeholder = d.login_placeholder;
