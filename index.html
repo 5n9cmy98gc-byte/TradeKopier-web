@@ -1151,28 +1151,35 @@
     const numEls = statsEl.querySelectorAll('.n');
     const countEl = numEls[2];
     let done = false;
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting && !done){
-          done = true;
-          statsEl.classList.add('in-view');
-          if(countEl){
-            const target = 11;
-            const dur = 900;
-            const start = performance.now();
-            setTimeout(function(){
-              requestAnimationFrame(function tick(now){
-                const p = Math.min(1, (now - start) / dur);
-                countEl.textContent = Math.round(p * target) + '+';
-                if(p < 1) requestAnimationFrame(tick);
-              });
-            }, 250);
-          }
-          io.disconnect();
-        }
-      });
-    }, {threshold:.4});
-    io.observe(statsEl);
+    function reveal(){
+      if(done) return;
+      done = true;
+      statsEl.classList.add('in-view');
+      if(countEl){
+        const target = 11;
+        const dur = 900;
+        const start = performance.now();
+        setTimeout(function(){
+          requestAnimationFrame(function tick(now){
+            const p = Math.min(1, (now - start) / dur);
+            countEl.textContent = Math.round(p * target) + '+';
+            if(p < 1) requestAnimationFrame(tick);
+          });
+        }, 250);
+      }
+    }
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){ reveal(); io.disconnect(); }
+        });
+      }, {threshold:.4});
+      io.observe(statsEl);
+    } else {
+      reveal();
+    }
+    // Red de seguridad: si el observer no dispara por lo que sea, mostrar igualmente.
+    setTimeout(reveal, 1800);
   })();
 
   // ---- Tira de marcas (logo chips: logo oficial cuando está disponible,
