@@ -91,16 +91,16 @@
   .wrap{max-width:1100px; margin:0 auto; padding:0 24px;}
   /* Promo badge flotante */
   .promo-badge{
-    position:fixed; left:20px; bottom:20px; z-index:60; width:132px; height:132px; border-radius:26px;
+    position:fixed; left:20px; bottom:20px; z-index:60; width:172px; height:172px; border-radius:32px;
     background:linear-gradient(135deg,var(--accent),var(--accent2)); color:var(--text);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
-    box-shadow:0 20px 38px -14px rgba(47,140,230,.55); cursor:pointer; text-align:center; padding:10px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+    box-shadow:0 24px 46px -14px rgba(47,140,230,.6); cursor:pointer; text-align:center; padding:12px;
     animation:promoFloat 3.2s ease-in-out infinite; transition:transform .25s ease, box-shadow .25s ease;
   }
-  .promo-badge:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 24px 44px -14px rgba(47,140,230,.68);}
-  .promo-pct{font-size:29px; font-weight:800; line-height:1; color:var(--text);}
-  .promo-code{font-size:13px; font-weight:800; letter-spacing:.03em; color:var(--text); margin-top:3px;}
-  .promo-sub{font-size:11px; font-weight:600; color:var(--text); opacity:.85; margin-top:2px;}
+  .promo-badge:hover{transform:translateY(-4px) scale(1.05); box-shadow:0 28px 52px -14px rgba(47,140,230,.72);}
+  .promo-pct{font-size:38px; font-weight:800; line-height:1; color:var(--text);}
+  .promo-code{font-size:16px; font-weight:800; letter-spacing:.03em; color:var(--text); margin-top:4px;}
+  .promo-sub{font-size:13px; font-weight:600; color:var(--text); opacity:.85; margin-top:3px;}
   .promo-close{
     position:absolute; top:-8px; right:-8px; width:22px; height:22px; border-radius:50%;
     background:#fff; color:var(--text); border:1px solid var(--border); font-size:13px; line-height:1;
@@ -111,10 +111,10 @@
     50%{transform:translateY(calc(var(--promoScroll,0px) - 9px));}
   }
   @media(max-width:820px){
-    .promo-badge{width:104px; height:104px; left:14px; bottom:14px; border-radius:22px;}
-    .promo-pct{font-size:22px;}
-    .promo-code{font-size:11px;}
-    .promo-sub{font-size:9.5px;}
+    .promo-badge{width:132px; height:132px; left:14px; bottom:14px; border-radius:26px;}
+    .promo-pct{font-size:28px;}
+    .promo-code{font-size:13px;}
+    .promo-sub{font-size:11px;}
   }
 
   header{
@@ -373,6 +373,7 @@
     border-top:1px solid var(--border); padding-top:20px;
   }
   footer .disclaimer strong{display:block; margin-bottom:6px; color:#465060;}
+  footer .disclaimer p{margin:10px 0 0;}
 
   @media(max-width:820px){
     .navlinks{display:none;}
@@ -481,7 +482,7 @@
   <div class="stats">
     <div><div class="n" data-i18n="stats.n1">Ilimitadas</div><div class="l" data-i18n="stats.l1">cuentas y conexiones</div></div>
     <div><div class="n">&lt;1s</div><div class="l" data-i18n="stats.l3">de latencia de réplica</div></div>
-    <div><div class="n">11+</div><div class="l" data-i18n="stats.l2">prop firms y brokers compatibles</div></div>
+    <div><div class="n" data-i18n="stats.n3">Todos</div><div class="l" data-i18n="stats.l2">los brokers y conexiones compatibles</div></div>
   </div>
 </section>
 
@@ -706,10 +707,9 @@
     <a href="cookies.html" data-i18n="footer.cookies">Política de Cookies</a>
   </div>
   <div class="disclaimer">
-    <strong>Declaración de Riesgo:</strong>
-    La operación de futuros y forex sobrelleva riesgos substanciales y no es para todos los inversionistas. Un inversionista, podría, potencialmente perder todo o más de la inversión inicial. Capital de Riesgo, es dinero que puede ser perdido, sin poner en juego la seguridad financiera o estilo de vida de la persona. Solo capital de riesgo debe ser utilizado para trading, y solo aquellas personas con suficiente capital de riesgo deben considerar trading. Resultados pasados, no son necesariamente indicativos de resultados futuros.
-    <br><br>
-    Resultados hipotéticos de rendimiento deben tener muchas limitaciones inherentes, algunas de las cuales se describen a continuación. No se debe hacer representación de que alguna de las cuentas va o es probable que tenga resultados similares a los mostrados; de hecho, hay diferencias frecuentes entre los resultados hipotéticos y los resultados actuales obtenidos por cualquier programa de trading. Una de las limitaciones de resultados hipotéticos de rendimiento es el hecho de que son preparados con los beneficios en retrospectiva. Además, trading hipotético no involucra riesgo financiero, y ningún record de trading hipotético puede considerar el riesgo financiero de operaciones reales. Por ejemplo, la capacidad de resistir pérdidas o de adherirse a un programa de trading particular sin importar pérdidas son puntos materiales los cuales pueden afectar de manera substancial resultados de trading real. Hay muchos factores relacionados a los mercados en general, o a la implementación de cualquier programa de trading especifico, los cuales no pueden ser todos considerados en la preparación de resultados hipotéticos, todos estos, pueden afectar los resultados de trading de forma adversa.
+    <strong data-i18n="footer.disclaimer.title">Declaración de Riesgo:</strong>
+    <p data-i18n="footer.disclaimer.p1">La operación de futuros y forex sobrelleva riesgos substanciales y no es para todos los inversionistas. Un inversionista, podría, potencialmente perder todo o más de la inversión inicial. Capital de Riesgo, es dinero que puede ser perdido, sin poner en juego la seguridad financiera o estilo de vida de la persona. Solo capital de riesgo debe ser utilizado para trading, y solo aquellas personas con suficiente capital de riesgo deben considerar trading. Resultados pasados, no son necesariamente indicativos de resultados futuros.</p>
+    <p data-i18n="footer.disclaimer.p2">Resultados hipotéticos de rendimiento deben tener muchas limitaciones inherentes, algunas de las cuales se describen a continuación. No se debe hacer representación de que alguna de las cuentas va o es probable que tenga resultados similares a los mostrados; de hecho, hay diferencias frecuentes entre los resultados hipotéticos y los resultados actuales obtenidos por cualquier programa de trading. Una de las limitaciones de resultados hipotéticos de rendimiento es el hecho de que son preparados con los beneficios en retrospectiva. Además, trading hipotético no involucra riesgo financiero, y ningún record de trading hipotético puede considerar el riesgo financiero de operaciones reales. Por ejemplo, la capacidad de resistir pérdidas o de adherirse a un programa de trading particular sin importar pérdidas son puntos materiales los cuales pueden afectar de manera substancial resultados de trading real. Hay muchos factores relacionados a los mercados en general, o a la implementación de cualquier programa de trading especifico, los cuales no pueden ser todos considerados en la preparación de resultados hipotéticos, todos estos, pueden afectar los resultados de trading de forma adversa.</p>
   </div>
 </footer>
 
@@ -747,7 +747,7 @@
       "hero.sub":"TradeKopier replica automáticamente cada entrada, salida y protección de tu cuenta maestra hacia todas tus cuentas esclavas — sin límite de cuentas, sin límite de conexiones.",
       "hero.cta1":"Ver planes","hero.cta2":"Ver funciones",
       "stats.n1":"Ilimitadas","stats.l1":"cuentas y conexiones",
-      "stats.l2":"prop firms y brokers compatibles",
+      "stats.n3":"Todos","stats.l2":"los brokers y conexiones compatibles",
       "stats.l3":"de latencia de réplica",
       "brokers.label":"Compatible con TradingView, Tradovate, y con todas las conexiones y empresas de fondeo que permite NinjaTrader 8, incluyendo:","brokers.more":"y muchas más",
       "features.eyebrow":"Funciones","features.title":"Todo lo que necesitas para gestionar varias cuentas",
@@ -793,6 +793,7 @@
       "cta.title":"Copia tus operaciones con total confianza","cta.sub":"Un único TradeKopier, todas las funciones, sin límite de cuentas ni conexiones. Empieza cuando quieras.","cta.btn":"Ver planes",
       "footer.tagline":"Copiador de operaciones multi-cuenta para NinjaTrader 8 — hecho por traders, para traders.",
       "footer.faq":"FAQ","footer.contact":"Contacto","footer.terms":"Términos de Servicio","footer.privacy":"Política de Privacidad","footer.cookies":"Política de Cookies",
+      "footer.disclaimer.title":"Declaración de Riesgo:","footer.disclaimer.p1":"La operación de futuros y forex sobrelleva riesgos substanciales y no es para todos los inversionistas. Un inversionista, podría, potencialmente perder todo o más de la inversión inicial. Capital de Riesgo, es dinero que puede ser perdido, sin poner en juego la seguridad financiera o estilo de vida de la persona. Solo capital de riesgo debe ser utilizado para trading, y solo aquellas personas con suficiente capital de riesgo deben considerar trading. Resultados pasados, no son necesariamente indicativos de resultados futuros.","footer.disclaimer.p2":"Resultados hipotéticos de rendimiento deben tener muchas limitaciones inherentes, algunas de las cuales se describen a continuación. No se debe hacer representación de que alguna de las cuentas va o es probable que tenga resultados similares a los mostrados; de hecho, hay diferencias frecuentes entre los resultados hipotéticos y los resultados actuales obtenidos por cualquier programa de trading. Una de las limitaciones de resultados hipotéticos de rendimiento es el hecho de que son preparados con los beneficios en retrospectiva. Además, trading hipotético no involucra riesgo financiero, y ningún record de trading hipotético puede considerar el riesgo financiero de operaciones reales. Por ejemplo, la capacidad de resistir pérdidas o de adherirse a un programa de trading particular sin importar pérdidas son puntos materiales los cuales pueden afectar de manera substancial resultados de trading real. Hay muchos factores relacionados a los mercados en general, o a la implementación de cualquier programa de trading especifico, los cuales no pueden ser todos considerados en la preparación de resultados hipotéticos, todos estos, pueden afectar los resultados de trading de forma adversa.",
       "chat.title":"Soporte TradeKopier","chat.placeholder":"Escribe tu pregunta...","chat.send":"Enviar",
       "chat.welcome":"¡Hola! Soy el asistente de TradeKopier. Pregúntame sobre precios, instalación, compatibilidad o lo que necesites.",
       "chat.openticket":"¿No es suficiente? Abrir ticket de soporte",
@@ -810,7 +811,7 @@
       "hero.sub":"TradeKopier automatically replicates every entry, exit and protective order from your master account to all your slave accounts — no account limit, no connection limit.",
       "hero.cta1":"View plans","hero.cta2":"See features",
       "stats.n1":"Unlimited","stats.l1":"accounts and connections",
-      "stats.l2":"compatible prop firms & brokers",
+      "stats.n3":"All","stats.l2":"brokers and connections supported",
       "stats.l3":"replication latency",
       "brokers.label":"Compatible with TradingView, Tradovate, and every connection and prop firm NinjaTrader 8 supports, including:","brokers.more":"and many more",
       "features.eyebrow":"Features","features.title":"Everything you need to manage multiple accounts",
@@ -856,6 +857,7 @@
       "cta.title":"Copy your trades with total confidence","cta.sub":"One TradeKopier, every feature, no limit on accounts or connections. Start whenever you're ready.","cta.btn":"View plans",
       "footer.tagline":"Multi-account trade copier for NinjaTrader 8 — built by traders, for traders.",
       "footer.faq":"FAQ","footer.contact":"Contact","footer.terms":"Terms of Service","footer.privacy":"Privacy Policy","footer.cookies":"Cookie Policy",
+      "footer.disclaimer.title":"Risk Disclosure:","footer.disclaimer.p1":"Futures and forex trading carries substantial risk and is not suitable for all investors. An investor could potentially lose all or more than the initial investment. Risk capital is money that can be lost without jeopardizing one's financial security or lifestyle. Only risk capital should be used for trading, and only those with sufficient risk capital should consider trading. Past performance is not necessarily indicative of future results.","footer.disclaimer.p2":"Hypothetical performance results have many inherent limitations, some of which are described below. No representation is being made that any account will or is likely to achieve results similar to those shown; in fact, there are frequently sharp differences between hypothetical results and the actual results subsequently achieved by any particular trading program. One of the limitations of hypothetical performance results is that they are prepared with the benefit of hindsight. In addition, hypothetical trading does not involve financial risk, and no hypothetical trading record can completely account for the impact of financial risk in actual trading. For example, the ability to withstand losses or to adhere to a particular trading program in spite of trading losses are material points which can also adversely affect actual trading results. There are numerous other factors related to the markets in general, or to the implementation of any specific trading program, which cannot be fully accounted for in the preparation of hypothetical performance results, all of which can adversely affect actual trading results.",
       "chat.title":"TradeKopier Support","chat.placeholder":"Type your question...","chat.send":"Send",
       "chat.welcome":"Hi! I'm the TradeKopier assistant. Ask me about pricing, installation, compatibility, or anything else.",
       "chat.openticket":"Not enough? Open a support ticket",
@@ -873,7 +875,7 @@
       "hero.sub":"TradeKopier repliziert automatisch jeden Einstieg, Ausstieg und jede Absicherung deines Master-Kontos auf alle Slave-Konten — ohne Konto- oder Verbindungslimit.",
       "hero.cta1":"Preise ansehen","hero.cta2":"Funktionen ansehen",
       "stats.n1":"Unbegrenzt","stats.l1":"Konten und Verbindungen",
-      "stats.l2":"kompatible Prop-Firms & Broker",
+      "stats.n3":"Alle","stats.l2":"unterstützten Broker und Verbindungen",
       "stats.l3":"Replikationslatenz",
       "brokers.label":"Kompatibel mit TradingView, Tradovate und jeder Verbindung sowie Prop-Firm, die NinjaTrader 8 unterstützt, u. a.:","brokers.more":"und viele mehr",
       "features.eyebrow":"Funktionen","features.title":"Alles, was du für mehrere Konten brauchst",
@@ -919,6 +921,7 @@
       "cta.title":"Kopiere deine Trades mit vollem Vertrauen","cta.sub":"Ein TradeKopier, alle Funktionen, kein Limit bei Konten oder Verbindungen. Starte, wann immer du bereit bist.","cta.btn":"Preise ansehen",
       "footer.tagline":"Multi-Konto-Trade-Copier für NinjaTrader 8 — von Tradern für Trader entwickelt.",
       "footer.faq":"FAQ","footer.contact":"Kontakt","footer.terms":"Nutzungsbedingungen","footer.privacy":"Datenschutz","footer.cookies":"Cookie-Richtlinie",
+      "footer.disclaimer.title":"Risikohinweis:","footer.disclaimer.p1":"Der Handel mit Futures und Forex birgt erhebliche Risiken und ist nicht für jeden Anleger geeignet. Ein Anleger kann möglicherweise die gesamte Anfangsinvestition oder mehr verlieren. Risikokapital ist Geld, das verloren werden kann, ohne die finanzielle Sicherheit oder den Lebensstandard zu gefährden. Für den Handel sollte nur Risikokapital verwendet werden, und nur Personen mit ausreichendem Risikokapital sollten den Handel in Betracht ziehen. Vergangene Ergebnisse sind nicht zwangsläufig ein Hinweis auf zukünftige Ergebnisse.","footer.disclaimer.p2":"Hypothetische Performance-Ergebnisse unterliegen zahlreichen inhärenten Einschränkungen, von denen einige im Folgenden beschrieben werden. Es wird keine Zusicherung gegeben, dass ein Konto ähnliche Ergebnisse wie die gezeigten erzielen wird oder wahrscheinlich erzielen wird; tatsächlich gibt es häufig deutliche Unterschiede zwischen hypothetischen Ergebnissen und den tatsächlichen Ergebnissen, die später von einem bestimmten Handelsprogramm erzielt werden. Eine der Einschränkungen hypothetischer Performance-Ergebnisse besteht darin, dass sie im Nachhinein erstellt werden. Darüber hinaus ist mit hypothetischem Handel kein finanzielles Risiko verbunden, und keine hypothetische Handelsaufzeichnung kann die Auswirkungen des finanziellen Risikos beim tatsächlichen Handel vollständig berücksichtigen. Zum Beispiel sind die Fähigkeit, Verluste zu ertragen, oder an einem bestimmten Handelsprogramm trotz Handelsverlusten festzuhalten, wesentliche Punkte, die sich ebenfalls erheblich auf die tatsächlichen Handelsergebnisse auswirken können. Es gibt zahlreiche weitere Faktoren im Zusammenhang mit den Märkten im Allgemeinen oder der Umsetzung eines bestimmten Handelsprogramms, die bei der Erstellung hypothetischer Performance-Ergebnisse nicht vollständig berücksichtigt werden können und die sich alle nachteilig auf die tatsächlichen Handelsergebnisse auswirken können.",
       "chat.title":"TradeKopier-Support","chat.placeholder":"Schreib deine Frage...","chat.send":"Senden",
       "chat.welcome":"Hallo! Ich bin der TradeKopier-Assistent. Frag mich zu Preisen, Installation, Kompatibilität oder was du sonst brauchst.",
       "chat.openticket":"Nicht genug? Support-Ticket öffnen",
@@ -936,7 +939,7 @@
       "hero.sub":"O TradeKopier replica automaticamente cada entrada, saída e proteção da tua conta mestre para todas as contas escravas — sem limite de contas, sem limite de conexões.",
       "hero.cta1":"Ver planos","hero.cta2":"Ver funcionalidades",
       "stats.n1":"Ilimitadas","stats.l1":"contas e conexões",
-      "stats.l2":"prop firms e brokers compatíveis",
+      "stats.n3":"Todos","stats.l2":"os brokers e conexões compatíveis",
       "stats.l3":"de latência de réplica",
       "brokers.label":"Compatível com TradingView, Tradovate, e com todas as conexões e empresas de fondeo que o NinjaTrader 8 permite, incluindo:","brokers.more":"e muitas mais",
       "features.eyebrow":"Funcionalidades","features.title":"Tudo o que precisas para gerir várias contas",
@@ -982,6 +985,7 @@
       "cta.title":"Copia as tuas operações com total confiança","cta.sub":"Um único TradeKopier, todas as funcionalidades, sem limite de contas nem conexões. Começa quando quiseres.","cta.btn":"Ver planos",
       "footer.tagline":"Copiador de operações multi-conta para NinjaTrader 8 — feito por traders, para traders.",
       "footer.faq":"FAQ","footer.contact":"Contacto","footer.terms":"Termos de Serviço","footer.privacy":"Política de Privacidade","footer.cookies":"Política de Cookies",
+      "footer.disclaimer.title":"Declaração de Risco:","footer.disclaimer.p1":"A negociação de futuros e forex envolve riscos substanciais e não é adequada para todos os investidores. Um investidor pode potencialmente perder todo ou mais do que o investimento inicial. Capital de risco é dinheiro que pode ser perdido sem comprometer a segurança financeira ou o estilo de vida da pessoa. Apenas capital de risco deve ser utilizado para negociação, e apenas pessoas com capital de risco suficiente devem considerar negociar. Resultados passados não são necessariamente indicativos de resultados futuros.","footer.disclaimer.p2":"Os resultados de desempenho hipotéticos têm muitas limitações inerentes, algumas das quais são descritas a seguir. Não se faz nenhuma representação de que qualquer conta irá ou é provável que alcance resultados semelhantes aos apresentados; de facto, há frequentemente diferenças acentuadas entre os resultados hipotéticos e os resultados reais posteriormente obtidos por qualquer programa de negociação específico. Uma das limitações dos resultados de desempenho hipotéticos é o facto de serem preparados com o benefício da retrospetiva. Além disso, a negociação hipotética não envolve risco financeiro, e nenhum registo de negociação hipotética pode considerar totalmente o impacto do risco financeiro na negociação real. Por exemplo, a capacidade de suportar perdas ou de aderir a um determinado programa de negociação apesar das perdas são pontos materiais que também podem afetar substancialmente os resultados de negociação reais. Existem numerosos outros fatores relacionados com os mercados em geral, ou com a implementação de qualquer programa de negociação específico, que não podem ser totalmente considerados na preparação de resultados hipotéticos, todos os quais podem afetar adversamente os resultados de negociação reais.",
       "chat.title":"Suporte TradeKopier","chat.placeholder":"Escreve a tua pergunta...","chat.send":"Enviar",
       "chat.welcome":"Olá! Sou o assistente do TradeKopier. Pergunta-me sobre preços, instalação, compatibilidade ou o que precisares.",
       "chat.openticket":"Não é suficiente? Abrir ticket de suporte",
@@ -999,7 +1003,7 @@
       "hero.sub":"TradeKopier replica automaticamente ogni entrata, uscita e protezione del tuo conto master su tutti i conti slave — senza limiti di conti, senza limiti di connessioni.",
       "hero.cta1":"Vedi i piani","hero.cta2":"Vedi le funzionalità",
       "stats.n1":"Illimitati","stats.l1":"conti e connessioni",
-      "stats.l2":"prop firm e broker compatibili",
+      "stats.n3":"Tutti","stats.l2":"i broker e le connessioni supportati",
       "stats.l3":"di latenza di replica",
       "brokers.label":"Compatibile con TradingView, Tradovate, e con tutte le connessioni e le prop firm supportate da NinjaTrader 8, tra cui:","brokers.more":"e molti altri",
       "features.eyebrow":"Funzionalità","features.title":"Tutto ciò che serve per gestire più conti",
@@ -1045,6 +1049,7 @@
       "cta.title":"Copia le tue operazioni con totale fiducia","cta.sub":"Un solo TradeKopier, tutte le funzionalità, nessun limite di conti o connessioni. Inizia quando vuoi.","cta.btn":"Vedi i piani",
       "footer.tagline":"Copiatore di operazioni multi-conto per NinjaTrader 8 — creato da trader, per trader.",
       "footer.faq":"FAQ","footer.contact":"Contatto","footer.terms":"Termini di Servizio","footer.privacy":"Informativa sulla Privacy","footer.cookies":"Informativa sui Cookie",
+      "footer.disclaimer.title":"Avvertenza sui Rischi:","footer.disclaimer.p1":"Il trading di futures e forex comporta rischi sostanziali e non è adatto a tutti gli investitori. Un investitore potrebbe potenzialmente perdere tutto o più dell'investimento iniziale. Il capitale di rischio è denaro che può essere perso senza compromettere la sicurezza finanziaria o lo stile di vita della persona. Solo il capitale di rischio dovrebbe essere utilizzato per il trading, e solo le persone con capitale di rischio sufficiente dovrebbero considerare il trading. I risultati passati non sono necessariamente indicativi di risultati futuri.","footer.disclaimer.p2":"I risultati di performance ipotetici presentano molte limitazioni intrinseche, alcune delle quali sono descritte di seguito. Non viene fatta alcuna dichiarazione sul fatto che un conto raggiungerà o è probabile che raggiunga risultati simili a quelli mostrati; infatti, esistono spesso differenze marcate tra i risultati ipotetici e i risultati effettivi successivamente ottenuti da un determinato programma di trading. Uno dei limiti dei risultati di performance ipotetici è il fatto che vengono preparati con il senno di poi. Inoltre, il trading ipotetico non comporta alcun rischio finanziario, e nessun record di trading ipotetico può tenere pienamente conto dell'impatto del rischio finanziario nel trading reale. Ad esempio, la capacità di sopportare le perdite o di attenersi a un particolare programma di trading nonostante le perdite sono punti rilevanti che possono anche influire negativamente sui risultati di trading reali. Esistono numerosi altri fattori legati ai mercati in generale o all'implementazione di qualsiasi programma di trading specifico che non possono essere pienamente considerati nella preparazione dei risultati ipotetici, tutti i quali possono influire negativamente sui risultati di trading reali.",
       "chat.title":"Supporto TradeKopier","chat.placeholder":"Scrivi la tua domanda...","chat.send":"Invia",
       "chat.welcome":"Ciao! Sono l'assistente di TradeKopier. Chiedimi di prezzi, installazione, compatibilità o qualsiasi altra cosa.",
       "chat.openticket":"Non basta? Apri un ticket di supporto",
@@ -1062,7 +1067,7 @@
       "hero.sub":"TradeKopier réplique automatiquement chaque entrée, sortie et protection de votre compte maître vers tous vos comptes esclaves — sans limite de comptes, sans limite de connexions.",
       "hero.cta1":"Voir les tarifs","hero.cta2":"Voir les fonctionnalités",
       "stats.n1":"Illimités","stats.l1":"comptes et connexions",
-      "stats.l2":"prop firms et brokers compatibles",
+      "stats.n3":"Tous","stats.l2":"les brokers et connexions pris en charge",
       "stats.l3":"de latence de réplication",
       "brokers.label":"Compatible avec TradingView, Tradovate, et toutes les connexions et sociétés de prop trading prises en charge par NinjaTrader 8, notamment :","brokers.more":"et bien d'autres",
       "features.eyebrow":"Fonctionnalités","features.title":"Tout ce dont vous avez besoin pour gérer plusieurs comptes",
@@ -1108,6 +1113,7 @@
       "cta.title":"Copiez vos trades en toute confiance","cta.sub":"Un seul TradeKopier, toutes les fonctionnalités, sans limite de comptes ni de connexions. Commencez quand vous voulez.","cta.btn":"Voir les tarifs",
       "footer.tagline":"Copieur de trades multi-comptes pour NinjaTrader 8 — créé par des traders, pour des traders.",
       "footer.faq":"FAQ","footer.contact":"Contact","footer.terms":"Conditions d'utilisation","footer.privacy":"Politique de confidentialité","footer.cookies":"Politique de cookies",
+      "footer.disclaimer.title":"Avertissement sur les Risques :","footer.disclaimer.p1":"Le trading de futures et de forex comporte des risques substantiels et ne convient pas à tous les investisseurs. Un investisseur pourrait potentiellement perdre la totalité ou plus que son investissement initial. Le capital à risque est de l'argent qui peut être perdu sans compromettre la sécurité financière ou le mode de vie de la personne. Seul le capital à risque devrait être utilisé pour le trading, et seules les personnes disposant d'un capital à risque suffisant devraient envisager de trader. Les performances passées ne sont pas nécessairement indicatives des résultats futurs.","footer.disclaimer.p2":"Les résultats de performance hypothétiques comportent de nombreuses limites inhérentes, dont certaines sont décrites ci-dessous. Aucune déclaration n'est faite selon laquelle un compte atteindra ou est susceptible d'atteindre des résultats similaires à ceux présentés ; en fait, il existe fréquemment des différences marquées entre les résultats hypothétiques et les résultats réels obtenus par la suite par un programme de trading particulier. L'une des limites des résultats de performance hypothétiques est le fait qu'ils sont préparés avec le recul. De plus, le trading hypothétique n'implique aucun risque financier, et aucun historique de trading hypothétique ne peut rendre compte pleinement de l'impact du risque financier dans le trading réel. Par exemple, la capacité à supporter des pertes ou à adhérer à un programme de trading particulier malgré des pertes sont des points essentiels qui peuvent également affecter de manière significative les résultats de trading réels. Il existe de nombreux autres facteurs liés aux marchés en général ou à la mise en œuvre d'un programme de trading spécifique qui ne peuvent pas être entièrement pris en compte dans la préparation des résultats hypothétiques, et qui peuvent tous affecter négativement les résultats de trading réels.",
       "chat.title":"Support TradeKopier","chat.placeholder":"Écrivez votre question...","chat.send":"Envoyer",
       "chat.welcome":"Bonjour ! Je suis l'assistant TradeKopier. Posez-moi vos questions sur les prix, l'installation, la compatibilité, ou autre chose.",
       "chat.openticket":"Pas suffisant ? Ouvrir un ticket de support",
@@ -1195,25 +1201,11 @@
   (function(){
     const statsEl = document.querySelector('.stats');
     if(!statsEl) return;
-    const numEls = statsEl.querySelectorAll('.n');
-    const countEl = numEls[2];
     let done = false;
     function reveal(){
       if(done) return;
       done = true;
       statsEl.classList.add('in-view');
-      if(countEl){
-        const target = 11;
-        const dur = 900;
-        const start = performance.now();
-        setTimeout(function(){
-          requestAnimationFrame(function tick(now){
-            const p = Math.min(1, (now - start) / dur);
-            countEl.textContent = Math.round(p * target) + '+';
-            if(p < 1) requestAnimationFrame(tick);
-          });
-        }, 250);
-      }
     }
     if('IntersectionObserver' in window){
       const io = new IntersectionObserver((entries)=>{
