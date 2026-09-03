@@ -318,21 +318,51 @@
     max-width:1180px; margin:0 auto 18px; background:var(--panel); border:1px solid var(--border); border-radius:16px;
     overflow:hidden; box-shadow:0 30px 70px -35px rgba(0,0,0,.6);
   }
-  .shots-main .bar{display:flex; gap:6px; padding:12px 16px; background:var(--bg2); border-bottom:1px solid var(--border);}
-  .shots-main .bar span{width:10px; height:10px; border-radius:50%; background:var(--border);}
+  .shots-main .bar{display:flex; align-items:center; gap:6px; padding:12px 16px; background:var(--bg2); border-bottom:1px solid var(--border);}
+  .shots-main .bar span{width:10px; height:10px; border-radius:50%; background:var(--border); flex-shrink:0;}
+  .shots-main .bar span:nth-child(1){background:#ff5f57;}
+  .shots-main .bar span:nth-child(2){background:#febc2e;}
+  .shots-main .bar span:nth-child(3){background:#28c840;}
+  .shots-main .bar .bar-title{margin-left:8px; font-size:12.5px; font-weight:600; color:var(--muted); letter-spacing:.01em;}
   .shots-main .frame{position:relative; background:#000;}
   .shots-main img, .shots-main video{display:block; width:100%; height:auto;}
   .shots-caption{text-align:center; color:var(--muted); font-size:14.5px; margin-bottom:22px;}
-  .shots-thumbs{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; max-width:1180px; margin:0 auto;}
+  .shots-thumbs{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; max-width:1180px; margin:0 auto;}
   .shots-thumb{
-    width:140px; height:82px; border-radius:9px; overflow:hidden; border:2px solid var(--border); background:var(--panel);
-    cursor:pointer; position:relative; padding:0; flex-shrink:0;
+    display:flex; align-items:center; gap:8px; border-radius:12px; border:1.5px solid var(--border); background:var(--panel);
+    cursor:pointer; padding:10px 18px; font-size:13.5px; font-weight:600; color:var(--muted); flex-shrink:0;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
   }
-  .shots-thumb.active{border-color:var(--accent);}
-  .shots-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
-  .shots-thumb .play{
-    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.35);
-    color:#fff; font-size:20px;
+  .shots-thumb svg{width:17px; height:17px; flex-shrink:0;}
+  .shots-thumb.active{border-color:var(--accent); color:var(--accent); background:rgba(47,140,230,.07);}
+  .shots-thumb:hover{border-color:var(--accent);}
+
+  /* Hotspots interactivos sobre las capturas */
+  .hotspots{position:absolute; inset:0; pointer-events:none;}
+  .hotspot{
+    position:absolute; width:22px; height:22px; margin:-11px 0 0 -11px; border:none; background:transparent;
+    cursor:pointer; padding:0; z-index:5; pointer-events:auto;
+  }
+  .hotspot-dot{position:absolute; inset:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px rgba(47,140,230,.28);}
+  .hotspot-dot::after{
+    content:''; position:absolute; inset:-6px; border-radius:50%; border:2px solid var(--accent);
+    animation:hotspotPulse 1.8s ease-out infinite;
+  }
+  @keyframes hotspotPulse{
+    0%{transform:scale(.6); opacity:.9;}
+    100%{transform:scale(1.9); opacity:0;}
+  }
+  .hotspot-tip{
+    position:absolute; top:calc(100% + 10px); left:50%; transform:translateX(-50%) translateY(-4px);
+    width:220px; background:#fff; color:#1a2230; border:1px solid var(--border); border-radius:10px;
+    padding:10px 12px; font-size:12.5px; line-height:1.4; text-align:left; box-shadow:0 16px 30px -12px rgba(0,0,0,.4);
+    opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease; z-index:10;
+  }
+  .hotspot-tip strong{display:block; font-size:12.5px; margin-bottom:3px; color:#1a2230;}
+  .hotspot:hover .hotspot-tip, .hotspot.tip-visible .hotspot-tip{opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto;}
+  @media(max-width:820px){
+    .hotspot-tip{width:170px; font-size:11.5px;}
+    .shots-thumb{padding:9px 14px; font-size:12.5px;}
   }
 
   /* Pricing */
@@ -524,20 +554,14 @@
       <p data-i18n="shots.sub">Disponible en modo oscuro y modo claro — elige el que prefieras.</p>
     </div>
     <div class="shots-main">
-      <div class="bar"><span></span><span></span><span></span></div>
+      <div class="bar"><span></span><span></span><span></span><span class="bar-title" id="shotsBarTitle"></span></div>
       <div class="frame" id="shotsFrame">
         <img id="shotsImg" src="assets/screen-home.png" alt="TradeKopier Home">
+        <div class="hotspots" id="shotsHotspots"></div>
       </div>
     </div>
     <p class="shots-caption" id="shotsCaption" data-i18n="shots.cap.home">Home — saldo, posicionamiento de mercado (CFTC), próximos eventos y noticias, todo de un vistazo.</p>
-    <div class="shots-thumbs">
-      <button class="shots-thumb active" data-type="image" data-src="assets/screen-home.png" data-cap="shots.cap.home">
-        <img src="assets/screen-home.png" alt="Home">
-      </button>
-      <button class="shots-thumb" data-type="image" data-src="assets/screen-calendar.png" data-cap="shots.cap.calendar">
-        <img src="assets/screen-calendar.png" alt="Calendario económico">
-      </button>
-    </div>
+    <div class="shots-thumbs" id="shotsNav"></div>
   </div>
 </section>
 
@@ -778,6 +802,7 @@
       "shots.sub":"Disponible en modo oscuro y modo claro — elige el que prefieras.",
       "shots.cap.home":"Home — saldo, posicionamiento de mercado (CFTC), próximos eventos y noticias, todo de un vistazo.",
       "shots.cap.calendar":"Calendario económico — eventos de alto y medio impacto de la semana, en tu hora.",
+      "shots.nav.home":"Home","shots.nav.calendar":"Calendario","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Calendario económico","shots.hs.home1.t":"Balance y cuentas","shots.hs.home1.d":"Visión total de tu capital y cuántas cuentas tienes conectadas, de un vistazo.","shots.hs.home2.t":"Posicionamiento CFTC","shots.hs.home2.d":"Sentimiento del mercado (% largo/corto) por instrumento, directo del reporte semanal COT.","shots.hs.home3.t":"Eventos de alto impacto","shots.hs.home3.d":"Los próximos anuncios económicos importantes, con cuenta atrás en tiempo real.","shots.hs.cal1.t":"Semana completa","shots.hs.cal1.d":"Todos los eventos de la semana organizados por día, en tu zona horaria.","shots.hs.cal2.t":"Impacto por color","shots.hs.cal2.d":"Rojo = alto impacto, amarillo = medio. Filtra de un vistazo lo que realmente mueve el mercado.","shots.hs.cal3.t":"Detalle por evento","shots.hs.cal3.d":"Hora exacta, previsión y dato anterior para cada publicación.",
       "shots.cap.video":"Vídeo de demostración en directo.",
       "pricing.eyebrow":"Precios","pricing.title":"El mismo TradeKopier, elige tu duración",
       "pricing.sub":"Todas las funciones incluidas en los 3 planes. Cuanto más tiempo elijas, más ahorras.",
@@ -842,6 +867,7 @@
       "shots.sub":"Available in dark mode and light mode — pick whichever you prefer.",
       "shots.cap.home":"Home — balance, market positioning (CFTC), upcoming events and news, all at a glance.",
       "shots.cap.calendar":"Economic Calendar — high and medium-impact events for the week, in your time zone.",
+      "shots.nav.home":"Home","shots.nav.calendar":"Calendar","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Economic Calendar","shots.hs.home1.t":"Balance & accounts","shots.hs.home1.d":"A full view of your capital and how many accounts are connected, at a glance.","shots.hs.home2.t":"CFTC positioning","shots.hs.home2.d":"Market sentiment (% long/short) per instrument, straight from the weekly COT report.","shots.hs.home3.t":"High-impact events","shots.hs.home3.d":"Upcoming major economic releases, with a live countdown.","shots.hs.cal1.t":"Full week","shots.hs.cal1.d":"Every event of the week organized by day, in your own time zone.","shots.hs.cal2.t":"Impact by color","shots.hs.cal2.d":"Red = high impact, yellow = medium. Spot what actually moves the market at a glance.","shots.hs.cal3.t":"Event detail","shots.hs.cal3.d":"Exact time, forecast and previous reading for every release.",
       "shots.cap.video":"Live demo video.",
       "pricing.eyebrow":"Pricing","pricing.title":"The same TradeKopier, choose your duration",
       "pricing.sub":"Every feature included in all 3 plans. The longer you choose, the more you save.",
@@ -906,6 +932,7 @@
       "shots.sub":"Verfügbar im Dunkel- und Hellmodus — wähle, was dir lieber ist.",
       "shots.cap.home":"Home — Kontostand, Marktpositionierung (CFTC), anstehende Ereignisse und News auf einen Blick.",
       "shots.cap.calendar":"Wirtschaftskalender — Ereignisse mit hoher und mittlerer Auswirkung für die Woche, in deiner Zeitzone.",
+      "shots.nav.home":"Home","shots.nav.calendar":"Kalender","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Wirtschaftskalender","shots.hs.home1.t":"Kontostand & Konten","shots.hs.home1.d":"Ein vollständiger Überblick über dein Kapital und wie viele Konten verbunden sind, auf einen Blick.","shots.hs.home2.t":"CFTC-Positionierung","shots.hs.home2.d":"Marktstimmung (% long/short) pro Instrument, direkt aus dem wöchentlichen COT-Bericht.","shots.hs.home3.t":"Ereignisse mit hoher Auswirkung","shots.hs.home3.d":"Anstehende wichtige Wirtschaftsdaten, mit Live-Countdown.","shots.hs.cal1.t":"Ganze Woche","shots.hs.cal1.d":"Alle Ereignisse der Woche nach Tag geordnet, in deiner eigenen Zeitzone.","shots.hs.cal2.t":"Auswirkung nach Farbe","shots.hs.cal2.d":"Rot = hohe Auswirkung, gelb = mittlere. Erkenne auf einen Blick, was den Markt wirklich bewegt.","shots.hs.cal3.t":"Ereignisdetail","shots.hs.cal3.d":"Genaue Uhrzeit, Prognose und vorheriger Wert für jede Veröffentlichung.",
       "shots.cap.video":"Live-Demo-Video.",
       "pricing.eyebrow":"Preise","pricing.title":"Derselbe TradeKopier, wähle deine Laufzeit",
       "pricing.sub":"Alle Funktionen in allen 3 Plänen enthalten. Je länger die Laufzeit, desto mehr sparst du.",
@@ -970,6 +997,7 @@
       "shots.sub":"Disponível em modo escuro e modo claro — escolhe o que preferires.",
       "shots.cap.home":"Home — saldo, posicionamento de mercado (CFTC), próximos eventos e notícias, tudo num relance.",
       "shots.cap.calendar":"Calendário Económico — eventos de alto e médio impacto da semana, no teu fuso horário.",
+      "shots.nav.home":"Home","shots.nav.calendar":"Calendário","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Calendário Económico","shots.hs.home1.t":"Saldo e contas","shots.hs.home1.d":"Uma visão completa do teu capital e de quantas contas estão ligadas, num relance.","shots.hs.home2.t":"Posicionamento CFTC","shots.hs.home2.d":"Sentimento de mercado (% comprado/vendido) por instrumento, direto do relatório semanal COT.","shots.hs.home3.t":"Eventos de alto impacto","shots.hs.home3.d":"Próximos anúncios económicos importantes, com contagem decrescente em tempo real.","shots.hs.cal1.t":"Semana completa","shots.hs.cal1.d":"Todos os eventos da semana organizados por dia, no teu fuso horário.","shots.hs.cal2.t":"Impacto por cor","shots.hs.cal2.d":"Vermelho = alto impacto, amarelo = médio. Identifica num relance o que realmente move o mercado.","shots.hs.cal3.t":"Detalhe do evento","shots.hs.cal3.d":"Hora exata, previsão e valor anterior de cada publicação.",
       "shots.cap.video":"Vídeo de demonstração ao vivo.",
       "pricing.eyebrow":"Preços","pricing.title":"O mesmo TradeKopier, escolhe a duração",
       "pricing.sub":"Todas as funcionalidades incluídas nos 3 planos. Quanto mais tempo escolheres, mais poupas.",
@@ -1034,6 +1062,7 @@
       "shots.sub":"Disponibile in modalità scura e modalità chiara — scegli quella che preferisci.",
       "shots.cap.home":"Home — saldo, posizionamento di mercato (CFTC), prossimi eventi e notizie, tutto a colpo d'occhio.",
       "shots.cap.calendar":"Calendario Economico — eventi ad alto e medio impatto della settimana, nel tuo fuso orario.",
+      "shots.nav.home":"Home","shots.nav.calendar":"Calendario","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Calendario Economico","shots.hs.home1.t":"Saldo e conti","shots.hs.home1.d":"Una visione completa del tuo capitale e di quanti conti sono collegati, a colpo d'occhio.","shots.hs.home2.t":"Posizionamento CFTC","shots.hs.home2.d":"Sentiment di mercato (% long/short) per strumento, direttamente dal report settimanale COT.","shots.hs.home3.t":"Eventi ad alto impatto","shots.hs.home3.d":"Prossimi annunci economici importanti, con conto alla rovescia in tempo reale.","shots.hs.cal1.t":"Settimana completa","shots.hs.cal1.d":"Tutti gli eventi della settimana organizzati per giorno, nel tuo fuso orario.","shots.hs.cal2.t":"Impatto per colore","shots.hs.cal2.d":"Rosso = alto impatto, giallo = medio. Individua a colpo d'occhio cosa muove davvero il mercato.","shots.hs.cal3.t":"Dettaglio evento","shots.hs.cal3.d":"Ora esatta, previsione e dato precedente per ogni pubblicazione.",
       "shots.cap.video":"Video dimostrativo dal vivo.",
       "pricing.eyebrow":"Prezzi","pricing.title":"Lo stesso TradeKopier, scegli la durata",
       "pricing.sub":"Tutte le funzionalità incluse nei 3 piani. Più a lungo scegli, più risparmi.",
@@ -1098,6 +1127,7 @@
       "shots.sub":"Disponible en mode sombre et en mode clair — choisissez celui que vous préférez.",
       "shots.cap.home":"Accueil — solde, positionnement du marché (CFTC), événements à venir et actualités, en un coup d'œil.",
       "shots.cap.calendar":"Calendrier économique — événements à fort et moyen impact de la semaine, dans votre fuseau horaire.",
+      "shots.nav.home":"Accueil","shots.nav.calendar":"Calendrier","shots.title.home":"TradeKopier — Accueil","shots.title.calendar":"TradeKopier — Calendrier économique","shots.hs.home1.t":"Solde et comptes","shots.hs.home1.d":"Une vue complète de votre capital et du nombre de comptes connectés, en un coup d'œil.","shots.hs.home2.t":"Positionnement CFTC","shots.hs.home2.d":"Sentiment du marché (% long/short) par instrument, directement issu du rapport COT hebdomadaire.","shots.hs.home3.t":"Événements à fort impact","shots.hs.home3.d":"Prochaines annonces économiques majeures, avec un compte à rebours en direct.","shots.hs.cal1.t":"Semaine complète","shots.hs.cal1.d":"Tous les événements de la semaine organisés par jour, dans votre fuseau horaire.","shots.hs.cal2.t":"Impact par couleur","shots.hs.cal2.d":"Rouge = fort impact, jaune = moyen. Repérez en un coup d'œil ce qui bouge vraiment le marché.","shots.hs.cal3.t":"Détail de l'événement","shots.hs.cal3.d":"Heure exacte, prévision et valeur précédente pour chaque publication.",
       "shots.cap.video":"Vidéo de démonstration en direct.",
       "pricing.eyebrow":"Tarifs","pricing.title":"Le même TradeKopier, choisissez votre durée",
       "pricing.sub":"Toutes les fonctionnalités incluses dans les 3 plans. Plus vous choisissez une durée longue, plus vous économisez.",
@@ -1138,31 +1168,99 @@
     });
     document.documentElement.lang = lang;
     localStorage.setItem('tk_lang', lang);
-    const activeThumb = document.querySelector('.shots-thumb.active');
-    if(activeThumb) updateShotsCaption(activeThumb.getAttribute('data-cap'));
   }
 
   function updateShotsCaption(key){
     const el = document.getElementById('shotsCaption');
-    if(el && i18n[currentLang][key]) el.textContent = i18n[currentLang][key];
+    if(el && i18n[currentLang][key]){ el.setAttribute('data-i18n', key); el.textContent = i18n[currentLang][key]; }
   }
 
-  // ---- Galería de capturas / vídeo ----
-  document.querySelectorAll('.shots-thumb').forEach(thumb=>{
-    thumb.addEventListener('click', ()=>{
-      document.querySelectorAll('.shots-thumb').forEach(t=>t.classList.remove('active'));
-      thumb.classList.add('active');
-      const type = thumb.getAttribute('data-type');
-      const src = thumb.getAttribute('data-src');
-      const frame = document.getElementById('shotsFrame');
-      if(type === 'video'){
-        frame.innerHTML = '<video id="shotsImg" src="' + src + '" controls autoplay></video>';
-      } else {
-        frame.innerHTML = '<img id="shotsImg" src="' + src + '" alt="TradeKopier">';
-      }
-      updateShotsCaption(thumb.getAttribute('data-cap'));
+  // ---- Tour interactivo de capturas: nav estilo sidebar + hotspots ----
+  const shotsData = [
+    {
+      id:'home', img:'assets/screen-home.png', capKey:'shots.cap.home',
+      navKey:'shots.nav.home', titleKey:'shots.title.home',
+      navIcon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>',
+      hotspots:[
+        {left:41.7, top:10.9, tKey:'shots.hs.home1.t', dKey:'shots.hs.home1.d'},
+        {left:31.5, top:24.8, tKey:'shots.hs.home2.t', dKey:'shots.hs.home2.d'},
+        {left:32.6, top:41.3, tKey:'shots.hs.home3.t', dKey:'shots.hs.home3.d'}
+      ]
+    },
+    {
+      id:'calendar', img:'assets/screen-calendar.png', capKey:'shots.cap.calendar',
+      navKey:'shots.nav.calendar', titleKey:'shots.title.calendar',
+      navIcon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>',
+      hotspots:[
+        {left:55.8, top:11.0, tKey:'shots.hs.cal1.t', dKey:'shots.hs.cal1.d'},
+        {left:74.9, top:17.3, tKey:'shots.hs.cal2.t', dKey:'shots.hs.cal2.d'},
+        {left:43.5, top:22.4, tKey:'shots.hs.cal3.t', dKey:'shots.hs.cal3.d'}
+      ]
+    }
+  ];
+  let activeShotId = shotsData[0].id;
+
+  function buildHotspotsHtml(shot){
+    return shot.hotspots.map(function(h){
+      const t = (i18n[currentLang][h.tKey] || '');
+      const d = (i18n[currentLang][h.dKey] || '');
+      return '<button class="hotspot" style="left:' + h.left + '%; top:' + h.top + '%;" type="button">' +
+        '<span class="hotspot-dot"></span>' +
+        '<span class="hotspot-tip"><strong data-i18n="' + h.tKey + '">' + t + '</strong><span data-i18n="' + h.dKey + '">' + d + '</span></span>' +
+        '</button>';
+    }).join('');
+  }
+
+  function wireHotspots(){
+    const spots = document.querySelectorAll('#shotsHotspots .hotspot');
+    spots.forEach(function(sp){
+      sp.addEventListener('click', function(e){
+        e.stopPropagation();
+        const willOpen = !sp.classList.contains('tip-visible');
+        spots.forEach(function(s){ s.classList.remove('tip-visible'); });
+        if(willOpen) sp.classList.add('tip-visible');
+      });
     });
+  }
+  document.addEventListener('click', function(){
+    document.querySelectorAll('#shotsHotspots .hotspot.tip-visible').forEach(function(s){ s.classList.remove('tip-visible'); });
   });
+
+  function updateShotsTitle(key){
+    const el = document.getElementById('shotsBarTitle');
+    if(el && i18n[currentLang][key]){ el.setAttribute('data-i18n', key); el.textContent = i18n[currentLang][key]; }
+  }
+
+  function setActiveShot(id){
+    const shot = shotsData.find(function(s){ return s.id === id; });
+    if(!shot) return;
+    activeShotId = id;
+    const img = document.getElementById('shotsImg');
+    img.setAttribute('src', shot.img);
+    img.setAttribute('alt', 'TradeKopier');
+    document.getElementById('shotsHotspots').innerHTML = buildHotspotsHtml(shot);
+    wireHotspots();
+    updateShotsCaption(shot.capKey);
+    updateShotsTitle(shot.titleKey);
+    document.querySelectorAll('#shotsNav .shots-thumb').forEach(function(t){
+      t.classList.toggle('active', t.getAttribute('data-id') === id);
+    });
+  }
+
+  function renderShotsNav(){
+    const nav = document.getElementById('shotsNav');
+    nav.innerHTML = shotsData.map(function(shot){
+      const label = i18n[currentLang][shot.navKey] || '';
+      return '<button class="shots-thumb' + (shot.id === activeShotId ? ' active' : '') + '" data-id="' + shot.id + '" type="button">' +
+        shot.navIcon + '<span data-i18n="' + shot.navKey + '">' + label + '</span></button>';
+    }).join('');
+    nav.querySelectorAll('.shots-thumb').forEach(function(btn){
+      btn.addEventListener('click', function(){ setActiveShot(btn.getAttribute('data-id')); });
+    });
+  }
+
+  renderShotsNav();
+  setActiveShot(activeShotId);
 
   document.getElementById('langSwitch').addEventListener('change', (e)=> setLang(e.target.value));
 
