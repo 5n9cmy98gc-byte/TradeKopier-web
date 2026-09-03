@@ -210,13 +210,6 @@
     to{transform:translateX(-50%);}
   }
 
-  /* Trust grid */
-  .trust{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto;}
-  .trustcard{padding:22px 4px;}
-  .trustcard h3{font-size:15.5px; font-weight:700; margin-bottom:8px;}
-  .trustcard p{color:var(--muted); font-size:13.5px;}
-  .trustcard .n{font-size:22px; margin-bottom:10px;}
-
   /* Execution pipeline */
   .pipeline{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; max-width:1050px; margin:0 auto; counter-reset:pipe;}
   .pipestep{
@@ -348,7 +341,7 @@
 
   @media(max-width:820px){
     .navlinks{display:none;}
-    .features, .steps, .plans, .trust, .pipeline{grid-template-columns:1fr;}
+    .features, .steps, .plans, .pipeline{grid-template-columns:1fr;}
     .plan.featured{transform:none;}
     .risk{grid-template-columns:1fr; padding:32px;}
     .stats{gap:34px;}
@@ -551,22 +544,6 @@
   </div>
 </section>
 
-<section id="confianza">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow" data-i18n="trust.eyebrow">Confianza</div>
-      <h2 data-i18n="trust.title">Seguro por defecto, pensado para traders serios</h2>
-    </div>
-    <div class="trust">
-      <div class="trustcard"><div class="n">♾️</div><h3 data-i18n="trust1.h">Cuentas ilimitadas, precio fijo</h3><p data-i18n="trust1.p">Copia en tantas cuentas fondeadas y reales como operes, sin cargos por cuenta adicional.</p></div>
-      <div class="trustcard"><div class="n">🏛️</div><h3 data-i18n="trust2.h">Pensado para las reglas de las prop firms</h3><p data-i18n="trust2.p">Los controles de riesgo mantienen tus evaluaciones y cuentas fondeadas dentro de la normativa en cada señal.</p></div>
-      <div class="trustcard"><div class="n">🔌</div><h3 data-i18n="trust3.h">Conexiones directas y nativas</h3><p data-i18n="trust3.p">Integrado directamente en NinjaTrader 8 — sin plugins externos ni capas intermedias.</p></div>
-      <div class="trustcard"><div class="n">🔐</div><h3 data-i18n="trust4.h">Cifrado y privado</h3><p data-i18n="trust4.p">Tu conexión al bróker permanece en tu propio equipo — nunca guardamos tus contraseñas.</p></div>
-      <div class="trustcard"><div class="n">🧑‍💻</div><h3 data-i18n="trust5.h">Soporte humano real, 24/7</h3><p data-i18n="trust5.p">La ayuda viene directamente del equipo que construye y mantiene TradeKopier.</p></div>
-    </div>
-  </div>
-</section>
-
 <section id="precios" class="pricing">
   <div class="wrap">
     <div class="section-head">
@@ -754,12 +731,6 @@
       "risk.li2":"Modo \"liquidar y bloquear\" — la cuenta queda bloqueada hasta el día siguiente, sin posibilidad de revertirlo por error",
       "risk.li3":"Si la maestra toca su propio límite, se cierra solo ella — las esclavas siguen operando con normalidad",
       "risk.li4":"Panel de verificación que te avisa si una cuenta activa no tiene límites configurados",
-      "trust.eyebrow":"Confianza","trust.title":"Seguro por defecto, pensado para traders serios",
-      "trust1.h":"Cuentas ilimitadas, precio fijo","trust1.p":"Copia en tantas cuentas fondeadas y reales como operes, sin cargos por cuenta adicional.",
-      "trust2.h":"Pensado para las reglas de las prop firms","trust2.p":"Los controles de riesgo mantienen tus evaluaciones y cuentas fondeadas dentro de la normativa en cada señal.",
-      "trust3.h":"Conexiones directas y nativas","trust3.p":"Integrado directamente en NinjaTrader 8 — sin plugins externos ni capas intermedias.",
-      "trust4.h":"Cifrado y privado","trust4.p":"Tu conexión al bróker permanece en tu propio equipo — nunca guardamos tus contraseñas.",
-      "trust5.h":"Soporte humano real, 24/7","trust5.p":"La ayuda viene directamente del equipo que construye y mantiene TradeKopier.",
       "how.eyebrow":"Instalación","how.title":"Listo en menos de 5 minutos",
       "how.s1h":"Compra tu licencia","how.s1p":"Elige tu plan y recibe tu clave de licencia al instante por email.",
       "how.s2h":"Instala en NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, selecciona el archivo, reinicia NinjaTrader.",
@@ -825,12 +796,6 @@
       "risk.li2":"\"Liquidate and lock\" mode — the account stays locked until the next day, with no way to revert it by mistake",
       "risk.li3":"If the master hits its own limit, only the master closes — slave accounts keep trading normally",
       "risk.li4":"Verification panel that warns you if an active account has no limits configured",
-      "trust.eyebrow":"Trust","trust.title":"Safe by default, built for serious traders",
-      "trust1.h":"Unlimited accounts, flat price","trust1.p":"Copy to as many funded and live accounts as you run, with no per-account fees.",
-      "trust2.h":"Built for prop firm rules","trust2.p":"Risk controls keep your evaluations and funded accounts compliant on every signal.",
-      "trust3.h":"Direct, native connections","trust3.p":"Wired directly into NinjaTrader 8 — no third-party plugins, no middle layers.",
-      "trust4.h":"Encrypted and private","trust4.p":"Your broker connection stays on your own machine — we never store your passwords.",
-      "trust5.h":"Real human support, 24/7","trust5.p":"Help comes straight from the team that builds and runs TradeKopier.",
       "how.eyebrow":"Installation","how.title":"Ready in under 5 minutes",
       "how.s1h":"Buy your license","how.s1p":"Choose your plan and get your license key instantly by email.",
       "how.s2h":"Install on NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, select the file, restart NinjaTrader.",
@@ -896,12 +861,6 @@
       "risk.li2":"\"Liquidieren und sperren\"-Modus — das Konto bleibt bis zum nächsten Tag gesperrt, ohne versehentliche Rückgängigmachung",
       "risk.li3":"Erreicht der Master sein eigenes Limit, schließt nur er — Slave-Konten handeln normal weiter",
       "risk.li4":"Prüfpanel, das warnt, wenn ein aktives Konto keine Limits konfiguriert hat",
-      "trust.eyebrow":"Vertrauen","trust.title":"Standardmäßig sicher, für ernsthafte Trader gebaut",
-      "trust1.h":"Unbegrenzte Konten, Festpreis","trust1.p":"Kopiere auf so viele Funded- und Live-Konten, wie du betreibst, ohne Gebühren pro zusätzlichem Konto.",
-      "trust2.h":"Für die Regeln der Prop-Firms gebaut","trust2.p":"Risikokontrollen halten deine Evaluierungen und Funded-Konten bei jedem Signal regelkonform.",
-      "trust3.h":"Direkte, native Verbindungen","trust3.p":"Direkt in NinjaTrader 8 integriert — ohne Drittanbieter-Plugins oder Zwischenschichten.",
-      "trust4.h":"Verschlüsselt und privat","trust4.p":"Deine Broker-Verbindung bleibt auf deinem eigenen Rechner — wir speichern niemals deine Passwörter.",
-      "trust5.h":"Echter menschlicher Support, 24/7","trust5.p":"Die Hilfe kommt direkt vom Team, das TradeKopier entwickelt und betreibt.",
       "how.eyebrow":"Installation","how.title":"In unter 5 Minuten startklar",
       "how.s1h":"Lizenz kaufen","how.s1p":"Wähle deinen Plan und erhalte deinen Lizenzschlüssel sofort per E-Mail.",
       "how.s2h":"In NinjaTrader 8 installieren","how.s2p":"Tools → Import → NinjaScript Add-On, Datei auswählen, NinjaTrader neu starten.",
@@ -967,12 +926,6 @@
       "risk.li2":"Modo \"liquidar e bloquear\" — a conta fica bloqueada até ao dia seguinte, sem possibilidade de reverter por engano",
       "risk.li3":"Se a mestre atingir o seu próprio limite, só ela fecha — as escravas continuam a operar normalmente",
       "risk.li4":"Painel de verificação que avisa se uma conta ativa não tem limites configurados",
-      "trust.eyebrow":"Confiança","trust.title":"Seguro por padrão, pensado para traders sérios",
-      "trust1.h":"Contas ilimitadas, preço fixo","trust1.p":"Copia para tantas contas fundeadas e reais quantas operares, sem custos por conta adicional.",
-      "trust2.h":"Pensado para as regras das prop firms","trust2.p":"Os controlos de risco mantêm as tuas avaliações e contas fundeadas dentro da norma em cada sinal.",
-      "trust3.h":"Conexões diretas e nativas","trust3.p":"Integrado diretamente no NinjaTrader 8 — sem plugins externos nem camadas intermédias.",
-      "trust4.h":"Cifrado e privado","trust4.p":"A tua conexão ao broker permanece no teu próprio equipamento — nunca guardamos as tuas palavras-passe.",
-      "trust5.h":"Suporte humano real, 24/7","trust5.p":"A ajuda vem diretamente da equipa que constrói e mantém o TradeKopier.",
       "how.eyebrow":"Instalação","how.title":"Pronto em menos de 5 minutos",
       "how.s1h":"Compra a tua licença","how.s1p":"Escolhe o teu plano e recebe a tua chave de licença instantaneamente por email.",
       "how.s2h":"Instala no NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, seleciona o ficheiro, reinicia o NinjaTrader.",
@@ -1038,12 +991,6 @@
       "risk.li2":"Modalità \"liquida e blocca\" — il conto resta bloccato fino al giorno successivo, senza possibilità di annullarlo per errore",
       "risk.li3":"Se il master raggiunge il proprio limite, si chiude solo lui — i conti slave continuano a operare normalmente",
       "risk.li4":"Pannello di verifica che avvisa se un conto attivo non ha limiti configurati",
-      "trust.eyebrow":"Fiducia","trust.title":"Sicuro per impostazione predefinita, pensato per trader seri",
-      "trust1.h":"Conti illimitati, prezzo fisso","trust1.p":"Copia su tutti i conti funded e live che gestisci, senza costi per conto aggiuntivo.",
-      "trust2.h":"Pensato per le regole delle prop firm","trust2.p":"I controlli di rischio mantengono le tue valutazioni e i conti funded conformi a ogni segnale.",
-      "trust3.h":"Connessioni dirette e native","trust3.p":"Integrato direttamente in NinjaTrader 8 — senza plugin esterni né livelli intermedi.",
-      "trust4.h":"Crittografato e privato","trust4.p":"La tua connessione al broker resta sul tuo computer — non salviamo mai le tue password.",
-      "trust5.h":"Supporto umano reale, 24/7","trust5.p":"L'assistenza arriva direttamente dal team che sviluppa e gestisce TradeKopier.",
       "how.eyebrow":"Installazione","how.title":"Pronto in meno di 5 minuti",
       "how.s1h":"Acquista la licenza","how.s1p":"Scegli il tuo piano e ricevi la chiave di licenza istantaneamente via email.",
       "how.s2h":"Installa su NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, seleziona il file, riavvia NinjaTrader.",
@@ -1109,12 +1056,6 @@
       "risk.li2":"Mode « liquider et verrouiller » — le compte reste verrouillé jusqu'au lendemain, sans possibilité de l'annuler par erreur",
       "risk.li3":"Si le maître atteint sa propre limite, seul lui se ferme — les comptes esclaves continuent de trader normalement",
       "risk.li4":"Panneau de vérification qui vous avertit si un compte actif n'a aucune limite configurée",
-      "trust.eyebrow":"Confiance","trust.title":"Sécurisé par défaut, conçu pour les traders sérieux",
-      "trust1.h":"Comptes illimités, prix fixe","trust1.p":"Copiez sur autant de comptes financés et réels que vous gérez, sans frais par compte supplémentaire.",
-      "trust2.h":"Conçu pour les règles des prop firms","trust2.p":"Les contrôles de risque maintiennent vos évaluations et comptes financés conformes à chaque signal.",
-      "trust3.h":"Connexions directes et natives","trust3.p":"Intégré directement dans NinjaTrader 8 — sans plugins tiers ni couches intermédiaires.",
-      "trust4.h":"Chiffré et privé","trust4.p":"Votre connexion au broker reste sur votre propre machine — nous ne stockons jamais vos mots de passe.",
-      "trust5.h":"Support humain réel, 24/7","trust5.p":"L'aide vient directement de l'équipe qui développe et fait fonctionner TradeKopier.",
       "how.eyebrow":"Installation","how.title":"Prêt en moins de 5 minutes",
       "how.s1h":"Achetez votre licence","how.s1p":"Choisissez votre plan et recevez votre clé de licence instantanément par email.",
       "how.s2h":"Installez sur NinjaTrader 8","how.s2p":"Tools → Import → NinjaScript Add-On, sélectionnez le fichier, redémarrez NinjaTrader.",
@@ -1203,14 +1144,14 @@
     { name:'TradingView', ini:'TV', color:'#1e88e5', logo:'assets/logos/tradingview.png' },
     { name:'Tradovate', ini:'TD', color:'#00b386', logo:'assets/logos/tradovate.png' },
     { name:'Rithmic', ini:'RM', color:'#37474f', logo:'assets/logos/rithmic.png' },
-    { name:'Lucid Trading', ini:'LT', color:'#7c5cff' },
+    { name:'Lucid Trading', ini:'LT', color:'#7c5cff', logo:'assets/logos/lucidtrading.png' },
     { name:'Apex Trader Funding', ini:'AT', color:'#e35b4b', logo:'assets/logos/apex.png' },
     { name:'Tradeify', ini:'TF', color:'#3ea6ff', logo:'assets/logos/tradeify.png' },
-    { name:'Bulenox', ini:'BX', color:'#2ecc71' },
+    { name:'Bulenox', ini:'BX', color:'#2ecc71', logo:'assets/logos/bulenox.png' },
     { name:'Alpha Futures', ini:'AF', color:'#c99a2e', logo:'assets/logos/alphafutures.png' },
     { name:'MyFundedFutures', ini:'MF', color:'#00acc1', logo:'assets/logos/myfundedfutures.png' },
     { name:'Take Profit Trader', ini:'TP', color:'#43a047', logo:'assets/logos/takeprofittrader.png' },
-    { name:'FundedNext', ini:'FN', color:'#5c6bc0' },
+    { name:'FundedNext', ini:'FN', color:'#5c6bc0', logo:'assets/logos/fundednext.png' },
   ];
   function buildMarqueeHtml(){
     const chips = brands.map(b => {
