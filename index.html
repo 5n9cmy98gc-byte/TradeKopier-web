@@ -152,7 +152,13 @@
   .btn-ghost:hover{border-color:var(--muted);}
 
   .stats{display:flex; justify-content:center; gap:56px; flex-wrap:wrap; padding:20px 24px 70px; text-align:center;}
-  .stats div .n{font-size:24px; font-weight:800; color:var(--accent);}
+  .stats > div{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease;}
+  .stats.in-view > div:nth-child(1){transition-delay:.05s;}
+  .stats.in-view > div:nth-child(2){transition-delay:.18s;}
+  .stats.in-view > div:nth-child(3){transition-delay:.31s;}
+  .stats.in-view > div{opacity:1; transform:translateY(0);}
+  .stats div .n{font-size:24px; font-weight:800; color:var(--accent); display:inline-block; transition:transform .2s ease, color .2s ease;}
+  .stats div:hover .n{transform:scale(1.1); color:var(--accent2);}
   .stats div .l{font-size:12.5px; color:var(--muted); margin-top:2px; max-width:150px;}
 
   section{padding:76px 24px;}
@@ -439,9 +445,9 @@
     </div>
   </div>
   <div class="stats">
-    <div><div class="n" data-i18n="stats.n1">Ilimitadas</div><div class="l" data-i18n="stats.l1">cuentas esclavas por maestra</div></div>
-    <div><div class="n" data-i18n="stats.n2">Ilimitadas</div><div class="l" data-i18n="stats.l2">conexiones/brokers a la vez</div></div>
+    <div><div class="n" data-i18n="stats.n1">Ilimitadas</div><div class="l" data-i18n="stats.l1">cuentas y conexiones</div></div>
     <div><div class="n">&lt;1s</div><div class="l" data-i18n="stats.l3">de latencia de réplica</div></div>
+    <div><div class="n">11+</div><div class="l" data-i18n="stats.l2">prop firms y brokers compatibles</div></div>
   </div>
 </section>
 
@@ -712,8 +718,8 @@
       "hero.title.accent":"Copia tus operaciones al instante","hero.title.rest":"en todas tus cuentas a la vez",
       "hero.sub":"TradeKopier replica automáticamente cada entrada, salida y protección de tu cuenta maestra hacia todas tus cuentas esclavas — sin límite de cuentas, sin límite de conexiones.",
       "hero.cta1":"Ver planes","hero.cta2":"Ver funciones",
-      "stats.n1":"Ilimitadas","stats.l1":"cuentas esclavas por maestra",
-      "stats.n2":"Ilimitadas","stats.l2":"conexiones/brokers a la vez",
+      "stats.n1":"Ilimitadas","stats.l1":"cuentas y conexiones",
+      "stats.l2":"prop firms y brokers compatibles",
       "stats.l3":"de latencia de réplica",
       "brokers.label":"Compatible con TradingView, Tradovate, y con todas las conexiones y empresas de fondeo que permite NinjaTrader 8, incluyendo:","brokers.more":"y muchas más",
       "features.eyebrow":"Funciones","features.title":"Todo lo que necesitas para gestionar varias cuentas",
@@ -777,8 +783,8 @@
       "hero.title.accent":"Copy your trades instantly","hero.title.rest":"across all your accounts at once",
       "hero.sub":"TradeKopier automatically replicates every entry, exit and protective order from your master account to all your slave accounts — no account limit, no connection limit.",
       "hero.cta1":"View plans","hero.cta2":"See features",
-      "stats.n1":"Unlimited","stats.l1":"slave accounts per master",
-      "stats.n2":"Unlimited","stats.l2":"connections/brokers at once",
+      "stats.n1":"Unlimited","stats.l1":"accounts and connections",
+      "stats.l2":"compatible prop firms & brokers",
       "stats.l3":"replication latency",
       "brokers.label":"Compatible with TradingView, Tradovate, and every connection and prop firm NinjaTrader 8 supports, including:","brokers.more":"and many more",
       "features.eyebrow":"Features","features.title":"Everything you need to manage multiple accounts",
@@ -842,8 +848,8 @@
       "hero.title.accent":"Kopiere deine Trades sofort","hero.title.rest":"auf all deine Konten gleichzeitig",
       "hero.sub":"TradeKopier repliziert automatisch jeden Einstieg, Ausstieg und jede Absicherung deines Master-Kontos auf alle Slave-Konten — ohne Konto- oder Verbindungslimit.",
       "hero.cta1":"Preise ansehen","hero.cta2":"Funktionen ansehen",
-      "stats.n1":"Unbegrenzt","stats.l1":"Slave-Konten pro Master",
-      "stats.n2":"Unbegrenzt","stats.l2":"Verbindungen/Broker gleichzeitig",
+      "stats.n1":"Unbegrenzt","stats.l1":"Konten und Verbindungen",
+      "stats.l2":"kompatible Prop-Firms & Broker",
       "stats.l3":"Replikationslatenz",
       "brokers.label":"Kompatibel mit TradingView, Tradovate und jeder Verbindung sowie Prop-Firm, die NinjaTrader 8 unterstützt, u. a.:","brokers.more":"und viele mehr",
       "features.eyebrow":"Funktionen","features.title":"Alles, was du für mehrere Konten brauchst",
@@ -907,8 +913,8 @@
       "hero.title.accent":"Copia as tuas operações ao instante","hero.title.rest":"em todas as tuas contas ao mesmo tempo",
       "hero.sub":"O TradeKopier replica automaticamente cada entrada, saída e proteção da tua conta mestre para todas as contas escravas — sem limite de contas, sem limite de conexões.",
       "hero.cta1":"Ver planos","hero.cta2":"Ver funcionalidades",
-      "stats.n1":"Ilimitadas","stats.l1":"contas escravas por mestre",
-      "stats.n2":"Ilimitadas","stats.l2":"conexões/brokers ao mesmo tempo",
+      "stats.n1":"Ilimitadas","stats.l1":"contas e conexões",
+      "stats.l2":"prop firms e brokers compatíveis",
       "stats.l3":"de latência de réplica",
       "brokers.label":"Compatível com TradingView, Tradovate, e com todas as conexões e empresas de fondeo que o NinjaTrader 8 permite, incluindo:","brokers.more":"e muitas mais",
       "features.eyebrow":"Funcionalidades","features.title":"Tudo o que precisas para gerir várias contas",
@@ -972,8 +978,8 @@
       "hero.title.accent":"Copia le tue operazioni all'istante","hero.title.rest":"su tutti i tuoi conti contemporaneamente",
       "hero.sub":"TradeKopier replica automaticamente ogni entrata, uscita e protezione del tuo conto master su tutti i conti slave — senza limiti di conti, senza limiti di connessioni.",
       "hero.cta1":"Vedi i piani","hero.cta2":"Vedi le funzionalità",
-      "stats.n1":"Illimitati","stats.l1":"conti slave per master",
-      "stats.n2":"Illimitate","stats.l2":"connessioni/broker contemporaneamente",
+      "stats.n1":"Illimitati","stats.l1":"conti e connessioni",
+      "stats.l2":"prop firm e broker compatibili",
       "stats.l3":"di latenza di replica",
       "brokers.label":"Compatibile con TradingView, Tradovate, e con tutte le connessioni e le prop firm supportate da NinjaTrader 8, tra cui:","brokers.more":"e molti altri",
       "features.eyebrow":"Funzionalità","features.title":"Tutto ciò che serve per gestire più conti",
@@ -1037,8 +1043,8 @@
       "hero.title.accent":"Copiez vos trades instantanément","hero.title.rest":"sur tous vos comptes à la fois",
       "hero.sub":"TradeKopier réplique automatiquement chaque entrée, sortie et protection de votre compte maître vers tous vos comptes esclaves — sans limite de comptes, sans limite de connexions.",
       "hero.cta1":"Voir les tarifs","hero.cta2":"Voir les fonctionnalités",
-      "stats.n1":"Illimités","stats.l1":"comptes esclaves par maître",
-      "stats.n2":"Illimitées","stats.l2":"connexions/brokers à la fois",
+      "stats.n1":"Illimités","stats.l1":"comptes et connexions",
+      "stats.l2":"prop firms et brokers compatibles",
       "stats.l3":"de latence de réplication",
       "brokers.label":"Compatible avec TradingView, Tradovate, et toutes les connexions et sociétés de prop trading prises en charge par NinjaTrader 8, notamment :","brokers.more":"et bien d'autres",
       "features.eyebrow":"Fonctionnalités","features.title":"Tout ce dont vous avez besoin pour gérer plusieurs comptes",
@@ -1137,6 +1143,37 @@
   });
 
   document.getElementById('langSwitch').addEventListener('change', (e)=> setLang(e.target.value));
+
+  // Stats hero: entrada animada al hacer scroll + contador para "11+"
+  (function(){
+    const statsEl = document.querySelector('.stats');
+    if(!statsEl) return;
+    const numEls = statsEl.querySelectorAll('.n');
+    const countEl = numEls[2];
+    let done = false;
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting && !done){
+          done = true;
+          statsEl.classList.add('in-view');
+          if(countEl){
+            const target = 11;
+            const dur = 900;
+            const start = performance.now();
+            setTimeout(function(){
+              requestAnimationFrame(function tick(now){
+                const p = Math.min(1, (now - start) / dur);
+                countEl.textContent = Math.round(p * target) + '+';
+                if(p < 1) requestAnimationFrame(tick);
+              });
+            }, 250);
+          }
+          io.disconnect();
+        }
+      });
+    }, {threshold:.4});
+    io.observe(statsEl);
+  })();
 
   // ---- Tira de marcas (logo chips: logo oficial cuando está disponible,
   // si no, iniciales + color a modo identificativo) ----
