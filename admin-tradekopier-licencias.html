@@ -46,7 +46,7 @@
   }
   .logout:hover{color:var(--text); border-color:var(--muted);}
 
-  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px;}
+  .stats{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin-bottom:28px;}
   .stat{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;}
   .stat .n{font-size:26px; font-weight:700;}
   .stat .l{font-size:12px; color:var(--muted); margin-top:2px;}
@@ -135,10 +135,18 @@
         <div class="stat"><div class="n" style="color:var(--green)" id="statActive">—</div><div class="l">Activas</div></div>
         <div class="stat"><div class="n" style="color:var(--yellow)" id="statIdle">—</div><div class="l">Sin activar</div></div>
         <div class="stat"><div class="n" style="color:var(--red)" id="statRevoked">—</div><div class="l">Revocadas / expiradas</div></div>
+        <div class="stat"><div class="n" style="color:var(--accent)" id="statFree">—</div><div class="l">Descargas gratis</div></div>
       </div>
 
       <div class="toolbar">
         <input type="text" id="searchBox" placeholder="Buscar por email o clave..." oninput="renderTable()">
+        <select id="planFilter" onchange="renderTable()" style="padding:9px 12px; border-radius:8px; border:1px solid var(--border); background:var(--panel2); color:var(--text); font-size:13px;">
+          <option value="">Todos los planes</option>
+          <option value="free">Gratis</option>
+          <option value="paid">Pago</option>
+          <option value="trial">Prueba</option>
+          <option value="legacy_discount">Descuento 50%</option>
+        </select>
         <button class="btn btn-ghost" onclick="loadLicenses()">↻ Refrescar</button>
         <button class="btn btn-primary" onclick="crearLicencia()">+ Nueva licencia (30 días)</button>
       </div>
@@ -147,6 +155,7 @@
         <thead>
           <tr>
             <th>Email</th>
+            <th>Plan</th>
             <th>Clave</th>
             <th>Estado</th>
             <th>Vence</th>
@@ -257,6 +266,16 @@
     return { label:'Activa', cls:'badge-ok' };
   }
 
+  function planDe(l){
+    const map = {
+      free: { label:'Gratis', cls:'badge-idle' },
+      paid: { label:'Pago', cls:'badge-ok' },
+      trial: { label:'Prueba', cls:'badge-warn' },
+      legacy_discount: { label:'Descuento 50%', cls:'badge-ok' },
+    };
+    return map[l.plan] || { label: l.plan || '—', cls:'badge-idle' };
+  }
+
   function renderStats(){
     let active=0, idle=0, revokedOrExp=0;
     licenses.forEach(l=>{
@@ -269,6 +288,7 @@
     document.getElementById('statActive').textContent = active;
     document.getElementById('statIdle').textContent = idle;
     document.getElementById('statRevoked').textContent = revokedOrExp;
+    document.getElementById('statFree').textContent = licenses.filter(l => l.plan === 'free').length;
   }
 
   function fmtFecha(iso){
@@ -280,10 +300,12 @@
 
   function renderTable(){
     const q = document.getElementById('searchBox').value.trim().toLowerCase();
+    const planQ = document.getElementById('planFilter').value;
     const tbody = document.getElementById('tbody');
     tbody.innerHTML = '';
     const filtered = licenses.filter(l =>
-      !q || l.email.toLowerCase().includes(q) || l.license_key.toLowerCase().includes(q)
+      (!q || l.email.toLowerCase().includes(q) || l.license_key.toLowerCase().includes(q)) &&
+      (!planQ || l.plan === planQ)
     );
     if (filtered.length === 0){
       document.getElementById('tableStatus').textContent = "No hay licencias que coincidan.";
@@ -292,11 +314,13 @@
     }
     filtered.forEach(l=>{
       const e = estadoDe(l);
+      const p = planDe(l);
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>
           <input class="email-edit" value="${l.email.replace(/"/g,'&quot;')}" id="email-${l.id}">
         </td>
+        <td><span class="badge ${p.cls}">${p.label}</span></td>
         <td class="mono">${l.license_key}</td>
         <td><span class="badge ${e.cls}">${e.label}</span></td>
         <td>${fmtFecha(l.expires_at)}</td>
