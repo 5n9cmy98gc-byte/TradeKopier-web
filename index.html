@@ -466,13 +466,6 @@
 </head>
 <body>
 
-<div class="promo-badge" id="promoBadge">
-  <button class="promo-close" id="promoClose" aria-label="Close">×</button>
-  <div class="promo-pct">-50%</div>
-  <div class="promo-code">SUMMER50</div>
-  <div class="promo-sub" data-i18n="promo.sub">primer mes</div>
-</div>
-
 <header>
   <nav>
     <div class="logo"><span class="klogo" aria-hidden="true"><svg class="kmark" viewBox="0 0 40 40" width="22" height="22" focusable="false"><g stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M8 9 V31"/><path d="M8 20 L18 9"/><path d="M8 20 L18 31"/><path d="M32 9 V31"/><path d="M32 20 L22 9"/><path d="M32 20 L22 31"/></g></svg></span><span class="wordmark">Trade<span class="kletter">K</span>opier</span></div>
@@ -480,7 +473,7 @@
       <a href="#features" data-i18n="nav.features">Funciones</a>
       <a href="#capturas" data-i18n="nav.shots">Interfaz</a>
       <a href="#riesgo" data-i18n="nav.risk">Gestión de riesgo</a>
-      <a href="#precios" data-i18n="nav.pricing">Precios</a>
+      <a href="#descarga" data-i18n="nav.pricing">Descarga</a>
       <a href="#como-funciona" data-i18n="nav.install">Instalación</a>
       <a href="faq.html" data-i18n="nav.faq">FAQ</a>
     </div>
@@ -494,18 +487,18 @@
         <option value="it">Italiano</option>
       </select>
       <a href="mi-cuenta.html" style="color:var(--muted); font-size:15.5px;" data-i18n="nav.account">Mi cuenta</a>
-      <a href="#precios" class="navcta" data-i18n="nav.cta">Empezar</a>
+      <a href="#descarga" class="navcta" data-i18n="nav.cta">Descarga gratis</a>
     </div>
   </nav>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <div class="badge" data-i18n="hero.badge">💰 El mejor precio del mercado, sin límites</div>
+    <div class="badge" data-i18n="hero.badge">🎁 100% gratis — sin tarjeta de crédito</div>
     <h1><span data-i18n="hero.title.accent">Copia tus operaciones al instante</span> <span data-i18n="hero.title.rest" style="background:none;-webkit-text-fill-color:var(--text);">en todas tus cuentas a la vez</span></h1>
     <p data-i18n="hero.sub">TradeKopier replica automáticamente cada entrada, salida y protección de tu cuenta maestra hacia todas tus cuentas esclavas — sin límite de cuentas, sin límite de conexiones.</p>
     <div class="hero-ctas">
-      <a href="#precios" class="btn btn-primary" data-i18n="hero.cta1">Ver planes</a>
+      <a href="#descarga" class="btn btn-primary" data-i18n="hero.cta1">Descargar gratis</a>
       <a href="#features" class="btn btn-ghost" data-i18n="hero.cta2">Ver funciones</a>
     </div>
   </div>
@@ -626,42 +619,27 @@
   </div>
 </section>
 
-<section id="precios" class="pricing">
+<section id="descarga" class="pricing">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow" data-i18n="pricing.eyebrow">Precios</div>
-      <h2 data-i18n="pricing.title">El mismo TradeKopier, elige tu duración</h2>
-      <p data-i18n="pricing.sub">Todas las funciones incluidas en los 3 planes. Cuanto más tiempo elijas, más ahorras.</p>
+      <div class="eyebrow" data-i18n="pricing.eyebrow">Descarga gratuita</div>
+      <h2 data-i18n="pricing.title">Empieza a copiar tus operaciones hoy</h2>
+      <p data-i18n="pricing.sub">Todas las funciones incluidas. Solo necesitas tu email para recibir tu clave al instante.</p>
     </div>
-    <div class="plans">
-      <div class="plan">
-        <div class="planicon">🎯</div>
-        <h3 data-i18n="plan.mensual">Mensual</h3>
-        <p class="plandesc" data-i18n="plan.mensual.desc">Pruébalo sin compromiso, cancela cuando quieras.</p>
-        <div class="price">$25<span class="per" data-i18n="plan.permes">/mes</span></div>
-        <div class="save" data-i18n="plan.trial">🎁 7 días gratis, después $25/mes</div>
-        <a href="https://buy.stripe.com/14A14ndVS1aU2I5eTV1ck00" class="btn btn-ghost" data-i18n="plan.cta">Comprar ahora</a>
-      </div>
-      <div class="plan featured">
-        <div class="ribbon" data-i18n="plan.popular">Más popular</div>
-        <div class="planicon">🔥</div>
-        <h3 data-i18n="plan.trimestral">Trimestral</h3>
-        <p class="plandesc" data-i18n="plan.trimestral.desc">El equilibrio perfecto entre ahorro y flexibilidad.</p>
-        <div class="price">$60<span class="per" data-i18n="plan.pertri">/3 meses</span></div>
-        <div class="save" data-i18n="plan.save.tri">Ahorras $15</div>
-        <a href="https://buy.stripe.com/bJe9ATbNK6ve6YldPR1ck01" class="btn btn-primary" data-i18n="plan.cta">Comprar ahora</a>
-      </div>
-      <div class="plan">
-        <div class="planicon">💎</div>
-        <h3 data-i18n="plan.semestral">Semestral</h3>
-        <p class="plandesc" data-i18n="plan.semestral.desc">Máximo ahorro para quien ya sabe que se queda.</p>
-        <div class="price">$100<span class="per" data-i18n="plan.persem">/6 meses</span></div>
-        <div class="save" data-i18n="plan.save.sem">Ahorras $50</div>
-        <a href="https://buy.stripe.com/28EdR92da1aU3M99zB1ck02" class="btn btn-ghost" data-i18n="plan.cta">Comprar ahora</a>
+    <div class="plans" style="justify-content:center;">
+      <div class="plan featured" style="max-width:420px;">
+        <div class="planicon">🚀</div>
+        <h3 data-i18n="plan.mensual">TradeKopier</h3>
+        <p class="plandesc" data-i18n="plan.mensual.desc">Descárgalo gratis y recibe tu licencia al instante por email.</p>
+        <form id="freeDownloadForm" style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+          <input type="email" id="freeDownloadEmail" required autocomplete="email" placeholder="tu@email.com" data-i18n-ph="download.emailPlaceholder" style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-size:15px;width:100%;box-sizing:border-box;">
+          <button type="submit" id="freeDownloadBtn" class="btn btn-primary" data-i18n="plan.cta">Descargar gratis</button>
+        </form>
+        <div id="freeDownloadMsg" style="display:none;margin-top:12px;font-size:14px;line-height:1.4;"></div>
       </div>
     </div>
     <div class="included">
-      <h4 data-i18n="included.title">Incluido en los 3 planes</h4>
+      <h4 data-i18n="included.title">Todo incluido, sin coste</h4>
       <ul>
         <li data-i18n="pf1">Cuentas y conexiones ilimitadas</li>
         <li data-i18n="pf2">Réplica en tiempo real</li>
@@ -670,10 +648,10 @@
         <li data-i18n="pf5">Actualizaciones y nuevas funciones sin coste extra</li>
         <li data-i18n="pf6">Soporte 24/7</li>
         <li data-i18n="pf7">Compatible con TradingView</li>
-        <li data-i18n="pf8">Cancela cuando quieras, sin permanencia</li>
+        <li data-i18n="pf8">Sin tarjeta de crédito</li>
       </ul>
     </div>
-    <div class="pricenote" data-i18n="plan.note">Pago seguro procesado por Stripe.</div>
+    <div class="pricenote" data-i18n="plan.note">Recibirás tu clave de licencia al instante por email.</div>
   </div>
 </section>
 
@@ -713,8 +691,8 @@
   <div class="wrap">
     <div class="final-cta">
       <h2 data-i18n="cta.title">Copia tus operaciones con total confianza</h2>
-      <p data-i18n="cta.sub">Un único TradeKopier, todas las funciones, sin límite de cuentas ni conexiones. Empieza cuando quieras.</p>
-      <a href="#precios" class="btn btn-primary" data-i18n="cta.btn">Ver planes</a>
+      <p data-i18n="cta.sub">TradeKopier gratis, todas las funciones, sin límite de cuentas ni conexiones. Descárgalo cuando quieras.</p>
+      <a href="#descarga" class="btn btn-primary" data-i18n="cta.btn">Descargar gratis</a>
     </div>
   </div>
 </section>
@@ -764,12 +742,12 @@
   // ---- Traducciones ----
   const i18n = {
     es:{
-      "nav.features":"Funciones","nav.shots":"Interfaz","nav.install":"Instalación","nav.risk":"Gestión de riesgo","nav.pricing":"Precios","nav.faq":"FAQ","nav.account":"Mi cuenta","nav.cta":"Empezar",
-      "hero.badge":"💰 El mejor precio del mercado, sin límites",
+      "nav.features":"Funciones","nav.shots":"Interfaz","nav.install":"Instalación","nav.risk":"Gestión de riesgo","nav.pricing":"Descarga","nav.faq":"FAQ","nav.account":"Mi cuenta","nav.cta":"Descarga gratis","download.emailPlaceholder":"tu@email.com","download.success":"¡Listo! Revisa tu email — te hemos enviado tu clave de licencia y el enlace de descarga.","download.error":"Algo ha fallado. Inténtalo de nuevo o escríbenos a licencias@tradekopier.com.",
+      "hero.badge":"🎁 100% gratis — sin tarjeta de crédito",
       "promo.sub":"primer mes, hasta el 30 sep",
       "hero.title.accent":"Copia tus operaciones al instante","hero.title.rest":"en todas tus cuentas a la vez",
       "hero.sub":"TradeKopier replica automáticamente cada entrada, salida y protección de tu cuenta maestra hacia todas tus cuentas esclavas — sin límite de cuentas, sin límite de conexiones.",
-      "hero.cta1":"Ver planes","hero.cta2":"Ver funciones",
+      "hero.cta1":"Descargar gratis","hero.cta2":"Ver funciones",
       "stats.n1":"Ilimitadas","stats.l1":"cuentas y conexiones",
       "stats.n3":"Todos","stats.l2":"los brokers y conexiones compatibles",
       "stats.l3":"de latencia de réplica",
@@ -805,18 +783,18 @@
       "shots.nav.home":"Home","shots.nav.calendar":"Calendario","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Calendario económico","shots.hs.home1.t":"Balance y cuentas","shots.hs.home1.d":"Visión total de tu capital y cuántas cuentas tienes conectadas, de un vistazo.","shots.hs.home2.t":"Posicionamiento CFTC","shots.hs.home2.d":"Sentimiento del mercado (% largo/corto) por instrumento, directo del reporte semanal COT.","shots.hs.home3.t":"Eventos de alto impacto","shots.hs.home3.d":"Los próximos anuncios económicos importantes, con cuenta atrás en tiempo real.","shots.hs.cal1.t":"Semana completa","shots.hs.cal1.d":"Todos los eventos de la semana organizados por día, en tu zona horaria.","shots.hs.cal2.t":"Impacto por color","shots.hs.cal2.d":"Rojo = alto impacto, amarillo = medio. Filtra de un vistazo lo que realmente mueve el mercado.","shots.hs.cal3.t":"Detalle por evento","shots.hs.cal3.d":"Hora exacta, previsión y dato anterior para cada publicación.",
       "shots.nav.cockpit":"Cockpit","shots.nav.group":"Grupos","shots.nav.risk":"Risk Management","shots.title.cockpit":"TradeKopier — Cockpit","shots.title.group":"TradeKopier — Crear grupo","shots.title.risk":"TradeKopier — Risk Management","shots.cap.cockpit":"Cockpit en vivo — la operación se replica en tiempo real entre varias cuentas, cada una con su propio multiplicador.","shots.cap.group":"Crear un grupo — elige la cuenta maestra, añade esclavas y listo, en segundos.","shots.cap.risk":"Risk Management — define PDLL y PDPT por cuenta, con bloqueo automático si se supera el límite.",
       "shots.cap.video":"Vídeo de demostración en directo.",
-      "pricing.eyebrow":"Precios","pricing.title":"El mismo TradeKopier, elige tu duración",
-      "pricing.sub":"Todas las funciones incluidas en los 3 planes. Cuanto más tiempo elijas, más ahorras.",
-      "plan.mensual":"Mensual","plan.trimestral":"Trimestral","plan.semestral":"Semestral",
-      "plan.mensual.desc":"Pruébalo sin compromiso, cancela cuando quieras.","plan.trimestral.desc":"El equilibrio perfecto entre ahorro y flexibilidad.","plan.semestral.desc":"Máximo ahorro para quien ya sabe que se queda.",
+      "pricing.eyebrow":"Descarga gratuita","pricing.title":"Empieza a copiar tus operaciones hoy",
+      "pricing.sub":"Todas las funciones incluidas. Solo necesitas tu email para recibir tu clave al instante.",
+      "plan.mensual":"TradeKopier","plan.trimestral":"Trimestral","plan.semestral":"Semestral",
+      "plan.mensual.desc":"Descárgalo gratis y recibe tu licencia al instante por email.","plan.trimestral.desc":"El equilibrio perfecto entre ahorro y flexibilidad.","plan.semestral.desc":"Máximo ahorro para quien ya sabe que se queda.",
       "plan.permes":"/mes","plan.pertri":"/3 meses","plan.persem":"/6 meses","plan.popular":"Más popular",
       "plan.save.tri":"Ahorras $15","plan.save.sem":"Ahorras $50","plan.trial":"🎁 7 días gratis, después $25/mes",
       "pf1":"Cuentas y conexiones ilimitadas","pf2":"Réplica en tiempo real","pf3":"Gestión de riesgo PDLL/PDPT automática",
       "pf4":"Protección SL/TP real","pf5":"Actualizaciones y nuevas funciones sin coste extra","pf6":"Soporte 24/7",
-      "pf7":"Compatible con TradingView","pf8":"Cancela cuando quieras, sin permanencia",
-      "included.title":"Incluido en los 3 planes",
-      "plan.cta":"Comprar ahora","plan.note":"Pago seguro procesado por Stripe.",
-      "cta.title":"Copia tus operaciones con total confianza","cta.sub":"Un único TradeKopier, todas las funciones, sin límite de cuentas ni conexiones. Empieza cuando quieras.","cta.btn":"Ver planes",
+      "pf7":"Compatible con TradingView","pf8":"Sin tarjeta de crédito",
+      "included.title":"Todo incluido, sin coste",
+      "plan.cta":"Descargar gratis","plan.note":"Recibirás tu clave de licencia al instante por email.",
+      "cta.title":"Copia tus operaciones con total confianza","cta.sub":"TradeKopier gratis, todas las funciones, sin límite de cuentas ni conexiones. Descárgalo cuando quieras.","cta.btn":"Descargar gratis",
       "footer.tagline":"Copiador de operaciones multi-cuenta para NinjaTrader 8 — hecho por traders, para traders.",
       "footer.faq":"FAQ","footer.contact":"Contacto","footer.terms":"Términos de Servicio","footer.privacy":"Política de Privacidad","footer.cookies":"Política de Cookies",
       "footer.disclaimer.title":"Declaración de Riesgo:","footer.disclaimer.p1":"La operación de futuros y forex sobrelleva riesgos substanciales y no es para todos los inversionistas. Un inversionista, podría, potencialmente perder todo o más de la inversión inicial. Capital de Riesgo, es dinero que puede ser perdido, sin poner en juego la seguridad financiera o estilo de vida de la persona. Solo capital de riesgo debe ser utilizado para trading, y solo aquellas personas con suficiente capital de riesgo deben considerar trading. Resultados pasados, no son necesariamente indicativos de resultados futuros.","footer.disclaimer.p2":"Resultados hipotéticos de rendimiento deben tener muchas limitaciones inherentes, algunas de las cuales se describen a continuación. No se debe hacer representación de que alguna de las cuentas va o es probable que tenga resultados similares a los mostrados; de hecho, hay diferencias frecuentes entre los resultados hipotéticos y los resultados actuales obtenidos por cualquier programa de trading. Una de las limitaciones de resultados hipotéticos de rendimiento es el hecho de que son preparados con los beneficios en retrospectiva. Además, trading hipotético no involucra riesgo financiero, y ningún record de trading hipotético puede considerar el riesgo financiero de operaciones reales. Por ejemplo, la capacidad de resistir pérdidas o de adherirse a un programa de trading particular sin importar pérdidas son puntos materiales los cuales pueden afectar de manera substancial resultados de trading real. Hay muchos factores relacionados a los mercados en general, o a la implementación de cualquier programa de trading especifico, los cuales no pueden ser todos considerados en la preparación de resultados hipotéticos, todos estos, pueden afectar los resultados de trading de forma adversa.",
@@ -830,12 +808,12 @@
       "chat.error":"Algo ha fallado. Inténtalo de nuevo o abre un ticket.",
     },
     en:{
-      "nav.features":"Features","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Risk management","nav.pricing":"Pricing","nav.faq":"FAQ","nav.account":"My account","nav.cta":"Get started",
-      "hero.badge":"💰 Best price in the market, no limits",
+      "nav.features":"Features","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Risk management","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"My account","nav.cta":"Free download","download.emailPlaceholder":"you@email.com","download.success":"Done! Check your email — we\u2019ve sent your license key and download link.","download.error":"Something went wrong. Try again or email us at licencias@tradekopier.com.",
+      "hero.badge":"🎁 100% free — no credit card required",
       "promo.sub":"first month, through Sept 30",
       "hero.title.accent":"Copy your trades instantly","hero.title.rest":"across all your accounts at once",
       "hero.sub":"TradeKopier automatically replicates every entry, exit and protective order from your master account to all your slave accounts — no account limit, no connection limit.",
-      "hero.cta1":"View plans","hero.cta2":"See features",
+      "hero.cta1":"Download free","hero.cta2":"See features",
       "stats.n1":"Unlimited","stats.l1":"accounts and connections",
       "stats.n3":"All","stats.l2":"brokers and connections supported",
       "stats.l3":"replication latency",
@@ -871,18 +849,18 @@
       "shots.nav.home":"Home","shots.nav.calendar":"Calendar","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Economic Calendar","shots.hs.home1.t":"Balance & accounts","shots.hs.home1.d":"A full view of your capital and how many accounts are connected, at a glance.","shots.hs.home2.t":"CFTC positioning","shots.hs.home2.d":"Market sentiment (% long/short) per instrument, straight from the weekly COT report.","shots.hs.home3.t":"High-impact events","shots.hs.home3.d":"Upcoming major economic releases, with a live countdown.","shots.hs.cal1.t":"Full week","shots.hs.cal1.d":"Every event of the week organized by day, in your own time zone.","shots.hs.cal2.t":"Impact by color","shots.hs.cal2.d":"Red = high impact, yellow = medium. Spot what actually moves the market at a glance.","shots.hs.cal3.t":"Event detail","shots.hs.cal3.d":"Exact time, forecast and previous reading for every release.",
       "shots.nav.cockpit":"Cockpit","shots.nav.group":"Groups","shots.nav.risk":"Risk Management","shots.title.cockpit":"TradeKopier — Cockpit","shots.title.group":"TradeKopier — Create Group","shots.title.risk":"TradeKopier — Risk Management","shots.cap.cockpit":"Live Cockpit — the trade replicates in real time across several accounts, each with its own multiplier.","shots.cap.group":"Create a group — pick the master account, add slaves, done in seconds.","shots.cap.risk":"Risk Management — set PDLL and PDPT per account, with automatic lockout if the limit is hit.",
       "shots.cap.video":"Live demo video.",
-      "pricing.eyebrow":"Pricing","pricing.title":"The same TradeKopier, choose your duration",
-      "pricing.sub":"Every feature included in all 3 plans. The longer you choose, the more you save.",
-      "plan.mensual":"Monthly","plan.trimestral":"Quarterly","plan.semestral":"Semi-annual",
-      "plan.mensual.desc":"Try it with no commitment, cancel anytime.","plan.trimestral.desc":"The perfect balance of savings and flexibility.","plan.semestral.desc":"Maximum savings for traders who are already sold.",
+      "pricing.eyebrow":"Free download","pricing.title":"Start copying your trades today",
+      "pricing.sub":"Every feature included. Just enter your email to get your key instantly.",
+      "plan.mensual":"TradeKopier","plan.trimestral":"Quarterly","plan.semestral":"Semi-annual",
+      "plan.mensual.desc":"Download it for free and get your license instantly by email.","plan.trimestral.desc":"The perfect balance of savings and flexibility.","plan.semestral.desc":"Maximum savings for traders who are already sold.",
       "plan.permes":"/mo","plan.pertri":"/3 months","plan.persem":"/6 months","plan.popular":"Most popular",
       "plan.save.tri":"Save $15","plan.save.sem":"Save $50","plan.trial":"🎁 7 days free, then $25/mo",
       "pf1":"Unlimited accounts and connections","pf2":"Real-time replication","pf3":"Automatic PDLL/PDPT risk management",
       "pf4":"Real SL/TP protection","pf5":"Free updates and new features included","pf6":"24/7 support",
-      "pf7":"Compatible with TradingView","pf8":"Cancel anytime, no lock-in",
-      "included.title":"Included in all 3 plans",
-      "plan.cta":"Buy now","plan.note":"Secure payment processed by Stripe.",
-      "cta.title":"Copy your trades with total confidence","cta.sub":"One TradeKopier, every feature, no limit on accounts or connections. Start whenever you're ready.","cta.btn":"View plans",
+      "pf7":"Compatible with TradingView","pf8":"No credit card required",
+      "included.title":"Everything included, at no cost",
+      "plan.cta":"Download free","plan.note":"You'll receive your license key instantly by email.",
+      "cta.title":"Copy your trades with total confidence","cta.sub":"Free TradeKopier, every feature, no limit on accounts or connections. Download whenever you're ready.","cta.btn":"Download free",
       "footer.tagline":"Multi-account trade copier for NinjaTrader 8 — built by traders, for traders.",
       "footer.faq":"FAQ","footer.contact":"Contact","footer.terms":"Terms of Service","footer.privacy":"Privacy Policy","footer.cookies":"Cookie Policy",
       "footer.disclaimer.title":"Risk Disclosure:","footer.disclaimer.p1":"Futures and forex trading carries substantial risk and is not suitable for all investors. An investor could potentially lose all or more than the initial investment. Risk capital is money that can be lost without jeopardizing one's financial security or lifestyle. Only risk capital should be used for trading, and only those with sufficient risk capital should consider trading. Past performance is not necessarily indicative of future results.","footer.disclaimer.p2":"Hypothetical performance results have many inherent limitations, some of which are described below. No representation is being made that any account will or is likely to achieve results similar to those shown; in fact, there are frequently sharp differences between hypothetical results and the actual results subsequently achieved by any particular trading program. One of the limitations of hypothetical performance results is that they are prepared with the benefit of hindsight. In addition, hypothetical trading does not involve financial risk, and no hypothetical trading record can completely account for the impact of financial risk in actual trading. For example, the ability to withstand losses or to adhere to a particular trading program in spite of trading losses are material points which can also adversely affect actual trading results. There are numerous other factors related to the markets in general, or to the implementation of any specific trading program, which cannot be fully accounted for in the preparation of hypothetical performance results, all of which can adversely affect actual trading results.",
@@ -896,12 +874,12 @@
       "chat.error":"Something went wrong. Try again or open a ticket.",
     },
     de:{
-      "nav.features":"Funktionen","nav.shots":"Oberfläche","nav.install":"Installation","nav.risk":"Risikomanagement","nav.pricing":"Preise","nav.faq":"FAQ","nav.account":"Mein Konto","nav.cta":"Loslegen",
-      "hero.badge":"💰 Bestpreis am Markt, ohne Limits",
+      "nav.features":"Funktionen","nav.shots":"Oberfläche","nav.install":"Installation","nav.risk":"Risikomanagement","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"Mein Konto","nav.cta":"Kostenlos laden","download.emailPlaceholder":"deine@email.com","download.success":"Fertig! Schau in dein E-Mail-Postfach \u2014 wir haben dir deinen Lizenzschl\u00fcssel und den Download-Link geschickt.","download.error":"Etwas ist schiefgelaufen. Versuch es erneut oder schreib uns an licencias@tradekopier.com.",
+      "hero.badge":"🎁 100% kostenlos — keine Kreditkarte nötig",
       "promo.sub":"1. Monat, bis 30. Sept.",
       "hero.title.accent":"Kopiere deine Trades sofort","hero.title.rest":"auf all deine Konten gleichzeitig",
       "hero.sub":"TradeKopier repliziert automatisch jeden Einstieg, Ausstieg und jede Absicherung deines Master-Kontos auf alle Slave-Konten — ohne Konto- oder Verbindungslimit.",
-      "hero.cta1":"Preise ansehen","hero.cta2":"Funktionen ansehen",
+      "hero.cta1":"Kostenlos laden","hero.cta2":"Funktionen ansehen",
       "stats.n1":"Unbegrenzt","stats.l1":"Konten und Verbindungen",
       "stats.n3":"Alle","stats.l2":"unterstützten Broker und Verbindungen",
       "stats.l3":"Replikationslatenz",
@@ -937,18 +915,18 @@
       "shots.nav.home":"Home","shots.nav.calendar":"Kalender","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Wirtschaftskalender","shots.hs.home1.t":"Kontostand & Konten","shots.hs.home1.d":"Ein vollständiger Überblick über dein Kapital und wie viele Konten verbunden sind, auf einen Blick.","shots.hs.home2.t":"CFTC-Positionierung","shots.hs.home2.d":"Marktstimmung (% long/short) pro Instrument, direkt aus dem wöchentlichen COT-Bericht.","shots.hs.home3.t":"Ereignisse mit hoher Auswirkung","shots.hs.home3.d":"Anstehende wichtige Wirtschaftsdaten, mit Live-Countdown.","shots.hs.cal1.t":"Ganze Woche","shots.hs.cal1.d":"Alle Ereignisse der Woche nach Tag geordnet, in deiner eigenen Zeitzone.","shots.hs.cal2.t":"Auswirkung nach Farbe","shots.hs.cal2.d":"Rot = hohe Auswirkung, gelb = mittlere. Erkenne auf einen Blick, was den Markt wirklich bewegt.","shots.hs.cal3.t":"Ereignisdetail","shots.hs.cal3.d":"Genaue Uhrzeit, Prognose und vorheriger Wert für jede Veröffentlichung.",
       "shots.nav.cockpit":"Cockpit","shots.nav.group":"Gruppen","shots.nav.risk":"Risk Management","shots.title.cockpit":"TradeKopier — Cockpit","shots.title.group":"TradeKopier — Gruppe erstellen","shots.title.risk":"TradeKopier — Risk Management","shots.cap.cockpit":"Live-Cockpit — der Trade wird in Echtzeit auf mehrere Konten repliziert, jedes mit eigenem Multiplikator.","shots.cap.group":"Gruppe erstellen — Master-Konto wählen, Slaves hinzufügen, fertig in Sekunden.","shots.cap.risk":"Risk Management — PDLL und PDPT pro Konto festlegen, mit automatischer Sperre bei Erreichen des Limits.",
       "shots.cap.video":"Live-Demo-Video.",
-      "pricing.eyebrow":"Preise","pricing.title":"Derselbe TradeKopier, wähle deine Laufzeit",
-      "pricing.sub":"Alle Funktionen in allen 3 Plänen enthalten. Je länger die Laufzeit, desto mehr sparst du.",
-      "plan.mensual":"Monatlich","plan.trimestral":"Vierteljährlich","plan.semestral":"Halbjährlich",
-      "plan.mensual.desc":"Unverbindlich testen, jederzeit kündbar.","plan.trimestral.desc":"Die perfekte Balance aus Ersparnis und Flexibilität.","plan.semestral.desc":"Maximale Ersparnis für alle, die schon überzeugt sind.",
+      "pricing.eyebrow":"Kostenloser Download","pricing.title":"Starte noch heute mit dem Kopieren deiner Trades",
+      "pricing.sub":"Alle Funktionen inklusive. Gib einfach deine E-Mail ein, um sofort deinen Schlüssel zu erhalten.",
+      "plan.mensual":"TradeKopier","plan.trimestral":"Vierteljährlich","plan.semestral":"Halbjährlich",
+      "plan.mensual.desc":"Lade es kostenlos herunter und erhalte deine Lizenz sofort per E-Mail.","plan.trimestral.desc":"Die perfekte Balance aus Ersparnis und Flexibilität.","plan.semestral.desc":"Maximale Ersparnis für alle, die schon überzeugt sind.",
       "plan.permes":"/Monat","plan.pertri":"/3 Monate","plan.persem":"/6 Monate","plan.popular":"Am beliebtesten",
       "plan.save.tri":"Spare $15","plan.save.sem":"Spare $50","plan.trial":"🎁 7 Tage gratis, danach $25/Monat",
       "pf1":"Unbegrenzte Konten und Verbindungen","pf2":"Echtzeit-Replikation","pf3":"Automatisches PDLL/PDPT-Risikomanagement",
       "pf4":"Echter SL/TP-Schutz","pf5":"Kostenlose Updates und neue Funktionen inklusive","pf6":"24/7-Support",
-      "pf7":"Kompatibel mit TradingView","pf8":"Jederzeit kündbar, keine Vertragsbindung",
-      "included.title":"In allen 3 Plänen enthalten",
-      "plan.cta":"Jetzt kaufen","plan.note":"Sichere Zahlung, abgewickelt von Stripe.",
-      "cta.title":"Kopiere deine Trades mit vollem Vertrauen","cta.sub":"Ein TradeKopier, alle Funktionen, kein Limit bei Konten oder Verbindungen. Starte, wann immer du bereit bist.","cta.btn":"Preise ansehen",
+      "pf7":"Kompatibel mit TradingView","pf8":"Keine Kreditkarte nötig",
+      "included.title":"Alles inklusive, ohne Kosten",
+      "plan.cta":"Kostenlos laden","plan.note":"Du erhältst deinen Lizenzschlüssel sofort per E-Mail.",
+      "cta.title":"Kopiere deine Trades mit vollem Vertrauen","cta.sub":"Kostenloser TradeKopier, alle Funktionen, kein Limit bei Konten oder Verbindungen. Lade herunter, wann immer du bereit bist.","cta.btn":"Kostenlos laden",
       "footer.tagline":"Multi-Konto-Trade-Copier für NinjaTrader 8 — von Tradern für Trader entwickelt.",
       "footer.faq":"FAQ","footer.contact":"Kontakt","footer.terms":"Nutzungsbedingungen","footer.privacy":"Datenschutz","footer.cookies":"Cookie-Richtlinie",
       "footer.disclaimer.title":"Risikohinweis:","footer.disclaimer.p1":"Der Handel mit Futures und Forex birgt erhebliche Risiken und ist nicht für jeden Anleger geeignet. Ein Anleger kann möglicherweise die gesamte Anfangsinvestition oder mehr verlieren. Risikokapital ist Geld, das verloren werden kann, ohne die finanzielle Sicherheit oder den Lebensstandard zu gefährden. Für den Handel sollte nur Risikokapital verwendet werden, und nur Personen mit ausreichendem Risikokapital sollten den Handel in Betracht ziehen. Vergangene Ergebnisse sind nicht zwangsläufig ein Hinweis auf zukünftige Ergebnisse.","footer.disclaimer.p2":"Hypothetische Performance-Ergebnisse unterliegen zahlreichen inhärenten Einschränkungen, von denen einige im Folgenden beschrieben werden. Es wird keine Zusicherung gegeben, dass ein Konto ähnliche Ergebnisse wie die gezeigten erzielen wird oder wahrscheinlich erzielen wird; tatsächlich gibt es häufig deutliche Unterschiede zwischen hypothetischen Ergebnissen und den tatsächlichen Ergebnissen, die später von einem bestimmten Handelsprogramm erzielt werden. Eine der Einschränkungen hypothetischer Performance-Ergebnisse besteht darin, dass sie im Nachhinein erstellt werden. Darüber hinaus ist mit hypothetischem Handel kein finanzielles Risiko verbunden, und keine hypothetische Handelsaufzeichnung kann die Auswirkungen des finanziellen Risikos beim tatsächlichen Handel vollständig berücksichtigen. Zum Beispiel sind die Fähigkeit, Verluste zu ertragen, oder an einem bestimmten Handelsprogramm trotz Handelsverlusten festzuhalten, wesentliche Punkte, die sich ebenfalls erheblich auf die tatsächlichen Handelsergebnisse auswirken können. Es gibt zahlreiche weitere Faktoren im Zusammenhang mit den Märkten im Allgemeinen oder der Umsetzung eines bestimmten Handelsprogramms, die bei der Erstellung hypothetischer Performance-Ergebnisse nicht vollständig berücksichtigt werden können und die sich alle nachteilig auf die tatsächlichen Handelsergebnisse auswirken können.",
@@ -962,12 +940,12 @@
       "chat.error":"Etwas ist schiefgelaufen. Versuch es erneut oder öffne ein Ticket.",
     },
     pt:{
-      "nav.features":"Funcionalidades","nav.shots":"Interface","nav.install":"Instalação","nav.risk":"Gestão de risco","nav.pricing":"Preços","nav.faq":"FAQ","nav.account":"Minha conta","nav.cta":"Começar",
-      "hero.badge":"💰 O melhor preço do mercado, sem limites",
+      "nav.features":"Funcionalidades","nav.shots":"Interface","nav.install":"Instalação","nav.risk":"Gestão de risco","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"Minha conta","nav.cta":"Download grátis","download.emailPlaceholder":"teu@email.com","download.success":"Pronto! Verifica o teu email \u2014 enviamos a tua chave de licen\u00e7a e o link de download.","download.error":"Algo correu mal. Tenta novamente ou escreve-nos para licencias@tradekopier.com.",
+      "hero.badge":"🎁 100% grátis — sem cartão de crédito",
       "promo.sub":"1º mês, até 30 set",
       "hero.title.accent":"Copia as tuas operações ao instante","hero.title.rest":"em todas as tuas contas ao mesmo tempo",
       "hero.sub":"O TradeKopier replica automaticamente cada entrada, saída e proteção da tua conta mestre para todas as contas escravas — sem limite de contas, sem limite de conexões.",
-      "hero.cta1":"Ver planos","hero.cta2":"Ver funcionalidades",
+      "hero.cta1":"Baixar grátis","hero.cta2":"Ver funcionalidades",
       "stats.n1":"Ilimitadas","stats.l1":"contas e conexões",
       "stats.n3":"Todos","stats.l2":"os brokers e conexões compatíveis",
       "stats.l3":"de latência de réplica",
@@ -1003,18 +981,18 @@
       "shots.nav.home":"Home","shots.nav.calendar":"Calendário","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Calendário Económico","shots.hs.home1.t":"Saldo e contas","shots.hs.home1.d":"Uma visão completa do teu capital e de quantas contas estão ligadas, num relance.","shots.hs.home2.t":"Posicionamento CFTC","shots.hs.home2.d":"Sentimento de mercado (% comprado/vendido) por instrumento, direto do relatório semanal COT.","shots.hs.home3.t":"Eventos de alto impacto","shots.hs.home3.d":"Próximos anúncios económicos importantes, com contagem decrescente em tempo real.","shots.hs.cal1.t":"Semana completa","shots.hs.cal1.d":"Todos os eventos da semana organizados por dia, no teu fuso horário.","shots.hs.cal2.t":"Impacto por cor","shots.hs.cal2.d":"Vermelho = alto impacto, amarelo = médio. Identifica num relance o que realmente move o mercado.","shots.hs.cal3.t":"Detalhe do evento","shots.hs.cal3.d":"Hora exata, previsão e valor anterior de cada publicação.",
       "shots.nav.cockpit":"Cockpit","shots.nav.group":"Grupos","shots.nav.risk":"Risk Management","shots.title.cockpit":"TradeKopier — Cockpit","shots.title.group":"TradeKopier — Criar Grupo","shots.title.risk":"TradeKopier — Risk Management","shots.cap.cockpit":"Cockpit ao vivo — a operação replica-se em tempo real em várias contas, cada uma com o seu próprio multiplicador.","shots.cap.group":"Criar um grupo — escolhe a conta mestre, adiciona escravas, pronto em segundos.","shots.cap.risk":"Risk Management — define PDLL e PDPT por conta, com bloqueio automático ao atingir o limite.",
       "shots.cap.video":"Vídeo de demonstração ao vivo.",
-      "pricing.eyebrow":"Preços","pricing.title":"O mesmo TradeKopier, escolhe a duração",
-      "pricing.sub":"Todas as funcionalidades incluídas nos 3 planos. Quanto mais tempo escolheres, mais poupas.",
-      "plan.mensual":"Mensal","plan.trimestral":"Trimestral","plan.semestral":"Semestral",
-      "plan.mensual.desc":"Experimenta sem compromisso, cancela quando quiseres.","plan.trimestral.desc":"O equilíbrio perfeito entre poupança e flexibilidade.","plan.semestral.desc":"Poupança máxima para quem já sabe que fica.",
+      "pricing.eyebrow":"Download gratuito","pricing.title":"Começa a copiar as tuas operações hoje",
+      "pricing.sub":"Todas as funcionalidades incluídas. Basta o teu email para receberes a tua chave na hora.",
+      "plan.mensual":"TradeKopier","plan.trimestral":"Trimestral","plan.semestral":"Semestral",
+      "plan.mensual.desc":"Descarrega grátis e recebe a tua licença na hora por email.","plan.trimestral.desc":"O equilíbrio perfeito entre poupança e flexibilidade.","plan.semestral.desc":"Poupança máxima para quem já sabe que fica.",
       "plan.permes":"/mês","plan.pertri":"/3 meses","plan.persem":"/6 meses","plan.popular":"Mais popular",
       "plan.save.tri":"Poupa $15","plan.save.sem":"Poupa $50","plan.trial":"🎁 7 dias grátis, depois $25/mês",
       "pf1":"Contas e conexões ilimitadas","pf2":"Réplica em tempo real","pf3":"Gestão de risco PDLL/PDPT automática",
       "pf4":"Proteção SL/TP real","pf5":"Atualizações e novas funcionalidades sem custo extra","pf6":"Suporte 24/7",
-      "pf7":"Compatível com TradingView","pf8":"Cancela quando quiseres, sem fidelização",
-      "included.title":"Incluído nos 3 planos",
-      "plan.cta":"Comprar agora","plan.note":"Pagamento seguro processado pela Stripe.",
-      "cta.title":"Copia as tuas operações com total confiança","cta.sub":"Um único TradeKopier, todas as funcionalidades, sem limite de contas nem conexões. Começa quando quiseres.","cta.btn":"Ver planos",
+      "pf7":"Compatível com TradingView","pf8":"Sem cartão de crédito",
+      "included.title":"Tudo incluído, sem custo",
+      "plan.cta":"Baixar grátis","plan.note":"Vais receber a tua chave de licença na hora por email.",
+      "cta.title":"Copia as tuas operações com total confiança","cta.sub":"TradeKopier grátis, todas as funcionalidades, sem limite de contas nem conexões. Descarrega quando quiseres.","cta.btn":"Baixar grátis",
       "footer.tagline":"Copiador de operações multi-conta para NinjaTrader 8 — feito por traders, para traders.",
       "footer.faq":"FAQ","footer.contact":"Contacto","footer.terms":"Termos de Serviço","footer.privacy":"Política de Privacidade","footer.cookies":"Política de Cookies",
       "footer.disclaimer.title":"Declaração de Risco:","footer.disclaimer.p1":"A negociação de futuros e forex envolve riscos substanciais e não é adequada para todos os investidores. Um investidor pode potencialmente perder todo ou mais do que o investimento inicial. Capital de risco é dinheiro que pode ser perdido sem comprometer a segurança financeira ou o estilo de vida da pessoa. Apenas capital de risco deve ser utilizado para negociação, e apenas pessoas com capital de risco suficiente devem considerar negociar. Resultados passados não são necessariamente indicativos de resultados futuros.","footer.disclaimer.p2":"Os resultados de desempenho hipotéticos têm muitas limitações inerentes, algumas das quais são descritas a seguir. Não se faz nenhuma representação de que qualquer conta irá ou é provável que alcance resultados semelhantes aos apresentados; de facto, há frequentemente diferenças acentuadas entre os resultados hipotéticos e os resultados reais posteriormente obtidos por qualquer programa de negociação específico. Uma das limitações dos resultados de desempenho hipotéticos é o facto de serem preparados com o benefício da retrospetiva. Além disso, a negociação hipotética não envolve risco financeiro, e nenhum registo de negociação hipotética pode considerar totalmente o impacto do risco financeiro na negociação real. Por exemplo, a capacidade de suportar perdas ou de aderir a um determinado programa de negociação apesar das perdas são pontos materiais que também podem afetar substancialmente os resultados de negociação reais. Existem numerosos outros fatores relacionados com os mercados em geral, ou com a implementação de qualquer programa de negociação específico, que não podem ser totalmente considerados na preparação de resultados hipotéticos, todos os quais podem afetar adversamente os resultados de negociação reais.",
@@ -1028,12 +1006,12 @@
       "chat.error":"Algo correu mal. Tenta novamente ou abre um ticket.",
     },
     it:{
-      "nav.features":"Funzionalità","nav.shots":"Interfaccia","nav.install":"Installazione","nav.risk":"Gestione del rischio","nav.pricing":"Prezzi","nav.faq":"FAQ","nav.account":"Il mio account","nav.cta":"Inizia",
-      "hero.badge":"💰 Il miglior prezzo del mercato, senza limiti",
+      "nav.features":"Funzionalità","nav.shots":"Interfaccia","nav.install":"Installazione","nav.risk":"Gestione del rischio","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"Il mio account","nav.cta":"Download gratis","download.emailPlaceholder":"tua@email.com","download.success":"Fatto! Controlla la tua email \u2014 ti abbiamo inviato la chiave di licenza e il link di download.","download.error":"Qualcosa \u00e8 andato storto. Riprova o scrivici a licencias@tradekopier.com.",
+      "hero.badge":"🎁 100% gratis — nessuna carta di credito",
       "promo.sub":"1° mese, fino al 30 set",
       "hero.title.accent":"Copia le tue operazioni all'istante","hero.title.rest":"su tutti i tuoi conti contemporaneamente",
       "hero.sub":"TradeKopier replica automaticamente ogni entrata, uscita e protezione del tuo conto master su tutti i conti slave — senza limiti di conti, senza limiti di connessioni.",
-      "hero.cta1":"Vedi i piani","hero.cta2":"Vedi le funzionalità",
+      "hero.cta1":"Scarica gratis","hero.cta2":"Vedi le funzionalità",
       "stats.n1":"Illimitati","stats.l1":"conti e connessioni",
       "stats.n3":"Tutti","stats.l2":"i broker e le connessioni supportati",
       "stats.l3":"di latenza di replica",
@@ -1069,18 +1047,18 @@
       "shots.nav.home":"Home","shots.nav.calendar":"Calendario","shots.title.home":"TradeKopier — Home","shots.title.calendar":"TradeKopier — Calendario Economico","shots.hs.home1.t":"Saldo e conti","shots.hs.home1.d":"Una visione completa del tuo capitale e di quanti conti sono collegati, a colpo d'occhio.","shots.hs.home2.t":"Posizionamento CFTC","shots.hs.home2.d":"Sentiment di mercato (% long/short) per strumento, direttamente dal report settimanale COT.","shots.hs.home3.t":"Eventi ad alto impatto","shots.hs.home3.d":"Prossimi annunci economici importanti, con conto alla rovescia in tempo reale.","shots.hs.cal1.t":"Settimana completa","shots.hs.cal1.d":"Tutti gli eventi della settimana organizzati per giorno, nel tuo fuso orario.","shots.hs.cal2.t":"Impatto per colore","shots.hs.cal2.d":"Rosso = alto impatto, giallo = medio. Individua a colpo d'occhio cosa muove davvero il mercato.","shots.hs.cal3.t":"Dettaglio evento","shots.hs.cal3.d":"Ora esatta, previsione e dato precedente per ogni pubblicazione.",
       "shots.nav.cockpit":"Cockpit","shots.nav.group":"Gruppi","shots.nav.risk":"Risk Management","shots.title.cockpit":"TradeKopier — Cockpit","shots.title.group":"TradeKopier — Crea Gruppo","shots.title.risk":"TradeKopier — Risk Management","shots.cap.cockpit":"Cockpit dal vivo — l'operazione si replica in tempo reale su più conti, ciascuno con il proprio moltiplicatore.","shots.cap.group":"Crea un gruppo — scegli il conto master, aggiungi gli slave, fatto in pochi secondi.","shots.cap.risk":"Risk Management — imposta PDLL e PDPT per conto, con blocco automatico al raggiungimento del limite.",
       "shots.cap.video":"Video dimostrativo dal vivo.",
-      "pricing.eyebrow":"Prezzi","pricing.title":"Lo stesso TradeKopier, scegli la durata",
-      "pricing.sub":"Tutte le funzionalità incluse nei 3 piani. Più a lungo scegli, più risparmi.",
-      "plan.mensual":"Mensile","plan.trimestral":"Trimestrale","plan.semestral":"Semestrale",
-      "plan.mensual.desc":"Provalo senza impegno, cancella quando vuoi.","plan.trimestral.desc":"Il perfetto equilibrio tra risparmio e flessibilità.","plan.semestral.desc":"Il massimo risparmio per chi ha già deciso di restare.",
+      "pricing.eyebrow":"Download gratuito","pricing.title":"Inizia oggi a copiare le tue operazioni",
+      "pricing.sub":"Tutte le funzionalità incluse. Ti basta l'email per ricevere subito la tua chiave.",
+      "plan.mensual":"TradeKopier","plan.trimestral":"Trimestrale","plan.semestral":"Semestrale",
+      "plan.mensual.desc":"Scaricalo gratis e ricevi subito la licenza via email.","plan.trimestral.desc":"Il perfetto equilibrio tra risparmio e flessibilità.","plan.semestral.desc":"Il massimo risparmio per chi ha già deciso di restare.",
       "plan.permes":"/mese","plan.pertri":"/3 mesi","plan.persem":"/6 mesi","plan.popular":"Più popolare",
       "plan.save.tri":"Risparmi $15","plan.save.sem":"Risparmi $50","plan.trial":"🎁 7 giorni gratis, poi $25/mese",
       "pf1":"Conti e connessioni illimitati","pf2":"Replica in tempo reale","pf3":"Gestione del rischio PDLL/PDPT automatica",
       "pf4":"Protezione SL/TP reale","pf5":"Aggiornamenti e nuove funzionalità senza costi extra","pf6":"Supporto 24/7",
-      "pf7":"Compatibile con TradingView","pf8":"Annulla quando vuoi, nessun vincolo",
-      "included.title":"Incluso in tutti e 3 i piani",
-      "plan.cta":"Acquista ora","plan.note":"Pagamento sicuro elaborato da Stripe.",
-      "cta.title":"Copia le tue operazioni con totale fiducia","cta.sub":"Un solo TradeKopier, tutte le funzionalità, nessun limite di conti o connessioni. Inizia quando vuoi.","cta.btn":"Vedi i piani",
+      "pf7":"Compatibile con TradingView","pf8":"Nessuna carta di credito richiesta",
+      "included.title":"Tutto incluso, senza costi",
+      "plan.cta":"Scarica gratis","plan.note":"Riceverai subito la tua chiave di licenza via email.",
+      "cta.title":"Copia le tue operazioni con totale fiducia","cta.sub":"TradeKopier gratis, tutte le funzionalità, nessun limite di conti o connessioni. Scaricalo quando vuoi.","cta.btn":"Scarica gratis",
       "footer.tagline":"Copiatore di operazioni multi-conto per NinjaTrader 8 — creato da trader, per trader.",
       "footer.faq":"FAQ","footer.contact":"Contatto","footer.terms":"Termini di Servizio","footer.privacy":"Informativa sulla Privacy","footer.cookies":"Informativa sui Cookie",
       "footer.disclaimer.title":"Avvertenza sui Rischi:","footer.disclaimer.p1":"Il trading di futures e forex comporta rischi sostanziali e non è adatto a tutti gli investitori. Un investitore potrebbe potenzialmente perdere tutto o più dell'investimento iniziale. Il capitale di rischio è denaro che può essere perso senza compromettere la sicurezza finanziaria o lo stile di vita della persona. Solo il capitale di rischio dovrebbe essere utilizzato per il trading, e solo le persone con capitale di rischio sufficiente dovrebbero considerare il trading. I risultati passati non sono necessariamente indicativi di risultati futuri.","footer.disclaimer.p2":"I risultati di performance ipotetici presentano molte limitazioni intrinseche, alcune delle quali sono descritte di seguito. Non viene fatta alcuna dichiarazione sul fatto che un conto raggiungerà o è probabile che raggiunga risultati simili a quelli mostrati; infatti, esistono spesso differenze marcate tra i risultati ipotetici e i risultati effettivi successivamente ottenuti da un determinato programma di trading. Uno dei limiti dei risultati di performance ipotetici è il fatto che vengono preparati con il senno di poi. Inoltre, il trading ipotetico non comporta alcun rischio finanziario, e nessun record di trading ipotetico può tenere pienamente conto dell'impatto del rischio finanziario nel trading reale. Ad esempio, la capacità di sopportare le perdite o di attenersi a un particolare programma di trading nonostante le perdite sono punti rilevanti che possono anche influire negativamente sui risultati di trading reali. Esistono numerosi altri fattori legati ai mercati in generale o all'implementazione di qualsiasi programma di trading specifico che non possono essere pienamente considerati nella preparazione dei risultati ipotetici, tutti i quali possono influire negativamente sui risultati di trading reali.",
@@ -1094,12 +1072,12 @@
       "chat.error":"Qualcosa è andato storto. Riprova o apri un ticket.",
     },
     fr:{
-      "nav.features":"Fonctionnalités","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Gestion du risque","nav.pricing":"Tarifs","nav.faq":"FAQ","nav.account":"Mon compte","nav.cta":"Commencer",
-      "hero.badge":"💰 Le meilleur prix du marché, sans limites",
+      "nav.features":"Fonctionnalités","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Gestion du risque","nav.pricing":"Téléchargement","nav.faq":"FAQ","nav.account":"Mon compte","nav.cta":"Téléchargement gratuit","download.emailPlaceholder":"ton@email.com","download.success":"C\u2019est fait\u00a0! V\u00e9rifie ton email \u2014 nous t\u2019avons envoy\u00e9 ta cl\u00e9 de licence et le lien de t\u00e9l\u00e9chargement.","download.error":"Une erreur s\u2019est produite. R\u00e9essaie ou \u00e9cris-nous \u00e0 licencias@tradekopier.com.",
+      "hero.badge":"🎁 100% gratuit — sans carte bancaire",
       "promo.sub":"1er mois, jusqu'au 30 sept",
       "hero.title.accent":"Copiez vos trades instantanément","hero.title.rest":"sur tous vos comptes à la fois",
       "hero.sub":"TradeKopier réplique automatiquement chaque entrée, sortie et protection de votre compte maître vers tous vos comptes esclaves — sans limite de comptes, sans limite de connexions.",
-      "hero.cta1":"Voir les tarifs","hero.cta2":"Voir les fonctionnalités",
+      "hero.cta1":"Télécharger gratuitement","hero.cta2":"Voir les fonctionnalités",
       "stats.n1":"Illimités","stats.l1":"comptes et connexions",
       "stats.n3":"Tous","stats.l2":"les brokers et connexions pris en charge",
       "stats.l3":"de latence de réplication",
@@ -1135,18 +1113,18 @@
       "shots.nav.home":"Accueil","shots.nav.calendar":"Calendrier","shots.title.home":"TradeKopier — Accueil","shots.title.calendar":"TradeKopier — Calendrier économique","shots.hs.home1.t":"Solde et comptes","shots.hs.home1.d":"Une vue complète de votre capital et du nombre de comptes connectés, en un coup d'œil.","shots.hs.home2.t":"Positionnement CFTC","shots.hs.home2.d":"Sentiment du marché (% long/short) par instrument, directement issu du rapport COT hebdomadaire.","shots.hs.home3.t":"Événements à fort impact","shots.hs.home3.d":"Prochaines annonces économiques majeures, avec un compte à rebours en direct.","shots.hs.cal1.t":"Semaine complète","shots.hs.cal1.d":"Tous les événements de la semaine organisés par jour, dans votre fuseau horaire.","shots.hs.cal2.t":"Impact par couleur","shots.hs.cal2.d":"Rouge = fort impact, jaune = moyen. Repérez en un coup d'œil ce qui bouge vraiment le marché.","shots.hs.cal3.t":"Détail de l'événement","shots.hs.cal3.d":"Heure exacte, prévision et valeur précédente pour chaque publication.",
       "shots.nav.cockpit":"Cockpit","shots.nav.group":"Groupes","shots.nav.risk":"Risk Management","shots.title.cockpit":"TradeKopier — Cockpit","shots.title.group":"TradeKopier — Créer un groupe","shots.title.risk":"TradeKopier — Risk Management","shots.cap.cockpit":"Cockpit en direct — le trade se réplique en temps réel sur plusieurs comptes, chacun avec son propre multiplicateur.","shots.cap.group":"Créer un groupe — choisissez le compte maître, ajoutez les esclaves, prêt en quelques secondes.","shots.cap.risk":"Risk Management — définissez PDLL et PDPT par compte, avec verrouillage automatique en cas de dépassement de la limite.",
       "shots.cap.video":"Vidéo de démonstration en direct.",
-      "pricing.eyebrow":"Tarifs","pricing.title":"Le même TradeKopier, choisissez votre durée",
-      "pricing.sub":"Toutes les fonctionnalités incluses dans les 3 plans. Plus vous choisissez une durée longue, plus vous économisez.",
-      "plan.mensual":"Mensuel","plan.trimestral":"Trimestriel","plan.semestral":"Semestriel",
-      "plan.mensual.desc":"Essayez sans engagement, annulez à tout moment.","plan.trimestral.desc":"L'équilibre parfait entre économies et flexibilité.","plan.semestral.desc":"Économies maximales pour ceux qui sont déjà convaincus.",
+      "pricing.eyebrow":"Téléchargement gratuit","pricing.title":"Commencez à copier vos trades dès aujourd'hui",
+      "pricing.sub":"Toutes les fonctionnalités incluses. Il vous suffit d'un email pour recevoir votre clé instantanément.",
+      "plan.mensual":"TradeKopier","plan.trimestral":"Trimestriel","plan.semestral":"Semestriel",
+      "plan.mensual.desc":"Télécharge-le gratuitement et reçois ta licence instantanément par email.","plan.trimestral.desc":"L'équilibre parfait entre économies et flexibilité.","plan.semestral.desc":"Économies maximales pour ceux qui sont déjà convaincus.",
       "plan.permes":"/mois","plan.pertri":"/3 mois","plan.persem":"/6 mois","plan.popular":"Le plus populaire",
       "plan.save.tri":"Économisez 15 $","plan.save.sem":"Économisez 50 $","plan.trial":"🎁 7 jours gratuits, puis 25 $/mois",
       "pf1":"Comptes et connexions illimités","pf2":"Réplication en temps réel","pf3":"Gestion du risque PDLL/PDPT automatique",
       "pf4":"Protection SL/TP réelle","pf5":"Mises à jour et nouvelles fonctionnalités incluses sans frais","pf6":"Support 24/7",
-      "pf7":"Compatible avec TradingView","pf8":"Annulez à tout moment, sans engagement",
-      "included.title":"Inclus dans les 3 plans",
-      "plan.cta":"Acheter maintenant","plan.note":"Paiement sécurisé traité par Stripe.",
-      "cta.title":"Copiez vos trades en toute confiance","cta.sub":"Un seul TradeKopier, toutes les fonctionnalités, sans limite de comptes ni de connexions. Commencez quand vous voulez.","cta.btn":"Voir les tarifs",
+      "pf7":"Compatible avec TradingView","pf8":"Sans carte bancaire",
+      "included.title":"Tout inclus, sans frais",
+      "plan.cta":"Télécharger gratuitement","plan.note":"Vous recevrez votre clé de licence instantanément par email.",
+      "cta.title":"Copiez vos trades en toute confiance","cta.sub":"TradeKopier gratuit, toutes les fonctionnalités, sans limite de comptes ni de connexions. Téléchargez quand vous voulez.","cta.btn":"Télécharger gratuitement",
       "footer.tagline":"Copieur de trades multi-comptes pour NinjaTrader 8 — créé par des traders, pour des traders.",
       "footer.faq":"FAQ","footer.contact":"Contact","footer.terms":"Conditions d'utilisation","footer.privacy":"Politique de confidentialité","footer.cookies":"Politique de cookies",
       "footer.disclaimer.title":"Avertissement sur les Risques :","footer.disclaimer.p1":"Le trading de futures et de forex comporte des risques substantiels et ne convient pas à tous les investisseurs. Un investisseur pourrait potentiellement perdre la totalité ou plus que son investissement initial. Le capital à risque est de l'argent qui peut être perdu sans compromettre la sécurité financière ou le mode de vie de la personne. Seul le capital à risque devrait être utilisé pour le trading, et seules les personnes disposant d'un capital à risque suffisant devraient envisager de trader. Les performances passées ne sont pas nécessairement indicatives des résultats futurs.","footer.disclaimer.p2":"Les résultats de performance hypothétiques comportent de nombreuses limites inhérentes, dont certaines sont décrites ci-dessous. Aucune déclaration n'est faite selon laquelle un compte atteindra ou est susceptible d'atteindre des résultats similaires à ceux présentés ; en fait, il existe fréquemment des différences marquées entre les résultats hypothétiques et les résultats réels obtenus par la suite par un programme de trading particulier. L'une des limites des résultats de performance hypothétiques est le fait qu'ils sont préparés avec le recul. De plus, le trading hypothétique n'implique aucun risque financier, et aucun historique de trading hypothétique ne peut rendre compte pleinement de l'impact du risque financier dans le trading réel. Par exemple, la capacité à supporter des pertes ou à adhérer à un programme de trading particulier malgré des pertes sont des points essentiels qui peuvent également affecter de manière significative les résultats de trading réels. Il existe de nombreux autres facteurs liés aux marchés en général ou à la mise en œuvre d'un programme de trading spécifique qui ne peuvent pas être entièrement pris en compte dans la préparation des résultats hypothétiques, et qui peuvent tous affecter négativement les résultats de trading réels.",
@@ -1290,37 +1268,6 @@
   setActiveShot(activeShotId);
 
   document.getElementById('langSwitch').addEventListener('change', (e)=> setLang(e.target.value));
-
-  // Promo badge flotante: parallax al hacer scroll + cierre persistente
-  (function(){
-    const badge = document.getElementById('promoBadge');
-    if(!badge) return;
-    if(localStorage.getItem('tk_promo_dismissed') === '1'){ badge.style.display = 'none'; return; }
-    let ticking = false;
-    function onScroll(){
-      if(ticking) return;
-      ticking = true;
-      requestAnimationFrame(function(){
-        const offset = Math.min(window.scrollY * 0.04, 20);
-        badge.style.setProperty('--promoScroll', (-offset) + 'px');
-        ticking = false;
-      });
-    }
-    window.addEventListener('scroll', onScroll, {passive:true});
-    badge.addEventListener('click', function(e){
-      if(e.target.id === 'promoClose') return;
-      const precios = document.querySelector('#precios');
-      if(precios) precios.scrollIntoView({behavior:'smooth'});
-    });
-    const closeBtn = document.getElementById('promoClose');
-    if(closeBtn){
-      closeBtn.addEventListener('click', function(e){
-        e.stopPropagation();
-        badge.style.display = 'none';
-        localStorage.setItem('tk_promo_dismissed', '1');
-      });
-    }
-  })();
 
   // Stats hero: entrada animada al hacer scroll + contador para "11+"
   (function(){
@@ -1503,6 +1450,40 @@
       btn.disabled = false;
     }
   });
+
+  // ---- Descarga gratuita ----
+  const FREE_SIGNUP_URL = "https://ansdganfothquofypear.supabase.co/functions/v1/free-license-signup";
+  const freeDownloadForm = document.getElementById('freeDownloadForm');
+  if (freeDownloadForm) {
+    freeDownloadForm.addEventListener('submit', async function(e){
+      e.preventDefault();
+      const emailInput = document.getElementById('freeDownloadEmail');
+      const email = emailInput.value.trim();
+      const btn = document.getElementById('freeDownloadBtn');
+      const msg = document.getElementById('freeDownloadMsg');
+      if (!email) return;
+      btn.disabled = true;
+      msg.style.display = 'none';
+      try {
+        const resp = await fetch(FREE_SIGNUP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await resp.json();
+        if (!resp.ok || !data.ok) throw new Error(data.error || 'error');
+        msg.textContent = i18n[currentLang]['download.success'];
+        msg.style.color = 'var(--accent)';
+        msg.style.display = 'block';
+        freeDownloadForm.style.display = 'none';
+      } catch(err) {
+        msg.textContent = i18n[currentLang]['download.error'];
+        msg.style.color = '#ff5c5c';
+        msg.style.display = 'block';
+        btn.disabled = false;
+      }
+    });
+  }
 </script>
 
 </body>
