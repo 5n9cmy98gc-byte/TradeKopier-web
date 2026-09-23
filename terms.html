@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeKopier — Terms of Service</title>
+<title>TradeKopier — Términos de Servicio</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
   :root{
@@ -27,8 +27,17 @@
   p{margin-bottom:14px;}
   ul{margin:0 0 14px 20px;}
   li{margin-bottom:6px;}
+  table{width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:13.5px;}
+  th, td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); color:#c3ccd6;}
+  th{color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.04em;}
   footer{border-top:1px solid var(--border); padding:36px 24px; text-align:center; color:var(--muted); font-size:13px;}
   footer a{margin:0 10px;}
+
+  .summary{background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:10px; padding:18px 20px 8px; margin:0 0 30px;}
+  .summary ol{margin:10px 0 12px 20px;}
+  .summary li{margin-bottom:8px;}
+  strong{color:var(--text);}
+  [hidden]{display:none !important;}
 </style>
 </head>
 <body>
@@ -37,50 +46,252 @@
   <nav>
     <a href="index.html" class="logo"><span class="dot"></span>TradeKopier</a>
     <select id="langSwitch">
-      <option value="en">English</option>
       <option value="es">Español</option>
+      <option value="en">English</option>
     </select>
   </nav>
 </header>
 
 <div class="wrap">
-  <h1 data-i18n="title">Terms of Service</h1>
-  <div class="updated" data-i18n="updated">Last updated: August 21, 2026</div>
-
-  <h2 data-i18n="s1.h">1. Acceptance of these terms</h2>
-  <p data-i18n="s1.p">By purchasing, downloading, installing, or using TradeKopier, you agree to these Terms of Service. If you do not agree, do not use TradeKopier.</p>
-
-  <h2 data-i18n="s2.h">2. What TradeKopier is</h2>
-  <p data-i18n="s2.p1">TradeKopier is a software add-on that runs inside NinjaTrader 8. It replicates orders from a leader account to follower accounts you configure, and lets you set per-account risk limits (PDLL/PDPT).</p>
-  <p data-i18n="s2.p2">TradeKopier is not a broker, not an investment advisor, and does not manage funds on your behalf. It does not place trades on its own initiative — it only replicates what happens on the leader account you control. Every trading decision remains entirely yours.</p>
-
-  <h2 data-i18n="s3.h">3. Licenses and plans</h2>
-  <p data-i18n="s3.p1">TradeKopier is sold under monthly, quarterly, or semi-annual licenses. Payment is processed by Stripe. Your license key is generated and emailed automatically after payment.</p>
-  <p data-i18n="s3.p2">A license is personal and tied to the email you purchased with. Sharing, reselling, or redistributing a license key is not permitted and may result in revocation without refund.</p>
-
-  <h2 data-i18n="s4.h">4. Payments and refunds</h2>
-  <p data-i18n="s4.p">Prices are shown in USD and charged through Stripe at the start of each billing period you choose. We do not automatically refund partial periods. If you believe you were charged in error, contact us at licencias@tradekopier.com and we'll review it case by case.</p>
-
-  <h2 data-i18n="s5.h">5. Intellectual property</h2>
-  <p data-i18n="s5.p">TradeKopier's software, design, and branding are the property of its developer. Purchasing a license grants you the right to use the software under these terms — it does not transfer ownership of the software itself.</p>
-
-  <h2 data-i18n="s6.h">6. Risk and limitation of liability</h2>
-  <p data-i18n="s6.p1">Futures and forex trading involves substantial risk of loss. You are solely responsible for your trading decisions, position sizing, and risk settings. TradeKopier does not guarantee profits, uninterrupted operation, or that every order will replicate without delay or error.</p>
-  <p data-i18n="s6.p2">To the maximum extent permitted by law, TradeKopier and its developer are not liable for trading losses, missed trades, connectivity issues with NinjaTrader or your broker, market latency, or any indirect or consequential damages arising from use of the software.</p>
-
-  <h2 data-i18n="s7.h">7. Changes to the service</h2>
-  <p data-i18n="s7.p">We may update, add, or remove features over time. We'll make reasonable efforts to communicate significant changes in advance via email or Discord.</p>
-
-  <h2 data-i18n="s8.h">8. Termination</h2>
-  <p data-i18n="s8.p">We may suspend or revoke a license in case of non-payment, misuse, license sharing, or violation of these terms. You may stop using TradeKopier and let your license expire at any time.</p>
-
-  <h2 data-i18n="s9.h">9. Contact</h2>
-  <p data-i18n="s9.p">Questions about these terms: <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a>.</p>
+<div data-lang-block="es" lang="es">
+<h1>Términos y Condiciones de Uso de TradeKopier</h1>
+<div class="updated">Última actualización: 23 de septiembre de 2026 · Versión 2.0</div>
+<div class="summary"><p><strong>Resumen importante: léelo antes de usar TradeKopier.</strong> No sustituye al texto completo, pero recoge lo esencial.</p><ol><li>TradeKopier es solo una herramienta de software. No es un bróker ni un asesor financiero, y no gestiona tu dinero. Todas las decisiones de trading son tuyas.</li><li>El trading de futuros y forex conlleva un riesgo elevado. Puedes perder todo tu capital, e incluso más.</li><li><strong>TradeKopier puede fallar.</strong> Una orden puede no copiarse, copiarse tarde, duplicada o con otro tamaño. Las funciones de riesgo (PDLL/PDPT, liquidar, bloquear) pueden no activarse a tiempo. Debes vigilar tus cuentas en todo momento y tener tus propios límites de riesgo configurados en tu bróker o empresa de fondeo.</li><li>Tú debes comprobar que las normas de tu empresa de fondeo o bróker permiten usar un copiador de operaciones.</li><li>Salvo en lo que la ley no permite limitar, TradeKopier no responde de tus pérdidas de trading ni de la pérdida de cuentas de fondeo (secciones 12 y 13).</li><li>TradeKopier es un producto independiente. No está respaldado por NinjaTrader, LLC ni por NinjaTrader Brokerage (sección 5).</li></ol></div>
+<h2>1. Titular del servicio</h2>
+<p>En cumplimiento de la Ley 34/2002, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI), se informa de que el software TradeKopier y el sitio web tradekopier.com pertenecen a:</p>
+<ul><li><strong>Titular:</strong> Carlos Lozano Ramón (en adelante, el "Titular")</li><li><strong>Email de contacto:</strong> <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a></li></ul>
+<h2>2. Definiciones</h2>
+<ul><li><strong>"Software" o "TradeKopier":</strong> el complemento (AddOn) para NinjaTrader 8 llamado TradeKopier, incluidas sus actualizaciones, y los servicios en línea asociados (validación de licencias, web y soporte).</li><li><strong>"Usuario" o "tú":</strong> la persona física o jurídica que descarga, instala, activa o utiliza el Software.</li><li><strong>"Consumidor":</strong> el Usuario que actúa con un propósito ajeno a su actividad comercial, empresarial, oficio o profesión, según la normativa aplicable.</li><li><strong>"Plataforma":</strong> el software de trading NinjaTrader 8, propiedad de NinjaTrader, LLC.</li><li><strong>"Cuenta Maestra" y "Cuentas Esclavas":</strong> la Cuenta Maestra es la cuenta de trading cuyas órdenes sirven de referencia. Las Cuentas Esclavas son aquellas a las que el Software intenta copiar esas órdenes, según la configuración del Usuario.</li><li><strong>"Funciones de Riesgo":</strong> las herramientas auxiliares del Software pensadas para ayudar a gestionar el riesgo. Incluyen, entre otras: el límite de pérdida diaria (PDLL), el objetivo de beneficio diario (PDPT), las acciones "Liquidar" y "Liquidar y bloquear", el bloqueo manual, el cierre de posiciones ("Flatten") y la desactivación automática de la réplica ("Follow").</li><li><strong>"Servicios de Terceros":</strong> cualquier producto o servicio que no preste el Titular. Por ejemplo: la Plataforma, brókeres, empresas de fondeo (prop firms), proveedores de datos de mercado y de conectividad, sistemas operativos y servicios en la nube.</li><li><strong>"Contenido Informativo":</strong> la información que el Software o la web muestran solo a título informativo. Por ejemplo: el posicionamiento CFTC/COT, el calendario económico, las noticias, las estadísticas del diario de trading, las tarjetas de resultados y los códigos de descuento de terceros.</li></ul>
+<h2>3. Aceptación de los Términos</h2>
+<p>3.1. Al descargar, instalar, activar o utilizar el Software aceptas por completo estos Términos, la Declaración de Riesgo y la Política de Privacidad publicadas en tradekopier.com. Si no estás de acuerdo, no descargues ni utilices el Software.</p>
+<p>3.2. El Titular puede pedirte que aceptes expresamente estos Términos (por ejemplo, marcando una casilla) al descargar o activar el Software. En ese caso guardará constancia de tu aceptación, de la versión que aceptaste y de la fecha.</p>
+<p>3.3. Declaras que eres mayor de 18 años y que tienes capacidad legal para contratar. Si utilizas el Software en nombre de una empresa, declaras que puedes obligarla, y la empresa quedará vinculada por estos Términos.</p>
+<h2>4. Qué es TradeKopier y qué no es</h2>
+<p>4.1. TradeKopier es solo una herramienta de software. Según la configuración que tú defines, intenta copiar en tus Cuentas Esclavas las órdenes que colocas en tu Cuenta Maestra. Además, ofrece Funciones de Riesgo y Contenido Informativo como ayuda.</p>
+<p>4.2. TradeKopier no es un bróker, ni una empresa de servicios de inversión, ni un asesor financiero, ni un gestor de carteras, ni un proveedor de señales. El Titular:</p>
+<ul><li>no está registrado ni autorizado como tal ante la CNMV ni ante ningún otro regulador (incluidos la SEC, la CFTC y la NFA);</li><li>no custodia fondos;</li><li>no ejecuta operaciones por iniciativa propia;</li><li>no presta asesoramiento ni hace recomendaciones de inversión.</li></ul>
+<p>4.3. El Software no decide qué, cuándo ni cuánto operar. Solo actúa según las órdenes que tú colocas y la configuración que tú estableces. Cada decisión de trading, y cada orden que resulte de ella en cualquiera de tus cuentas, es de tu exclusiva responsabilidad.</p>
+<p>4.4. Nada de lo que aparece en el Software, en la web, en redes sociales, en el soporte o en cualquier comunicación del Titular es asesoramiento financiero, legal, fiscal o de inversión.</p>
+<h2>5. Independencia respecto de NinjaTrader y de otros terceros</h2>
+<p>5.1. TradeKopier es un producto independiente desarrollado por el Titular. NinjaTrader® es una marca de NinjaTrader, LLC. Que TradeKopier aparezca en el NinjaTrader Ecosystem o en cualquier otro directorio no significa que NinjaTrader, LLC ni ninguna de sus sociedades vinculadas lo respalden, aprueben, certifiquen, recomienden o garanticen. Esto incluye a NinjaTrader Brokerage, NinjaTrader Clearing LLC y Tradovate.</p>
+<p>5.2. El Titular no tiene ninguna relación con NinjaTrader Brokerage ni actúa en su nombre. NinjaTrader, LLC no es parte de estos Términos, no da soporte sobre TradeKopier y no asume ninguna responsabilidad frente al Usuario en relación con el Software.</p>
+<p>5.3. Cualquier incidencia, consulta o reclamación sobre TradeKopier debe dirigirse exclusivamente al Titular, en los términos y con los límites previstos en estos Términos.</p>
+<p>5.4. Los nombres, logotipos y marcas de brókeres, empresas de fondeo, plataformas y otros terceros que aparecen en la web o en el Software pertenecen a sus titulares. Solo se usan para indicar compatibilidad o para describir ofertas de terceros, y su mención no implica afiliación, patrocinio ni respaldo.</p>
+<h2>6. Licencia de uso</h2>
+<p>6.1. Siempre que cumplas estos Términos, el Titular te concede una licencia para instalar y utilizar el Software en tu propio trading. La licencia es personal y limitada, no exclusiva, intransferible y revocable, y no puedes sublicenciarla.</p>
+<p>6.2. La licencia está vinculada a tu email y puede vincularse también a un equipo concreto. Para usarla hace falta conexión a internet, porque la licencia se valida periódicamente. Si el servicio de validación no está disponible por cualquier motivo, el Software puede no arrancar o dejar de funcionar, y el Titular no será responsable de ello.</p>
+<p>6.3. <strong>Licencia gratuita.</strong> Hoy el Software se ofrece sin coste. El Titular puede en cualquier momento modificar, limitar o retirar la licencia gratuita, o introducir planes de pago, y lo avisará con antelación razonable cuando sea posible. Retirar o modificar la licencia gratuita no da derecho a ninguna indemnización.</p>
+<p>6.4. <strong>Planes de pago.</strong> Si en el futuro hay planes de pago, se regirán además por las condiciones concretas que se muestren antes de la compra (precio, duración, renovación, cancelación y reembolsos). Si eres Consumidor y el contenido digital se te entrega de inmediato, se te pedirá que consientas expresamente que empiece la entrega y que reconozcas que por eso pierdes el derecho de desistimiento, en los términos de la normativa de consumo.</p>
+<p>6.5. Está prohibido:</p>
+<ul><li>(a) compartir, ceder, revender, sublicenciar o distribuir el Software o tu clave de licencia;</li><li>(b) descompilar, desensamblar, desofuscar o aplicar ingeniería inversa al Software, salvo en la medida en que la ley aplicable lo permita expresamente pese a esta prohibición;</li><li>(c) eludir, desactivar o manipular el sistema de licencias o cualquier medida de protección;</li><li>(d) modificar el Software o crear obras derivadas de él;</li><li>(e) utilizar el Software con fines ilícitos, como manipular el mercado (spoofing, layering o wash trading), o para incumplir las normas de brókeres, empresas de fondeo o de la Plataforma;</li><li>(f) utilizar el Software para operar cuentas de terceros en contra de lo previsto en la sección 8.</li></ul>
+<h2>7. Tus obligaciones para un uso seguro</h2>
+<p>Reconoces que estas obligaciones son esenciales para usar el Software con seguridad, y que, si no las cumples, eres tú quien causa los daños que se produzcan.</p>
+<p>7.1. <strong>Configuración.</strong> Solo tú eres responsable de configurar y revisar:</p>
+<ul><li>las cuentas, los grupos y los multiplicadores;</li><li>los redondeos y los instrumentos, incluida la conversión entre contratos micro y mini;</li><li>la activación de la réplica y los límites de las Funciones de Riesgo.</li></ul>
+<p>Antes de operar en real debes comprobar que el resultado es el que quieres.</p>
+<p>7.2. <strong>Prueba previa en simulación.</strong> Debes probar el Software en cuentas de simulación antes de usarlo con cuentas reales o de fondeo. Tienes que repetir la prueba después de cada actualización del Software o de la Plataforma y después de cada cambio importante en la configuración.</p>
+<p>7.3. <strong>Supervisión constante.</strong> Mientras el Software esté activo debes vigilar en tiempo real la Cuenta Maestra y todas las Cuentas Esclavas, y comprobar que cada orden y cada posición se han copiado bien. No dejes el Software funcionando sin supervisión.</p>
+<p>7.4. <strong>Obligación de intervenir.</strong> Si ves cualquier anomalía, debes detener la réplica de inmediato y gestionar tus posiciones a mano. Por ejemplo:</p>
+<ul><li>una orden que no se ha copiado, está duplicada o tiene un tamaño o una dirección incorrectos;</li><li>posiciones desincronizadas;</li><li>Funciones de Riesgo que no actúan;</li><li>errores o desconexiones.</li></ul>
+<p>7.5. <strong>Controles de riesgo propios.</strong> Debes mantener en todo momento tus propios controles de riesgo, independientes del Software. En particular, órdenes de stop colocadas en tu bróker y los límites de pérdida que ofrezca tu bróker o tu empresa de fondeo. Las Funciones de Riesgo de TradeKopier son una ayuda complementaria y nunca sustituyen a esos controles.</p>
+<p>7.6. <strong>Entorno técnico.</strong> Eres responsable de:</p>
+<ul><li>tu equipo, tu sistema operativo y sus actualizaciones;</li><li>el suministro eléctrico y tu conexión a internet;</li><li>la licencia y la versión de la Plataforma;</li><li>las conexiones con tu bróker y tus fuentes de datos;</li><li>tener el Software actualizado a la última versión disponible.</li></ul>
+<p>7.7. <strong>Normas de brókeres y empresas de fondeo.</strong> Solo tú eres responsable de conocer y cumplir las normas de cada bróker y empresa de fondeo con los que operes. Entre otras, las que se refieren a:</p>
+<ul><li>el uso de copiadores de operaciones y la operativa en varias cuentas;</li><li>la titularidad de las cuentas y las coberturas entre cuentas;</li><li>las reglas de consistencia, la operativa en noticias y el tamaño máximo de posición.</li></ul>
+<p>Algunas empresas de fondeo limitan o prohíben usar copiadores, o copiar operaciones entre cuentas de distintos titulares. Antes de usar el Software debes confirmar con cada una que lo que vas a hacer está permitido.</p>
+<p>7.8. <strong>Legalidad.</strong> Debes asegurarte de que el trading y el uso del Software son legales en tu país de residencia.</p>
+<p>7.9. <strong>Registros.</strong> Debes guardar tus propios registros de operaciones. Los datos del diario de trading del Software son solo informativos y pueden estar incompletos o ser inexactos.</p>
+<h2>8. Cuentas de terceros</h2>
+<p>8.1. Solo puedes conectar al Software cuentas de las que seas titular o que estés legalmente autorizado a operar.</p>
+<p>8.2. Está prohibido usar el Software para operar o copiar operaciones en cuentas de otras personas (por ejemplo, de clientes, familiares, amigos o suscriptores) sin las autorizaciones y licencias que exija la ley, porque esa actividad puede ser un servicio de inversión regulado.</p>
+<p>8.3. Si, a pesar de lo anterior, usas el Software en cuentas de otras personas, lo haces bajo tu exclusiva responsabilidad. El Titular no asume ninguna obligación ni responsabilidad frente a ellas.</p>
+<h2>9. Riesgos que conoces y aceptas expresamente</h2>
+<p>Se te ha informado, entiendes y aceptas expresamente que, aunque uses el Software correctamente y el Titular se esfuerce razonablemente, pueden ocurrir, entre otras, las siguientes situaciones:</p>
+<ul><li>(a) órdenes que no se copian, se copian solo en parte, con retraso, duplicadas o con un tamaño, dirección, instrumento o precio distintos de los esperados;</li><li>(b) desincronización entre la Cuenta Maestra y las Cuentas Esclavas, sobre todo tras desconexiones, reinicios, ejecuciones parciales, cambios rápidos de órdenes u órdenes compuestas (bracket, OCO);</li><li>(c) latencias variables. Cualquier cifra de velocidad o latencia que se publique es orientativa, se midió en unas condiciones concretas y no es una garantía;</li><li>(d) deslizamiento (slippage), huecos de precio, mercados rápidos o con poca liquidez y suspensiones de negociación, que pueden hacer que las órdenes se ejecuten a precios peores que en la Cuenta Maestra;</li><li>(e) que las Funciones de Riesgo no se activen, se activen tarde o sin motivo (por ejemplo, porque la Plataforma o el bróker envíen datos de resultados retrasados o erróneos), no cierren todas las posiciones, las cierren a peor precio o pierdan el estado de bloqueo. En esos casos, las pérdidas pueden superar los límites configurados;</li><li>(f) incompatibilidades o fallos causados por actualizaciones de la Plataforma, del sistema operativo o de Servicios de Terceros, o por la caída de estos servicios;</li><li>(g) errores de programación ("bugs"): no se puede garantizar que un software complejo no tenga errores;</li><li>(h) caídas del servicio de validación de licencias que impidan arrancar o seguir usando el Software;</li><li>(i) errores, retrasos u omisiones en el Contenido Informativo;</li><li>(j) el riesgo propio del trading con apalancamiento: las pérdidas pueden superar el capital depositado, y los resultados pasados no garantizan resultados futuros.</li></ul>
+<p><strong>Utilizas el Software bajo tu propio riesgo.</strong></p>
+<h2>10. Contenido Informativo, tarjetas de resultados y enlaces de terceros</h2>
+<p>10.1. El Contenido Informativo es solo informativo. Puede tener errores o estar desactualizado, y no es una recomendación de inversión. No debes basar tus decisiones de trading en él.</p>
+<p>10.2. Las tarjetas de resultados y las estadísticas que generas con el Software se basan en tus datos, y el Titular no las verifica. Si las compartes en público, solo tú respondes de que sean exactas y de no usarlas para hacer afirmaciones de rentabilidad engañosas.</p>
+<p>10.3. Algunos enlaces, códigos de descuento u ofertas de terceros que aparecen en el Software o en la web pueden ser enlaces de afiliado, por los que el Titular puede recibir una compensación. Esto incluye los enlaces para descargar la Plataforma. Incluirlos no es una recomendación. Los productos y servicios de terceros se rigen por sus propias condiciones, y el Titular no responde de ellos, de su disponibilidad ni de los cambios en sus ofertas.</p>
+<h2>11. Soporte y asistente automático</h2>
+<p>11.1. El soporte se ofrece por email y a través del chat de la web, en la medida en que sea razonablemente posible. No hay compromiso de disponibilidad ni de tiempos de respuesta, salvo que se acuerde expresamente y por escrito.</p>
+<p>11.2. El chat de la web puede estar atendido por un asistente automático basado en inteligencia artificial. Sus respuestas se generan de forma automática y pueden tener errores. No son asesoramiento profesional ni suponen ningún compromiso del Titular. Para temas importantes, escribe por email.</p>
+<h2>12. Exclusión de garantías</h2>
+<p>12.1. <strong>EN LA MÁXIMA MEDIDA QUE PERMITA LA LEY APLICABLE, EL SOFTWARE Y TODOS LOS SERVICIOS ASOCIADOS SE OFRECEN "TAL CUAL" Y "SEGÚN DISPONIBILIDAD", SIN NINGÚN TIPO DE GARANTÍA, EXPRESA O IMPLÍCITA. ESTO INCLUYE LAS GARANTÍAS DE IDONEIDAD PARA UN FIN CONCRETO, COMERCIABILIDAD, EXACTITUD, AUSENCIA DE ERRORES, FUNCIONAMIENTO ININTERRUMPIDO, COMPATIBILIDAD CON FUTURAS VERSIONES DE LA PLATAFORMA Y NO INFRACCIÓN DE DERECHOS DE TERCEROS.</strong></p>
+<p>12.2. El Titular no garantiza que el Software copie todas las órdenes, ni que lo haga en un tiempo concreto, ni que las Funciones de Riesgo actúen en todos los casos. Tampoco garantiza que usar el Software genere beneficios o evite pérdidas.</p>
+<p>12.3. Salvo en lo que la normativa de consumo imponga de forma obligatoria, ninguna información publicitaria, comercial o de soporte supone una garantía distinta de las que recogen estos Términos.</p>
+<p>12.4. Si eres Consumidor, esta sección no limita los derechos irrenunciables que te reconoce la normativa de consumo, incluidos los relativos a la conformidad de los contenidos digitales.</p>
+<h2>13. Limitación de responsabilidad</h2>
+<p>13.1. <strong>EN LA MÁXIMA MEDIDA QUE PERMITA LA LEY APLICABLE, EL TITULAR NO RESPONDE DE:</strong></p>
+<ul><li>(a) pérdidas de trading de cualquier tipo, incluidas las causadas por órdenes que no se copiaron, se copiaron con retraso, duplicadas o con errores;</li><li>(b) pérdidas causadas porque las Funciones de Riesgo no actuaron, actuaron tarde o sin motivo;</li><li>(c) la pérdida, suspensión, descalificación o cierre de cuentas de fondeo o de evaluación, los pagos o retiradas (payouts) denegados, ni las cuotas de evaluación, reinicio o activación;</li><li>(d) el lucro cesante, las oportunidades de negocio perdidas, la pérdida de datos o los daños a la reputación;</li><li>(e) los daños indirectos, incidentales, consecuenciales, especiales o punitivos;</li><li>(f) los daños causados por Servicios de Terceros, por tu configuración, por no vigilar tus cuentas, por no cumplir la sección 7, o por usar el Software sin autorización o modificado;</li><li>(g) los daños que se habrían evitado interviniendo a tiempo como indica la sección 7.4.</li></ul>
+<p>13.2. <strong>Límite de importe.</strong> En la máxima medida que permita la ley aplicable, la responsabilidad total del Titular frente a ti, sumando todas las causas relacionadas con el Software o con estos Términos, no superará la mayor de estas dos cantidades:</p>
+<ul><li>(a) lo que hayas pagado al Titular por la licencia en los doce (12) meses anteriores al hecho que causó el daño; o</li><li>(b) cincuenta euros (50 €).</li></ul>
+<p>13.3. <strong>Responsabilidades que no se limitan.</strong> Nada de lo previsto en estos Términos excluye ni limita la responsabilidad del Titular por dolo o culpa grave, por daños a la vida o a la integridad física de las personas, ni ninguna otra responsabilidad que la ley aplicable no permita excluir o limitar. En esos casos, la responsabilidad solo se limitará hasta donde la ley lo permita.</p>
+<p>13.4. Estas limitaciones se aplican sea cual sea el fundamento de la reclamación (contractual, extracontractual o cualquier otro), aunque se hubiera advertido al Titular de que esos daños podían producirse. Son una condición esencial de cómo se ofrece el Software, en particular de que se ofrezca gratis.</p>
+<p>13.5. <strong>Aviso de incidencias.</strong> Debes comunicar cualquier incidencia por escrito a <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a> lo antes posible desde que la detectes. Incluye la información que tengas (fecha, cuentas afectadas y registros) para que se pueda analizar y limitar sus efectos. Si no eres Consumidor, tienes un plazo de un (1) año desde el hecho que causó el daño para presentar cualquier reclamación.</p>
+<h2>14. Indemnización al Titular</h2>
+<p>14.1. En la medida que permita la ley aplicable, te comprometes a defender al Titular (y, en su caso, a la sociedad que le suceda), a dejarle libre de toda responsabilidad y a compensarle por cualquier reclamación, daño, sanción, coste o gasto, incluidos los honorarios razonables de abogados y procuradores, que se deriven de:</p>
+<ul><li>(a) tu incumplimiento de estos Términos;</li><li>(b) que infrinjas la ley o derechos de terceros;</li><li>(c) que incumplas las normas o condiciones de brókeres, empresas de fondeo o de la Plataforma;</li><li>(d) el uso del Software en cuentas de terceros, o la prestación a terceros de servicios basados en el Software;</li><li>(e) el uso no autorizado, la modificación o la manipulación del Software;</li><li>(f) el contenido que publiques o compartas, incluidas tarjetas de resultados o afirmaciones de rentabilidad;</li><li>(g) cualquier reclamación que terceros dirijan contra el Titular a raíz de tu uso del Software en los casos anteriores, incluidas las de NinjaTrader, LLC y sus sociedades vinculadas, brókeres o empresas de fondeo.</li></ul>
+<p>14.2. Si eres Consumidor, esta obligación solo se aplica cuando el daño se deba a tu incumplimiento o a una actuación tuya dolosa o negligente.</p>
+<h2>15. Actualizaciones, cambios y retirada del Software</h2>
+<p>15.1. El Titular puede actualizar, modificar, suspender o retirar en cualquier momento el Software, o cualquiera de sus funciones, total o parcialmente. Intentará avisar con antelación razonable de los cambios importantes.</p>
+<p>15.2. El Titular no garantiza que el Software sea compatible con futuras versiones de la Plataforma ni que siga disponible, y no será responsable si deja de ofrecerlo. Las versiones antiguas pueden dejar de funcionar o de tener soporte.</p>
+<p>15.3. Las funciones marcadas como "beta", "nuevo" o experimentales pueden ser especialmente inestables.</p>
+<h2>16. Suspensión y terminación</h2>
+<p>16.1. El Titular puede suspender o revocar tu licencia, sin que tengas derecho a indemnización:</p>
+<ul><li>si incumples estos Términos;</li><li>si hay indicios de fraude, de uso indebido o de que compartes la licencia;</li><li>por motivos de seguridad;</li><li>por obligación legal;</li><li>y, si la licencia es gratuita, en cualquier momento.</li></ul>
+<p>16.2. Puedes dejar de usar el Software y desinstalarlo cuando quieras.</p>
+<p>16.3. Cuando la licencia termine, debes desinstalar el Software. Las secciones 5, 6.5, 8.3, 9, 10, 12, 13, 14, 17, 22 y 23 siguen en vigor después de que la licencia termine.</p>
+<h2>17. Propiedad intelectual</h2>
+<p>17.1. El Software, su código, su diseño, su documentación, la marca TradeKopier y el resto de sus elementos son propiedad del Titular o de quienes le han dado licencia. Estos Términos no te dan ningún derecho sobre ellos más allá de la licencia de la sección 6.</p>
+<p>17.2. Si nos envías sugerencias o comentarios, podemos usarlos libremente, sin obligación de compensarte.</p>
+<h2>18. Protección de datos</h2>
+<p>El tratamiento de tus datos personales se rige por la Política de Privacidad publicada en tradekopier.com. En ella se explica, entre otras cosas:</p>
+<ul><li>qué datos hacen falta para gestionar y validar tu licencia, como tu email y un identificador técnico de tu equipo;</li><li>el envío anónimo de informes técnicos de errores;</li><li>el uso del chat de soporte.</li></ul>
+<h2>19. Fuerza mayor</h2>
+<p>El Titular no será responsable de incumplimientos ni retrasos debidos a causas que estén fuera de su control razonable. Por ejemplo:</p>
+<ul><li>caídas o cambios de la Plataforma, de brókeres, de los mercados o de los proveedores de datos;</li><li>fallos de internet, del alojamiento web o de los servicios en la nube;</li><li>ciberataques y actualizaciones del sistema operativo;</li><li>cortes de suministro, catástrofes, conflictos, epidemias o decisiones de las autoridades.</li></ul>
+<h2>20. Cesión</h2>
+<p>20.1. No puedes ceder ni traspasar estos Términos ni tu licencia sin el consentimiento previo y por escrito del Titular.</p>
+<p>20.2. El Titular puede ceder su posición en estos Términos, incluidas las licencias ya concedidas, a una sociedad que controle o a quien le suceda como titular del Software. Te lo comunicará por email o en la web.</p>
+<h2>21. Cambios en estos Términos</h2>
+<p>21.1. El Titular puede modificar estos Términos. La versión vigente se publicará en tradekopier.com con su fecha de actualización. Los cambios importantes se avisarán por email o dentro del Software con antelación razonable.</p>
+<p>21.2. Si no aceptas la nueva versión, debes dejar de usar el Software. Si sigues usándolo después de que entre en vigor, o si la aceptas expresamente cuando se te pida, aceptas los nuevos Términos.</p>
+<h2>22. Ley aplicable y tribunales</h2>
+<p>22.1. Estos Términos se rigen por la legislación española.</p>
+<p>22.2. Antes de acudir a los tribunales, las partes intentarán resolver el conflicto de forma amistosa durante treinta (30) días, contados desde que se comunique por escrito a <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a>.</p>
+<p>22.3. Si no eres Consumidor, las partes se someten en exclusiva a los juzgados y tribunales del domicilio del Titular y renuncian a cualquier otro fuero.</p>
+<p>22.4. Si eres Consumidor, serán competentes los juzgados y tribunales que correspondan según la normativa aplicable. Nada de lo previsto aquí te privará de la protección que te den las normas obligatorias de tu país de residencia.</p>
+<h2>23. Disposiciones generales</h2>
+<p>23.1. Si una cláusula se declara nula o inaplicable, esto solo afecta a esa cláusula o a la parte de ella que sea nula. El resto de los Términos sigue siendo válido.</p>
+<p>23.2. Estos Términos, junto con la Declaración de Riesgo y la Política de Privacidad, son el acuerdo completo entre las partes sobre el Software.</p>
+<p>23.3. Que el Titular no ejerza un derecho no significa que renuncie a él.</p>
+<p>23.4. Estos Términos están redactados en español. Si hay diferencias entre esta versión y una traducción, prevalece la versión española, salvo que la ley disponga otra cosa.</p>
+<p>23.5. Las comunicaciones se harán por email: a ti, en la dirección asociada a tu licencia; al Titular, en <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a>.</p>
+</div>
+<div data-lang-block="en" lang="en" hidden>
+<h1>TradeKopier Terms and Conditions of Use</h1>
+<div class="updated">Last updated: September 23, 2026 · Version 2.0</div>
+<p>This is a translation. If there is any difference between this version and the Spanish version, the Spanish version prevails (section 23.4).</p>
+<div class="summary"><p><strong>Important summary: read it before using TradeKopier.</strong> It does not replace the full text, but it covers the essentials.</p><ol><li>TradeKopier is only a software tool. It is not a broker or a financial advisor, and it does not manage your money. All trading decisions are yours.</li><li>Futures and forex trading carries a high level of risk. You can lose all of your capital, and even more.</li><li><strong>TradeKopier can fail.</strong> An order may not be copied, or may be copied late, duplicated or with a different size. The risk features (PDLL/PDPT, liquidate, lock) may not trigger in time. You must monitor your accounts at all times and keep your own risk limits configured with your broker or prop firm.</li><li>You must check that your prop firm's or broker's rules allow the use of a trade copier.</li><li>Except where the law does not allow it to be limited, TradeKopier is not liable for your trading losses or for the loss of funded accounts (sections 12 and 13).</li><li>TradeKopier is an independent product. It is not endorsed by NinjaTrader, LLC or by NinjaTrader Brokerage (section 5).</li></ol></div>
+<h2>1. Service provider</h2>
+<p>In compliance with Spanish Law 34/2002 on Information Society Services and Electronic Commerce (LSSI), the TradeKopier software and the website tradekopier.com belong to:</p>
+<ul><li><strong>Owner:</strong> Carlos Lozano Ramón (the "Owner")</li><li><strong>Contact email:</strong> <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a></li></ul>
+<h2>2. Definitions</h2>
+<ul><li><strong>"Software" or "TradeKopier":</strong> the add-on for NinjaTrader 8 called TradeKopier, including its updates, and the associated online services (license validation, website and support).</li><li><strong>"User" or "you":</strong> the individual or legal entity that downloads, installs, activates or uses the Software.</li><li><strong>"Consumer":</strong> a User acting for purposes outside their trade, business, craft or profession, as defined by applicable law.</li><li><strong>"Platform":</strong> the NinjaTrader 8 trading software, owned by NinjaTrader, LLC.</li><li><strong>"Master Account" and "Slave Accounts":</strong> the Master Account is the trading account whose orders serve as the reference. Slave Accounts are the accounts to which the Software attempts to copy those orders, according to the User's configuration.</li><li><strong>"Risk Features":</strong> the Software's auxiliary tools intended to help manage risk. They include, among others: the daily loss limit (PDLL), the daily profit target (PDPT), the "Liquidate" and "Liquidate and lock" actions, manual locking, closing positions ("Flatten") and automatic deactivation of replication ("Follow").</li><li><strong>"Third-Party Services":</strong> any product or service not provided by the Owner. For example: the Platform, brokers, prop firms, market data and connectivity providers, operating systems and cloud services.</li><li><strong>"Informational Content":</strong> information shown by the Software or the website for informational purposes only. For example: CFTC/COT positioning, the economic calendar, news, trading journal statistics, results cards and third-party discount codes.</li></ul>
+<h2>3. Acceptance of these Terms</h2>
+<p>3.1. By downloading, installing, activating or using the Software, you fully accept these Terms, the Risk Disclosure and the Privacy Policy published on tradekopier.com. If you do not agree, do not download or use the Software.</p>
+<p>3.2. The Owner may ask you to expressly accept these Terms (for example, by ticking a box) when you download or activate the Software. In that case, the Owner will keep a record of your acceptance, the version you accepted and the date.</p>
+<p>3.3. You declare that you are over 18 and have the legal capacity to enter into contracts. If you use the Software on behalf of a company, you declare that you are authorized to bind it, and the company will be bound by these Terms.</p>
+<h2>4. What TradeKopier is and what it is not</h2>
+<p>4.1. TradeKopier is only a software tool. According to the configuration you define, it attempts to copy the orders you place in your Master Account to your Slave Accounts. It also offers Risk Features and Informational Content as aids.</p>
+<p>4.2. TradeKopier is not a broker, an investment firm, a financial advisor, a portfolio manager or a signal provider. The Owner:</p>
+<ul><li>is not registered or authorized as such with the CNMV or any other regulator (including the SEC, the CFTC and the NFA);</li><li>does not hold client funds;</li><li>does not execute trades on its own initiative;</li><li>does not provide investment advice or recommendations.</li></ul>
+<p>4.3. The Software does not decide what, when or how much to trade. It only acts on the orders you place and the configuration you set. Every trading decision, and every resulting order in any of your accounts, is your sole responsibility.</p>
+<p>4.4. Nothing in the Software, on the website, on social media, in support or in any communication from the Owner constitutes financial, legal, tax or investment advice.</p>
+<h2>5. Independence from NinjaTrader and other third parties</h2>
+<p>5.1. TradeKopier is an independent product developed by the Owner. NinjaTrader® is a trademark of NinjaTrader, LLC. The listing of TradeKopier on the NinjaTrader Ecosystem or any other directory does not mean that NinjaTrader, LLC or any of its affiliates endorse, approve, certify, recommend or guarantee it. This includes NinjaTrader Brokerage, NinjaTrader Clearing LLC and Tradovate.</p>
+<p>5.2. The Owner has no relationship with NinjaTrader Brokerage and does not act on its behalf. NinjaTrader, LLC is not a party to these Terms, does not provide support for TradeKopier and assumes no liability to the User in connection with the Software.</p>
+<p>5.3. Any issue, question or claim relating to TradeKopier must be addressed exclusively to the Owner, on the terms and within the limits set out in these Terms.</p>
+<p>5.4. The names, logos and trademarks of brokers, prop firms, platforms and other third parties shown on the website or in the Software belong to their owners. They are used only to indicate compatibility or to describe third-party offers, and their mention does not imply affiliation, sponsorship or endorsement.</p>
+<h2>6. License to use</h2>
+<p>6.1. As long as you comply with these Terms, the Owner grants you a license to install and use the Software for your own trading. The license is personal and limited, non-exclusive, non-transferable and revocable, and you may not sublicense it.</p>
+<p>6.2. The license is linked to your email and may also be linked to a specific computer. An internet connection is required because the license is validated periodically. If the validation service is unavailable for any reason, the Software may not start or may stop working, and the Owner will not be liable for this.</p>
+<p>6.3. <strong>Free license.</strong> The Software is currently offered free of charge. The Owner may at any time modify, limit or withdraw the free license, or introduce paid plans, and will give reasonable advance notice where possible. Withdrawing or modifying the free license does not give rise to any compensation.</p>
+<p>6.4. <strong>Paid plans.</strong> If paid plans are offered in the future, they will also be governed by the specific conditions shown before purchase (price, duration, renewal, cancellation and refunds). If you are a Consumer and the digital content is supplied immediately, you will be asked to expressly consent to the start of supply and to acknowledge that you therefore lose your right of withdrawal, as provided by consumer law.</p>
+<p>6.5. You may not:</p>
+<ul><li>(a) share, assign, resell, sublicense or distribute the Software or your license key;</li><li>(b) decompile, disassemble, deobfuscate or reverse engineer the Software, except to the extent that applicable law expressly permits it notwithstanding this prohibition;</li><li>(c) circumvent, disable or tamper with the licensing system or any protection measure;</li><li>(d) modify the Software or create derivative works from it;</li><li>(e) use the Software for unlawful purposes, such as market manipulation (spoofing, layering or wash trading), or to breach the rules of brokers, prop firms or the Platform;</li><li>(f) use the Software to operate third-party accounts in breach of section 8.</li></ul>
+<h2>7. Your obligations for safe use</h2>
+<p>You acknowledge that these obligations are essential for using the Software safely and that, if you fail to comply with them, you are the one causing any resulting damage.</p>
+<p>7.1. <strong>Configuration.</strong> You alone are responsible for configuring and reviewing:</p>
+<ul><li>accounts, groups and multipliers;</li><li>rounding and instruments, including conversion between micro and mini contracts;</li><li>activation of replication and the limits of the Risk Features.</li></ul>
+<p>Before trading live, you must check that the result is what you intend.</p>
+<p>7.2. <strong>Prior testing in simulation.</strong> You must test the Software on simulation accounts before using it with live or funded accounts. You must repeat this test after every update of the Software or the Platform and after every significant configuration change.</p>
+<p>7.3. <strong>Constant monitoring.</strong> While the Software is active, you must monitor the Master Account and all Slave Accounts in real time and check that every order and position has been copied correctly. Do not leave the Software running unattended.</p>
+<p>7.4. <strong>Duty to intervene.</strong> If you notice any anomaly, you must stop replication immediately and manage your positions manually. For example:</p>
+<ul><li>an order that was not copied, was duplicated or has an incorrect size or direction;</li><li>positions out of sync;</li><li>Risk Features that do not act;</li><li>errors or disconnections.</li></ul>
+<p>7.5. <strong>Your own risk controls.</strong> You must maintain at all times your own risk controls, independent of the Software. In particular, stop orders placed with your broker and the loss limits offered by your broker or prop firm. TradeKopier's Risk Features are a complementary aid and never replace those controls.</p>
+<p>7.6. <strong>Technical environment.</strong> You are responsible for:</p>
+<ul><li>your computer, operating system and their updates;</li><li>your power supply and internet connection;</li><li>your Platform license and version;</li><li>your broker connections and data feeds;</li><li>keeping the Software updated to the latest available version.</li></ul>
+<p>7.7. <strong>Broker and prop firm rules.</strong> You alone are responsible for knowing and complying with the rules of every broker and prop firm you trade with, including those concerning:</p>
+<ul><li>the use of trade copiers and trading multiple accounts;</li><li>account ownership and hedging between accounts;</li><li>consistency rules, news trading and maximum position size.</li></ul>
+<p>Some prop firms restrict or prohibit trade copiers, or copying trades between accounts of different holders. Before using the Software, you must confirm with each of them that what you intend to do is allowed.</p>
+<p>7.8. <strong>Legality.</strong> You must make sure that trading and using the Software are legal in your country of residence.</p>
+<p>7.9. <strong>Records.</strong> You must keep your own trading records. The Software's trading journal data is for information only and may be incomplete or inaccurate.</p>
+<h2>8. Third-party accounts</h2>
+<p>8.1. You may only connect to the Software accounts that you own or are legally authorized to operate.</p>
+<p>8.2. You may not use the Software to trade or copy trades in other people's accounts (for example, clients, relatives, friends or subscribers) without the authorizations and licenses required by law, because that activity may be a regulated investment service.</p>
+<p>8.3. If, despite the above, you use the Software on other people's accounts, you do so at your sole responsibility. The Owner assumes no obligation or liability towards them.</p>
+<h2>9. Risks you know and expressly accept</h2>
+<p>You have been informed, understand and expressly accept that, even if you use the Software correctly and the Owner makes reasonable efforts, the following situations, among others, may occur:</p>
+<ul><li>(a) orders that are not copied, are copied only partially, late, duplicated or with a different size, direction, instrument or price than expected;</li><li>(b) desynchronization between the Master Account and the Slave Accounts, especially after disconnections, restarts, partial fills, rapid order changes or complex orders (bracket, OCO);</li><li>(c) variable latency. Any speed or latency figure published is indicative, was measured under specific conditions and is not a guarantee;</li><li>(d) slippage, price gaps, fast or illiquid markets and trading halts, which may cause orders to be filled at worse prices than in the Master Account;</li><li>(e) Risk Features that do not trigger, trigger late or without reason (for example, because the Platform or the broker send delayed or incorrect P&amp;L data), fail to close all positions, close them at worse prices or lose their locked state. In such cases, losses may exceed the configured limits;</li><li>(f) incompatibilities or failures caused by updates to the Platform, the operating system or Third-Party Services, or by outages of those services;</li><li>(g) programming errors ("bugs"): complex software cannot be guaranteed to be error-free;</li><li>(h) outages of the license validation service that prevent the Software from starting or continuing to run;</li><li>(i) errors, delays or omissions in the Informational Content;</li><li>(j) the risk inherent in leveraged trading: losses may exceed the capital deposited, and past results do not guarantee future results.</li></ul>
+<p><strong>You use the Software at your own risk.</strong></p>
+<h2>10. Informational Content, results cards and third-party links</h2>
+<p>10.1. Informational Content is for information only. It may contain errors or be out of date, and it is not an investment recommendation. You must not base your trading decisions on it.</p>
+<p>10.2. The results cards and statistics you generate with the Software are based on your data, and the Owner does not verify them. If you share them publicly, you alone are responsible for their accuracy and for not using them to make misleading performance claims.</p>
+<p>10.3. Some links, discount codes or third-party offers shown in the Software or on the website may be affiliate links, for which the Owner may receive compensation. This includes links to download the Platform. Their inclusion is not a recommendation. Third-party products and services are governed by their own terms, and the Owner is not responsible for them, for their availability or for changes to their offers.</p>
+<h2>11. Support and automated assistant</h2>
+<p>11.1. Support is provided by email and through the website chat, to the extent reasonably possible. There is no commitment to availability or response times, unless expressly agreed in writing.</p>
+<p>11.2. The website chat may be handled by an automated assistant based on artificial intelligence. Its answers are generated automatically and may contain errors. They are not professional advice and do not bind the Owner. For important matters, write by email.</p>
+<h2>12. Disclaimer of warranties</h2>
+<p>12.1. <strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE SOFTWARE AND ALL ASSOCIATED SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. THIS INCLUDES WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, ACCURACY, ABSENCE OF ERRORS, UNINTERRUPTED OPERATION, COMPATIBILITY WITH FUTURE VERSIONS OF THE PLATFORM AND NON-INFRINGEMENT OF THIRD-PARTY RIGHTS.</strong></p>
+<p>12.2. The Owner does not guarantee that the Software will copy every order, that it will do so within a specific time, or that the Risk Features will act in every case. Nor does the Owner guarantee that using the Software will generate profits or prevent losses.</p>
+<p>12.3. Except where consumer law mandatorily provides otherwise, no advertising, commercial or support information constitutes a warranty other than those set out in these Terms.</p>
+<p>12.4. If you are a Consumer, this section does not limit the non-waivable rights granted to you by consumer law, including those relating to the conformity of digital content.</p>
+<h2>13. Limitation of liability</h2>
+<p>13.1. <strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE OWNER IS NOT LIABLE FOR:</strong></p>
+<ul><li>(a) trading losses of any kind, including those caused by orders that were not copied, were copied late, duplicated or with errors;</li><li>(b) losses caused because the Risk Features did not act, acted late or acted without reason;</li><li>(c) the loss, suspension, disqualification or closure of funded or evaluation accounts, denied payouts or withdrawals, or evaluation, reset or activation fees;</li><li>(d) loss of profits, lost business opportunities, loss of data or damage to reputation;</li><li>(e) indirect, incidental, consequential, special or punitive damages;</li><li>(f) damage caused by Third-Party Services, by your configuration, by failing to monitor your accounts, by failing to comply with section 7, or by unauthorized or modified use of the Software;</li><li>(g) damage that would have been avoided by intervening in time as required by section 7.4.</li></ul>
+<p>13.2. <strong>Cap on liability.</strong> To the maximum extent permitted by applicable law, the Owner's total liability to you, for all causes related to the Software or these Terms combined, will not exceed the greater of:</p>
+<ul><li>(a) the amount you paid the Owner for the license in the twelve (12) months before the event that caused the damage; or</li><li>(b) fifty euros (€50).</li></ul>
+<p>13.3. <strong>Liability that is not limited.</strong> Nothing in these Terms excludes or limits the Owner's liability for fraud or wilful misconduct, gross negligence, death or personal injury, or any other liability that cannot be excluded or limited under applicable law. In those cases, liability will only be limited to the extent permitted by law.</p>
+<p>13.4. These limitations apply whatever the basis of the claim (contract, tort or any other), even if the Owner was advised that such damage might occur. They are an essential condition of how the Software is offered, in particular of its being offered free of charge.</p>
+<p>13.5. <strong>Reporting incidents.</strong> You must report any incident in writing to <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a> as soon as possible after you detect it. Include the information you have (date, affected accounts and logs) so it can be analyzed and its effects limited. If you are not a Consumer, you have one (1) year from the event that caused the damage to bring any claim.</p>
+<h2>14. Indemnification of the Owner</h2>
+<p>14.1. To the extent permitted by applicable law, you agree to defend the Owner (and, where applicable, any company succeeding the Owner), to hold the Owner harmless and to compensate the Owner for any claim, damage, penalty, cost or expense, including reasonable legal fees, arising from:</p>
+<ul><li>(a) your breach of these Terms;</li><li>(b) your violation of the law or of third-party rights;</li><li>(c) your breach of the rules or terms of brokers, prop firms or the Platform;</li><li>(d) the use of the Software on third-party accounts, or the provision to third parties of services based on the Software;</li><li>(e) unauthorized use, modification or tampering with the Software;</li><li>(f) content you publish or share, including results cards or performance claims;</li><li>(g) any claim brought by third parties against the Owner as a result of your use of the Software in the cases above, including claims by NinjaTrader, LLC and its affiliates, brokers or prop firms.</li></ul>
+<p>14.2. If you are a Consumer, this obligation only applies when the damage is due to your breach or to wilful or negligent conduct on your part.</p>
+<h2>15. Updates, changes and discontinuation</h2>
+<p>15.1. The Owner may update, modify, suspend or discontinue the Software, or any of its features, in whole or in part, at any time. The Owner will try to give reasonable advance notice of significant changes.</p>
+<p>15.2. The Owner does not guarantee that the Software will be compatible with future versions of the Platform or that it will remain available, and will not be liable if it stops offering it. Older versions may stop working or stop being supported.</p>
+<p>15.3. Features marked as "beta", "new" or experimental may be particularly unstable.</p>
+<h2>16. Suspension and termination</h2>
+<p>16.1. The Owner may suspend or revoke your license, without you being entitled to compensation:</p>
+<ul><li>if you breach these Terms;</li><li>if there are signs of fraud, misuse or license sharing;</li><li>for security reasons;</li><li>where required by law;</li><li>and, if the license is free, at any time.</li></ul>
+<p>16.2. You may stop using the Software and uninstall it whenever you want.</p>
+<p>16.3. When the license ends, you must uninstall the Software. Sections 5, 6.5, 8.3, 9, 10, 12, 13, 14, 17, 22 and 23 remain in force after the license ends.</p>
+<h2>17. Intellectual property</h2>
+<p>17.1. The Software, its code, design, documentation, the TradeKopier brand and all its other elements belong to the Owner or to the Owner's licensors. These Terms give you no rights over them beyond the license in section 6.</p>
+<p>17.2. If you send us suggestions or feedback, we may use them freely, without any obligation to compensate you.</p>
+<h2>18. Data protection</h2>
+<p>The processing of your personal data is governed by the Privacy Policy published on tradekopier.com. Among other things, it explains:</p>
+<ul><li>what data is needed to manage and validate your license, such as your email and a technical identifier of your computer;</li><li>the anonymous sending of technical error reports;</li><li>the use of the support chat.</li></ul>
+<h2>19. Force majeure</h2>
+<p>The Owner will not be liable for failures or delays due to causes beyond its reasonable control. For example:</p>
+<ul><li>outages or changes of the Platform, brokers, markets or data providers;</li><li>failures of the internet, web hosting or cloud services;</li><li>cyberattacks and operating system updates;</li><li>power outages, disasters, conflicts, epidemics or decisions of the authorities.</li></ul>
+<h2>20. Assignment</h2>
+<p>20.1. You may not assign or transfer these Terms or your license without the Owner's prior written consent.</p>
+<p>20.2. The Owner may assign its position under these Terms, including licenses already granted, to a company it controls or to a successor as owner of the Software. The Owner will notify you by email or on the website.</p>
+<h2>21. Changes to these Terms</h2>
+<p>21.1. The Owner may modify these Terms. The current version will be published on tradekopier.com with its update date. Significant changes will be notified by email or within the Software with reasonable advance notice.</p>
+<p>21.2. If you do not accept the new version, you must stop using the Software. If you continue to use it after it takes effect, or if you expressly accept it when asked, you accept the new Terms.</p>
+<h2>22. Governing law and jurisdiction</h2>
+<p>22.1. These Terms are governed by Spanish law.</p>
+<p>22.2. Before going to court, the parties will try to resolve the dispute amicably for thirty (30) days from written notice to <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a>.</p>
+<p>22.3. If you are not a Consumer, the parties submit exclusively to the courts of the Owner's domicile and waive any other jurisdiction.</p>
+<p>22.4. If you are a Consumer, the competent courts will be those determined by applicable law. Nothing here will deprive you of the protection granted by the mandatory rules of your country of residence.</p>
+<h2>23. General provisions</h2>
+<p>23.1. If a clause is declared void or unenforceable, this only affects that clause or the part of it that is void. The rest of the Terms remains valid.</p>
+<p>23.2. These Terms, together with the Risk Disclosure and the Privacy Policy, are the entire agreement between the parties regarding the Software.</p>
+<p>23.3. The Owner's failure to exercise a right does not mean that the Owner waives it.</p>
+<p>23.4. These Terms are drafted in Spanish. If there are differences between the Spanish version and a translation, the Spanish version prevails, unless the law provides otherwise.</p>
+<p>23.5. Communications will be made by email: to you, at the address associated with your license; to the Owner, at <a href="mailto:licencias@tradekopier.com">licencias@tradekopier.com</a>.</p>
+</div>
 </div>
 
 <footer>
   <a href="index.html" data-i18n="f.home">Home</a>
   <a href="privacy.html" data-i18n="f.privacy">Privacy Policy</a>
+  <a href="index.html#declaracion-riesgo" data-i18n="f.risk">Risk Disclosure</a>
   <a href="cookies.html" data-i18n="f.cookies">Cookie Policy</a>
   <a href="faq.html" data-i18n="f.faq">FAQ</a>
   <a href="contact.html" data-i18n="f.contact">Contact</a>
@@ -88,59 +299,26 @@
 
 <script>
   const i18n = {
-    en:{
-      "title":"Terms of Service","updated":"Last updated: August 21, 2026",
-      "s1.h":"1. Acceptance of these terms","s1.p":"By purchasing, downloading, installing, or using TradeKopier, you agree to these Terms of Service. If you do not agree, do not use TradeKopier.",
-      "s2.h":"2. What TradeKopier is",
-      "s2.p1":"TradeKopier is a software add-on that runs inside NinjaTrader 8. It replicates orders from a leader account to follower accounts you configure, and lets you set per-account risk limits (PDLL/PDPT).",
-      "s2.p2":"TradeKopier is not a broker, not an investment advisor, and does not manage funds on your behalf. It does not place trades on its own initiative — it only replicates what happens on the leader account you control. Every trading decision remains entirely yours.",
-      "s3.h":"3. Licenses and plans",
-      "s3.p1":"TradeKopier is sold under monthly, quarterly, or semi-annual licenses. Payment is processed by Stripe. Your license key is generated and emailed automatically after payment.",
-      "s3.p2":"A license is personal and tied to the email you purchased with. Sharing, reselling, or redistributing a license key is not permitted and may result in revocation without refund.",
-      "s4.h":"4. Payments and refunds","s4.p":"Prices are shown in USD and charged through Stripe at the start of each billing period you choose. We do not automatically refund partial periods. If you believe you were charged in error, contact us at licencias@tradekopier.com and we'll review it case by case.",
-      "s5.h":"5. Intellectual property","s5.p":"TradeKopier's software, design, and branding are the property of its developer. Purchasing a license grants you the right to use the software under these terms — it does not transfer ownership of the software itself.",
-      "s6.h":"6. Risk and limitation of liability",
-      "s6.p1":"Futures and forex trading involves substantial risk of loss. You are solely responsible for your trading decisions, position sizing, and risk settings. TradeKopier does not guarantee profits, uninterrupted operation, or that every order will replicate without delay or error.",
-      "s6.p2":"To the maximum extent permitted by law, TradeKopier and its developer are not liable for trading losses, missed trades, connectivity issues with NinjaTrader or your broker, market latency, or any indirect or consequential damages arising from use of the software.",
-      "s7.h":"7. Changes to the service","s7.p":"We may update, add, or remove features over time. We'll make reasonable efforts to communicate significant changes in advance via email or Discord.",
-      "s8.h":"8. Termination","s8.p":"We may suspend or revoke a license in case of non-payment, misuse, license sharing, or violation of these terms. You may stop using TradeKopier and let your license expire at any time.",
-      "s9.h":"9. Contact","s9.p":"Questions about these terms: <a href=\"mailto:licencias@tradekopier.com\">licencias@tradekopier.com</a>.",
-      "f.home":"Home","f.privacy":"Privacy Policy","f.cookies":"Cookie Policy","f.faq":"FAQ","f.contact":"Contact",
-    },
-    es:{
-      "title":"Términos de Servicio","updated":"Última actualización: 21 de agosto de 2026",
-      "s1.h":"1. Aceptación de estos términos","s1.p":"Al comprar, descargar, instalar o usar TradeKopier, aceptas estos Términos de Servicio. Si no estás de acuerdo, no uses TradeKopier.",
-      "s2.h":"2. Qué es TradeKopier",
-      "s2.p1":"TradeKopier es un software (AddOn) que funciona dentro de NinjaTrader 8. Replica órdenes de una cuenta maestra hacia las cuentas esclavas que configures, y te permite fijar límites de riesgo por cuenta (PDLL/PDPT).",
-      "s2.p2":"TradeKopier no es un bróker, no es un asesor de inversión, y no gestiona fondos en tu nombre. No coloca operaciones por iniciativa propia — solo replica lo que ocurre en la cuenta maestra que tú controlas. Cada decisión de trading es exclusivamente tuya.",
-      "s3.h":"3. Licencias y planes",
-      "s3.p1":"TradeKopier se vende con licencias mensuales, trimestrales o semestrales. El pago se procesa con Stripe. Tu clave de licencia se genera y se envía por email automáticamente tras el pago.",
-      "s3.p2":"La licencia es personal y está vinculada al email con el que compraste. No está permitido compartir, revender o redistribuir una clave de licencia, y hacerlo puede suponer su revocación sin reembolso.",
-      "s4.h":"4. Pagos y reembolsos","s4.p":"Los precios se muestran en USD y se cobran a través de Stripe al inicio de cada periodo de facturación que elijas. No reembolsamos automáticamente periodos parciales. Si crees que se te ha cobrado por error, escríbenos a licencias@tradekopier.com y lo revisamos caso por caso.",
-      "s5.h":"5. Propiedad intelectual","s5.p":"El software, el diseño y la marca de TradeKopier son propiedad de su desarrollador. Comprar una licencia te da derecho a usar el software bajo estos términos — no transfiere la propiedad del software en sí.",
-      "s6.h":"6. Riesgo y limitación de responsabilidad",
-      "s6.p1":"El trading de futuros y forex conlleva un riesgo sustancial de pérdida. Eres el único responsable de tus decisiones de trading, del tamaño de tus posiciones y de tus ajustes de riesgo. TradeKopier no garantiza beneficios, funcionamiento ininterrumpido, ni que cada orden se replique sin retraso o error.",
-      "s6.p2":"En la máxima medida permitida por la ley, TradeKopier y su desarrollador no son responsables de pérdidas de trading, operaciones no ejecutadas, problemas de conectividad con NinjaTrader o tu bróker, latencia de mercado, ni de ningún daño indirecto o consecuente derivado del uso del software.",
-      "s7.h":"7. Cambios en el servicio","s7.p":"Podemos actualizar, añadir o eliminar funciones con el tiempo. Haremos un esfuerzo razonable por comunicar cambios importantes con antelación, por email o Discord.",
-      "s8.h":"8. Terminación","s8.p":"Podemos suspender o revocar una licencia en caso de impago, uso indebido, compartir la licencia, o incumplimiento de estos términos. Puedes dejar de usar TradeKopier y dejar que tu licencia expire cuando quieras.",
-      "s9.h":"9. Contacto","s9.p":"Dudas sobre estos términos: <a href=\"mailto:licencias@tradekopier.com\">licencias@tradekopier.com</a>.",
-      "f.home":"Inicio","f.privacy":"Política de Privacidad","f.cookies":"Política de Cookies","f.faq":"FAQ","f.contact":"Contacto",
-    },
+    en:{"f.home":"Home","f.privacy":"Privacy Policy","f.risk":"Risk Disclosure","f.cookies":"Cookie Policy","f.faq":"FAQ","f.contact":"Contact"},
+    es:{"f.home":"Inicio","f.privacy":"Política de Privacidad","f.risk":"Declaración de Riesgo","f.cookies":"Política de Cookies","f.faq":"FAQ","f.contact":"Contacto"},
   };
-
+  const TITLES = { en: "TradeKopier — Terms of Service", es: "TradeKopier — Términos de Servicio" };
   function setLang(lang){
-    if(!i18n[lang]) return;
-    document.querySelectorAll('[data-i18n]').forEach(el=>{
+    if(!i18n[lang]) lang = 'en';
+    document.querySelectorAll('[data-lang-block]').forEach(b => { b.hidden = (b.getAttribute('data-lang-block') !== lang); });
+    document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if(i18n[lang][key] !== undefined) el.innerHTML = i18n[lang][key];
+      if(i18n[lang][key] !== undefined) el.textContent = i18n[lang][key];
     });
     document.documentElement.lang = lang;
-    localStorage.setItem('tk_lang', lang);
+    document.title = TITLES[lang];
+    document.getElementById('langSwitch').value = lang;
+    try { localStorage.setItem('tk_lang', lang); } catch(e) {}
   }
   document.getElementById('langSwitch').addEventListener('change', e => setLang(e.target.value));
-  const saved = localStorage.getItem('tk_lang');
-  const initial = (saved === 'es') ? 'es' : 'en';
-  document.getElementById('langSwitch').value = initial;
+  let saved = null;
+  try { saved = localStorage.getItem('tk_lang'); } catch(e) {}
+  const initial = saved === 'es' ? 'es' : (saved ? 'en' : ((navigator.language || '').toLowerCase().startsWith('es') ? 'es' : 'en'));
   setLang(initial);
 </script>
 
