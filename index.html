@@ -386,6 +386,10 @@
   }
   footer .disclaimer strong{display:block; margin-bottom:6px; color:#465060;}
   footer .disclaimer p{margin:10px 0 0;}
+  footer .ecosystem-logos{display:flex; align-items:center; justify-content:center; gap:28px; flex-wrap:wrap; margin-top:22px;}
+  footer .ecosystem-logos a{display:inline-flex; padding:10px 14px;}
+  footer .ecosystem-logos img{height:20px; width:auto; display:block; opacity:.85; transition:opacity .15s;}
+  footer .ecosystem-logos a:hover img{opacity:1;}
 
   @media(max-width:820px){
     .navlinks{display:none;}
@@ -693,6 +697,11 @@
     <a href="privacy.html" data-i18n="footer.privacy">Política de Privacidad</a>
     <a href="cookies.html" data-i18n="footer.cookies">Política de Cookies</a>
   </div>
+  <div class="ecosystem-logos">
+    <span data-i18n="footer.ecosystem.caption" style="font-size:12px; color:var(--muted); width:100%; text-align:center; margin-bottom:2px;">Empieza gratis con:</span>
+    <a href="http://ninjatrader.com/GetStarted" target="_blank" rel="noopener"><img src="assets/logos/ninjatrader-wordmark.png" alt="NinjaTrader"></a>
+    <a href="http://kinetick.com/NinjaTrader" target="_blank" rel="noopener"><img src="assets/logos/kinetick-logo.png" alt="Kinetick"></a>
+  </div>
   <div class="disclaimer" id="declaracion-riesgo">
     <strong data-i18n="footer.disclaimer.title">Declaración de Riesgo:</strong>
     <p data-i18n="footer.disclaimer.p1">La operación de futuros y forex sobrelleva riesgos substanciales y no es para todos los inversionistas. Un inversionista, podría, potencialmente perder todo o más de la inversión inicial. Capital de Riesgo, es dinero que puede ser perdido, sin poner en juego la seguridad financiera o estilo de vida de la persona. Solo capital de riesgo debe ser utilizado para trading, y solo aquellas personas con suficiente capital de riesgo deben considerar trading. Resultados pasados, no son necesariamente indicativos de resultados futuros.</p>
@@ -727,6 +736,7 @@
   // ---- Traducciones ----
   const i18n = {
     es:{
+      "footer.ecosystem.caption":"Empieza gratis con:",
       "brokers.legal":"Las marcas y logotipos mostrados pertenecen a sus respectivos titulares y solo indican compatibilidad técnica. TradeKopier es un producto independiente y no está afiliado, patrocinado ni respaldado por NinjaTrader, LLC ni por ninguna de las empresas mencionadas. Revisa las normas de tu empresa de fondeo sobre el uso de copiadores.","download.terms1":"He leído y acepto los","download.termsLink":"Términos de Servicio","download.terms2":"y la","download.riskLink":"Declaración de Riesgo","download.terms3":", y entiendo que el trading conlleva riesgo de pérdida.",
       "nav.features":"Funciones","nav.shots":"Interfaz","nav.install":"Instalación","nav.risk":"Gestión de riesgo","nav.pricing":"Descarga","nav.faq":"FAQ","nav.account":"Mi cuenta","nav.cta":"Descarga gratis","download.emailPlaceholder":"tu@email.com","download.success":"¡Listo! Revisa tu email — te hemos enviado tu clave de licencia y el enlace de descarga.","download.error":"Algo ha fallado. Inténtalo de nuevo o escríbenos a soporte@tradekopier.com.",
       "hero.badge":"🎁 100% gratis — sin tarjeta de crédito",
@@ -794,6 +804,7 @@
       "chat.error":"Algo ha fallado. Inténtalo de nuevo o abre un ticket.",
     },
     en:{
+      "footer.ecosystem.caption":"Get started for free with:",
       "brokers.legal":"Trademarks and logos shown belong to their respective owners and only indicate technical compatibility. TradeKopier is an independent product and is not affiliated with, sponsored or endorsed by NinjaTrader, LLC or any of the companies listed. Check your prop firm's rules on the use of trade copiers.","download.terms1":"I have read and accept the","download.termsLink":"Terms of Service","download.terms2":"and the","download.riskLink":"Risk Disclosure","download.terms3":", and I understand that trading involves a risk of loss.",
       "nav.features":"Features","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Risk management","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"My account","nav.cta":"Free download","download.emailPlaceholder":"you@email.com","download.success":"Done! Check your email — we\u2019ve sent your license key and download link.","download.error":"Something went wrong. Try again or email us at soporte@tradekopier.com.",
       "hero.badge":"🎁 100% free — no credit card required",
@@ -861,6 +872,7 @@
       "chat.error":"Something went wrong. Try again or open a ticket.",
     },
     de:{
+      "footer.ecosystem.caption":"Kostenlos starten mit:",
       "brokers.legal":"Die gezeigten Marken und Logos gehören ihren jeweiligen Inhabern und zeigen nur technische Kompatibilität an. TradeKopier ist ein unabhängiges Produkt und weder mit NinjaTrader, LLC noch mit einem der genannten Unternehmen verbunden, von ihnen gesponsert oder unterstützt. Prüfe die Regeln deiner Prop-Firma zur Nutzung von Trade-Kopierern.","download.terms1":"Ich habe die","download.termsLink":"Nutzungsbedingungen","download.terms2":"und die","download.riskLink":"Risikohinweise","download.terms3":" gelesen und akzeptiere sie. Mir ist bewusst, dass Trading ein Verlustrisiko birgt.",
       "nav.features":"Funktionen","nav.shots":"Oberfläche","nav.install":"Installation","nav.risk":"Risikomanagement","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"Mein Konto","nav.cta":"Kostenlos laden","download.emailPlaceholder":"deine@email.com","download.success":"Fertig! Schau in dein E-Mail-Postfach \u2014 wir haben dir deinen Lizenzschl\u00fcssel und den Download-Link geschickt.","download.error":"Etwas ist schiefgelaufen. Versuch es erneut oder schreib uns an soporte@tradekopier.com.",
       "hero.badge":"🎁 100% kostenlos — keine Kreditkarte nötig",
@@ -928,6 +940,7 @@
       "chat.error":"Etwas ist schiefgelaufen. Versuch es erneut oder öffne ein Ticket.",
     },
     pt:{
+      "footer.ecosystem.caption":"Comece grátis com:",
       "brokers.legal":"As marcas e logótipos apresentados pertencem aos respetivos titulares e indicam apenas compatibilidade técnica. O TradeKopier é um produto independente e não é afiliado, patrocinado nem apoiado pela NinjaTrader, LLC nem por nenhuma das empresas mencionadas. Verifica as regras da tua empresa de financiamento sobre o uso de copiadores.","download.terms1":"Li e aceito os","download.termsLink":"Termos de Serviço","download.terms2":"e a","download.riskLink":"Declaração de Risco","download.terms3":", e compreendo que o trading implica risco de perda.",
       "nav.features":"Funcionalidades","nav.shots":"Interface","nav.install":"Instalação","nav.risk":"Gestão de risco","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"Minha conta","nav.cta":"Download grátis","download.emailPlaceholder":"teu@email.com","download.success":"Pronto! Verifica o teu email \u2014 enviamos a tua chave de licen\u00e7a e o link de download.","download.error":"Algo correu mal. Tenta novamente ou escreve-nos para soporte@tradekopier.com.",
       "hero.badge":"🎁 100% grátis — sem cartão de crédito",
@@ -995,6 +1008,7 @@
       "chat.error":"Algo correu mal. Tenta novamente ou abre um ticket.",
     },
     it:{
+      "footer.ecosystem.caption":"Inizia gratis con:",
       "brokers.legal":"I marchi e i loghi mostrati appartengono ai rispettivi titolari e indicano solo la compatibilità tecnica. TradeKopier è un prodotto indipendente e non è affiliato, sponsorizzato né approvato da NinjaTrader, LLC né da alcuna delle aziende citate. Verifica le regole della tua prop firm sull'uso dei trade copier.","download.terms1":"Ho letto e accetto i","download.termsLink":"Termini di Servizio","download.terms2":"e la","download.riskLink":"Dichiarazione di Rischio","download.terms3":", e comprendo che il trading comporta un rischio di perdita.",
       "nav.features":"Funzionalità","nav.shots":"Interfaccia","nav.install":"Installazione","nav.risk":"Gestione del rischio","nav.pricing":"Download","nav.faq":"FAQ","nav.account":"Il mio account","nav.cta":"Download gratis","download.emailPlaceholder":"tua@email.com","download.success":"Fatto! Controlla la tua email \u2014 ti abbiamo inviato la chiave di licenza e il link di download.","download.error":"Qualcosa \u00e8 andato storto. Riprova o scrivici a soporte@tradekopier.com.",
       "hero.badge":"🎁 100% gratis — nessuna carta di credito",
@@ -1062,6 +1076,7 @@
       "chat.error":"Qualcosa è andato storto. Riprova o apri un ticket.",
     },
     fr:{
+      "footer.ecosystem.caption":"Commencez gratuitement avec :",
       "brokers.legal":"Les marques et logos affichés appartiennent à leurs propriétaires respectifs et indiquent uniquement une compatibilité technique. TradeKopier est un produit indépendant, non affilié, sponsorisé ni approuvé par NinjaTrader, LLC ni par aucune des sociétés citées. Vérifiez les règles de votre prop firm concernant l'utilisation des copieurs de trades.","download.terms1":"J'ai lu et j'accepte les","download.termsLink":"Conditions d'utilisation","download.terms2":"et la","download.riskLink":"Déclaration de risque","download.terms3":", et je comprends que le trading comporte un risque de perte.",
       "nav.features":"Fonctionnalités","nav.shots":"Interface","nav.install":"Installation","nav.risk":"Gestion du risque","nav.pricing":"Téléchargement","nav.faq":"FAQ","nav.account":"Mon compte","nav.cta":"Téléchargement gratuit","download.emailPlaceholder":"ton@email.com","download.success":"C\u2019est fait\u00a0! V\u00e9rifie ton email \u2014 nous t\u2019avons envoy\u00e9 ta cl\u00e9 de licence et le lien de t\u00e9l\u00e9chargement.","download.error":"Une erreur s\u2019est produite. R\u00e9essaie ou \u00e9cris-nous \u00e0 soporte@tradekopier.com.",
       "hero.badge":"🎁 100% gratuit — sans carte bancaire",
