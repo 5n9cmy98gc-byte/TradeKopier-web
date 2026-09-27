@@ -1485,6 +1485,13 @@
         });
         const data = await resp.json();
         if (!resp.ok || !data.ok) throw new Error(data.error || 'error');
+        // Medición: conversión de Google Ads + evento de Google Analytics (descarga gratuita)
+        try {
+          if (typeof gtag === 'function') {
+            gtag('event', 'conversion', { 'send_to': 'AW-18418506339/KjpgCLDDlYgdEOO00M5E' });
+            gtag('event', 'sign_up', { 'method': 'free_download', 'language': currentLang });
+          }
+        } catch (_) {}
         msg.textContent = i18n[currentLang]['download.success'];
         msg.style.color = 'var(--accent)';
         msg.style.display = 'block';
