@@ -1350,8 +1350,11 @@
   }
   document.getElementById('marqueeTrack').innerHTML = buildMarqueeHtml() + buildMarqueeHtml();
 
+  // Idioma inicial: ?lang= en la URL (anuncios) > elección guardada > idioma del navegador > inglés
   const saved = localStorage.getItem('tk_lang');
-  const initialLang = (saved && i18n[saved]) ? saved : 'en';
+  const urlLang = (new URLSearchParams(location.search).get('lang') || '').slice(0, 2).toLowerCase();
+  const navLang = (navigator.language || '').slice(0, 2).toLowerCase();
+  const initialLang = i18n[urlLang] ? urlLang : (saved && i18n[saved]) ? saved : (i18n[navLang] ? navLang : 'en');
   document.getElementById('langSwitch').value = initialLang;
   setLang(initialLang);
 
@@ -1504,6 +1507,8 @@
         // Medición: conversión de Google Ads + evento de Google Analytics (descarga gratuita)
         try {
           if (typeof gtag === 'function') {
+            // Conversiones mejoradas: Google recibe el email cifrado (hash) solo si hay consentimiento (ad_user_data)
+            gtag('set', 'user_data', { 'email': email });
             gtag('event', 'conversion', { 'send_to': 'AW-18418506339/KjpgCLDDlYgdEOO00M5E' });
             gtag('event', 'sign_up', { 'method': 'free_download', 'language': currentLang });
           }
