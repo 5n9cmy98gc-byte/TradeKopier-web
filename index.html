@@ -1510,7 +1510,7 @@
             // Conversiones mejoradas: Google recibe el email cifrado (hash) solo si hay consentimiento (ad_user_data)
             gtag('set', 'user_data', { 'email': email });
             gtag('event', 'conversion', { 'send_to': 'AW-18418506339/KjpgCLDDlYgdEOO00M5E' });
-            gtag('event', 'sign_up', { 'method': 'free_download', 'language': currentLang });
+            gtag('event', 'sign_up', { 'method': 'free_download', 'language': currentLang, 'send_to': 'G-9JXFP07BG4' }); // solo a Analytics: en Ads ya cuenta la conversión
           }
         } catch (_) {}
         msg.textContent = i18n[currentLang]['download.success'];
