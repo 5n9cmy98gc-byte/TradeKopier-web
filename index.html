@@ -2,11 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JXFP07BG4"></script>
+<!-- Modo de consentimiento v2 de Google: se fija ANTES de cargar gtag. Aviso y elección en assets/consent.js -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // Fuera del EEE/Reino Unido/Suiza: activo salvo que el usuario rechace. Dentro: denegado hasta que acepte.
+  gtag('consent', 'default', {ad_storage:'granted', ad_user_data:'granted', analytics_storage:'granted', ad_personalization:'denied'});
+  gtag('consent', 'default', {ad_storage:'denied', ad_user_data:'denied', analytics_storage:'denied', ad_personalization:'denied', wait_for_update:500,
+    region:['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE','IS','LI','NO','GB','CH']});
+  (function(){try{var c=JSON.parse(localStorage.getItem('tk_consent')||'null');if(c&&c.v){var s=c.v==='granted'?'granted':'denied';gtag('consent','update',{ad_storage:s,ad_user_data:s,analytics_storage:s,ad_personalization:'denied'});}}catch(e){}})();
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9JXFP07BG4"></script>
+<script>
   gtag('js', new Date());
 
   gtag('config', 'G-9JXFP07BG4');
@@ -403,6 +413,12 @@
     .included ul{grid-template-columns:1fr;}
     .final-cta{padding:40px 24px; border-radius:16px;}
   }
+  /* Móvil: el botón de la cabecera desbordaba la pantalla (la portada ya tiene el botón de descarga) */
+  @media(max-width:600px){
+    nav{padding:14px 16px; gap:10px;}
+    .navright{gap:10px;}
+    .navcta{display:none;}
+  }
 
   /* Chat de soporte */
   .chat-bubble{
@@ -452,7 +468,6 @@
     .chat-bubble{right:16px;}
   }
 </style>
-<script type="text/javascript">(function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A7833160-3694-47da-bda6-dbb3c62e04721.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');</script>
 </head>
 <body>
 
@@ -1507,5 +1522,7 @@
   }
 </script>
 
+<script>window.TK_IMPACT = true;</script>
+<script src="assets/consent.js" defer></script>
 </body>
 </html>

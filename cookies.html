@@ -54,25 +54,29 @@
 
 <div class="wrap">
   <h1 data-i18n="title">Cookie Policy</h1>
-  <div class="updated" data-i18n="updated">Last updated: August 21, 2026</div>
+  <div class="updated" data-i18n="updated">Last updated: September 28, 2026</div>
 
-  <p data-i18n="intro">TradeKopier's website uses very little tracking on purpose. Here's exactly what's stored on your device and why.</p>
+  <p data-i18n="intro">This page explains what tradekopier.com stores on your device, why, and how you can accept or reject it.</p>
 
   <h2 data-i18n="s1.h">1. What we store</h2>
   <table>
     <tr><th data-i18n="t.name">Name</th><th data-i18n="t.type">Type</th><th data-i18n="t.purpose">Purpose</th></tr>
     <tr><td>tk_lang</td><td data-i18n="t.local">Local storage (not a cookie)</td><td data-i18n="t.p1">Remembers your chosen language across pages</td></tr>
+    <tr><td>tk_consent</td><td data-i18n="t.local2">Local storage (not a cookie)</td><td data-i18n="t.p2">Remembers whether you accepted or rejected analytics and advertising cookies</td></tr>
+    <tr><td>_ga, _ga_*</td><td data-i18n="t.ga">Google Analytics (Google) · up to 2 years</td><td data-i18n="t.p3">Measures visits and how the website is used, in aggregate</td></tr>
+    <tr><td>_gcl_au, _gcl_aw</td><td data-i18n="t.gads">Google Ads (Google) · 90 days</td><td data-i18n="t.p4">Measures whether a visit that came from one of our ads ends in a free download</td></tr>
+    <tr><td>IR_*</td><td data-i18n="t.impact">impact.com · up to 30 days</td><td data-i18n="t.p5">Measures views and clicks of our NinjaTrader affiliate link</td></tr>
   </table>
-  <p data-i18n="s1.p">We do not use analytics or advertising cookies on tradekopier.com.</p>
+  <p data-i18n="s1.p">tk_lang and tk_consent are necessary for the website to work and are always used. The Google Analytics, Google Ads and impact.com cookies are optional: in the European Economic Area, the United Kingdom and Switzerland they are only set if you accept them; elsewhere they are active unless you reject them. We do not use cookies for ad personalisation or remarketing.</p>
 
   <h2 data-i18n="s2.h">2. Third-party cookies</h2>
-  <p data-i18n="s2.p">When you click "Buy now" you're taken to a secure Stripe checkout page. Stripe may set its own cookies there to process your payment securely and prevent fraud — that happens on Stripe's domain, under Stripe's own cookie and privacy policies, not ours.</p>
+  <p data-i18n="s2.p">The optional cookies above belong to Google (Analytics and Ads) and impact.com, which process that data under their own privacy policies. If you click our NinjaTrader link, you go through impact.com and NinjaTrader, which may set their own cookies on their domains. If you ever pay through Stripe, Stripe may set cookies on its checkout page to process the payment and prevent fraud.</p>
 
-  <h2 data-i18n="s3.h">3. How to control this</h2>
-  <p data-i18n="s3.p">Since we only use local storage for your language preference, clearing your browser's site data for tradekopier.com is enough to reset it — no separate cookie banner is needed. Every modern browser lets you clear local storage from its privacy or site-settings menu.</p>
+  <h2 data-i18n="s3.h">3. How to accept, reject or change your choice</h2>
+  <p data-i18n="s3.p">The first time you visit, a notice lets you accept or reject the optional cookies, with both options equally visible. You can change your choice at any time with the "Cookie settings" link at the bottom of the page. You can also delete cookies and site data from your browser's settings.</p>
 
   <h2 data-i18n="s4.h">4. Changes to this policy</h2>
-  <p data-i18n="s4.p">If that ever changes — for example if we add analytics in the future — we'll update this page and reflect it here first.</p>
+  <p data-i18n="s4.p">If we add or remove cookies, we will update this page and its date.</p>
 
   <h2 data-i18n="s5.h">5. Contact</h2>
   <p data-i18n="s5.p">Questions: <a href="mailto:soporte@tradekopier.com">soporte@tradekopier.com</a>.</p>
@@ -95,25 +99,25 @@
   const i18n = {
     en:{
       "footer.disclaimer.title":"Risk Disclosure:","footer.disclaimer.p1":"Futures and forex trading carries substantial risk and is not suitable for all investors. An investor could potentially lose all or more than the initial investment. Risk capital is money that can be lost without jeopardizing one's financial security or lifestyle. Only risk capital should be used for trading, and only those with sufficient risk capital should consider trading. Past performance is not necessarily indicative of future results.","footer.disclaimer.p2":"Hypothetical performance results have many inherent limitations, some of which are described below. No representation is being made that any account will or is likely to achieve results similar to those shown; in fact, there are frequently sharp differences between hypothetical results and the actual results subsequently achieved by any particular trading program. One of the limitations of hypothetical performance results is that they are prepared with the benefit of hindsight. In addition, hypothetical trading does not involve financial risk, and no hypothetical trading record can completely account for the impact of financial risk in actual trading. For example, the ability to withstand losses or to adhere to a particular trading program in spite of trading losses are material points which can also adversely affect actual trading results. There are numerous other factors related to the markets in general, or to the implementation of any specific trading program, which cannot be fully accounted for in the preparation of hypothetical performance results, all of which can adversely affect actual trading results.",
-      "title":"Cookie Policy","updated":"Last updated: August 21, 2026",
-      "intro":"TradeKopier's website uses very little tracking on purpose. Here's exactly what's stored on your device and why.",
-      "s1.h":"1. What we store","t.name":"Name","t.type":"Type","t.purpose":"Purpose","t.local":"Local storage (not a cookie)","t.p1":"Remembers your chosen language across pages",
-      "s1.p":"We do not use analytics or advertising cookies on tradekopier.com.",
-      "s2.h":"2. Third-party cookies","s2.p":"When you click \"Buy now\" you're taken to a secure Stripe checkout page. Stripe may set its own cookies there to process your payment securely and prevent fraud — that happens on Stripe's domain, under Stripe's own cookie and privacy policies, not ours.",
-      "s3.h":"3. How to control this","s3.p":"Since we only use local storage for your language preference, clearing your browser's site data for tradekopier.com is enough to reset it — no separate cookie banner is needed. Every modern browser lets you clear local storage from its privacy or site-settings menu.",
-      "s4.h":"4. Changes to this policy","s4.p":"If that ever changes — for example if we add analytics in the future — we'll update this page and reflect it here first.",
+      "title":"Cookie Policy","updated":"Last updated: September 28, 2026",
+      "intro":"This page explains what tradekopier.com stores on your device, why, and how you can accept or reject it.",
+      "s1.h":"1. What we store","t.name":"Name","t.type":"Type","t.purpose":"Purpose","t.local":"Local storage (not a cookie)","t.local2":"Local storage (not a cookie)","t.p2":"Remembers whether you accepted or rejected analytics and advertising cookies","t.ga":"Google Analytics (Google) · up to 2 years","t.p3":"Measures visits and how the website is used, in aggregate","t.gads":"Google Ads (Google) · 90 days","t.p4":"Measures whether a visit that came from one of our ads ends in a free download","t.impact":"impact.com · up to 30 days","t.p5":"Measures views and clicks of our NinjaTrader affiliate link","t.p1":"Remembers your chosen language across pages",
+      "s1.p":"tk_lang and tk_consent are necessary for the website to work and are always used. The Google Analytics, Google Ads and impact.com cookies are optional: in the European Economic Area, the United Kingdom and Switzerland they are only set if you accept them; elsewhere they are active unless you reject them. We do not use cookies for ad personalisation or remarketing.",
+      "s2.h":"2. Third-party cookies","s2.p":"The optional cookies above belong to Google (Analytics and Ads) and impact.com, which process that data under their own privacy policies. If you click our NinjaTrader link, you go through impact.com and NinjaTrader, which may set their own cookies on their domains. If you ever pay through Stripe, Stripe may set cookies on its checkout page to process the payment and prevent fraud.",
+      "s3.h":"3. How to accept, reject or change your choice","s3.p":"The first time you visit, a notice lets you accept or reject the optional cookies, with both options equally visible. You can change your choice at any time with the \"Cookie settings\" link at the bottom of the page. You can also delete cookies and site data from your browser's settings.",
+      "s4.h":"4. Changes to this policy","s4.p":"If we add or remove cookies, we will update this page and its date.",
       "s5.h":"5. Contact","s5.p":"Questions: <a href=\"mailto:soporte@tradekopier.com\">soporte@tradekopier.com</a>.",
       "f.home":"Home","f.terms":"Terms of Service","f.privacy":"Privacy Policy","f.faq":"FAQ","f.contact":"Contact",
     },
     es:{
       "footer.disclaimer.title":"Declaración de Riesgo:","footer.disclaimer.p1":"La operación de futuros y forex sobrelleva riesgos substanciales y no es para todos los inversionistas. Un inversionista, podría, potencialmente perder todo o más de la inversión inicial. Capital de Riesgo, es dinero que puede ser perdido, sin poner en juego la seguridad financiera o estilo de vida de la persona. Solo capital de riesgo debe ser utilizado para trading, y solo aquellas personas con suficiente capital de riesgo deben considerar trading. Resultados pasados, no son necesariamente indicativos de resultados futuros.","footer.disclaimer.p2":"Resultados hipotéticos de rendimiento deben tener muchas limitaciones inherentes, algunas de las cuales se describen a continuación. No se debe hacer representación de que alguna de las cuentas va o es probable que tenga resultados similares a los mostrados; de hecho, hay diferencias frecuentes entre los resultados hipotéticos y los resultados actuales obtenidos por cualquier programa de trading. Una de las limitaciones de resultados hipotéticos de rendimiento es el hecho de que son preparados con los beneficios en retrospectiva. Además, trading hipotético no involucra riesgo financiero, y ningún record de trading hipotético puede considerar el riesgo financiero de operaciones reales. Por ejemplo, la capacidad de resistir pérdidas o de adherirse a un programa de trading particular sin importar pérdidas son puntos materiales los cuales pueden afectar de manera substancial resultados de trading real. Hay muchos factores relacionados a los mercados en general, o a la implementación de cualquier programa de trading especifico, los cuales no pueden ser todos considerados en la preparación de resultados hipotéticos, todos estos, pueden afectar los resultados de trading de forma adversa.",
-      "title":"Política de Cookies","updated":"Última actualización: 21 de agosto de 2026",
-      "intro":"La web de TradeKopier usa muy poco rastreo, a propósito. Esto es exactamente lo que se guarda en tu dispositivo y por qué.",
-      "s1.h":"1. Qué guardamos","t.name":"Nombre","t.type":"Tipo","t.purpose":"Para qué","t.local":"Almacenamiento local (no es una cookie)","t.p1":"Recuerda el idioma que elegiste entre páginas",
-      "s1.p":"No usamos cookies de analítica ni de publicidad en tradekopier.com.",
-      "s2.h":"2. Cookies de terceros","s2.p":"Cuando pulsas \"Comprar ahora\" te llevamos a una página segura de pago de Stripe. Ahí, Stripe puede establecer sus propias cookies para procesar tu pago de forma segura y prevenir fraude — eso ocurre en el dominio de Stripe, bajo su propia política de cookies y privacidad, no la nuestra.",
-      "s3.h":"3. Cómo controlarlo","s3.p":"Como solo usamos almacenamiento local para tu preferencia de idioma, basta con borrar los datos del sitio tradekopier.com en tu navegador para reiniciarlo — no hace falta un banner de cookies aparte. Cualquier navegador moderno te permite borrar el almacenamiento local desde su menú de privacidad o ajustes del sitio.",
-      "s4.h":"4. Cambios en esta política","s4.p":"Si eso cambia alguna vez — por ejemplo si añadimos analítica en el futuro — actualizaremos esta página y lo reflejaremos aquí primero.",
+      "title":"Política de Cookies","updated":"Última actualización: 28 de septiembre de 2026",
+      "intro":"Esta página explica qué guarda tradekopier.com en tu dispositivo, para qué, y cómo puedes aceptarlo o rechazarlo.",
+      "s1.h":"1. Qué guardamos","t.name":"Nombre","t.type":"Tipo","t.purpose":"Para qué","t.local":"Almacenamiento local (no es una cookie)","t.local2":"Almacenamiento local (no es una cookie)","t.p2":"Recuerda si aceptaste o rechazaste las cookies de analítica y publicidad","t.ga":"Google Analytics (Google) · hasta 2 años","t.p3":"Mide las visitas y el uso de la web de forma agregada","t.gads":"Google Ads (Google) · 90 días","t.p4":"Mide si una visita que llegó desde uno de nuestros anuncios termina en una descarga gratuita","t.impact":"impact.com · hasta 30 días","t.p5":"Mide las visualizaciones y los clics de nuestro enlace de afiliado de NinjaTrader","t.p1":"Recuerda el idioma que elegiste entre páginas",
+      "s1.p":"tk_lang y tk_consent son necesarias para que la web funcione y se usan siempre. Las cookies de Google Analytics, Google Ads e impact.com son opcionales: en el Espacio Económico Europeo, el Reino Unido y Suiza solo se activan si las aceptas; en el resto de países están activas salvo que las rechaces. No usamos cookies para personalizar anuncios ni para remarketing.",
+      "s2.h":"2. Cookies de terceros","s2.p":"Las cookies opcionales de arriba pertenecen a Google (Analytics y Ads) y a impact.com, que tratan esos datos según sus propias políticas de privacidad. Si pulsas nuestro enlace de NinjaTrader, pasas por impact.com y NinjaTrader, que pueden poner sus propias cookies en sus dominios. Si alguna vez pagas con Stripe, Stripe puede poner cookies en su página de pago para procesarlo y prevenir el fraude.",
+      "s3.h":"3. Cómo aceptar, rechazar o cambiar tu elección","s3.p":"La primera vez que entras, un aviso te permite aceptar o rechazar las cookies opcionales, con las dos opciones igual de visibles. Puedes cambiar tu elección cuando quieras con el enlace \"Configurar cookies\" del pie de página. También puedes borrar las cookies y los datos del sitio desde la configuración de tu navegador.",
+      "s4.h":"4. Cambios en esta política","s4.p":"Si añadimos o quitamos cookies, actualizaremos esta página y su fecha.",
       "s5.h":"5. Contacto","s5.p":"Dudas: <a href=\"mailto:soporte@tradekopier.com\">soporte@tradekopier.com</a>.",
       "f.home":"Inicio","f.terms":"Términos de Servicio","f.privacy":"Política de Privacidad","f.faq":"FAQ","f.contact":"Contacto",
     },
@@ -135,5 +139,6 @@
   setLang(initial);
 </script>
 
+<script src="assets/consent.js" defer></script>
 </body>
 </html>
